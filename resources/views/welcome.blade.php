@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
     </head>
     <body class="h-screen font-suse flex flex-col items-center justify-center">
+        <button class="px-3 py-1.5 bg-blue-300 text-white">Adicionar</button>
         <h1 class="text-3xl font-bold mb-4">
             Kanban
         </h1>
