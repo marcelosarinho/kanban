@@ -16,7 +16,7 @@
     </head>
     <body class="h-screen font-suse bg-gray-500">
         <nav class="h-12 bg-red-200">
-            <button>Dark mode</button>
+            <button id="btn-theme">Dark mode</button>
             <button id="btn-fullscreen">Fullscreen</button>
         </nav>
         <main class="flex flex-col items-center justify-center">
@@ -64,12 +64,12 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function () {
-            console.log("jquery instalado");
-        });
-
         $('#btn-fullscreen').on('click', function () {
             toggleFullScreen();
+        })
+
+        $('#btn-theme').on('click', function () {
+            console.log("modo dark");
         })
 
         function toggleFullScreen() {
