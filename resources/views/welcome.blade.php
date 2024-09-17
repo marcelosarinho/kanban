@@ -22,7 +22,7 @@
                 <i class="ph ph-arrows-out text-2xl"></i>
             </button>
         </nav>
-        <div class="absolute right-12 bg-white rounded-md mt-2 py-2 w-28">
+        <div id="theme-dropdown" class="absolute right-12 bg-white rounded-md mt-2 py-2 w-28 hidden">
             <div class="px-2 py-1 flex items-center">
                 <i class="mr-2 ph ph-moon text-xl"></i>
                 Escuro
@@ -86,7 +86,7 @@
         })
 
         $('#btn-theme').on('click', function () {
-            console.log("modo dark");
+            $('#theme-dropdown').toggle(200);
         })
 
         function toggleFullScreen() {
