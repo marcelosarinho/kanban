@@ -13,12 +13,20 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
     <body class="h-screen font-suse bg-gray-500">
-        <nav class="h-12 bg-red-200">
+        <nav class="relative h-12 bg-red-200 flex justify-end px-4 py-2 gap-3">
             <button id="btn-theme">Dark mode</button>
-            <button id="btn-fullscreen">Fullscreen</button>
+            <button id="btn-fullscreen">
+                <i class="ph ph-arrows-out text-2xl"></i>
+            </button>
         </nav>
+        <div class="absolute right-24 bg-white rounded-md mt-2 py-2">
+            <div class="px-8">Escuro</div>
+            <div class="px-8">Claro</div>
+            <div class="px-8">Sistema</div>
+        </div>
         <main class="flex flex-col items-center justify-center">
             <button class="px-3 py-1.5 bg-blue-300 text-white">Adicionar</button>
             <h1 class="text-3xl font-bold mb-4">
@@ -73,11 +81,11 @@
         })
 
         function toggleFullScreen() {
-            const bodyElement = document.querySelector('body');
-
             if (!document.fullscreenElement) {
+                $('#btn-fullscreen i').addClass('ph-arrows-in').removeClass('ph-arrows-out');
                 document.documentElement.requestFullscreen();
             } else if (document.exitFullscreen) {
+                $('#btn-fullscreen i').addClass('ph-arrows-out').removeClass('ph-arrows-in');
                 document.exitFullscreen();
             }
         }
