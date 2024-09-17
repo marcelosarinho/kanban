@@ -16,16 +16,25 @@
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
     <body class="h-screen font-suse bg-gray-500">
-        <nav class="relative h-12 bg-red-200 flex justify-end px-4 py-2 gap-3">
+        <nav class="relative h-12 bg-red-200 flex justify-end px-4 py-2 gap-3 items-center">
             <button id="btn-theme">Dark mode</button>
             <button id="btn-fullscreen">
                 <i class="ph ph-arrows-out text-2xl"></i>
             </button>
         </nav>
-        <div class="absolute right-24 bg-white rounded-md mt-2 py-2">
-            <div class="px-8">Escuro</div>
-            <div class="px-8">Claro</div>
-            <div class="px-8">Sistema</div>
+        <div class="absolute right-12 bg-white rounded-md mt-2 py-2 w-28">
+            <div class="px-2 py-1 flex items-center">
+                <i class="mr-2 ph ph-moon text-xl"></i>
+                Escuro
+            </div>
+            <div class="px-2 py-1 flex items-center">
+                <i class="mr-2 ph ph-sun text-xl"></i>
+                Claro
+            </div>
+            <div class="px-2 py-1 flex items-center">
+                <i class="mr-2 ph ph-moon-stars text-xl"></i>
+                Sistema
+            </div>
         </div>
         <main class="flex flex-col items-center justify-center">
             <button class="px-3 py-1.5 bg-blue-300 text-white">Adicionar</button>
