@@ -16,13 +16,8 @@
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
     <body class="h-screen font-suse bg-gray-200">
-        <nav id="topbar" class="relative h-12 bg-red-200 flex justify-end px-4 py-2 gap-3 items-center">
-            <button id="btn-theme">Dark mode</button>
-            <button id="btn-fullscreen">
-                <i class="ph ph-arrows-out text-2xl"></i>
-            </button>
-        </nav>
-        <nav id="sidebar" class="w-52 bg-red-500 h-full flex flex-col items-center">
+        <nav id="sidebar" class="fixed w-52 bg-red-500 h-full flex flex-col items-center">
+            <h3 class="text-xl font-semibold">Projetos</h3>
             <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center">
                 <input type="text">
                 <button class="flex items-center p-0.5">
@@ -40,6 +35,14 @@
                     Projeto 3
                 </div>
             </div>
+        </nav>
+        <nav id="topbar" class="fixed h-12 bg-red-200 flex justify-end px-4 py-7 gap-3 items-center left-52 right-0">
+            <button id="btn-theme">
+                <i class="ph ph-sun text-2xl"></i>
+            </button>
+            <button id="btn-fullscreen">
+                <i class="ph ph-arrows-out text-2xl"></i>
+            </button>
         </nav>
         <div id="theme-dropdown" class="absolute right-12 bg-white rounded-md mt-2 py-2 w-28 hidden">
             <div class="px-2 py-1 flex items-center hover:bg-gray-200 cursor-pointer">
