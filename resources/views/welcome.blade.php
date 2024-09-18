@@ -15,23 +15,42 @@
         <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
-    <body class="h-screen font-suse bg-gray-500">
-        <nav class="relative h-12 bg-red-200 flex justify-end px-4 py-2 gap-3 items-center">
+    <body class="h-screen font-suse bg-gray-200">
+        <nav id="topbar" class="relative h-12 bg-red-200 flex justify-end px-4 py-2 gap-3 items-center">
             <button id="btn-theme">Dark mode</button>
             <button id="btn-fullscreen">
                 <i class="ph ph-arrows-out text-2xl"></i>
             </button>
         </nav>
+        <nav id="sidebar" class="w-52 bg-red-500 h-full flex flex-col items-center">
+            <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center">
+                <input type="text">
+                <button class="flex items-center p-0.5">
+                    <i class="ph ph-magnifying-glass text-xl"></i>
+                </button>
+            </div>
+            <div id="projects" class="mt-4 flex flex-col w-full px-2 gap-2">
+                <div>
+                    Projeto 1
+                </div>
+                <div>
+                    Projeto 2
+                </div>
+                <div>
+                    Projeto 3
+                </div>
+            </div>
+        </nav>
         <div id="theme-dropdown" class="absolute right-12 bg-white rounded-md mt-2 py-2 w-28 hidden">
-            <div class="px-2 py-1 flex items-center">
+            <div class="px-2 py-1 flex items-center hover:bg-gray-200 cursor-pointer">
                 <i class="mr-2 ph ph-moon text-xl"></i>
                 Escuro
             </div>
-            <div class="px-2 py-1 flex items-center">
+            <div class="px-2 py-1 flex items-center hover:bg-gray-200 cursor-pointer">
                 <i class="mr-2 ph ph-sun text-xl"></i>
                 Claro
             </div>
-            <div class="px-2 py-1 flex items-center">
+            <div class="px-2 py-1 flex items-center hover:bg-gray-200 cursor-pointer">
                 <i class="mr-2 ph ph-moon-stars text-xl"></i>
                 Sistema
             </div>

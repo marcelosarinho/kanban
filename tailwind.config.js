@@ -8,6 +8,10 @@ export default {
     extend: {
       fontFamily: {
         'suse': ['SUSE', 'sans-serif'],
+      },
+      colors: {
+        'primary': '#d82645',
+        'secondary': '#182e3d',
       }
     },
   },
