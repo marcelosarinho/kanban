@@ -16,7 +16,7 @@
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
     <body class="h-screen font-suse bg-gray-200">
-        <nav id="sidebar" class="fixed w-52 bg-red-500 h-full flex flex-col items-center">
+        <nav id="sidebar" class="fixed w-52 bg-red-300 h-full flex flex-col items-center">
             <h3 class="text-xl font-semibold">Projetos</h3>
             <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center">
                 <input type="text">
@@ -58,7 +58,7 @@
                 Sistema
             </div>
         </div>
-        <main class="flex flex-col items-center justify-center">
+        <main class="flex flex-col items-center justify-center ml-52">
             <button class="px-3 py-1.5 bg-blue-300 text-white">Adicionar</button>
             <h1 class="text-3xl font-bold mb-4">
                 Kanban
@@ -69,32 +69,36 @@
                     <header class="text-2xl font-bold">
                         A fazer
                     </header>
-                    <div>
-                        Card do kanban vem aqui
+                    <div class="p-3 h-96 w-72 bg-green-200">
+                        <div>Badges vem aqui</div>
+                        <div>
+                            <i class="ph ph-dots-three-outline-vertical"></i>
+                        </div>
+                        <div class="bg-white rounded border-2 p-2">Card 1</div>
                     </div>
                 </div>
                 <div class="col-lg-3 h-100">
                     <header class="text-2xl font-bold">
                         Em progresso
                     </header>
-                    <div>
-                        Card do kanban vem aqui
+                    <div class="h-96 w-72 bg-green-200">
+                        <div>Card 1</div>
                     </div>
                 </div>
                 <div class="col-lg-3 h-100">
                     <header class="text-2xl font-bold">
                         Testando
                     </header>
-                    <div>
-                        Card do kanban vem aqui
+                    <div class="h-96 w-72 bg-green-200">
+                        <div>Card 1</div>
                     </div>
                 </div>
                 <div class="col-lg-3 h-100">
                     <header class="text-2xl font-bold">
                         Implementado
                     </header>
-                    <div>
-                        Card do kanban vem aqui
+                    <div class="h-96 w-72 bg-green-200">
+                        <div>Card 1</div>
                     </div>
                 </div>
             </div>
