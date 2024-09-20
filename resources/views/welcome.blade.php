@@ -75,10 +75,18 @@
                                 <div id="badges" class="flex gap-2">
                                     <div class="bg-purple-200 px-3 py-1 rounded-full text-sm">UI/UX</div>
                                 </div>
-                                <div id="actions">
+                                <div id="actions" class="relative">
                                     <button id="btn-actions" class="flex items-center p-1">
                                         <i class="text-gray-500 ph ph-dots-three-outline-vertical"></i>
                                     </button>
+                                    <div id="actions-dropdown" class="absolute hidden bg-white border border-zinc-300 rounded right-0 text-sm text-zinc-500 px-2 py-1">
+                                        <div class="flex items-center gap-1 py-0.5">
+                                            <i class="ph ph-pencil-simple"></i> Editar
+                                        </div>
+                                        <div class="flex items-center gap-1 py-0.5 text-red-500">
+                                            <i class="ph ph-trash-simple"></i> Deletar
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div id="progress-bar" class="h-1.5 bg-gray-200 rounded-full my-3">
@@ -134,6 +142,10 @@
 
         $('#btn-theme').on('click', function () {
             $('#theme-dropdown').toggle(200);
+        })
+
+        $('#btn-actions').on('click', function () {
+            $('#actions-dropdown').toggle();
         })
 
         function toggleFullScreen() {
