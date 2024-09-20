@@ -66,19 +66,40 @@
 
             <div class="flex gap-4">
                 <div class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold">
+                    <header class="text-2xl font-bold mb-2">
                         A fazer
                     </header>
                     <div class="p-3 h-96 w-72 bg-green-200">
-                        <div>Badges vem aqui</div>
-                        <div>
-                            <i class="ph ph-dots-three-outline-vertical"></i>
+                        <div class="bg-white rounded-md border-2 px-2 py-3">
+                            <div class="flex items-center justify-between mb-4">
+                                <div id="badges" class="flex gap-2">
+                                    <div class="bg-purple-200 px-3 py-1 rounded-full text-sm">UI/UX</div>
+                                </div>
+                                <div id="actions">
+                                    <button id="btn-actions" class="flex items-center p-1">
+                                        <i class="text-gray-500 ph ph-dots-three-outline-vertical"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="progress-bar" class="h-1.5 bg-gray-200 rounded-full my-3">
+                                <div id="progress" class="h-1.5 w-40 bg-green-400 rounded-full"></div>
+                            </div>
+                            <h1 class="font-medium mb-1">Título do card</h1>
+                            <p class="text-sm leading-tight">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis exercitationem, perspiciatis quod tempora sint voluptates veniam modi cum adipisci laudantium.</p>
+                            <hr class="border-t-2 border-zinc-100 -mx-2 my-3">
+                            <div class="flex gap-1 justify-end">
+                                <button id="btn-comment" class="flex items-center p-1">
+                                    <i class="ph ph-chat"></i>
+                                </button>
+                                <button id="btn-card-color" class="flex items-center p-1">
+                                    <i class="text-gray-500 ph ph-palette"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="bg-white rounded border-2 p-2">Card 1</div>
                     </div>
                 </div>
                 <div class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold">
+                    <header class="text-2xl font-bold mb-2">
                         Em progresso
                     </header>
                     <div class="h-96 w-72 bg-green-200">
@@ -86,7 +107,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold">
+                    <header class="text-2xl font-bold mb-2">
                         Testando
                     </header>
                     <div class="h-96 w-72 bg-green-200">
@@ -94,7 +115,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold">
+                    <header class="text-2xl font-bold mb-2">
                         Implementado
                     </header>
                     <div class="h-96 w-72 bg-green-200">
