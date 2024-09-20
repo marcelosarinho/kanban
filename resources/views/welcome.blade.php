@@ -95,13 +95,26 @@
                             <h1 class="font-medium mb-1">Título do card</h1>
                             <p class="text-sm leading-tight">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis exercitationem, perspiciatis quod tempora sint voluptates veniam modi cum adipisci laudantium.</p>
                             <hr class="border-t-2 border-zinc-100 -mx-2 my-3">
-                            <div class="flex gap-1 justify-end">
+                            <div class="relative flex gap-1 justify-end text-gray-500">
                                 <button id="btn-comment" class="flex items-center p-1">
                                     <i class="ph ph-chat"></i>
                                 </button>
                                 <button id="btn-card-color" class="flex items-center p-1">
-                                    <i class="text-gray-500 ph ph-palette"></i>
+                                    <i class="ph ph-palette"></i>
                                 </button>
+                                <div class="absolute bg-white border border-zinc-300 rounded w-40 p-2 hidden bottom-6" id="colors-dropdown">
+                                    <div class="flex flex-wrap gap-2">
+                                        <button class="bg-red-300 border border-red-300 p-3 rounded"></button>
+                                        <button class="bg-blue-300 border border-blue-300 p-3 rounded"></button>
+                                        <button class="bg-yellow-300 border border-yellow-300 p-3 rounded"></button>
+                                        <button class="bg-green-300 border border-green-300 p-3 rounded"></button>
+                                        <button class="bg-orange-300 border border-orange-300 p-3 rounded"></button>
+                                        <button class="bg-purple-300 border border-purple-300 p-3 rounded"></button>
+                                        <button class="bg-white border border-gray-300 p-3 rounded"></button>
+                                        <input type="color" class="size-7 rounded border border-gray-300"></input>
+                                    </div>
+                                </div>
+                                <div></div>
                             </div>
                         </div>
                     </div>
@@ -146,6 +159,10 @@
 
         $('#btn-actions').on('click', function () {
             $('#actions-dropdown').toggle();
+        })
+
+        $('#btn-card-color').on('click', function () {
+            $('#colors-dropdown').toggle();
         })
 
         function toggleFullScreen() {
