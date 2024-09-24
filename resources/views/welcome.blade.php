@@ -79,11 +79,11 @@
                                     <button id="btn-actions" class="flex items-center p-1">
                                         <i class="text-gray-500 ph ph-dots-three-outline-vertical"></i>
                                     </button>
-                                    <div id="actions-dropdown" class="absolute hidden bg-white border border-zinc-300 rounded right-0 text-sm text-zinc-500 px-2 py-1">
-                                        <div class="flex items-center gap-1 py-0.5">
+                                    <div id="actions-dropdown" class="absolute hidden bg-white border border-zinc-300 rounded right-0 text-sm text-zinc-500 py-1">
+                                        <div class="cursor-pointer transition-colors hover:bg-gray-200 flex items-center gap-1 p-1">
                                             <i class="ph ph-pencil-simple"></i> Editar
                                         </div>
-                                        <div class="flex items-center gap-1 py-0.5 text-red-500">
+                                        <div class="cursor-pointer transition-colors hover:bg-red-500 hover:text-white flex items-center gap-1 p-1 text-red-500">
                                             <i class="ph ph-trash-simple"></i> Deletar
                                         </div>
                                     </div>
@@ -99,19 +99,22 @@
                                 <button id="btn-comment" class="flex items-center p-1">
                                     <i class="ph ph-chat"></i>
                                 </button>
+                                <div class="absolute bottom-6 right-12 bg-white w-20 hidden">
+                                    Oi
+                                </div>
                                 <button id="btn-card-color" class="flex items-center p-1">
                                     <i class="ph ph-palette"></i>
                                 </button>
-                                <div class="absolute bg-white border border-zinc-300 rounded w-40 p-2 hidden bottom-6" id="colors-dropdown">
+                                <div class="absolute bg-white border border-zinc-300 rounded w-28 p-2 hidden bottom-6" id="colors-dropdown">
                                     <div class="flex flex-wrap gap-2">
-                                        <button class="bg-red-300 border border-red-300 p-3 rounded"></button>
-                                        <button class="bg-blue-300 border border-blue-300 p-3 rounded"></button>
-                                        <button class="bg-yellow-300 border border-yellow-300 p-3 rounded"></button>
-                                        <button class="bg-green-300 border border-green-300 p-3 rounded"></button>
-                                        <button class="bg-orange-300 border border-orange-300 p-3 rounded"></button>
-                                        <button class="bg-purple-300 border border-purple-300 p-3 rounded"></button>
-                                        <button class="bg-white border border-gray-300 p-3 rounded"></button>
-                                        <input type="color" class="size-7 rounded border border-gray-300"></input>
+                                        <button class="transition-colors hover:bg-red-400 bg-red-300 border border-red-300 p-3 rounded"></button>
+                                        <button class="transition-colors hover:bg-blue-400 bg-blue-300 border border-blue-300 p-3 rounded"></button>
+                                        <button class="transition-colors hover:bg-yellow-400 bg-yellow-300 border border-yellow-300 p-3 rounded"></button>
+                                        <button class="transition-colors hover:bg-green-400 bg-green-300 border border-green-300 p-3 rounded"></button>
+                                        <button class="transition-colors hover:bg-orange-400 bg-orange-300 border border-orange-300 p-3 rounded"></button>
+                                        <button class="transition-colors hover:bg-purple-400 bg-purple-300 border border-purple-300 p-3 rounded"></button>
+                                        <button class="transition-colors hover:bg-gray-100 bg-white border border-gray-300 p-3 rounded"></button>
+                                        <input type="color" class="cursor-pointer size-7 rounded border border-gray-300"></input>
                                     </div>
                                 </div>
                                 <div></div>
