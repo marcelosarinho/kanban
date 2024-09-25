@@ -70,7 +70,7 @@
                         A fazer
                     </header>
                     <div class="p-3 h-96 w-72 bg-green-200">
-                        <div class="bg-white rounded-md border-2 px-2 py-3">
+                        <div id="card-inicial" class="bg-white rounded-md border-2 px-2 py-3">
                             <div class="flex items-center justify-between mb-4">
                                 <div id="badges" class="flex gap-2">
                                     <div class="bg-purple-200 px-3 py-1 rounded-full text-sm">UI/UX</div>
@@ -109,14 +109,43 @@
                                 </button>
                                 <div class="absolute bg-white border border-zinc-300 rounded w-28 p-2 hidden bottom-6" id="colors-dropdown">
                                     <div class="flex flex-wrap gap-2">
-                                        <button value="bg-red-300" class="transition-colors hover:bg-red-400 bg-red-300 border border-red-300 p-3 rounded"></button>
-                                        <button value="bg-blue-300" class="transition-colors hover:bg-blue-400 bg-blue-300 border border-blue-300 p-3 rounded"></button>
-                                        <button value="bg-yellow-300" class="transition-colors hover:bg-yellow-400 bg-yellow-300 border border-yellow-300 p-3 rounded"></button>
-                                        <button value="bg-green-300" class="transition-colors hover:bg-green-400 bg-green-300 border border-green-300 p-3 rounded"></button>
-                                        <button value="bg-orange-300" class="transition-colors hover:bg-orange-400 bg-orange-300 border border-orange-300 p-3 rounded"></button>
-                                        <button value="bg-purple-300" class="transition-colors hover:bg-purple-400 bg-purple-300 border border-purple-300 p-3 rounded"></button>
-                                        <button value="bg-white" class="transition-colors hover:bg-gray-100 bg-white border border-gray-300 p-3 rounded"></button>
-                                        <input type="color" class="cursor-pointer size-7 rounded border border-gray-300"></input>
+                                        <button
+                                            onclick="setCardBgColor(this)"
+                                            value="#FECACA"
+                                            class="transition-colors hover:bg-red-300 bg-red-200 border border-red-200 p-3 rounded">
+                                        </button>
+                                        <button
+                                            onclick="setCardBgColor(this)"
+                                            value="#BFDBFE"
+                                            class="transition-colors hover:bg-blue-300 bg-blue-200 border border-blue-200 p-3 rounded">
+                                        </button>
+                                        <button
+                                            onclick="setCardBgColor(this)"
+                                            value="#FEF08A"
+                                            class="transition-colors hover:bg-yellow-300 bg-yellow-200 border border-yellow-200 p-3 rounded">
+                                        </button>
+                                        <button
+                                            onclick="setCardBgColor(this)"
+                                            value="#BBF7D0"
+                                            class="transition-colors hover:bg-green-300 bg-green-200 border border-green-200 p-3 rounded">
+                                        </button>
+                                        <button
+                                            onclick="setCardBgColor(this)"
+                                            value="#FED7AA"
+                                            class="transition-colors hover:bg-orange-300 bg-orange-200 border border-orange-200 p-3 rounded">
+                                        </button>
+                                        <button
+                                            onclick="setCardBgColor(this)"
+                                            value="#E9D5FF"
+                                            class="transition-colors hover:bg-purple-300 bg-purple-200 border border-purple-200 p-3 rounded">
+                                        </button>
+                                        <button
+                                            onclick="setCardBgColor(this)"
+                                            value="#FFFFFF"
+                                            class="transition-colors hover:bg-gray-100 bg-white border border-gray-300 p-3 rounded">
+                                        </button>
+                                        <input type="color"
+                                        class="cursor-pointer size-[26px] rounded border border-gray-300"></input>
                                     </div>
                                 </div>
                                 <div></div>
@@ -154,6 +183,11 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
+        function setCardBgColor(element) {
+            console.log(element.value);
+            // $('#card-inicial').addClass(element.value).removeClass('bg-white');
+        }
+
         $('#btn-fullscreen').on('click', function () {
             toggleFullScreen();
         })
