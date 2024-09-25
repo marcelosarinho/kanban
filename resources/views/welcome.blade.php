@@ -111,37 +111,37 @@
                                     <div class="flex flex-wrap gap-2">
                                         <button
                                             onclick="setCardBgColor(this)"
-                                            value="#FECACA"
+                                            value="#FECACA #FCA5A5"
                                             class="transition-colors hover:bg-red-300 bg-red-200 border border-red-200 p-3 rounded">
                                         </button>
                                         <button
                                             onclick="setCardBgColor(this)"
-                                            value="#BFDBFE"
+                                            value="#BFDBFE #93C5FD"
                                             class="transition-colors hover:bg-blue-300 bg-blue-200 border border-blue-200 p-3 rounded">
                                         </button>
                                         <button
                                             onclick="setCardBgColor(this)"
-                                            value="#FEF08A"
+                                            value="#FEF08A #FDE047"
                                             class="transition-colors hover:bg-yellow-300 bg-yellow-200 border border-yellow-200 p-3 rounded">
                                         </button>
                                         <button
                                             onclick="setCardBgColor(this)"
-                                            value="#BBF7D0"
+                                            value="#BBF7D0 #86EFAC"
                                             class="transition-colors hover:bg-green-300 bg-green-200 border border-green-200 p-3 rounded">
                                         </button>
                                         <button
                                             onclick="setCardBgColor(this)"
-                                            value="#FED7AA"
+                                            value="#FED7AA #FDBA74"
                                             class="transition-colors hover:bg-orange-300 bg-orange-200 border border-orange-200 p-3 rounded">
                                         </button>
                                         <button
                                             onclick="setCardBgColor(this)"
-                                            value="#E9D5FF"
+                                            value="#E9D5FF #D8B4FE"
                                             class="transition-colors hover:bg-purple-300 bg-purple-200 border border-purple-200 p-3 rounded">
                                         </button>
                                         <button
                                             onclick="setCardBgColor(this)"
-                                            value="#FFFFFF"
+                                            value="#FFFFFF #E5E7EB"
                                             class="transition-colors hover:bg-gray-100 bg-white border border-gray-300 p-3 rounded">
                                         </button>
                                         <input type="color"
@@ -184,7 +184,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         function setCardBgColor(element) {
-            $('#card-inicial').css('background-color', element.value);
+            let colors = element.value.split(" ");
+            $('#card-inicial').css('background-color', colors[0]);
+            $('#card-inicial').css('border-color', colors[1]);
+            $('hr').css('border-color', colors[1]);
         }
 
         $('#btn-fullscreen').on('click', function () {
