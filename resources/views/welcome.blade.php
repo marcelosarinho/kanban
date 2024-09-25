@@ -184,8 +184,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         function setCardBgColor(element) {
-            console.log(element.value);
-            // $('#card-inicial').addClass(element.value).removeClass('bg-white');
+            $('#card-inicial').css('background-color', element.value);
         }
 
         $('#btn-fullscreen').on('click', function () {
