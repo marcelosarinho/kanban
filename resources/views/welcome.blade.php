@@ -99,21 +99,23 @@
                                 <button id="btn-comment" class="flex items-center p-1">
                                     <i class="ph ph-chat"></i>
                                 </button>
-                                <div class="absolute bottom-6 right-12 bg-white w-20 hidden">
-                                    Oi
+                                <div id="comment-dropdown" class="absolute hidden bottom-6 right-10 bg-white border border-zinc-300 rounded text-sm text-zinc-500 py-1">
+                                    <button class="transition-colors hover:bg-gray-200 flex items-center gap-1 p-1">
+                                        <i class="ph ph-plus-circle"></i> Adicionar comentário
+                                    </button>
                                 </div>
                                 <button id="btn-card-color" class="flex items-center p-1">
                                     <i class="ph ph-palette"></i>
                                 </button>
                                 <div class="absolute bg-white border border-zinc-300 rounded w-28 p-2 hidden bottom-6" id="colors-dropdown">
                                     <div class="flex flex-wrap gap-2">
-                                        <button class="transition-colors hover:bg-red-400 bg-red-300 border border-red-300 p-3 rounded"></button>
-                                        <button class="transition-colors hover:bg-blue-400 bg-blue-300 border border-blue-300 p-3 rounded"></button>
-                                        <button class="transition-colors hover:bg-yellow-400 bg-yellow-300 border border-yellow-300 p-3 rounded"></button>
-                                        <button class="transition-colors hover:bg-green-400 bg-green-300 border border-green-300 p-3 rounded"></button>
-                                        <button class="transition-colors hover:bg-orange-400 bg-orange-300 border border-orange-300 p-3 rounded"></button>
-                                        <button class="transition-colors hover:bg-purple-400 bg-purple-300 border border-purple-300 p-3 rounded"></button>
-                                        <button class="transition-colors hover:bg-gray-100 bg-white border border-gray-300 p-3 rounded"></button>
+                                        <button value="bg-red-300" class="transition-colors hover:bg-red-400 bg-red-300 border border-red-300 p-3 rounded"></button>
+                                        <button value="bg-blue-300" class="transition-colors hover:bg-blue-400 bg-blue-300 border border-blue-300 p-3 rounded"></button>
+                                        <button value="bg-yellow-300" class="transition-colors hover:bg-yellow-400 bg-yellow-300 border border-yellow-300 p-3 rounded"></button>
+                                        <button value="bg-green-300" class="transition-colors hover:bg-green-400 bg-green-300 border border-green-300 p-3 rounded"></button>
+                                        <button value="bg-orange-300" class="transition-colors hover:bg-orange-400 bg-orange-300 border border-orange-300 p-3 rounded"></button>
+                                        <button value="bg-purple-300" class="transition-colors hover:bg-purple-400 bg-purple-300 border border-purple-300 p-3 rounded"></button>
+                                        <button value="bg-white" class="transition-colors hover:bg-gray-100 bg-white border border-gray-300 p-3 rounded"></button>
                                         <input type="color" class="cursor-pointer size-7 rounded border border-gray-300"></input>
                                     </div>
                                 </div>
@@ -166,6 +168,10 @@
 
         $('#btn-card-color').on('click', function () {
             $('#colors-dropdown').toggle();
+        })
+
+        $('#btn-comment').on('click', function () {
+            $('#comment-dropdown').toggle();
         })
 
         function toggleFullScreen() {
