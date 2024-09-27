@@ -15,10 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('to_do');
-            $table->string('in_progress');
-            $table->string('testing');
-            $table->string('implemented');
             $table->timestamps();
         });
     }
