@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->references('id')->on(table: 'projects');
+            $table->string("name");
             $table->timestamps();
         });
     }
