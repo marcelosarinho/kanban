@@ -16,23 +16,31 @@
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
     <body class="h-screen font-suse bg-gray-200">
-        <nav id="sidebar" class="fixed w-52 bg-red-300 h-full flex flex-col items-center">
-            <h3 class="text-xl font-semibold">Projetos</h3>
-            <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center">
-                <input type="text">
-                <button class="flex items-center p-0.5">
-                    <i class="ph ph-magnifying-glass text-xl"></i>
+        <nav id="sidebar" class="fixed w-52 bg-red-300 h-full">
+            <div id="leftbar" class="flex flex-col items-center px-2">
+                <h3 class="text-xl font-semibold text-center">Projetos</h3>
+                <button type="button" class="">
+                    Adicionar projeto
                 </button>
-            </div>
-            <div id="projects" class="mt-4 flex flex-col w-full px-2 gap-2">
-                <div>
-                    Projeto 1
+                <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center focus-within:border-red-500 border-2">
+                    <input type="text" class="outline-none px-0.5 text-sm">
+                    <button class="flex items-center p-0.5">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                    </button>
                 </div>
-                <div>
-                    Projeto 2
-                </div>
-                <div>
-                    Projeto 3
+                <div id="projects" class="mt-4 flex flex-col w-full gap-3">
+                    <div class="bg-red-700 py-2 px-3 rounded">
+                        <h2 class="font-semibold">Projeto 1</h2>
+                        <h6 class="text-sm truncate leading-tight">Descrição dasdas jdashh sa hadsh dhas dhashd sahd ashdsah</h6>
+                    </div>
+                    <div class="bg-red-700 py-2 px-3 rounded">
+                        <h2 class="font-semibold">Projeto 2</h2>
+                        <h6 class="text-sm truncate leading-tight">Descrição dasdas jdashh sa hadsh dhas dhashd sahd ashdsah</h6>
+                    </div>
+                    <div class="bg-red-700 py-2 px-3 rounded">
+                        <h2 class="font-semibold">Projeto 3</h2>
+                        <h6 class="text-sm truncate leading-tight">Descrição dasdas jdashh sa hadsh dhas dhashd sahd ashdsah</h6>
+                    </div>
                 </div>
             </div>
         </nav>
