@@ -16,13 +16,13 @@
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
     <body class="h-screen font-suse bg-gray-200">
-        <aside id="leftbar" class="fixed w-52 bg-red-300 h-full">
+        <aside id="leftbar" class="fixed w-52 bg-primary h-full">
             <div id="sidebar" class="flex flex-col items-center px-2">
                 <h3 class="text-xl font-semibold text-center">Projetos</h3>
                 <button type="button" class="bg-blue-500 px-2 py-1.5 rounded text-white text-sm mt-3">
                     Adicionar projeto
                 </button>
-                <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center focus-within:border-red-500 border-2">
+                <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center focus-within:border-primary-dark border-2">
                     <input type="text" class="outline-none px-0.5 text-sm">
                     <button class="flex items-center p-0.5">
                         <i class="ph ph-magnifying-glass text-xl"></i>
