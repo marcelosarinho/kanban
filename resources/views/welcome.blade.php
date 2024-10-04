@@ -19,7 +19,7 @@
         <aside id="leftbar" class="fixed w-52 bg-primary-300 h-full">
             <div id="sidebar" class="flex flex-col items-center px-2">
                 <h3 class="text-xl font-semibold text-center">Projetos</h3>
-                <button type="button" class="bg-blue-500 px-2 py-1.5 rounded text-white text-sm mt-3">
+                <button id="btn-add-project" type="button" class="bg-blue-500 px-2 py-1.5 rounded text-white text-sm mt-3">
                     Adicionar projeto
                 </button>
                 <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center focus-within:border-primary-700 border-2">
@@ -190,6 +190,29 @@
                 </div>
             </main>
         </section>
+
+        <div id="new-project-modal" class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-full z-50 bg-black/35">
+            <div class="w-1/2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white opacity-100 p-5 rounded">
+                <header>
+                    <h1 class="text-xl font-bold">Novo projeto</h1>
+                </header>
+                <main class="mb-4">
+                    <div class="mb-3">
+                        <label class="block" for="name">Nome</label>
+                        <input name="name" id="name" type="text" class="border rounded w-full">
+                    </div>
+
+                    <div>
+                        <label class="block" for="description">Descrição</label>
+                        <textarea class="border rounded w-full" name="description" id="description" cols="30" rows="3"></textarea>
+                    </div>
+                </main>
+                <footer class="text-right">
+                    <button class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">Cancelar</button>
+                    <button class="bg-blue-500 text-white rounded px-2 py-1">Criar</button>
+                </footer>
+            </div>
+        </div>
     </body>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -201,8 +224,16 @@
             $('hr').css('border-color', colors[1]);
         }
 
+        function closeModal() {
+            $('#new-project-modal').toggle();
+        }
+
         $('#btn-fullscreen').on('click', function () {
             toggleFullScreen();
+        })
+
+        $('#btn-add-project').on('click', function () {
+            $('#new-project-modal').toggle();
         })
 
         $('#btn-theme').on('click', function () {
