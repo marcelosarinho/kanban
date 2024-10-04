@@ -15,29 +15,29 @@
         <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
     </head>
-    <body class="h-screen font-suse bg-gray-200">
-        <aside id="leftbar" class="fixed w-52 bg-primary h-full">
+    <body class="h-screen font-suse bg-neutral-100">
+        <aside id="leftbar" class="fixed w-52 bg-primary-300 h-full">
             <div id="sidebar" class="flex flex-col items-center px-2">
                 <h3 class="text-xl font-semibold text-center">Projetos</h3>
                 <button type="button" class="bg-blue-500 px-2 py-1.5 rounded text-white text-sm mt-3">
                     Adicionar projeto
                 </button>
-                <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center focus-within:border-primary-dark border-2">
+                <div class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center focus-within:border-primary-700 border-2">
                     <input type="text" class="outline-none px-0.5 text-sm">
                     <button class="flex items-center p-0.5">
                         <i class="ph ph-magnifying-glass text-xl"></i>
                     </button>
                 </div>
                 <div id="projects" class="mt-4 flex flex-col w-full gap-3">
-                    <div class="bg-red-700 py-2 px-3 rounded cursor-pointer">
+                    <div class="bg-primary-200 py-2 px-3 rounded cursor-pointer">
                         <h2 class="font-semibold">Projeto 1</h2>
                         <h6 class="text-sm truncate leading-tight">Descrição dasdas jdashh sa hadsh dhas dhashd sahd ashdsah</h6>
                     </div>
-                    <div class="bg-red-700 py-2 px-3 rounded cursor-pointer">
+                    <div class="bg-primary-200 py-2 px-3 rounded cursor-pointer">
                         <h2 class="font-semibold">Projeto 2</h2>
                         <h6 class="text-sm truncate leading-tight">Descrição dasdas jdashh sa hadsh dhas dhashd sahd ashdsah</h6>
                     </div>
-                    <div class="bg-red-700 py-2 px-3 rounded cursor-pointer">
+                    <div class="bg-primary-200 py-2 px-3 rounded cursor-pointer">
                         <h2 class="font-semibold">Projeto 3</h2>
                         <h6 class="text-sm truncate leading-tight">Descrição dasdas jdashh sa hadsh dhas dhashd sahd ashdsah</h6>
                     </div>
@@ -45,7 +45,7 @@
             </div>
         </aside>
         <section id="rightbar" class="ml-52">
-            <nav id="topbar" class="z-[1] fixed h-12 bg-red-200 flex justify-end px-4 py-7 gap-3 items-center left-52 right-0">
+            <nav id="topbar" class="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0">
                 <button id="btn-theme">
                     <i class="ph ph-sun text-2xl"></i>
                 </button>
