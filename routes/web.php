@@ -8,5 +8,5 @@ Route::get('/', function () {
 });
 
 Route::prefix('/projects')->group(function () {
-    Route::post('/save', [ProjectController::class, 'save']);
+    Route::post('/save', [ProjectController::class, 'store'])->name('projects.store');
 });

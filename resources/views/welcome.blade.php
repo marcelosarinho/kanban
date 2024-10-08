@@ -197,19 +197,22 @@
                     <h1 class="text-xl font-bold">Novo projeto</h1>
                 </header>
                 <main class="mb-4">
-                    <div class="mb-3">
-                        <label class="block mb-1" for="name">Nome</label>
-                        <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full">
-                    </div>
-
-                    <div>
-                        <label class="block mb-1" for="description">Descrição</label>
-                        <textarea class="px-2 py-1 border rounded w-full" name="description" id="description" cols="30" rows="3"></textarea>
-                    </div>
+                    <form action="/projects/save" id="create-project-form" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="block mb-1" for="name">Nome</label>
+                            <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full">
+                        </div>
+    
+                        <div>
+                            <label class="block mb-1" for="description">Descrição</label>
+                            <textarea class="px-2 py-1 border rounded w-full" name="description" id="description" cols="30" rows="3"></textarea>
+                        </div>
+                    </form>
                 </main>
                 <footer class="text-right">
                     <button type="button" class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">Cancelar</button>
-                    <button type="button" class="bg-blue-500 text-white rounded px-2 py-1" onclick="createProject()">Criar</button>
+                    <button form="create-project-form" class="bg-blue-500 text-white rounded px-2 py-1">Criar</button>
                 </footer>
             </div>
         </div>
@@ -228,16 +231,19 @@
             $('#new-project-modal').toggle();
         }
 
-        // function createProject() {
-        //     const name = $('#name').val();
-        //     const description = $('#description').val();
+        function createProject() {
+            const name = $('#name').val();
+            const description = $('#description').val();
 
-        //     $.ajax({
-        //         method: "POST",
-        //         data: { name, description },
-        //         url: ""
-        //     })
-        // }
+            console.log(name);
+            console.log(description);
+
+            $.ajax({
+                method: "POST",
+                data: { name, description },
+                url: "/projects/save"
+            });
+        }
 
         $('#btn-fullscreen').on('click', function () {
             toggleFullScreen();

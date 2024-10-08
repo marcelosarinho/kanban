@@ -29,7 +29,13 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $project = new Project();
+        $project->save([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect()->back();
     }
 
     /**
