@@ -193,23 +193,23 @@
 
         <div id="new-project-modal" class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-full z-50 bg-black/35">
             <div class="w-1/2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white opacity-100 p-5 rounded">
-                <header>
+                <header class="mb-3">
                     <h1 class="text-xl font-bold">Novo projeto</h1>
                 </header>
                 <main class="mb-4">
                     <div class="mb-3">
-                        <label class="block" for="name">Nome</label>
-                        <input name="name" id="name" type="text" class="border rounded w-full">
+                        <label class="block mb-1" for="name">Nome</label>
+                        <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full">
                     </div>
 
                     <div>
-                        <label class="block" for="description">Descrição</label>
-                        <textarea class="border rounded w-full" name="description" id="description" cols="30" rows="3"></textarea>
+                        <label class="block mb-1" for="description">Descrição</label>
+                        <textarea class="px-2 py-1 border rounded w-full" name="description" id="description" cols="30" rows="3"></textarea>
                     </div>
                 </main>
                 <footer class="text-right">
-                    <button class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">Cancelar</button>
-                    <button class="bg-blue-500 text-white rounded px-2 py-1">Criar</button>
+                    <button type="button" class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">Cancelar</button>
+                    <button type="button" class="bg-blue-500 text-white rounded px-2 py-1" onclick="createProject()">Criar</button>
                 </footer>
             </div>
         </div>
@@ -227,6 +227,17 @@
         function closeModal() {
             $('#new-project-modal').toggle();
         }
+
+        // function createProject() {
+        //     const name = $('#name').val();
+        //     const description = $('#description').val();
+
+        //     $.ajax({
+        //         method: "POST",
+        //         data: { name, description },
+        //         url: ""
+        //     })
+        // }
 
         $('#btn-fullscreen').on('click', function () {
             toggleFullScreen();
