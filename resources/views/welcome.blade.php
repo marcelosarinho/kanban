@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         @vite('resources/css/app.css')
 
         <title>Laravel</title>
@@ -197,11 +198,12 @@
                     <h1 class="text-xl font-bold">Novo projeto</h1>
                 </header>
                 <main class="mb-4">
-                    <form action="/projects/save" id="create-project-form" method="POST">
+                    <form id="create-project-form">
                         @csrf
                         <div class="mb-3">
                             <label class="block mb-1" for="name">Nome</label>
                             <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full">
+                            <p class="text-red-500 text-sm">Nome obrigatório!</p>
                         </div>
     
                         <div>
@@ -211,8 +213,12 @@
                     </form>
                 </main>
                 <footer class="text-right">
-                    <button type="button" class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">Cancelar</button>
-                    <button form="create-project-form" class="bg-blue-500 text-white rounded px-2 py-1">Criar</button>
+                    <button type="button" class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">
+                        <i class="ph ph-x mr-1"></i> Cancelar
+                    </button>
+                    <button type="submit" form="create-project-form" class="bg-blue-500 text-white rounded px-2 py-1">
+                        <i class="ph ph-check mr-1"></i> Criar
+                    </button>
                 </footer>
             </div>
         </div>
@@ -220,6 +226,12 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         function setCardBgColor(element) {
             let colors = element.value.split(" ");
             $('#card-inicial').css('background-color', colors[0]);
@@ -231,19 +243,24 @@
             $('#new-project-modal').toggle();
         }
 
-        function createProject() {
+        $('#create-project-form').on('submit', function (e) {
+            e.preventDefault();
+            
             const name = $('#name').val();
             const description = $('#description').val();
-
-            console.log(name);
-            console.log(description);
 
             $.ajax({
                 method: "POST",
                 data: { name, description },
-                url: "/projects/save"
+                url: "/projects/save",
+                success: function () {
+                    console.log("Projeto criado com sucesso!");
+                },
+                error: function (error) {
+                    console.log(error);
+                } 
             });
-        }
+        })
 
         $('#btn-fullscreen').on('click', function () {
             toggleFullScreen();

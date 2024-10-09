@@ -22,7 +22,16 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'required',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nome do projeto obrigatório!',
+            'description.required' => 'Descrição do projeto obrigatória!'
         ];
     }
 }
