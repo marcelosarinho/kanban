@@ -229,6 +229,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="helper.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -270,21 +271,27 @@
             //     $('#description').removeClass('border-red-500');
             // }
 
-            console.log(name);
-
             $.ajax({
                 method: "POST",
                 data: { name, description },
                 url: "/projects/save",
                 success: function (data) {
                     closeModal();
+
                     Swal.fire({
-                        title: 'Teste',
-                        text: 'Testando SWAL',
+                        title: 'Sucesso',
+                        text: data,
                         icon: 'success',
+                        confirmButtonText: 'Fechar'
                     })
                 },
                 error: function (error) {
+                    Swal.fire({
+                        title: "Erro",
+                        text: "Erro ao criar projeto!",
+                        icon: "error",
+                        confirmButtonText: 'Fechar'
+                    })
                     console.log(error);
                 } 
             });
