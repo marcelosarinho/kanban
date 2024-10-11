@@ -13,7 +13,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projetos = Project::all();
     }
 
     /**
