@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use \Illuminate\Contracts\Validation\Validator;
 
 class StoreProjectRequest extends FormRequest
 {
@@ -22,16 +23,21 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'description' => 'required',
+            // 'name' => 'required',
+            // 'description' => 'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'Nome do projeto obrigatório!',
-            'description.required' => 'Descrição do projeto obrigatória!'
+            // 'name.required' => 'Nome do projeto obrigatório!',
+            // 'description.required' => 'Descrição do projeto obrigatória!'
         ];
     }
+
+    // public function failedValidation(Validator $validator)
+    // {
+    //     return response()->json('falhou na validação');
+    // }
 }

@@ -194,8 +194,10 @@
 
         <div id="new-project-modal" class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-full z-50 bg-black/35">
             <div class="w-1/2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white opacity-100 p-5 rounded">
-                <header class="mb-3">
+                <header class="mb-3 flex justify-between">
                     <h1 class="text-xl font-bold">Novo projeto</h1>
+
+                    <i class="ph ph-x cursor-pointer hover:text-blue-500" onclick="closeModal()"></i>
                 </header>
                 <main class="mb-4">
                     <form id="create-project-form">
@@ -250,22 +252,24 @@
             const name = $('#name').val();
             const description = $('#description').val();
 
-            if (!name) {
-                $('#name-error').removeClass('hidden');
-                $('#name').addClass('border border-red-500');
-                return;
-            } else {
-                $('#name-error').addClass('hidden');
-                $('#name').removeClass('border border-red-500');
-            }
+            // if (!name) {
+            //     $('#name-error').removeClass('hidden');
+            //     $('#name').addClass('border-red-500');
+            //     return;
+            // } else {
+            //     $('#name-error').addClass('hidden');
+            //     $('#name').removeClass('border-red-500');
+            // }
 
-            if (!description) {
-                $('#description-error').removeClass('hidden');
-                $('#description').addClass('border border-red-500');
-            } else {
-                $('#description-error').addClass('hidden');
-                $('#description').removeClass('border border-red-500');
-            }
+            // if (!description) {
+            //     $('#description-error').removeClass('hidden');
+            //     $('#description').addClass('border-red-500');
+            // } else {
+            //     $('#description-error').addClass('hidden');
+            //     $('#description').removeClass('border-red-500');
+            // }
+
+            console.log(name);
 
             $.ajax({
                 method: "POST",
