@@ -203,12 +203,13 @@
                         <div class="mb-3">
                             <label class="block mb-1" for="name">Nome</label>
                             <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full">
-                            <p class="text-red-500 text-sm">Nome obrigatório!</p>
+                            <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
                         </div>
     
                         <div>
                             <label class="block mb-1" for="description">Descrição</label>
                             <textarea class="px-2 py-1 border rounded w-full" name="description" id="description" cols="30" rows="3"></textarea>
+                            <p id="description-error" class="text-red-500 text-sm mt-1 hidden">Descrição obrigatória!</p>
                         </div>
                     </form>
                 </main>
@@ -248,6 +249,23 @@
             
             const name = $('#name').val();
             const description = $('#description').val();
+
+            if (!name) {
+                $('#name-error').removeClass('hidden');
+                $('#name').addClass('border border-red-500');
+                return;
+            } else {
+                $('#name-error').addClass('hidden');
+                $('#name').removeClass('border border-red-500');
+            }
+
+            if (!description) {
+                $('#description-error').removeClass('hidden');
+                $('#description').addClass('border border-red-500');
+            } else {
+                $('#description-error').addClass('hidden');
+                $('#description').removeClass('border border-red-500');
+            }
 
             $.ajax({
                 method: "POST",
