@@ -74,8 +74,9 @@
             </h1>
             
             <button class="bg-green-300">Salvar</button>
-            <x-button type="button" color="red" shade="500" />
-            <x-button type="submit" color="blue" shade="200" />
+            <x-button id="add-card" type="button" color="red" shade="500">
+                Adicionar tarefa
+            </x-button>
 
             <div class="flex gap-4">
                 <div id="to-do-section" class="col-lg-3 h-100">
