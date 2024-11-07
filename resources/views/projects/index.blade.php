@@ -34,10 +34,7 @@
             </div>
             <div id="projects" class="mt-4 flex flex-col w-full gap-3">
                 @foreach ($projects as $project)
-                    <div class="bg-primary-200 py-2 px-3 rounded cursor-pointer">
-                        <h2 class="font-semibold">{{ $project->name }}</h2>
-                        <h6 class="text-sm truncate leading-tight">{{ $project->description }}</h6>
-                    </div>
+                    <x-sidebar-card name="{{ $project->name }}" description="{{ $project->description }}" />
                 @endforeach
             </div>
         </div>
