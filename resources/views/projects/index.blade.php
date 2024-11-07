@@ -64,16 +64,21 @@
             </div>
         </nav>
 
-        <main class="flex flex-col items-center justify-center pt-20">
+        <main class="flex flex-col items-center justify-center px-6 pt-20">
             <button id="add-card-btn" class="px-3 py-1.5 bg-blue-300 text-white">Adicionar</button>
             <h1 class="text-3xl font-bold mb-4">
                 Kanban
             </h1>
-            
-            <button class="bg-green-300">Salvar</button>
-            <x-button id="add-card" type="button" color="red" shade="500">
-                Adicionar tarefa
-            </x-button>
+
+            <div class="flex justify-between w-full mb-4">
+                <x-button id="add-card" type="button" color="red" shade="500">
+                    Adicionar tarefa
+                </x-button>
+    
+                <x-button id="add-card" type="button" color="green" shade="400">
+                    Salvar
+                </x-button>
+            </div>
 
             <div class="flex gap-4">
                 <div id="to-do-section" class="col-lg-3 h-100">
