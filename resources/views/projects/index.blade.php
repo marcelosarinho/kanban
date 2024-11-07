@@ -65,7 +65,6 @@
         </nav>
 
         <main class="flex flex-col items-center justify-center px-6 pt-20">
-            <button id="add-card-btn" class="px-3 py-1.5 bg-blue-300 text-white">Adicionar</button>
             <h1 class="text-3xl font-bold mb-4">
                 Kanban
             </h1>
@@ -92,7 +91,7 @@
                         Em progresso
                     </header>
                     <div class="h-96 w-72 bg-green-200">
-                        <div>Card 1</div>
+                        <div></div>
                     </div>
                 </div>
                 <div class="col-lg-3 h-100">
@@ -100,7 +99,7 @@
                         Testando
                     </header>
                     <div class="h-96 w-72 bg-green-200">
-                        <div>Card 1</div>
+                        <div></div>
                     </div>
                 </div>
                 <div class="col-lg-3 h-100">
@@ -108,7 +107,7 @@
                         Implementado
                     </header>
                     <div class="h-96 w-72 bg-green-200">
-                        <div>Card 1</div>
+                        <div></div>
                     </div>
                 </div>
             </div>
