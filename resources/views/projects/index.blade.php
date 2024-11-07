@@ -22,9 +22,10 @@
     <aside id="leftbar" class="fixed w-52 bg-primary-300 h-full">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center">Projetos</h3>
-            <button id="btn-add-project" type="button" class="bg-blue-500 px-2 py-1.5 rounded text-white text-sm mt-3">
+            <x-button id="btn-add-project" type="button" color="blue" shade="500">
                 Adicionar projeto
-            </button>
+            </x-button>
+
             <div
                 class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center focus-within:border-primary-700 border-2">
                 <input type="text" class="outline-none px-0.5 text-sm">
