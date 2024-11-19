@@ -72,7 +72,7 @@
             </h1>
 
             <div class="flex justify-between w-full mb-4">
-                <x-button id="add-card" type="button" color="red" shade="500" textColor="white">
+                <x-button id="btn-add-card" type="button" color="red" shade="500" textColor="white">
                     <i class="ph-bold ph-plus"></i>
                     Adicionar tarefa
                 </x-button>
@@ -125,7 +125,7 @@
             <header class="mb-3 flex justify-between">
                 <h1 class="text-xl font-bold">Novo projeto</h1>
 
-                <i class="ph ph-x cursor-pointer hover:text-blue-500" onclick="closeModal()"></i>
+                <i class="ph-bold ph-x cursor-pointer hover:text-blue-500" onclick="closeModal()"></i>
             </header>
             <main class="mb-4">
                 <form id="create-project-form">
@@ -149,7 +149,7 @@
                     <i class="ph ph-x mr-1"></i> Cancelar
                 </button> --}}
 
-                <x-button id="btn-close-modal" type="button" color="red" shade="500" textColor="white">
+                <x-button id="btn-close-modal" type="button" color="red" shade="500" textColor="white" onclick="closeModal()">
                     <i class="ph-bold ph-x"></i>
                     Cancelar
                 </x-button>
@@ -185,7 +185,7 @@
         $('#new-project-modal').toggle();
     }
 
-    $('#add-card-btn').on('click', function () {
+    $('#btn-add-card').on('click', function () {
         $('#to-do-section > div').append(`
             <div id="card-inicial" class="bg-white rounded-md border-2 px-2 py-3">
                 <div class="flex items-center justify-between mb-4">
