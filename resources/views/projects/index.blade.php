@@ -90,7 +90,7 @@
                     </header>
                     <div class="p-3 h-96 w-72 bg-green-200"></div>
                 </div>
-                <div class="col-lg-3 h-100">
+                <div id="in-progress-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2">
                         Em progresso
                     </header>
@@ -98,7 +98,7 @@
                         <div></div>
                     </div>
                 </div>
-                <div class="col-lg-3 h-100">
+                <div id="testing-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2">
                         Testando
                     </header>
@@ -106,7 +106,7 @@
                         <div></div>
                     </div>
                 </div>
-                <div class="col-lg-3 h-100">
+                <div id="implement-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2">
                         Implementado
                     </header>
