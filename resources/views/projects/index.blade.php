@@ -22,7 +22,7 @@
     <aside id="leftbar" class="fixed w-52 bg-primary-300 h-full">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center">Projetos</h3>
-            <x-button id="btn-add-project" type="button" color="blue" shade="500">
+            <x-button id="btn-add-project" type="button" color="blue" shade="500" textColor="white">
                 <i class="ph-bold ph-plus"></i>
                 Adicionar projeto
             </x-button>
@@ -72,12 +72,12 @@
             </h1>
 
             <div class="flex justify-between w-full mb-4">
-                <x-button id="add-card" type="button" color="red" shade="500">
+                <x-button id="add-card" type="button" color="red" shade="500" textColor="white">
                     <i class="ph-bold ph-plus"></i>
                     Adicionar tarefa
                 </x-button>
     
-                <x-button id="add-card" type="button" color="green" shade="400">
+                <x-button id="add-card" type="button" color="green" shade="400" textColor="dark">
                     <i class="ph-bold ph-check"></i>
                     Salvar
                 </x-button>
@@ -144,14 +144,20 @@
                     </div>
                 </form>
             </main>
-            <footer class="text-right">
-                <button type="button" class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">
+            <footer class="flex gap-3 justify-end">
+                {{-- <button class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">
                     <i class="ph ph-x mr-1"></i> Cancelar
-                </button>
+                </button> --}}
 
-                <button type="submit" form="create-project-form" class="bg-blue-500 text-white rounded px-2 py-1">
-                    <i class="ph ph-check mr-1"></i> Criar
-                </button>
+                <x-button id="btn-close-modal" type="button" color="red" shade="500" textColor="white">
+                    <i class="ph-bold ph-x"></i>
+                    Cancelar
+                </x-button>
+
+                <x-button id="btn-create-new-project" type="submit" color="blue" shade="500" textColor="white">
+                    <i class="ph-bold ph-plus"></i>
+                    Criar
+                </x-button>
             </footer>
         </div>
     </div>
