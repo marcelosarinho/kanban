@@ -24,6 +24,9 @@ export default {
         'info': '#00A4FC',
         'warning': '#FFD800',
         'danger': '#FF3887',
+      },
+      boxShadow: {
+        'flat': '3px 3px 0px -1px rgba(0,0,0,1)'
       }
     },
   },
