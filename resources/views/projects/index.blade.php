@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     <meta charset="utf-8">
@@ -19,19 +19,21 @@
 </head>
 
 <body class="h-screen font-suse bg-neutral-100">
-    <aside id="leftbar" class="fixed w-52 bg-primary-300 h-full">
+    <aside id="leftbar" class="fixed w-52 bg-white h-full border-r-2 border-gray-200 dark:bg-neutral-800 dark:border-zinc-950">
         <div id="sidebar" class="flex flex-col items-center px-2">
-            <h3 class="text-xl font-semibold text-center">Projetos</h3>
+            <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-white">Projetos</h3>
             <x-button id="btn-add-project" type="button" color="blue" shade="500" textColor="white">
                 <i class="ph-bold ph-plus"></i>
                 Adicionar projeto
             </x-button>
 
             <div
-                class="mt-6 rounded py-0.5 px-1 bg-white h-fit flex items-center focus-within:border-primary-700 border-2">
-                <input type="text" class="outline-none px-0.5 text-sm">
+                class="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center focus-within:border-primary-700
+                border-2 dark:bg-neutral-700 dark:border-zinc-950"
+            >
+                <input type="text" class="outline-none px-0.5 text-sm bg-gray-50 dark:bg-neutral-700">
                 <button class="flex items-center p-0.5">
-                    <i class="ph ph-magnifying-glass text-xl"></i>
+                    <i class="ph ph-magnifying-glass text-xl dark:text-white"></i>
                 </button>
             </div>
             <div id="projects" class="mt-4 flex flex-col w-full gap-3">
@@ -43,12 +45,14 @@
     </aside>
     <section id="rightbar" class="ml-52">
         <nav id="topbar"
-            class="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0">
+            class="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b-2 border-gray-200
+            dark:bg-neutral-800 dark:border-zinc-950"
+        >
             <button id="btn-theme">
-                <i class="ph ph-sun text-2xl"></i>
+                <i class="ph ph-sun text-2xl dark:text-white"></i>
             </button>
             <button id="btn-fullscreen">
-                <i class="ph ph-arrows-out text-2xl"></i>
+                <i class="ph ph-arrows-out text-2xl dark:text-white"></i>
             </button>
             <div id="theme-dropdown" class="absolute right-12 bg-white rounded-md mt-2 py-2 w-28 hidden">
                 <div class="px-2 py-1 flex items-center hover:bg-gray-200 cursor-pointer">
@@ -66,13 +70,13 @@
             </div>
         </nav>
 
-        <main class="flex flex-col items-center justify-center px-6 pt-20">
-            <h1 class="text-3xl font-bold mb-4">
+        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-neutral-900">
+            <h1 class="text-3xl font-bold mb-4 dark:text-white">
                 Kanban
             </h1>
 
             <div class="flex justify-between w-full mb-4">
-                <x-button id="btn-add-card" type="button" color="red" shade="500" textColor="white">
+                <x-button id="btn-add-card" type="button" color="blue" shade="500" textColor="white">
                     <i class="ph-bold ph-plus"></i>
                     Adicionar tarefa
                 </x-button>
@@ -85,13 +89,13 @@
 
             <div class="flex gap-4">
                 <div id="to-do-section" class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold mb-2">
+                    <header class="text-2xl font-bold mb-2 dark:text-white">
                         A fazer
                     </header>
                     <div class="p-3 h-96 w-72 bg-green-200"></div>
                 </div>
                 <div id="in-progress-section" class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold mb-2">
+                    <header class="text-2xl font-bold mb-2 dark:text-white">
                         Em progresso
                     </header>
                     <div class="h-96 w-72 bg-green-200">
@@ -99,7 +103,7 @@
                     </div>
                 </div>
                 <div id="testing-section" class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold mb-2">
+                    <header class="text-2xl font-bold mb-2 dark:text-white">
                         Testando
                     </header>
                     <div class="h-96 w-72 bg-green-200">
@@ -107,7 +111,7 @@
                     </div>
                 </div>
                 <div id="implement-section" class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold mb-2">
+                    <header class="text-2xl font-bold mb-2 dark:text-white">
                         Implementado
                     </header>
                     <div class="h-96 w-72 bg-green-200">
