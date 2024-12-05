@@ -54,16 +54,16 @@
             <button id="btn-fullscreen">
                 <i class="ph ph-arrows-out text-2xl dark:text-white"></i>
             </button>
-            <div id="theme-dropdown" class="absolute right-12 bg-white rounded-md mt-2 py-2 w-28 hidden">
-                <div class="px-2 py-1 flex items-center hover:bg-gray-200 cursor-pointer">
+            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 py-2 w-28 hidden text-sm border border-gray-200 dark:bg-zinc-800 dark:border-zinc-950 dark:text-white">
+                <div class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-moon text-xl"></i>
                     Escuro
                 </div>
-                <div class="px-2 py-1 flex items-center hover:bg-gray-200 cursor-pointer">
+                <div class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-sun text-xl"></i>
                     Claro
                 </div>
-                <div class="px-2 py-1 flex items-center hover:bg-gray-200 cursor-pointer">
+                <div class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-moon-stars text-xl"></i>
                     Sistema
                 </div>
