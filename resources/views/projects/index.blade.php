@@ -70,7 +70,7 @@
             </div>
         </nav>
 
-        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-zinc-900 bg-slate-100">
+        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-zinc-900 bg-slate-100 h-screen max-h-screen">
             <h1 class="text-3xl font-bold mb-4 dark:text-white">
                 Kanban
             </h1>
@@ -191,17 +191,17 @@
 
     $('#btn-add-card').on('click', function () {
         $('#to-do-section > div').append(`
-            <div id="card-inicial" class="bg-white rounded-md border-2 px-2 py-3">
+            <div id="card-inicial" class="bg-white rounded-md border-2 px-2 py-3 dark:bg-zinc-700 dark:border-zinc-950 dark:text-white">
                 <div class="flex items-center justify-between mb-4">
                     <div id="badges" class="flex gap-2">
-                        <div class="bg-purple-200 px-3 py-1 rounded-full text-sm">UI/UX</div>
+                        <div class="bg-purple-200 dark:bg-purple-800 px-3 py-1 rounded-full text-sm">UI/UX</div>
                     </div>
                     <div id="actions" class="relative">
                         <button id="btn-actions" class="flex items-center p-1">
-                            <i class="text-gray-500 ph ph-dots-three-outline-vertical"></i>
+                            <i class="ph ph-dots-three-outline-vertical text-white dark:text-white"></i>
                         </button>
                         <div id="actions-dropdown"
-                            class="absolute hidden bg-white border border-zinc-300 rounded right-0 text-sm text-zinc-500 py-1">
+                            class="absolute hidden bg-white border border-zinc-300 rounded right-0 text-sm py-1 text-black dark:text-white">
                             <div
                                 class="cursor-pointer transition-colors hover:bg-gray-200 flex items-center gap-1 p-1">
                                 <i class="ph ph-pencil-simple"></i> Editar
@@ -213,17 +213,17 @@
                         </div>
                     </div>
                 </div>
-                <div id="progress-bar" class="h-1.5 bg-gray-200 rounded-full my-3">
+                <div id="progress-bar" class="h-1.5 bg-gray-200 dark:bg-zinc-900 rounded-full my-3">
                     <div id="progress" class="h-1.5 w-40 bg-green-400 rounded-full"></div>
                 </div>
                 <h1 class="font-medium mb-1">Título do card</h1>
                 <p class="text-sm leading-tight">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Facilis exercitationem, perspiciatis quod tempora sint voluptates veniam modi cum
                     adipisci laudantium.</p>
-                <hr class="border-t-2 border-zinc-100 -mx-2 my-3">
+                <hr class="border-t-2 border-zinc-100 dark:border-zinc-950 -mx-2 my-3">
                 <div class="relative flex gap-1 justify-end text-gray-500">
                     <button id="btn-comment" class="flex items-center p-1">
-                        <i class="ph ph-chat"></i>
+                        <i class="ph ph-chat text-dark dark:text-white"></i>
                     </button>
                     <div id="comment-dropdown"
                         class="absolute hidden bottom-6 right-10 bg-white border border-zinc-300 rounded text-sm text-zinc-500 py-1">
@@ -232,7 +232,7 @@
                         </button>
                     </div>
                     <button id="btn-card-color" class="flex items-center p-1">
-                        <i class="ph ph-palette"></i>
+                        <i class="ph ph-palette text-dark dark:text-white"></i>
                     </button>
                     <div class="absolute bg-white border border-zinc-300 rounded w-28 p-2 hidden bottom-6"
                         id="colors-dropdown">
