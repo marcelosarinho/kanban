@@ -19,19 +19,19 @@
 </head>
 
 <body class="h-screen font-suse bg-neutral-100">
-    <aside id="leftbar" class="fixed w-52 bg-white h-full border-r-2 border-gray-200 dark:bg-neutral-800 dark:border-zinc-950">
+    <aside id="leftbar" class="fixed w-52 bg-white h-full border-r-2 border-gray-200 dark:bg-zinc-800 dark:border-zinc-950">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-white">Projetos</h3>
-            <x-button id="btn-add-project" type="button" color="blue" shade="500" textColor="white">
+            <x-button id="btn-add-project" type="button" color="bg-blue-500" textColor="white">
                 <i class="ph-bold ph-plus"></i>
                 Adicionar projeto
             </x-button>
 
             <div
-                class="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center focus-within:border-primary-700
-                border-2 dark:bg-neutral-700 dark:border-zinc-950"
+                class="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center border-2
+                dark:bg-neutral-700 dark:border-zinc-950"
             >
-                <input type="text" class="outline-none px-0.5 text-sm bg-gray-50 dark:bg-neutral-700">
+                <input type="text" class="outline-none px-0.5 text-sm bg-gray-50 dark:bg-neutral-700 dark:text-white">
                 <button class="flex items-center p-0.5">
                     <i class="ph ph-magnifying-glass text-xl dark:text-white"></i>
                 </button>
@@ -46,7 +46,7 @@
     <section id="rightbar" class="ml-52">
         <nav id="topbar"
             class="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b-2 border-gray-200
-            dark:bg-neutral-800 dark:border-zinc-950"
+            dark:bg-zinc-800 dark:border-zinc-950"
         >
             <button id="btn-theme">
                 <i class="ph ph-sun text-2xl dark:text-white"></i>
@@ -70,18 +70,18 @@
             </div>
         </nav>
 
-        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-neutral-900">
+        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-zinc-900 bg-slate-100">
             <h1 class="text-3xl font-bold mb-4 dark:text-white">
                 Kanban
             </h1>
 
             <div class="flex justify-between w-full mb-4">
-                <x-button id="btn-add-card" type="button" color="blue" shade="500" textColor="white">
+                <x-button id="btn-add-card" type="button" color="bg-blue-500" textColor="white">
                     <i class="ph-bold ph-plus"></i>
                     Adicionar tarefa
                 </x-button>
     
-                <x-button id="add-card" type="button" color="green" shade="400" textColor="dark">
+                <x-button id="add-card" type="button" color="bg-green-400" textColor="dark">
                     <i class="ph-bold ph-check"></i>
                     Salvar
                 </x-button>
@@ -92,13 +92,13 @@
                     <header class="text-2xl font-bold mb-2 dark:text-white">
                         A fazer
                     </header>
-                    <div class="p-3 h-96 w-72 bg-green-200"></div>
+                    <div class="p-3 h-96 w-72 bg-white dark:bg-zinc-800"></div>
                 </div>
                 <div id="in-progress-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2 dark:text-white">
                         Em progresso
                     </header>
-                    <div class="h-96 w-72 bg-green-200">
+                    <div class="h-96 w-72 bg-white dark:bg-zinc-800">
                         <div></div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                     <header class="text-2xl font-bold mb-2 dark:text-white">
                         Testando
                     </header>
-                    <div class="h-96 w-72 bg-green-200">
+                    <div class="h-96 w-72 bg-white dark:bg-zinc-800">
                         <div></div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                     <header class="text-2xl font-bold mb-2 dark:text-white">
                         Implementado
                     </header>
-                    <div class="h-96 w-72 bg-green-200">
+                    <div class="h-96 w-72 bg-white dark:bg-zinc-800">
                         <div></div>
                     </div>
                 </div>
