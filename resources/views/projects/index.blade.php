@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -55,15 +55,15 @@
                 <i class="ph ph-arrows-out text-2xl dark:text-white"></i>
             </button>
             <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 py-2 w-28 hidden text-sm border border-gray-200 dark:bg-zinc-800 dark:border-zinc-950 dark:text-white">
-                <div class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+                <div id="dark-theme" class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-moon text-xl"></i>
                     Escuro
                 </div>
-                <div class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+                <div id="light-theme" class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-sun text-xl"></i>
                     Claro
                 </div>
-                <div class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+                <div id="system-theme" class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-moon-stars text-xl"></i>
                     Sistema
                 </div>
@@ -178,6 +178,14 @@
     function closeModal() {
         $('#new-project-modal').toggle();
     }
+
+    $('#dark-theme').on('click', function () {
+        $('html').addClass('dark')
+    })
+
+    $('#light-theme').on('click', function () {
+        $('html').removeClass('dark')
+    })
 
     $('#btn-add-card').on('click', function () {
         $('#to-do-section > div').append(`
