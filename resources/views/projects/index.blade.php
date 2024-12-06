@@ -130,14 +130,14 @@
         <form id="create-project-form">
             @csrf
             <div class="mb-3">
-                <label class="block mb-1" for="name">Nome</label>
-                <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full">
+                <label class="block mb-1 dark:text-white" for="name">Nome</label>
+                <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black">
                 <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
             </div>
 
             <div>
-                <label class="block mb-1" for="description">Descrição</label>
-                <textarea class="px-2 py-1 border rounded w-full" name="description" id="description" cols="30"
+                <label class="block mb-1 dark:text-white" for="description">Descrição</label>
+                <textarea class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black" name="description" id="description" cols="30"
                     rows="3"></textarea>
                 <p id="description-error" class="text-red-500 text-sm mt-1 hidden">Descrição obrigatória!</p>
             </div>
@@ -155,46 +155,6 @@
             </x-button>
         </x-slot:footer>
     </x-modal>
-
-    {{-- <div id="new-project-modal"
-        class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-full z-50 bg-black/35">
-        <div
-            class="w-1/2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white opacity-100 p-5 rounded">
-            <header class="mb-3 flex justify-between">
-                <h1 class="text-xl font-bold">Novo projeto</h1>
-
-                <i class="ph-bold ph-x cursor-pointer hover:text-blue-500" onclick="closeModal()"></i>
-            </header>
-            <main class="mb-4">
-                <form id="create-project-form">
-                    @csrf
-                    <div class="mb-3">
-                        <label class="block mb-1" for="name">Nome</label>
-                        <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full">
-                        <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
-                    </div>
-
-                    <div>
-                        <label class="block mb-1" for="description">Descrição</label>
-                        <textarea class="px-2 py-1 border rounded w-full" name="description" id="description" cols="30"
-                            rows="3"></textarea>
-                        <p id="description-error" class="text-red-500 text-sm mt-1 hidden">Descrição obrigatória!</p>
-                    </div>
-                </form>
-            </main>
-            <footer class="flex gap-3 justify-end">
-                <x-button id="btn-close-modal" type="button" color="red" shade="500" textColor="white" onclick="closeModal()">
-                    <i class="ph-bold ph-x"></i>
-                    Cancelar
-                </x-button>
-
-                <x-button id="btn-create-new-project" type="submit" color="blue" shade="500" textColor="white">
-                    <i class="ph-bold ph-plus"></i>
-                    Criar
-                </x-button>
-            </footer>
-        </div>
-    </div> --}}
 </body>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
