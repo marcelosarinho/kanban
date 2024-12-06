@@ -122,7 +122,41 @@
         </main>
     </section>
 
-    <div id="new-project-modal"
+    <x-modal id="new-project-modal" closeModal="closeModal()">
+        <x-slot:header>
+            Novo projeto
+        </x-slot:header>
+
+        <form id="create-project-form">
+            @csrf
+            <div class="mb-3">
+                <label class="block mb-1" for="name">Nome</label>
+                <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full">
+                <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
+            </div>
+
+            <div>
+                <label class="block mb-1" for="description">Descrição</label>
+                <textarea class="px-2 py-1 border rounded w-full" name="description" id="description" cols="30"
+                    rows="3"></textarea>
+                <p id="description-error" class="text-red-500 text-sm mt-1 hidden">Descrição obrigatória!</p>
+            </div>
+        </form>
+
+        <x-slot:footer>
+            <x-button id="btn-close-modal" type="button" color="bg-red-500" textColor="white" onclick="closeModal()">
+                <i class="ph-bold ph-x"></i>
+                Cancelar
+            </x-button>
+
+            <x-button id="btn-create-new-project" type="submit" color="bg-blue-500" textColor="white">
+                <i class="ph-bold ph-plus"></i>
+                Criar
+            </x-button>
+        </x-slot:footer>
+    </x-modal>
+
+    {{-- <div id="new-project-modal"
         class="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-full z-50 bg-black/35">
         <div
             class="w-1/2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white opacity-100 p-5 rounded">
@@ -149,10 +183,6 @@
                 </form>
             </main>
             <footer class="flex gap-3 justify-end">
-                {{-- <button class="bg-red-500 text-white rounded px-2 py-1" onclick="closeModal()">
-                    <i class="ph ph-x mr-1"></i> Cancelar
-                </button> --}}
-
                 <x-button id="btn-close-modal" type="button" color="red" shade="500" textColor="white" onclick="closeModal()">
                     <i class="ph-bold ph-x"></i>
                     Cancelar
@@ -164,7 +194,7 @@
                 </x-button>
             </footer>
         </div>
-    </div>
+    </div> --}}
 </body>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
