@@ -54,16 +54,16 @@
             <button id="btn-fullscreen">
                 <i class="ph ph-arrows-out text-2xl dark:text-white"></i>
             </button>
-            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 py-2 w-28 hidden text-sm border border-gray-300 dark:bg-zinc-800 dark:border-zinc-950 dark:text-white">
-                <div id="dark-theme" class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border border-gray-300 dark:bg-zinc-800 dark:border-zinc-950 dark:text-white">
+                <div id="dark-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-moon text-xl"></i>
                     Escuro
                 </div>
-                <div id="light-theme" class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+                <div id="light-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-sun text-xl"></i>
                     Claro
                 </div>
-                <div id="system-theme" class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+                <div id="system-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-moon-stars text-xl"></i>
                     Sistema
                 </div>
@@ -81,7 +81,7 @@
                     Adicionar tarefa
                 </x-button>
     
-                <x-button id="add-card" type="button" color="bg-green-400" textColor="dark">
+                <x-button id="add-card" type="button" color="bg-success" textColor="dark">
                     <i class="ph-bold ph-check text-lg"></i>
                     Salvar
                 </x-button>
