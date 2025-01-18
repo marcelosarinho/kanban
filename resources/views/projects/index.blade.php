@@ -23,7 +23,7 @@
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-white">Projetos</h3>
             <x-button id="btn-add-project" type="button" color="bg-blue-500" textColor="white">
-                <i class="ph-bold ph-plus"></i>
+                <i class="ph-bold ph-plus text-lg"></i>
                 Adicionar projeto
             </x-button>
 
@@ -77,12 +77,12 @@
 
             <div class="flex justify-between w-full mb-4">
                 <x-button id="btn-add-card" type="button" color="bg-blue-500" textColor="white">
-                    <i class="ph-bold ph-plus"></i>
+                    <i class="ph-bold ph-plus text-lg"></i>
                     Adicionar tarefa
                 </x-button>
     
                 <x-button id="add-card" type="button" color="bg-green-400" textColor="dark">
-                    <i class="ph-bold ph-check"></i>
+                    <i class="ph-bold ph-check text-lg"></i>
                     Salvar
                 </x-button>
             </div>

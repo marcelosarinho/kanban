@@ -12,9 +12,6 @@ export default {
       colors: {
         'dark-lime': '#afe952',
       },
-      boxShadow: {
-        'flat': '5px 5px 0px -1px rgba(0,0,0,1)'
-      }
     },
   },
   darkMode: 'selector',
