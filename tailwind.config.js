@@ -11,6 +11,9 @@ export default {
       },
       colors: {
         'dark-lime': '#afe952',
+        'success': '#52e9af',
+        'info': '#8952e9',
+        'danger': '#e95252',
       },
     },
   },
