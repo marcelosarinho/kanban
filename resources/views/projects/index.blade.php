@@ -92,13 +92,13 @@
                     <header class="text-2xl font-bold mb-2 dark:text-white">
                         A fazer
                     </header>
-                    <div class="p-3 h-96 w-72 bg-white dark:bg-zinc-800"></div>
+                    <div class="p-3 h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800"></div>
                 </div>
                 <div id="in-progress-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2 dark:text-white">
                         Em progresso
                     </header>
-                    <div class="h-96 w-72 bg-white dark:bg-zinc-800">
+                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
                         <div></div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                     <header class="text-2xl font-bold mb-2 dark:text-white">
                         Testando
                     </header>
-                    <div class="h-96 w-72 bg-white dark:bg-zinc-800">
+                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
                         <div></div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                     <header class="text-2xl font-bold mb-2 dark:text-white">
                         Implementado
                     </header>
-                    <div class="h-96 w-72 bg-white dark:bg-zinc-800">
+                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
                         <div></div>
                     </div>
                 </div>
