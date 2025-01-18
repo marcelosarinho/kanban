@@ -19,7 +19,7 @@
 </head>
 
 <body class="h-screen font-suse bg-neutral-100">
-    <aside id="leftbar" class="fixed w-52 bg-white h-full border-r-2 border-gray-200 dark:bg-zinc-800 dark:border-zinc-950">
+    <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-zinc-800 dark:border-zinc-950">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-white">Projetos</h3>
             <x-button id="btn-add-project" type="button" color="bg-blue-500" textColor="white">
@@ -45,7 +45,7 @@
     </aside>
     <section id="rightbar" class="ml-52">
         <nav id="topbar"
-            class="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b-2 border-gray-200
+            class="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300
             dark:bg-zinc-800 dark:border-zinc-950"
         >
             <button id="btn-theme">
@@ -54,7 +54,7 @@
             <button id="btn-fullscreen">
                 <i class="ph ph-arrows-out text-2xl dark:text-white"></i>
             </button>
-            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 py-2 w-28 hidden text-sm border border-gray-200 dark:bg-zinc-800 dark:border-zinc-950 dark:text-white">
+            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 py-2 w-28 hidden text-sm border border-gray-300 dark:bg-zinc-800 dark:border-zinc-950 dark:text-white">
                 <div id="dark-theme" class="px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-moon text-xl"></i>
                     Escuro
