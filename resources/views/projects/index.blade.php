@@ -70,7 +70,7 @@
             </div>
         </nav>
 
-        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-zinc-900 bg-slate-100 h-screen max-h-screen">
+        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-zinc-900 bg-gray-100 h-screen max-h-screen">
             <h1 class="text-3xl font-bold mb-4 dark:text-white">
                 Kanban
             </h1>
