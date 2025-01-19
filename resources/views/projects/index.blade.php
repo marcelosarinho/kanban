@@ -145,12 +145,12 @@
 
         <x-slot:footer>
             <x-button id="btn-close-modal" type="button" color="bg-red-500" textColor="white" onclick="closeModal()">
-                <i class="ph-bold ph-x"></i>
+                <i class="ph-bold ph-x text-lg"></i>
                 Cancelar
             </x-button>
 
             <x-button id="btn-create-new-project" type="submit" color="bg-primary" textColor="white">
-                <i class="ph-bold ph-plus"></i>
+                <i class="ph-bold ph-plus text-lg"></i>
                 Criar
             </x-button>
         </x-slot:footer>
