@@ -21,7 +21,7 @@
 <body class="h-screen font-suse bg-neutral-100">
     <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-zinc-800 dark:border-zinc-950">
         <div id="sidebar" class="flex flex-col items-center px-2">
-            <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-white">Projetos</h3>
+            <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
             <x-button id="btn-add-project" type="button" color="bg-blue-500" textColor="white">
                 <i class="ph-bold ph-plus text-lg"></i>
                 Adicionar projeto
@@ -31,9 +31,9 @@
                 class="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center border-2
                 dark:bg-neutral-700 dark:border-zinc-950"
             >
-                <input type="text" class="outline-none px-0.5 text-sm bg-gray-50 dark:bg-neutral-700 dark:text-white">
+                <input type="text" class="outline-none px-0.5 text-sm bg-gray-50 dark:bg-neutral-700 dark:text-gray-300">
                 <button class="flex items-center p-0.5">
-                    <i class="ph ph-magnifying-glass text-xl dark:text-white"></i>
+                    <i class="ph ph-magnifying-glass text-xl dark:text-gray-300"></i>
                 </button>
             </div>
             <div id="projects" class="mt-4 flex flex-col w-full gap-3">
@@ -49,12 +49,12 @@
             dark:bg-zinc-800 dark:border-zinc-950"
         >
             <button id="btn-theme">
-                <i class="ph ph-sun text-2xl dark:text-white"></i>
+                <i class="ph ph-sun text-2xl dark:text-gray-300"></i>
             </button>
             <button id="btn-fullscreen">
-                <i class="ph ph-arrows-out text-2xl dark:text-white"></i>
+                <i class="ph ph-arrows-out text-2xl dark:text-gray-300"></i>
             </button>
-            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border border-gray-300 dark:bg-zinc-800 dark:border-zinc-950 dark:text-white">
+            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border border-gray-300 dark:bg-zinc-800 dark:border-zinc-950 dark:text-gray-300">
                 <div id="dark-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
                     <i class="mr-2 ph ph-moon text-xl"></i>
                     Escuro
@@ -71,7 +71,7 @@
         </nav>
 
         <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-zinc-900 bg-gray-50 h-screen max-h-screen">
-            <h1 class="text-3xl font-bold mb-4 dark:text-white">
+            <h1 class="text-3xl font-bold mb-4 dark:text-gray-300">
                 Kanban
             </h1>
 
@@ -89,13 +89,13 @@
 
             <div class="flex gap-4">
                 <div id="to-do-section" class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold mb-2 dark:text-white">
+                    <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         A fazer
                     </header>
                     <div class="p-3 h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800"></div>
                 </div>
                 <div id="in-progress-section" class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold mb-2 dark:text-white">
+                    <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         Em progresso
                     </header>
                     <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 <div id="testing-section" class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold mb-2 dark:text-white">
+                    <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         Testando
                     </header>
                     <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div id="implement-section" class="col-lg-3 h-100">
-                    <header class="text-2xl font-bold mb-2 dark:text-white">
+                    <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         Implementado
                     </header>
                     <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
@@ -130,13 +130,13 @@
         <form id="create-project-form">
             @csrf
             <div class="mb-3">
-                <label class="block mb-1 dark:text-white" for="name">Nome</label>
+                <label class="block mb-1 dark:text-gray-300" for="name">Nome</label>
                 <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black">
                 <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
             </div>
 
             <div>
-                <label class="block mb-1 dark:text-white" for="description">Descrição</label>
+                <label class="block mb-1 dark:text-gray-300" for="description">Descrição</label>
                 <textarea class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black" name="description" id="description" cols="30"
                     rows="3"></textarea>
                 <p id="description-error" class="text-red-500 text-sm mt-1 hidden">Descrição obrigatória!</p>
@@ -189,17 +189,17 @@
 
     $('#btn-add-card').on('click', function () {
         $('#to-do-section > div').append(`
-            <div id="card-inicial" class="bg-white rounded-md border-2 px-2 py-3 dark:bg-zinc-700 dark:border-zinc-950 dark:text-white">
+            <div id="card-inicial" class="bg-white rounded-md border-2 px-2 py-3 dark:bg-zinc-700 dark:border-zinc-950 dark:text-gray-300">
                 <div class="flex items-center justify-between mb-4">
                     <div id="badges" class="flex gap-2">
                         <div class="bg-purple-200 dark:bg-purple-800 px-3 py-1 rounded-full text-sm">UI/UX</div>
                     </div>
                     <div id="actions" class="relative">
                         <button id="btn-actions" class="flex items-center p-1">
-                            <i class="ph ph-dots-three-outline-vertical text-white dark:text-white"></i>
+                            <i class="ph ph-dots-three-outline-vertical text-white dark:text-gray-300"></i>
                         </button>
                         <div id="actions-dropdown"
-                            class="absolute hidden bg-white border border-zinc-300 rounded right-0 text-sm py-1 text-black dark:text-white">
+                            class="absolute hidden bg-white border border-zinc-300 rounded right-0 text-sm py-1 text-black dark:text-gray-300">
                             <div
                                 class="cursor-pointer transition-colors hover:bg-gray-200 flex items-center gap-1 p-1">
                                 <i class="ph ph-pencil-simple"></i> Editar
@@ -221,7 +221,7 @@
                 <hr class="border-t-2 border-zinc-100 dark:border-zinc-950 -mx-2 my-3">
                 <div class="relative flex gap-1 justify-end text-gray-500">
                     <button id="btn-comment" class="flex items-center p-1">
-                        <i class="ph ph-chat text-dark dark:text-white"></i>
+                        <i class="ph ph-chat text-dark dark:text-gray-300"></i>
                     </button>
                     <div id="comment-dropdown"
                         class="absolute hidden bottom-6 right-10 bg-white border border-zinc-300 rounded text-sm text-zinc-500 py-1">
@@ -230,7 +230,7 @@
                         </button>
                     </div>
                     <button id="btn-card-color" class="flex items-center p-1">
-                        <i class="ph ph-palette text-dark dark:text-white"></i>
+                        <i class="ph ph-palette text-dark dark:text-gray-300"></i>
                     </button>
                     <div class="absolute bg-white border border-zinc-300 rounded w-28 p-2 hidden bottom-6"
                         id="colors-dropdown">
