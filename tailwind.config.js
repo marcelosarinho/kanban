@@ -10,7 +10,7 @@ export default {
         'suse': ['SUSE', 'sans-serif'],
       },
       colors: {
-        'dark-lime': '#afe952',
+        'primary': '##e3279a',
         'success': '#52e9af',
         'info': '#8952e9',
         'danger': '#e95252',
