@@ -22,7 +22,7 @@
     <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-zinc-800 dark:border-zinc-950">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
-            <x-button id="btn-add-project" type="button" color="bg-blue-500" textColor="white">
+            <x-button id="btn-add-project" type="button" color="bg-primary" textColor="white">
                 <i class="ph-bold ph-plus text-lg"></i>
                 Adicionar projeto
             </x-button>
@@ -76,7 +76,7 @@
             </h1>
 
             <div class="flex justify-between w-full mb-4">
-                <x-button id="btn-add-card" type="button" color="bg-blue-500" textColor="white">
+                <x-button id="btn-add-card" type="button" color="bg-primary" textColor="white">
                     <i class="ph-bold ph-plus text-lg"></i>
                     Adicionar tarefa
                 </x-button>
@@ -149,7 +149,7 @@
                 Cancelar
             </x-button>
 
-            <x-button id="btn-create-new-project" type="submit" color="bg-blue-500" textColor="white">
+            <x-button id="btn-create-new-project" type="submit" color="bg-primary" textColor="white">
                 <i class="ph-bold ph-plus"></i>
                 Criar
             </x-button>
