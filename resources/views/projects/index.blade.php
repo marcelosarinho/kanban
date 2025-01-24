@@ -183,10 +183,12 @@
 
     $('#dark-theme').on('click', function () {
         $('html').addClass('dark')
+        localStorage.setItem('theme', 'dark')
     })
 
     $('#light-theme').on('click', function () {
         $('html').removeClass('dark')
+        localStorage.setItem('theme', 'light')
     })
 
     $('#btn-add-card').on('click', function () {
