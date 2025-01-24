@@ -19,7 +19,7 @@
 </head>
 
 <body class="h-screen font-suse bg-neutral-100">
-    <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-zinc-800 dark:border-zinc-950">
+    <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
             <x-button id="btn-add-project" type="button" color="bg-primary" textColor="white">
@@ -28,10 +28,11 @@
             </x-button>
 
             <div
-                class="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center border-2
-                dark:bg-neutral-700 dark:border-zinc-950"
+                class="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center border
+                dark:bg-slate-800 dark:border-slate-700"
             >
-                <input type="text" class="outline-none px-0.5 text-sm bg-gray-50 dark:bg-neutral-700 dark:text-gray-300">
+                <input type="text" class="outline-none px-0.5 text-sm bg-gray-50
+                    dark:bg-slate-800 dark:text-gray-300">
                 <button class="flex items-center p-0.5">
                     <i class="ph ph-magnifying-glass text-xl dark:text-gray-300"></i>
                 </button>
@@ -46,7 +47,7 @@
     <section id="rightbar" class="ml-52">
         <nav id="topbar"
             class="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300
-            dark:bg-zinc-800 dark:border-zinc-950"
+            dark:bg-slate-900 dark:border-slate-700"
         >
             <button id="btn-theme">
                 <i class="ph ph-sun text-2xl dark:text-gray-300"></i>
@@ -54,23 +55,24 @@
             <button id="btn-fullscreen">
                 <i class="ph ph-arrows-out text-2xl dark:text-gray-300"></i>
             </button>
-            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border border-gray-300 dark:bg-zinc-800 dark:border-zinc-950 dark:text-gray-300">
-                <div id="dark-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+            <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border
+                border-gray-300 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300">
+                <div id="dark-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-900">
                     <i class="mr-2 ph ph-moon text-xl"></i>
                     Escuro
                 </div>
-                <div id="light-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+                <div id="light-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-900">
                     <i class="mr-2 ph ph-sun text-xl"></i>
                     Claro
                 </div>
-                <div id="system-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-zinc-700">
+                <div id="system-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-900">
                     <i class="mr-2 ph ph-moon-stars text-xl"></i>
                     Sistema
                 </div>
             </div>
         </nav>
 
-        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-zinc-900 bg-gray-50 h-screen max-h-screen">
+        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50 h-screen max-h-screen">
             <h1 class="text-3xl font-bold mb-4 dark:text-gray-300">
                 Kanban
             </h1>
@@ -92,13 +94,13 @@
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         A fazer
                     </header>
-                    <div class="p-3 h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800"></div>
+                    <div class="p-3 h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700"></div>
                 </div>
                 <div id="in-progress-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         Em progresso
                     </header>
-                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
+                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
                         <div></div>
                     </div>
                 </div>
@@ -106,7 +108,7 @@
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         Testando
                     </header>
-                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
+                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
                         <div></div>
                     </div>
                 </div>
@@ -114,7 +116,7 @@
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         Implementado
                     </header>
-                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-zinc-800">
+                    <div class="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
                         <div></div>
                     </div>
                 </div>
