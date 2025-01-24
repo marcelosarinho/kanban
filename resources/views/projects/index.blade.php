@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="author" content="Marcelo Sarinho">
+    <meta name="description" content="Web application created to manage my programming projects">
     @vite('resources/css/app.css')
 
     <title>Laravel</title>
@@ -164,6 +166,10 @@
 {{-- <script src="helper.js"></script> --}}
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
+    $(document).ready(function() {
+        console.log('Teste')
+    })
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
