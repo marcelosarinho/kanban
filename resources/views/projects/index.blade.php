@@ -20,7 +20,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="h-screen font-suse bg-neutral-100">
+<body class="h-screen font-suse bg-neutral-100 dark:bg-slate-950">
     <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
@@ -58,7 +58,7 @@
                 <i class="ph ph-arrows-out text-2xl dark:text-gray-300"></i>
             </button>
             <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border
-                border-gray-300 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300">
+                border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300">
                 <div id="dark-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-900">
                     <i class="mr-2 ph ph-moon text-xl"></i>
                     Escuro
@@ -167,7 +167,13 @@
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
     $(document).ready(function() {
-        console.log('Teste')
+        const theme = localStorage.getItem('theme')
+
+        if (theme === 'dark') {
+            $('html').addClass('dark')
+        } else {
+            $('html').removeClass('light')
+        }
     })
 
     $.ajaxSetup({
