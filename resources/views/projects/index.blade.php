@@ -148,7 +148,8 @@
         </form>
 
         <x-slot:footer>
-            <x-button id="btn-close-modal" type="button" color="bg-red-500" textColor="white" onclick="closeModal()">
+            <x-button id="btn-close-modal" type="button" color="bg-white" textColor="primary" border="border" borderColor="border-primary"
+                onclick="closeModal()">
                 <i class="ph-bold ph-x text-lg"></i>
                 Cancelar
             </x-button>
