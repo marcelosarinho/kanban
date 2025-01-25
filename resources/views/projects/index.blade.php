@@ -205,7 +205,7 @@
 
     $('#btn-add-card').on('click', function () {
         $('#to-do-section > div').append(`
-            <div id="card-inicial" class="bg-white rounded-md border-2 px-2 py-3 dark:bg-zinc-700 dark:border-zinc-950 dark:text-gray-300">
+            <div id="card-inicial" class="bg-white rounded-md border-2 px-2 py-3 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300">
                 <div class="flex items-center justify-between mb-4">
                     <div id="badges" class="flex gap-2">
                         <div class="bg-purple-200 dark:bg-purple-800 px-3 py-1 rounded-full text-sm">UI/UX</div>
@@ -234,7 +234,7 @@
                 <p class="text-sm leading-tight">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Facilis exercitationem, perspiciatis quod tempora sint voluptates veniam modi cum
                     adipisci laudantium.</p>
-                <hr class="border-t-2 border-zinc-100 dark:border-zinc-950 -mx-2 my-3">
+                <hr class="border-t-2 border-zinc-100 dark:border-slate-700 -mx-2 my-3">
                 <div class="relative flex gap-1 justify-end text-gray-500">
                     <button id="btn-comment" class="flex items-center p-1">
                         <i class="ph ph-chat text-dark dark:text-gray-300"></i>
