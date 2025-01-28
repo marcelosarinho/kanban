@@ -134,15 +134,19 @@
         <form id="create-project-form">
             @csrf
             <div class="mb-3">
-                <label class="block mb-1 dark:text-gray-300" for="name">Nome</label>
-                <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black">
+                <label class="w-fit block mb-1 dark:text-gray-300" for="name">Nome</label>
+                <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black
+                    focus-visible:ring-[3px] focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border
+                    focus-visible:border-primary" />
                 <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
             </div>
 
             <div>
-                <label class="block mb-1 dark:text-gray-300" for="description">Descrição</label>
-                <textarea class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black" name="description" id="description" cols="30"
-                    rows="3"></textarea>
+                <label class="w-fit block mb-1 dark:text-gray-300" for="description">Descrição</label>
+                <textarea name="description" id="description" cols="30" rows="3"
+                    class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black focus-visible:ring-[3px]
+                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary"
+                ></textarea>
                 <p id="description-error" class="text-red-500 text-sm mt-1 hidden">Descrição obrigatória!</p>
             </div>
         </form>
