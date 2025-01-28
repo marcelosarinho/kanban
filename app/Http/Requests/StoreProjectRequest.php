@@ -23,21 +23,17 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name' => 'required',
-            // 'description' => 'required',
+            'name' => 'required|unique:projects',
+            'description' => 'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            // 'name.required' => 'Nome do projeto obrigatório!',
-            // 'description.required' => 'Descrição do projeto obrigatória!'
+            'name.required' => 'Nome do projeto obrigatório!',
+            'name.unique' => 'Projeto já existe!',
+            'description.required' => 'Descrição do projeto obrigatória!'
         ];
     }
-
-    // public function failedValidation(Validator $validator)
-    // {
-    //     return response()->json('falhou na validação');
-    // }
 }

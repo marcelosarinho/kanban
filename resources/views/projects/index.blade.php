@@ -158,7 +158,7 @@
                 Cancelar
             </x-button>
 
-            <x-button id="btn-create-new-project" type="submit" color="bg-primary" textColor="white">
+            <x-button id="btn-create-new-project" type="submit" color="bg-primary" textColor="white" form="create-project-form">
                 <i class="ph-bold ph-plus text-lg"></i>
                 Criar
             </x-button>
@@ -293,6 +293,9 @@
         const name = $('#name').val();
         const description = $('#description').val();
 
+        console.log(name)
+        console.log(description)
+
         // if (!name) {
         //     $('#name-error').removeClass('hidden');
         //     $('#name').addClass('border-red-500');
@@ -325,7 +328,7 @@
                     text: data,
                     icon: 'success',
                     confirmButtonText: 'Fechar'
-                })
+                }).then(() => window.location.reload())
             },
             error: function(error) {
                 Swal.fire({
