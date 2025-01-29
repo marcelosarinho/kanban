@@ -59,15 +59,15 @@
             </button>
             <div id="theme-dropdown" class="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border
                 border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300">
-                <div id="dark-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-900">
+                <div id="dark-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                     <i class="mr-2 ph ph-moon text-xl"></i>
                     Escuro
                 </div>
-                <div id="light-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-900">
+                <div id="light-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                     <i class="mr-2 ph ph-sun text-xl"></i>
                     Claro
                 </div>
-                <div id="system-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-900">
+                <div id="system-theme" class="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                     <i class="mr-2 ph ph-moon-stars text-xl"></i>
                     Sistema
                 </div>
