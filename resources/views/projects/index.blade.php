@@ -135,17 +135,18 @@
             @csrf
             <div class="mb-3">
                 <label class="w-fit block mb-1 dark:text-gray-300" for="name">Nome</label>
-                <input name="name" id="name" type="text" class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black
+                <input name="name" id="name" type="text" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950
                     focus-visible:ring-[3px] focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border
-                    focus-visible:border-primary" />
+                    focus-visible:border-primary dark:text-gray-300" />
                 <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
             </div>
 
-            <div>
+            <div class="mb-3">
                 <label class="w-fit block mb-1 dark:text-gray-300" for="description">Descrição</label>
                 <textarea name="description" id="description" cols="30" rows="3"
-                    class="px-2 py-1 border rounded w-full dark:bg-neutral-700 dark:border-black focus-visible:ring-[3px]
-                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary"
+                    class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-[3px]
+                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
+                    dark:text-gray-300"
                 ></textarea>
                 <p id="description-error" class="text-red-500 text-sm mt-1 hidden">Descrição obrigatória!</p>
             </div>
