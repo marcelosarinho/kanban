@@ -135,9 +135,7 @@
             @csrf
             <div class="mb-3">
                 <x-label for="name">Nome</x-label>
-                <input name="name" id="name" type="text" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950
-                    focus-visible:ring-4 focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border
-                    focus-visible:border-primary dark:text-gray-300" />
+                <x-text-input name="name" id="name" />
                 <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
             </div>
 
