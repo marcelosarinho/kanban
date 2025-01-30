@@ -24,7 +24,7 @@
     <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
-            <x-button id="btn-add-project" type="button" color="bg-primary" textColor="text-white">
+            <x-button id="btn-add-project" type="button" bgColor="bg-primary" textColor="text-white">
                 <i class="ph-bold ph-plus text-lg"></i>
                 Adicionar projeto
             </x-button>
@@ -80,12 +80,12 @@
             </h1>
 
             <div class="flex justify-between w-full mb-4">
-                <x-button id="btn-add-card" type="button" color="bg-primary" textColor="text-white">
+                <x-button id="btn-add-card" type="button" bgColor="bg-primary" textColor="text-white">
                     <i class="ph-bold ph-plus text-lg"></i>
                     Adicionar tarefa
                 </x-button>
     
-                <x-button id="add-card" type="button" color="bg-success" textColor="text-dark">
+                <x-button id="add-card" type="button" bgColor="bg-success" textColor="text-dark">
                     <i class="ph-bold ph-check text-lg"></i>
                     Salvar
                 </x-button>
@@ -153,13 +153,13 @@
         </form>
 
         <x-slot:footer>
-            <x-button id="btn-close-modal" type="button" color="bg-transparent" textColor="text-primary" border="border" borderColor="border-primary"
+            <x-button id="btn-close-modal" type="button" bgColor="bg-transparent" textColor="text-primary" border="border" borderColor="border-primary"
                 onclick="closeModal()">
                 <i class="ph-bold ph-x text-lg"></i>
                 Cancelar
             </x-button>
 
-            <x-button id="btn-create-new-project" type="submit" color="bg-primary" textColor="text-white" form="create-project-form">
+            <x-button id="btn-create-new-project" type="submit" bgColor="bg-primary" textColor="text-white" form="create-project-form">
                 <i class="ph-bold ph-plus text-lg"></i>
                 Criar
             </x-button>
