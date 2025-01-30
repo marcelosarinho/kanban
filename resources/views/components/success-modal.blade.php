@@ -11,7 +11,7 @@
     </main>
   
     <footer>
-      <x-button id="teste" type="button" bgColor="bg-red-500" textColor="text-black">Fechar</x-button>
+      <x-button id="close-success-modal-btn" type="button" bgColor="bg-red-500" textColor="text-black">Fechar</x-button>
     </footer>
   </div>
 </div>
