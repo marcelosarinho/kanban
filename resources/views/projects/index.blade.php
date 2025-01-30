@@ -126,6 +126,8 @@
         </main>
     </section>
 
+    <x-success-modal></x-success-modal>
+
     <x-modal id="new-project-modal" closeModal="closeModal()">
         <x-slot:header>
             Novo projeto
