@@ -298,22 +298,21 @@
         const name = $('#name').val();
         const description = $('#description').val();
 
-        // if (!name) {
-        //     $('#name-error').removeClass('hidden');
-        //     $('#name').addClass('border-red-500');
-        //     return;
-        // } else {
-        //     $('#name-error').addClass('hidden');
-        //     $('#name').removeClass('border-red-500');
-        // }
+        if (!name) {
+            $('#name-error').removeClass('hidden');
+            $('#name').addClass('border-red-500');
+        } else {
+            $('#name-error').addClass('hidden');
+            $('#name').removeClass('border-red-500');
+        }
 
-        // if (!description) {
-        //     $('#description-error').removeClass('hidden');
-        //     $('#description').addClass('border-red-500');
-        // } else {
-        //     $('#description-error').addClass('hidden');
-        //     $('#description').removeClass('border-red-500');
-        // }
+        if (!description) {
+            $('#description-error').removeClass('hidden');
+            $('#description').addClass('border-red-500');
+        } else {
+            $('#description-error').addClass('hidden');
+            $('#description').removeClass('border-red-500');
+        }
 
         $.ajax({
             method: "POST",
