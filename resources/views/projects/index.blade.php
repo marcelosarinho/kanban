@@ -126,8 +126,8 @@
         </main>
     </section>
 
-    <x-success-modal></x-success-modal>
-    <x-error-modal></x-error-modal>
+    <x-success-modal />
+    <x-error-modal />
 
     <x-modal id="new-project-modal" closeModal="closeModal()">
         <x-slot:header>
@@ -199,14 +199,18 @@
         $('#new-project-modal').toggle();
     }
 
+    function closeErrorModal() {
+        $('#error-modal').toggle();
+    }
+
     $('#dark-theme').on('click', function () {
-        $('html').addClass('dark')
-        localStorage.setItem('theme', 'dark')
+        $('html').addClass('dark');
+        localStorage.setItem('theme', 'dark');
     })
 
     $('#light-theme').on('click', function () {
-        $('html').removeClass('dark')
-        localStorage.setItem('theme', 'light')
+        $('html').removeClass('dark');
+        localStorage.setItem('theme', 'light');
     })
 
     $('#btn-add-card').on('click', function () {
@@ -294,9 +298,6 @@
         const name = $('#name').val();
         const description = $('#description').val();
 
-        console.log(name)
-        console.log(description)
-
         // if (!name) {
         //     $('#name-error').removeClass('hidden');
         //     $('#name').addClass('border-red-500');
@@ -332,12 +333,8 @@
                 }).then(() => window.location.reload())
             },
             error: function(error) {
-                Swal.fire({
-                    title: "Erro",
-                    text: "Erro ao criar projeto!",
-                    icon: "error",
-                    confirmButtonText: 'Fechar'
-                })
+                $('#error-modal main').text('Verifique os erros no formulário!')
+                $('#error-modal').toggle()
                 console.log(error);
             }
         });
