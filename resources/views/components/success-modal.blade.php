@@ -6,12 +6,12 @@
       Sucesso!
     </header>
   
-    <main>
+    <main class="text-lg">
       {{ $slot }}
     </main>
   
     <footer>
-      <x-button id="close-success-modal-btn" type="button" bgColor="bg-red-500" textColor="text-black">Fechar</x-button>
+      <x-button id="close-success-modal-btn" type="button" bgColor="bg-success" textColor="text-black">OK</x-button>
     </footer>
   </div>
 </div>

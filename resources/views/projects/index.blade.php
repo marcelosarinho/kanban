@@ -20,7 +20,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="h-screen font-suse bg-neutral-100 dark:bg-slate-950">
+<body class="absolute h-screen font-suse bg-neutral-100 dark:bg-slate-950">
     <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
@@ -127,6 +127,7 @@
     </section>
 
     <x-success-modal></x-success-modal>
+    <x-error-modal></x-error-modal>
 
     <x-modal id="new-project-modal" closeModal="closeModal()">
         <x-slot:header>
