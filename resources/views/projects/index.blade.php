@@ -129,7 +129,7 @@
     <x-success-modal />
     <x-error-modal />
 
-    <x-modal id="new-project-modal" closeModal="closeModal()">
+    <x-modal id="new-project-modal" closeModal="closeModal('new-project-modal')">
         <x-slot:header>
             Novo projeto
         </x-slot:header>
@@ -155,7 +155,7 @@
 
         <x-slot:footer>
             <x-button id="btn-close-modal" type="button" bgColor="bg-transparent" textColor="text-primary" border="border" borderColor="border-primary"
-                onclick="closeModal()">
+                onclick="closeModal('new-project-modal')">
                 <i class="ph-bold ph-x text-lg"></i>
                 Cancelar
             </x-button>
@@ -195,8 +195,8 @@
         $('hr').css('border-color', colors[1]);
     }
 
-    function closeModal() {
-        $('#new-project-modal').toggle();
+    function closeModal(id) {
+        $(`#${id}`).toggle();
     }
 
     function closeErrorModal() {
@@ -323,7 +323,7 @@
             },
             url: "/projects/save",
             success: function(data) {
-                closeModal();
+                closeModal('new-project-modal');
 
                 Swal.fire({
                     title: 'Sucesso',
