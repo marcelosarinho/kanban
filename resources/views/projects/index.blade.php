@@ -188,6 +188,16 @@
         }
     });
 
+    function renderErrors(errors) {
+        for(const field in errors) {
+            console.log(field)
+            console.log(errors)
+            if (Object.hasOwnProperty.call(errors, field)) {
+                console.log(errors[field])
+            }
+        }
+    }
+
     function setCardBgColor(element) {
         let colors = element.value.split(" ");
         $('#card-inicial').css('background-color', colors[0]);
@@ -334,7 +344,7 @@
             error: function(error) {
                 $('#error-modal main').text('Verifique os erros no formulário!')
                 $('#error-modal').toggle()
-                console.log(error);
+                renderErrors(error.responseJSON.errors)
             }
         });
     })

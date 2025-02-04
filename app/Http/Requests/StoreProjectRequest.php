@@ -23,7 +23,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:projects',
+            'name' => 'max:5|email',
             'description' => 'required',
         ];
     }
@@ -31,8 +31,8 @@ class StoreProjectRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Nome do projeto obrigatório!',
-            'name.unique' => 'Projeto já existe!',
+            'name.max' => 'Erro 1',
+            'name.email' => 'Erro 2',
             'description.required' => 'Descrição do projeto obrigatória!'
         ];
     }
