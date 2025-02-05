@@ -227,6 +227,11 @@
         $('#error-modal').toggle();
     }
 
+    function closeSuccessModal() {
+        $('#success-modal').toggle();
+        window.location.reload();
+    }
+
     $('#dark-theme').on('click', function () {
         $('html').addClass('dark');
         localStorage.setItem('theme', 'dark');
@@ -334,8 +339,8 @@
             success: function(data) {
                 closeModal('new-project-modal');
 
-                $(`#success-modal main`).text('Projeto criado com sucesso!')
-                $(`#success-modal`).toggle();
+                $('#success-modal main').text('Projeto criado com sucesso!')
+                $('#success-modal').toggle();
             },
             error: function(error) {
                 $('#error-modal main').text('Verifique os erros no formulário!')

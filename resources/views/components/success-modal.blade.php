@@ -11,7 +11,12 @@
     </main>
   
     <footer>
-      <x-button id="close-success-modal-btn" type="button" bgColor="bg-success" textColor="text-black">OK</x-button>
+      <x-button
+        onclick="closeSuccessModal()"
+        id="close-success-modal-btn" type="button" bgColor="bg-success" textColor="text-black"
+      >
+        OK
+      </x-button>
     </footer>
   </div>
 </div>
