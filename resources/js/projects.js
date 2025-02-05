@@ -1,1 +1,5 @@
-// aqui vem o js do projects
+const PROJECTS = $('#projects').val() ? JSON.parse($('#projects').val()) : []
+
+$(function() {
+  console.log(PROJECTS)
+})
