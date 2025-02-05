@@ -334,12 +334,8 @@
             success: function(data) {
                 closeModal('new-project-modal');
 
-                Swal.fire({
-                    title: 'Sucesso',
-                    text: data,
-                    icon: 'success',
-                    confirmButtonText: 'Fechar'
-                }).then(() => window.location.reload())
+                $(`#success-modal main`).text('Projeto criado com sucesso!')
+                $(`#success-modal`).toggle();
             },
             error: function(error) {
                 $('#error-modal main').text('Verifique os erros no formulário!')
