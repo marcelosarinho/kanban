@@ -173,12 +173,12 @@
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
     $(document).ready(function() {
-        const theme = localStorage.getItem('theme')
+        const theme = localStorage.getItem('theme');
 
         if (theme === 'dark') {
-            $('html').addClass('dark')
+            $('html').addClass('dark');
         } else {
-            $('html').removeClass('light')
+            $('html').removeClass('light');
         }
     })
 
@@ -188,11 +188,26 @@
         }
     });
 
+    function clearErrors() {
+        const fields = ['name', 'description'];
+
+        fields.forEach((field) => {
+            $(`#${field}-error`).addClass('hidden');
+            $(`#${field}-error`).text('');
+            $(`#${field}`).addClass('border-gray-300');
+            $(`#${field}`).addClass('dark:border-slate-950');
+            $(`#${field}`).removeClass('border-red-500');
+        })
+    }
+
     function renderErrors(errors) {
         for(const field in errors) {
             if (Object.hasOwnProperty.call(errors, field)) {
-                $(`#${field}-error`).removeClass('hidden')
-                $(`#${field}-error`).text(errors[field])
+                $(`#${field}-error`).removeClass('hidden');
+                $(`#${field}-error`).text(errors[field]);
+                $(`#${field}`).removeClass('border-gray-300');
+                $(`#${field}`).removeClass('dark:border-slate-950');
+                $(`#${field}`).addClass('border-red-500');
             }
         }
     }
@@ -307,21 +322,7 @@
         const name = $('#name').val();
         const description = $('#description').val();
 
-        if (!name) {
-            $('#name-error').removeClass('hidden');
-            $('#name').addClass('border-red-500');
-        } else {
-            $('#name-error').addClass('hidden');
-            $('#name').removeClass('border-red-500');
-        }
-
-        if (!description) {
-            $('#description-error').removeClass('hidden');
-            $('#description').addClass('border-red-500');
-        } else {
-            $('#description-error').addClass('hidden');
-            $('#description').removeClass('border-red-500');
-        }
+        clearErrors()
 
         $.ajax({
             method: "POST",
