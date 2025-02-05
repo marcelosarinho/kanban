@@ -139,7 +139,7 @@
             <div class="mb-3">
                 <x-label for="name">Nome</x-label>
                 <x-text-input name="name" id="name" />
-                <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Nome obrigatório!</p>
+                <p id="name-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
 
             <div class="mb-3">
@@ -149,7 +149,7 @@
                     focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
                     dark:text-gray-300"
                 ></textarea>
-                <p id="description-error" class="text-red-500 text-sm mt-1 hidden">Descrição obrigatória!</p>
+                <p id="description-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
         </form>
 
@@ -190,10 +190,9 @@
 
     function renderErrors(errors) {
         for(const field in errors) {
-            console.log(field)
-            console.log(errors)
             if (Object.hasOwnProperty.call(errors, field)) {
-                console.log(errors[field])
+                $(`#${field}-error`).removeClass('hidden')
+                $(`#${field}-error`).text(errors[field])
             }
         }
     }
