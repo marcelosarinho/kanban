@@ -164,6 +164,19 @@
             </x-button>
         </x-slot:footer>
     </x-modal>
+
+    <x-modal id="delete-project-modal" closeModal="closeModal('delete-project-modal')">
+        <x-slot:header>Deletar "nome do projeto"</x-slot:header>
+
+        <form action="">
+            Aqui o body
+        </form>
+
+        <x-slot:footer>
+            <button>Cancelar</button>
+            <button>Deletar</button>
+        </x-slot:footer>
+    </x-modal>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
