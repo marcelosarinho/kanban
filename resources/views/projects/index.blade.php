@@ -41,11 +41,7 @@
                     <i class="ph ph-magnifying-glass text-xl dark:text-gray-300"></i>
                 </button>
             </div>
-            <div id="projects" class="mt-4 flex flex-col w-full gap-3">
-                @foreach ($projects as $project)
-                    <x-sidebar-card name="{{ $project->name }}" description="{{ $project->description }}" />
-                @endforeach
-            </div>
+            <div id="div-projects" class="mt-4 flex flex-col w-full gap-3"></div>
         </div>
     </aside>
     <section id="rightbar" class="ml-52">
@@ -172,10 +168,13 @@
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 {{-- <script src="helper.js"></script> --}}
-<script src="../js/project.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
+    const PROJECTS = $('#projects').val() ? JSON.parse($('#projects').val()) : []
+
     $(document).ready(function() {
+        loadProjects()
+
         const theme = localStorage.getItem('theme');
 
         if (theme === 'dark') {
@@ -190,6 +189,14 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    function loadProjects() {
+        PROJECTS.forEach((project) => {
+            $('#div-projects').prepend(`
+                <x-sidebar-card name="${project.name}" description="${project.description}" />
+            `)
+        })
+    }
 
     function clearErrors() {
         const fields = ['name', 'description'];
