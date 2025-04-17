@@ -166,15 +166,23 @@
     </x-modal>
 
     <x-modal id="delete-project-modal" closeModal="closeModal('delete-project-modal')">
-        <x-slot:header>Deletar "nome do projeto"</x-slot:header>
+        <x-slot:header>Deletar <span id="delete-project-name"></span>?</x-slot:header>
 
         <form action="">
-            Aqui o body
+            Tem certeza de que deseja executar essa ação? O projeto será deletado para sempre!
         </form>
 
         <x-slot:footer>
-            <button>Cancelar</button>
-            <button>Deletar</button>
+            <x-button id="btn-close-delete-project-modal" type="button" bgColor="bg-transparent" textColor="text-primary" border="border" borderColor="border-primary"
+                onclick="closeModal('delete-project-modal')"
+            >
+                <i class="ph-bold ph-x text-lg"></i>
+                Cancelar
+            </x-button>
+            <x-button id="delete-project-btn" type="submit" bgColor="bg-primary" textColor="text-white">
+                <i class="ph ph-trash"></i>
+                Deletar
+            </x-button>
         </x-slot:footer>
     </x-modal>
 </body>
@@ -206,9 +214,18 @@
     function loadProjects() {
         PROJECTS.forEach((project) => {
             $('#div-projects').prepend(`
-                <x-sidebar-card name="${project.name}" description="${project.description}" />
+                <x-sidebar-card
+                    openModal="openDeleteProjectModal(${project.id}, '${project.name}')"
+                    name="${project.name}"
+                    description="${project.description}"
+                />
             `)
         })
+    }
+
+    function openDeleteProjectModal(id, name) {
+        $('#delete-project-name').text(name);
+        $('#delete-project-modal').toggle();
     }
 
     function clearErrors() {

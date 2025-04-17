@@ -13,4 +13,5 @@ Route::prefix('/')->group(function () {
 
 Route::prefix('/projects')->group(function () {
     Route::post('/save', [ProjectController::class, 'store'])->name('projects.store');
+    Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 });
