@@ -31,12 +31,16 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        Project::create([
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
-
-        return response()->json('Projeto criado com sucesso!', 200);
+        try {
+            Project::create([
+                'name' => $request->name,
+                'description' => $request->description
+            ]);
+    
+            return response()->json('Projeto criado com sucesso!', 200);
+        } catch (\Throwable $th) {
+            return response()->json('Erro ao criar projeto!', 500);
+        }
     }
 
     /**
