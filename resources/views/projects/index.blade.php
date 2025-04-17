@@ -225,7 +225,7 @@
 
     function renderErrors(errors) {
         for(const field in errors) {
-            if (Object.hasOwnProperty.call(errors, field)) {
+            if (Object.hasOwn(errors, field)) {
                 $(`#${field}-error`).removeClass('hidden');
                 $(`#${field}-error`).text(errors[field]);
                 $(`#${field}`).removeClass('border-gray-300');
