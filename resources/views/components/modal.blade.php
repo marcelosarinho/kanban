@@ -5,7 +5,7 @@
       <i class="ph ph-x cursor-pointer hover:text-blue-500 dark:text-white" onclick="{{ $closeModal }}"></i>
     </header>
     
-    <main class="mb-4">
+    <main class="mb-4 dark:text-white">
       {{ $slot }}
     </main>
   

@@ -9,7 +9,7 @@
     <meta name="description" content="Web application created to manage my programming projects">
     @vite('resources/css/app.css')
 
-    <title>Laravel</title>
+    <title>Kanban</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -166,10 +166,11 @@
     </x-modal>
 
     <x-modal id="delete-project-modal" closeModal="closeModal('delete-project-modal')">
-        <x-slot:header>Deletar <span id="delete-project-name"></span>?</x-slot:header>
+        <x-slot:header>Deletar projeto <span id="delete-project-name"></span>?</x-slot:header>
 
-        <form action="">
-            Tem certeza de que deseja executar essa ação? O projeto será deletado para sempre!
+        <form id="delete-project-form">
+            <p>Tem certeza de que deseja executar essa ação? O projeto será deletado para sempre!</p>
+            <input type="hidden" name="project_id" id="project_id">
         </form>
 
         <x-slot:footer>
@@ -179,7 +180,7 @@
                 <i class="ph-bold ph-x text-lg"></i>
                 Cancelar
             </x-button>
-            <x-button id="delete-project-btn" type="submit" bgColor="bg-primary" textColor="text-white">
+            <x-button id="btn-delete-project" type="submit" bgColor="bg-primary" textColor="text-white" form="delete-project-form">
                 <i class="ph ph-trash"></i>
                 Deletar
             </x-button>
@@ -226,6 +227,7 @@
     function openDeleteProjectModal(id, name) {
         $('#delete-project-name').text(name);
         $('#delete-project-modal').toggle();
+        $('#project_id').val(id);
     }
 
     function clearErrors() {
@@ -412,6 +414,28 @@
 
     $('#btn-comment').on('click', function() {
         $('#comment-dropdown').toggle();
+    })
+
+    $('#delete-project-form').on('submit', function(e) {
+        e.preventDefault();
+
+        const project_id = $('#project_id').val() ? $('#project_id').val() : null;
+
+        $.ajax({
+            method: 'DELETE',
+            url: `/projects/${project_id}`,
+            success: function(response) {
+                closeModal('delete-project-modal');
+
+                $('#success-modal main').text(response);
+                $('#success-modal').toggle();
+            },
+            error: function(error) {
+                $('#error-modal main').text(error);
+                $('#error-modal').toggle();
+                console.log(error);
+            }
+        })
     })
 
     function toggleFullScreen() {
