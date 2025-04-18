@@ -274,6 +274,11 @@
         window.location.reload();
     }
 
+    function showSuccess(text) {
+        $('#success-modal main').text(text);
+        $('#success-modal').toggle();
+    }
+
     $('#dark-theme').on('click', function () {
         $('html').addClass('dark');
         localStorage.setItem('theme', 'dark');
@@ -378,11 +383,9 @@
                 description
             },
             url: "/projects/save",
-            success: function(data) {
+            success: function(response) {
                 closeModal('new-project-modal');
-
-                $('#success-modal main').text('Projeto criado com sucesso!')
-                $('#success-modal').toggle();
+                showSuccess(response);
             },
             error: function(error) {
                 $('#error-modal main').text('Verifique os erros no formulário!')
@@ -426,9 +429,7 @@
             url: `/projects/${project_id}`,
             success: function(response) {
                 closeModal('delete-project-modal');
-
-                $('#success-modal main').text(response);
-                $('#success-modal').toggle();
+                showSuccess(response);
             },
             error: function(error) {
                 $('#error-modal main').text(error);
