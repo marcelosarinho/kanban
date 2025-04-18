@@ -277,6 +277,9 @@
     function showSuccess(text) {
         $('#success-modal main').text(text);
         $('#success-modal').toggle();
+        $('#success-modal > div').animate({
+            opacity: 1
+        })
     }
 
     function showError(error) {
