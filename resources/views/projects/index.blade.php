@@ -279,6 +279,11 @@
         $('#success-modal').toggle();
     }
 
+    function showError(error) {
+        $('#error-modal main').text(error);
+        $('#error-modal').toggle();
+    }
+
     $('#dark-theme').on('click', function () {
         $('html').addClass('dark');
         localStorage.setItem('theme', 'dark');
@@ -388,8 +393,7 @@
                 showSuccess(response);
             },
             error: function(error) {
-                $('#error-modal main').text('Verifique os erros no formulário!')
-                $('#error-modal').toggle()
+                showError(error);
                 renderErrors(error.responseJSON.errors)
             }
         });
@@ -432,8 +436,7 @@
                 showSuccess(response);
             },
             error: function(error) {
-                $('#error-modal main').text(error);
-                $('#error-modal').toggle();
+                showError(error);
                 console.log(error);
             }
         })
