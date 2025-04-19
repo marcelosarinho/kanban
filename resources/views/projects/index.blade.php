@@ -276,10 +276,7 @@
 
     function showSuccess(text) {
         $('#success-modal main').text(text);
-        $('#success-modal').toggle();
-        $('#success-modal > div').animate({
-            opacity: 1
-        })
+        $('#success-modal').fadeToggle(200);
     }
 
     function showError(error) {
