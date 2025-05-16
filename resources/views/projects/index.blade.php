@@ -78,12 +78,12 @@
             </h1>
 
             <div class="flex justify-between w-full mb-4">
-                <x-button id="btn-add-card" type="button" bgColor="bg-primary" textColor="text-white">
+                <x-button id="btn-add-task" type="button" bgColor="bg-primary" textColor="text-white">
                     <i class="ph-bold ph-plus text-lg"></i>
                     Adicionar tarefa
                 </x-button>
     
-                <x-button id="add-card" type="button" bgColor="bg-success" textColor="text-dark">
+                <x-button id="add-task" type="button" bgColor="bg-success" textColor="text-dark">
                     <i class="ph-bold ph-check text-lg"></i>
                     Salvar
                 </x-button>
@@ -183,6 +183,58 @@
             <x-button id="btn-delete-project" type="submit" bgColor="bg-primary" textColor="text-white" form="delete-project-form">
                 <i class="ph ph-trash"></i>
                 Deletar
+            </x-button>
+        </x-slot:footer>
+    </x-modal>
+
+    <x-modal id="new-task-modal" closeModal="closeModal('new-task-modal')">
+        <x-slot:header>
+            Nova tarefa
+        </x-slot:header>
+
+        <form id="create-task-form">
+            @csrf
+            <div class="mb-3">
+                <x-label for="column_id">Coluna</x-label>
+                <select name="column_id" id="column_id" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
+                    dark:text-gray-300">
+                    <option disabled selected value="">Selecione uma coluna</option>
+                    <option value="">A fazer</option>
+                    <option value="">Em progresso</option>
+                    <option value="">Testando</option>
+                    <option value="">Implementado</option>
+                </select>
+                <p id="column_id-error" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="task_name">Nome da tarefa</x-label>
+                <x-text-input name="task_name" id="task_name" />
+                <p id="task_name-error" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="description">Descrição</x-label>
+                <textarea name="description" id="description" cols="30" rows="3"
+                    class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
+                    dark:text-gray-300"
+                ></textarea>
+                <p id="description-error" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+        </form>
+
+        <x-slot:footer>
+            <x-button id="btn-close-modal" type="button" bgColor="bg-transparent" textColor="text-primary" border="border" borderColor="border-primary"
+                onclick="closeModal('new-task-modal')">
+                <i class="ph-bold ph-x text-lg"></i>
+                Cancelar
+            </x-button>
+
+            <x-button id="btn-create-new-task" type="submit" bgColor="bg-primary" textColor="text-white" form="create-task-form">
+                <i class="ph-bold ph-plus text-lg"></i>
+                Criar
             </x-button>
         </x-slot:footer>
     </x-modal>
@@ -405,6 +457,10 @@
 
     $('#btn-add-project').on('click', function() {
         $('#new-project-modal').toggle();
+    })
+
+    $('#btn-add-task').on('click', function() {
+        $('#new-task-modal').toggle();
     })
 
     $('#btn-theme').on('click', function() {
