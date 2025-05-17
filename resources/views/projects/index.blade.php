@@ -73,9 +73,11 @@
         </nav>
 
         <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50 h-screen max-h-screen">
-            <h1 class="text-3xl font-bold mb-4 dark:text-gray-300">
+            <h1 id="kanban-title" class="text-3xl font-bold mb-4 dark:text-gray-300">
                 Kanban
             </h1>
+
+            <p id="kanban-description" class="text-sm text-gray-500 dark:text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
 
             <div class="flex justify-between w-full mb-4">
                 <x-button id="btn-add-task" type="button" bgColor="bg-primary" textColor="text-white">
@@ -268,11 +270,28 @@
         PROJECTS.forEach((project) => {
             $('#div-projects').prepend(`
                 <x-sidebar-card
+                    id="${project.id}"
+                    openProject="openProject(${project.id})"
                     openModal="openDeleteProjectModal(${project.id}, '${project.name}')"
                     name="${project.name}"
                     description="${project.description}"
                 />
             `)
+        })
+    }
+
+    function openProject(id) {
+        $.ajax({
+            method: 'GET',
+            url: `/projects/${id}`,
+            success: function(response) {
+                $('#kanban-title').text(response.name);
+                $('#kanban-description').text(response.description);
+                console.log(response);
+            },
+            error: function(error) {
+                console.error(error);
+            },
         })
     }
 

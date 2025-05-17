@@ -48,7 +48,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        try {
+            return $project;
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
     /**

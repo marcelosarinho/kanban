@@ -12,6 +12,7 @@ Route::prefix('/')->group(function () {
 });
 
 Route::prefix('/projects')->group(function () {
+    Route::get('/{project}', [ProjectController::class, 'show'])->name('projects.show');
     Route::post('/save', [ProjectController::class, 'store'])->name('projects.store');
     Route::delete('/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 });

@@ -1,4 +1,6 @@
 <div
+  onclick="{{ $openProject }}"
+  id="project_{{ $id }}"
   class="bg-gray-100 py-2 px-3 rounded border border-gray-300
 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300
   hover:border-primary transition-colors"
