@@ -25,4 +25,8 @@ class Task extends Model
     public function projects() {
         return $this->belongsTo(Project::class);
     }
+
+    public function subtasks() {
+        return $this->hasMany(SubTask::class);
+    }
 }
