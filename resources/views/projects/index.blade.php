@@ -251,6 +251,7 @@
     $(document).ready(function() {
         loadProjects();
         loadTheme();
+        loadSelectedProject();
     })
 
     $.ajaxSetup({
@@ -283,6 +284,14 @@
         }
     }
 
+    function loadSelectedProject() {
+        const project = localStorage.getItem('project');
+
+        if (project) {
+            openProject(project);
+        }
+    }
+
     function openProject(id) {
         $.ajax({
             method: 'GET',
@@ -290,7 +299,7 @@
             success: function(response) {
                 $('#kanban-title').text(response.name);
                 $('#kanban-description').text(response.description);
-                console.log(response);
+                localStorage.setItem('project', response.id);
             },
             error: function(error) {
                 console.error(error);
