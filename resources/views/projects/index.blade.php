@@ -249,15 +249,8 @@
     const PROJECTS = $('#projects').val() ? JSON.parse($('#projects').val()) : []
 
     $(document).ready(function() {
-        loadProjects()
-
-        const theme = localStorage.getItem('theme');
-
-        if (theme === 'dark') {
-            $('html').addClass('dark');
-        } else {
-            $('html').removeClass('light');
-        }
+        loadProjects();
+        loadTheme();
     })
 
     $.ajaxSetup({
@@ -278,6 +271,16 @@
                 />
             `)
         })
+    }
+
+    function loadTheme() {
+        const theme = localStorage.getItem('theme');
+
+        if (theme === 'dark') {
+            $('html').addClass('dark');
+        } else {
+            $('html').removeClass('light');
+        }
     }
 
     function openProject(id) {
