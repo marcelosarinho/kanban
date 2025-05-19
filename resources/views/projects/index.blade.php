@@ -21,8 +21,6 @@
 </head>
 
 <body class="absolute h-screen font-suse bg-neutral-100 dark:bg-slate-950">
-    {{-- <input id="projects" type="hidden" value="{{ json_encode($projects) }}"> --}}
-
     <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div id="sidebar" class="flex flex-col items-center px-2">
             <h3 class="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
@@ -197,20 +195,6 @@
         <form id="create-task-form">
             @csrf
             <div class="mb-3">
-                <x-label for="column_id">Coluna</x-label>
-                <select name="column_id" id="column_id" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
-                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
-                    dark:text-gray-300">
-                    <option disabled selected value="">Selecione uma coluna</option>
-                    <option value="">A fazer</option>
-                    <option value="">Em progresso</option>
-                    <option value="">Testando</option>
-                    <option value="">Implementado</option>
-                </select>
-                <p id="column_id-error" class="text-red-500 text-sm mt-1 hidden"></p>
-            </div>
-
-            <div class="mb-3">
                 <x-label for="task_name">Nome da tarefa</x-label>
                 <x-text-input name="task_name" id="task_name" />
                 <p id="task_name-error" class="text-red-500 text-sm mt-1 hidden"></p>
@@ -224,6 +208,62 @@
                     dark:text-gray-300"
                 ></textarea>
                 <p id="description-error" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="priority">Prioridade</x-label>
+                <select name="priority" id="priority" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
+                    dark:text-gray-300">
+                    <option disabled selected value="">Selecione uma prioridade</option>
+                    <option value="high">Alta</option>
+                    <option value="medium">Média</option>
+                    <option value="low">Baixa</option>
+                </select>
+                <p id="priority-error" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="category">Categoria</x-label>
+                <select multiple name="category" id="category" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
+                    dark:text-gray-300">
+                    <option disabled selected value="">Selecione uma categoria</option>
+                    <option value="ui-ux">UI/UX</option>
+                    <option value="backend">Backend</option>
+                    <option value="frontend">Frontend</option>
+                </select>
+                <p id="category-error" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="comment">Comentário</x-label>
+                <textarea name="comment" id="comment" cols="30" rows="3"
+                    class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
+                    dark:text-gray-300"
+                ></textarea>
+                <p id="comment-error" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="color">Cor</x-label>
+                <input type="color" name="color" id="color">
+                <p id="color-error" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+
+            <div class="mb-3">
+                <x-label for="column_id">Coluna</x-label>
+                <select name="column_id" id="column_id" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
+                    dark:text-gray-300">
+                    <option disabled selected value="">Selecione uma coluna</option>
+                    <option value="todo">A fazer</option>
+                    <option value="in_progress">Em progresso</option>
+                    <option value="testing">Testando</option>
+                    <option value="implemented">Implementado</option>
+                </select>
+                <p id="column_id-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
         </form>
 
@@ -243,11 +283,9 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-{{-- <script src="helper.js"></script> --}}
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
     const PROJECTS = {{ Js::from($projects) }}
-    // const PROJECTS = $('#projects').val() ? JSON.parse($('#projects').val()) : []
 
     $(document).ready(function() {
         loadProjects();
@@ -298,8 +336,6 @@
             method: 'GET',
             url: `/projects/${id}`,
             success: function(response) {
-                console.log(response);
-                return;
                 $('#kanban-title').text(response.name);
                 $('#kanban-description').text(response.description);
                 localStorage.setItem('project', response.id);
@@ -465,7 +501,7 @@
         const name = $('#name').val();
         const description = $('#description').val();
 
-        clearErrors()
+        clearErrors();
 
         $.ajax({
             method: "POST",
