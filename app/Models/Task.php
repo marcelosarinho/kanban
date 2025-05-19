@@ -21,4 +21,8 @@ class Task extends Model
         'done',
         'status',
     ];
+
+    public function projects() {
+        return $this->belongsTo(Project::class);
+    }
 }
