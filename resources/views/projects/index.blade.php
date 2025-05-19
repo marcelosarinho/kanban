@@ -298,6 +298,8 @@
             method: 'GET',
             url: `/projects/${id}`,
             success: function(response) {
+                console.log(response);
+                return;
                 $('#kanban-title').text(response.name);
                 $('#kanban-description').text(response.description);
                 localStorage.setItem('project', response.id);

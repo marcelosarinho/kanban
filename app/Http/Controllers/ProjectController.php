@@ -48,10 +48,12 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $project->load('tasks');
+
         try {
-            return $project;
+            return response()->json($project, 200);
         } catch (\Throwable $th) {
-            return $th;
+            return response()->json($th, 500);
         }
     }
 
