@@ -21,7 +21,7 @@
 </head>
 
 <body class="absolute h-screen font-suse bg-neutral-100 dark:bg-slate-950">
-    <input id="projects" type="hidden" value="{{ json_encode($projects) }}">
+    {{-- <input id="projects" type="hidden" value="{{ json_encode($projects) }}"> --}}
 
     <aside id="leftbar" class="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div id="sidebar" class="flex flex-col items-center px-2">
@@ -246,7 +246,8 @@
 {{-- <script src="helper.js"></script> --}}
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
-    const PROJECTS = $('#projects').val() ? JSON.parse($('#projects').val()) : []
+    const PROJECTS = {{ Js::from($projects) }}
+    // const PROJECTS = $('#projects').val() ? JSON.parse($('#projects').val()) : []
 
     $(document).ready(function() {
         loadProjects();
