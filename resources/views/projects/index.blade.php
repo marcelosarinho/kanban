@@ -224,30 +224,42 @@
             </div>
 
             <div class="mb-3">
-                <x-label for="category">Categoria</x-label>
+                <x-label for="category">Categoria(s)</x-label>
                 <div class="flex gap-3">
-                    <label class="hover:bg-yellow-100 hover:border-yellow-300 transition-colors border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
-                        <input class="hidden" type="checkbox" name="category" id="teste">
+                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:hover:bg-purple-900/30 dark:hover:text-purple-300 dark:hover:border-purple-700 has-[:disabled]:opacity-50 has-[:checked]:text-purple-700 has-[:checked]:bg-purple-100 has-[:checked]:border-purple-300 hover:bg-purple-100
+                        hover:border-purple-300 hover:text-purple-700 border-[1.5px] transition-colors border-gray-300 rounded-full py-1 px-2 cursor-pointer"
+                    >
+                        <input class="hidden category-input" type="checkbox" name="category" id="teste">
                         UI/UX
                     </label>
-                    <label class="hover:bg-blue-100 hover:border-blue-300 transition-colors border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
-                        <input class="hidden" type="checkbox" name="category" id="frontend">
+                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:hover:bg-blue-900/30 dark:hover:text-blue-300 dark:hover:border-blue-700 has-[:disabled]:opacity-50 has-[:checked]:text-blue-700 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-300 hover:bg-blue-100
+                        hover:border-blue-300 hover:text-blue-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
+                    >
+                        <input class="hidden category-input" type="checkbox" name="category" id="frontend">
                         Front-end
                     </label>
-                    <label class="border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
-                        <input class="hidden" type="checkbox" name="category" id="backend">
+                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:hover:bg-green-900/30 dark:hover:text-green-300 dark:hover:border-green-700 has-[:disabled]:opacity-50 has-[:checked]:text-green-700 has-[:checked]:bg-green-100 has-[:checked]:border-green-300 hover:bg-green-100
+                        hover:border-green-300 hover:text-green-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
+                    >
+                        <input class="hidden category-input" type="checkbox" name="category" id="backend">
                         Back-end
                     </label>
-                    <label class="border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
-                        <input class="hidden" type="checkbox" name="category" id="database">
+                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:hover:bg-orange-900/30 dark:hover:text-orange-300 dark:hover:border-orange-700 has-[:disabled]:opacity-50 has-[:checked]:text-orange-700 has-[:checked]:bg-orange-100 has-[:checked]:border-orange-300 hover:bg-orange-100
+                        hover:border-orange-300 hover:text-orange-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
+                    >
+                        <input class="hidden category-input" type="checkbox" name="category" id="database">
                         Banco de dados
                     </label>
-                    <label class="border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
-                        <input class="hidden" type="checkbox" name="category" id="devops">
+                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:hover:bg-pink-900/30 dark:hover:text-pink-300 dark:hover:border-pink-700 has-[:disabled]:opacity-50 has-[:checked]:text-pink-700 has-[:checked]:bg-pink-100 has-[:checked]:border-pink-300 hover:bg-pink-100
+                        hover:border-pink-300 hover:text-pink-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
+                    >
+                        <input class="hidden category-input" type="checkbox" name="category" id="devops">
                         DevOps
                     </label>
-                    <label class="border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
-                        <input class="hidden" type="checkbox" name="category" id="mobile">
+                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:hover:bg-red-900/30 dark:hover:text-red-300 dark:hover:border-red-700 has-[:disabled]:opacity-50 has-[:checked]:text-red-700 has-[:checked]:bg-red-100 has-[:checked]:border-red-300 hover:bg-red-100
+                        hover:border-red-300 hover:text-red-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
+                    >
+                        <input class="hidden category-input" type="checkbox" name="category" id="mobile">
                         Mobile
                     </label>
                 </div>
@@ -568,6 +580,16 @@
                 console.log(error);
             }
         })
+    })
+
+    $('.category-input').on('change', function() {
+        const selectedCategoriesLength = $('.category-input:checked').length;
+        
+        if (selectedCategoriesLength >= 2) {
+            $('.category-input:not(:checked)').prop('disabled', true);
+        } else {
+            $('.category-input').prop('disabled', false);
+        }
     })
 
     function toggleFullScreen() {
