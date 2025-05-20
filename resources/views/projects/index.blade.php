@@ -201,13 +201,13 @@
             </div>
 
             <div class="mb-3">
-                <x-label for="description">Descrição</x-label>
-                <textarea name="description" id="description" cols="30" rows="3"
+                <x-label for="task-description">Descrição</x-label>
+                <textarea name="task-description" id="task-description" cols="30" rows="3"
                     class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
                     focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
                     dark:text-gray-300"
                 ></textarea>
-                <p id="description-error" class="text-red-500 text-sm mt-1 hidden"></p>
+                <p id="task-description-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
 
             <div class="mb-3">
@@ -225,31 +225,33 @@
 
             <div class="mb-3">
                 <x-label for="category">Categoria</x-label>
-                <select multiple name="category" id="category" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
-                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
-                    dark:text-gray-300">
-                    <option disabled selected value="">Selecione uma categoria</option>
-                    <option value="ui-ux">UI/UX</option>
-                    <option value="backend">Backend</option>
-                    <option value="frontend">Frontend</option>
-                </select>
+                <div class="flex gap-3">
+                    <label class="hover:bg-yellow-100 hover:border-yellow-300 transition-colors border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
+                        <input class="hidden" type="checkbox" name="category" id="teste">
+                        UI/UX
+                    </label>
+                    <label class="hover:bg-blue-100 hover:border-blue-300 transition-colors border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
+                        <input class="hidden" type="checkbox" name="category" id="frontend">
+                        Front-end
+                    </label>
+                    <label class="border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
+                        <input class="hidden" type="checkbox" name="category" id="backend">
+                        Back-end
+                    </label>
+                    <label class="border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
+                        <input class="hidden" type="checkbox" name="category" id="database">
+                        Banco de dados
+                    </label>
+                    <label class="border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
+                        <input class="hidden" type="checkbox" name="category" id="devops">
+                        DevOps
+                    </label>
+                    <label class="border border-gray-300 rounded-full py-1 px-2 cursor-pointer">
+                        <input class="hidden" type="checkbox" name="category" id="mobile">
+                        Mobile
+                    </label>
+                </div>
                 <p id="category-error" class="text-red-500 text-sm mt-1 hidden"></p>
-            </div>
-
-            <div class="mb-3">
-                <x-label for="comment">Comentário</x-label>
-                <textarea name="comment" id="comment" cols="30" rows="3"
-                    class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
-                    focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
-                    dark:text-gray-300"
-                ></textarea>
-                <p id="comment-error" class="text-red-500 text-sm mt-1 hidden"></p>
-            </div>
-
-            <div class="mb-3">
-                <x-label for="color">Cor</x-label>
-                <input type="color" name="color" id="color">
-                <p id="color-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
 
             <div class="mb-3">
