@@ -196,18 +196,18 @@
             </div>
 
             <div class="mb-3">
-                <x-label for="task-description">Descrição</x-label>
-                <textarea name="task-description" id="task-description" cols="30" rows="3"
+                <x-label for="task_description">Descrição</x-label>
+                <textarea name="task_description" id="task_description" cols="30" rows="3"
                     class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
                     focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
                     dark:text-gray-300"
                 ></textarea>
-                <p id="task-description-error" class="text-red-500 text-sm mt-1 hidden"></p>
+                <p id="task_description-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
 
             <div class="mb-3">
-                <x-label for="priority">Prioridade</x-label>
-                <select name="priority" id="priority" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                <x-label for="task_priority">Prioridade</x-label>
+                <select name="task_priority" id="task_priority" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
                     focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
                     dark:text-gray-300">
                     <option disabled selected value="">Selecione uma prioridade</option>
@@ -215,53 +215,55 @@
                     <option value="medium">Média</option>
                     <option value="low">Baixa</option>
                 </select>
-                <p id="priority-error" class="text-red-500 text-sm mt-1 hidden"></p>
+                <p id="task_priority-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
 
             <div class="mb-3">
-                <x-label for="category">Categoria(s)</x-label>
+                <x-label for="categories">Categoria(s)</x-label>
                 <div class="flex gap-3">
+                    <input id="categories" hidden name="categories" type="text">
+
                     <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-purple-300 dark:has-[:checked]:bg-purple-900/30 dark:has-[:checked]:border-purple-700
                         dark:hover:bg-purple-900/30 dark:hover:text-purple-300 dark:hover:border-purple-700 has-[:disabled]:opacity-50 has-[:checked]:text-purple-700 has-[:checked]:bg-purple-100
                         has-[:checked]:border-purple-300 hover:bg-purple-100 hover:border-purple-300 hover:text-purple-700 border-[1.5px] transition-colors border-gray-300 rounded-full
                         py-1 px-2 cursor-pointer"
                     >
-                        <input class="hidden category-input" type="checkbox" name="category[ui-ux]" id="ui-ux">
+                        <input class="hidden category-input" type="checkbox" id="ui_ux">
                         UI/UX
                     </label>
                     <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-blue-300 dark:has-[:checked]:bg-blue-900/30 dark:has-[:checked]:border-blue-700
                         dark:hover:bg-blue-900/30 dark:hover:text-blue-300 dark:hover:border-blue-700 has-[:disabled]:opacity-50 has-[:checked]:text-blue-700 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-300
                         hover:bg-blue-100 hover:border-blue-300 hover:text-blue-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
                     >
-                        <input class="hidden category-input" type="checkbox" name="category[frontend]" id="frontend">
+                        <input class="hidden category-input" type="checkbox" id="frontend">
                         Front-end
                     </label>
                     <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-green-300 dark:has-[:checked]:bg-green-900/30 dark:has-[:checked]:border-green-700
                         dark:hover:bg-green-900/30 dark:hover:text-green-300 dark:hover:border-green-700 has-[:disabled]:opacity-50 has-[:checked]:text-green-700 has-[:checked]:bg-green-100 has-[:checked]:border-green-300
                         hover:bg-green-100 hover:border-green-300 hover:text-green-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
                     >
-                        <input class="hidden category-input" type="checkbox" name="category[backend]" id="backend">
+                        <input class="hidden category-input" type="checkbox" id="backend">
                         Back-end
                     </label>
                     <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-orange-300 dark:has-[:checked]:bg-orange-900/30 dark:has-[:checked]:border-orange-700 dark:hover:bg-orange-900/30
                         dark:hover:text-orange-300 dark:hover:border-orange-700 has-[:disabled]:opacity-50 has-[:checked]:text-orange-700 has-[:checked]:bg-orange-100 has-[:checked]:border-orange-300 hover:bg-orange-100
                         hover:border-orange-300 hover:text-orange-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
                     >
-                        <input class="hidden category-input" type="checkbox" name="category[database]" id="database">
+                        <input class="hidden category-input" type="checkbox" id="database">
                         Banco de dados
                     </label>
                     <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-pink-300 dark:has-[:checked]:bg-pink-900/30 dark:has-[:checked]:border-pink-700 dark:hover:bg-pink-900/30
                         dark:hover:text-pink-300 dark:hover:border-pink-700 has-[:disabled]:opacity-50 has-[:checked]:text-pink-700 has-[:checked]:bg-pink-100 has-[:checked]:border-pink-300 hover:bg-pink-100 hover:border-pink-300
                         hover:text-pink-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
                     >
-                        <input class="hidden category-input" type="checkbox" name="category[devops]" id="devops">
+                        <input class="hidden category-input" type="checkbox" id="devops">
                         DevOps
                     </label>
                     <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-red-300 dark:has-[:checked]:bg-red-900/30 dark:has-[:checked]:border-red-700 dark:hover:bg-red-900/30
                         dark:hover:text-red-300 dark:hover:border-red-700 has-[:disabled]:opacity-50 has-[:checked]:text-red-700 has-[:checked]:bg-red-100 has-[:checked]:border-red-300 hover:bg-red-100 hover:border-red-300
                         hover:text-red-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
                     >
-                        <input class="hidden category-input" type="checkbox" name="category[mobile]" id="mobile">
+                        <input class="hidden category-input" type="checkbox" id="mobile">
                         Mobile
                     </label>
                 </div>
@@ -269,8 +271,8 @@
             </div>
 
             <div class="mb-3">
-                <x-label for="column_id">Coluna</x-label>
-                <select name="column_id" id="column_id" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                <x-label for="task_status">Status</x-label>
+                <select name="task_status" id="task_status" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
                     focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
                     dark:text-gray-300">
                     <option disabled selected value="">Selecione uma coluna</option>
@@ -279,7 +281,7 @@
                     <option value="testing">Testando</option>
                     <option value="implemented">Implementado</option>
                 </select>
-                <p id="column_id-error" class="text-red-500 text-sm mt-1 hidden"></p>
+                <p id="task_status-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
         </form>
 
@@ -290,7 +292,7 @@
                 Cancelar
             </x-button>
 
-            <x-button id="btn-create-new-task" type="submit" bgColor="bg-primary" textColor="text-white" form="create-task-form">
+            <x-button form="create-task-form" id="btn-create-new-task" type="submit" bgColor="bg-primary" textColor="text-white" form="create-task-form">
                 <i class="ph-bold ph-plus text-lg"></i>
                 Criar
             </x-button>
@@ -591,6 +593,43 @@
         } else {
             $('.category-input').prop('disabled', false);
         }
+    })
+
+    $('#create-task-form').on('submit', function(e) {
+        e.preventDefault();
+
+        const name = $('#task_name').val() ? $('#task_name').val() : null;
+        const description = $('#task-description').val() ? $('#task-description').val() : null;
+        const priority = $('#task_priority').val() ? $('#task_priority').val() : null;
+
+        const selectedCategories = $('.category-input:checked').map(function () {
+            return $(this).attr('id');
+        }).get();
+
+        $('#categories').val(selectedCategories.join(', '));
+
+        const category = $('#categories').val();
+        const status = $('#task_status').val();
+
+        $.ajax({
+            method: 'POST',
+            url: '/tasks/save',
+            data: {
+                name,
+                description,
+                priority,
+                category,
+                status
+            },
+            success: function(response) {
+                closeModal('new-task-modal');
+                showSuccess(response);
+            },
+            error: function(error) {
+                showError(error);
+                renderErrors(error.responseJSON.errors);
+            }
+        })
     })
 
     function toggleFullScreen() {
