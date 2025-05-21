@@ -16,3 +16,7 @@ Route::prefix('/projects')->group(function () {
     Route::post('/save', [ProjectController::class, 'store'])->name('projects.store');
     Route::delete('/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 });
+
+Route::prefix('/tasks')->group(function () {
+    Route::post('/save', [TaskController::class, 'store'])->name('tasks.store');
+});
