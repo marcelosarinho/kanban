@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
+use App\Models\Task;
 
 class TaskController extends Controller
 {
@@ -25,15 +27,28 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        return $request;
+        try {
+            Task::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'priority' => $request->priority,
+                'category' => $request->category,
+                'project_id' => $request->project_id,
+                'status' => $request->status,
+            ]);
+    
+            return response()->json('Tarefa criada com sucesso!', 200);
+        } catch (\Throwable $th) {
+            return response()->json('Erro ao criar tarefa!', 500);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Task $task)
     {
         //
     }
@@ -41,7 +56,7 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Task $task)
     {
         //
     }
@@ -49,7 +64,7 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
         //
     }
@@ -57,7 +72,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
         //
     }

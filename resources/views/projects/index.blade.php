@@ -599,33 +599,33 @@
         e.preventDefault();
 
         const name = $('#task_name').val() ? $('#task_name').val() : null;
-        const description = $('#task-description').val() ? $('#task-description').val() : null;
+        const description = $('#task_description').val() ? $('#task_description').val() : null;
         const priority = $('#task_priority').val() ? $('#task_priority').val() : null;
 
         const selectedCategories = $('.category-input:checked').map(function () {
             return $(this).attr('id');
         }).get();
 
-        $('#categories').val(selectedCategories.join(', '));
+        $('#categories').val(selectedCategories.join(','));
 
-        const category = $('#categories').val();
-        const status = $('#task_status').val();
+        const category = $('#categories').val() ? $('#categories').val() : null;
+        const status = $('#task_status').val() ? $('#task_status').val() : null;
         const project_id = localStorage.getItem('project');
+
+        const data = {
+            name,
+            description,
+            priority,
+            category,
+            status,
+            project_id
+        }
 
         $.ajax({
             method: 'POST',
             url: '/tasks/save',
-            data: {
-                name,
-                description,
-                priority,
-                category,
-                status,
-                project_id
-            },
+            data,
             success: function(response) {
-                console.log(response);
-                return;
                 closeModal('new-task-modal');
                 showSuccess(response);
             },
