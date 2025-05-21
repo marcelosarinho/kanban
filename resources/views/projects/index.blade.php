@@ -610,6 +610,7 @@
 
         const category = $('#categories').val();
         const status = $('#task_status').val();
+        const project_id = localStorage.getItem('project');
 
         $.ajax({
             method: 'POST',
@@ -619,9 +620,12 @@
                 description,
                 priority,
                 category,
-                status
+                status,
+                project_id
             },
             success: function(response) {
+                console.log(response);
+                return;
                 closeModal('new-task-modal');
                 showSuccess(response);
             },
