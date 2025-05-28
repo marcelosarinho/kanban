@@ -223,21 +223,8 @@
                 <div class="flex gap-3">
                     <input id="categories" hidden name="categories" type="text">
 
-                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-purple-300 dark:has-[:checked]:bg-purple-900/30 dark:has-[:checked]:border-purple-700
-                        dark:hover:bg-purple-900/30 dark:hover:text-purple-300 dark:hover:border-purple-700 has-[:disabled]:opacity-50 has-[:checked]:text-purple-700 has-[:checked]:bg-purple-100
-                        has-[:checked]:border-purple-300 hover:bg-purple-100 hover:border-purple-300 hover:text-purple-700 border-[1.5px] transition-colors border-gray-300 rounded-full
-                        py-1 px-2 cursor-pointer"
-                    >
-                        <input class="hidden category-input" type="checkbox" id="ui_ux">
-                        UI/UX
-                    </label>
-                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-blue-300 dark:has-[:checked]:bg-blue-900/30 dark:has-[:checked]:border-blue-700
-                        dark:hover:bg-blue-900/30 dark:hover:text-blue-300 dark:hover:border-blue-700 has-[:disabled]:opacity-50 has-[:checked]:text-blue-700 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-300
-                        hover:bg-blue-100 hover:border-blue-300 hover:text-blue-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
-                    >
-                        <input class="hidden category-input" type="checkbox" id="frontend">
-                        Front-end
-                    </label>
+                    <x-category-badge id="ui_ux" color="purple" label="UI/UX" />
+                    <x-category-badge id="frontend" color="blue" label="Front-end" />
                     <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-green-300 dark:has-[:checked]:bg-green-900/30 dark:has-[:checked]:border-green-700
                         dark:hover:bg-green-900/30 dark:hover:text-green-300 dark:hover:border-green-700 has-[:disabled]:opacity-50 has-[:checked]:text-green-700 has-[:checked]:bg-green-100 has-[:checked]:border-green-300
                         hover:bg-green-100 hover:border-green-300 hover:text-green-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
