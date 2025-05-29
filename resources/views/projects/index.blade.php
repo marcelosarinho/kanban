@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="Marcelo Sarinho">
-    <meta name="description" content="Web application created to manage my programming projects">
+    <meta name="description" content="Aplicação web que ajuda a gerenciar projetos através de um Kanban">
     @vite('resources/css/app.css')
 
     <title>Kanban</title>
@@ -210,10 +210,9 @@
                 <select name="task_priority" id="task_priority" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
                     focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
                     dark:text-gray-300">
-                    <option disabled selected value="">Selecione uma prioridade</option>
-                    <option value="high">Alta</option>
-                    <option value="medium">Média</option>
                     <option value="low">Baixa</option>
+                    <option value="medium">Média</option>
+                    <option value="high">Alta</option>
                 </select>
                 <p id="task_priority-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>
@@ -238,7 +237,6 @@
                 <select name="task_status" id="task_status" class="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
                     focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary
                     dark:text-gray-300">
-                    <option disabled selected value="">Selecione uma coluna</option>
                     <option value="todo">A fazer</option>
                     <option value="in_progress">Em progresso</option>
                     <option value="testing">Testando</option>
@@ -316,9 +314,15 @@
             method: 'GET',
             url: `/projects/${id}`,
             success: function(response) {
+                const tasks = response.tasks;
+
                 $('#kanban-title').text(response.name);
                 $('#kanban-description').text(response.description);
                 localStorage.setItem('project', response.id);
+
+                tasks.map((task) => {
+                    console.log(task);
+                })
             },
             error: function(error) {
                 console.error(error);

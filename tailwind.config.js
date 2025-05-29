@@ -16,7 +16,7 @@ export default {
         'danger': '#e95252',
       },
       animation: {
-        'in': 'in 0.2s ease-in',
+        'in': 'in 0.2s linear',
       },
       keyframes: {
         in: {
