@@ -1,7 +1,11 @@
 @php
     $colors = [
         'purple' => 'badge-purple',
-        'blue' => 'badge-blue'
+        'blue' => 'badge-blue',
+        'green' => 'badge-green',
+        'orange' => 'badge-orange',
+        'pink' => 'badge-pink',
+        'red' => 'badge-red',
     ]
 @endphp
 

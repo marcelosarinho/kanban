@@ -225,34 +225,10 @@
 
                     <x-category-badge id="ui_ux" color="purple" label="UI/UX" />
                     <x-category-badge id="frontend" color="blue" label="Front-end" />
-                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-green-300 dark:has-[:checked]:bg-green-900/30 dark:has-[:checked]:border-green-700
-                        dark:hover:bg-green-900/30 dark:hover:text-green-300 dark:hover:border-green-700 has-[:disabled]:opacity-50 has-[:checked]:text-green-700 has-[:checked]:bg-green-100 has-[:checked]:border-green-300
-                        hover:bg-green-100 hover:border-green-300 hover:text-green-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
-                    >
-                        <input class="hidden category-input" type="checkbox" id="backend">
-                        Back-end
-                    </label>
-                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-orange-300 dark:has-[:checked]:bg-orange-900/30 dark:has-[:checked]:border-orange-700 dark:hover:bg-orange-900/30
-                        dark:hover:text-orange-300 dark:hover:border-orange-700 has-[:disabled]:opacity-50 has-[:checked]:text-orange-700 has-[:checked]:bg-orange-100 has-[:checked]:border-orange-300 hover:bg-orange-100
-                        hover:border-orange-300 hover:text-orange-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
-                    >
-                        <input class="hidden category-input" type="checkbox" id="database">
-                        Banco de dados
-                    </label>
-                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-pink-300 dark:has-[:checked]:bg-pink-900/30 dark:has-[:checked]:border-pink-700 dark:hover:bg-pink-900/30
-                        dark:hover:text-pink-300 dark:hover:border-pink-700 has-[:disabled]:opacity-50 has-[:checked]:text-pink-700 has-[:checked]:bg-pink-100 has-[:checked]:border-pink-300 hover:bg-pink-100 hover:border-pink-300
-                        hover:text-pink-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
-                    >
-                        <input class="hidden category-input" type="checkbox" id="devops">
-                        DevOps
-                    </label>
-                    <label class="dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 dark:has-[:checked]:text-red-300 dark:has-[:checked]:bg-red-900/30 dark:has-[:checked]:border-red-700 dark:hover:bg-red-900/30
-                        dark:hover:text-red-300 dark:hover:border-red-700 has-[:disabled]:opacity-50 has-[:checked]:text-red-700 has-[:checked]:bg-red-100 has-[:checked]:border-red-300 hover:bg-red-100 hover:border-red-300
-                        hover:text-red-700 transition-colors border-[1.5px] border-gray-300 rounded-full py-1 px-2 cursor-pointer"
-                    >
-                        <input class="hidden category-input" type="checkbox" id="mobile">
-                        Mobile
-                    </label>
+                    <x-category-badge id="backend" color="green" label="Back-end" />
+                    <x-category-badge id="database" color="orange" label="Banco de dados" />
+                    <x-category-badge id="devops" color="pink" label="DevOps" />
+                    <x-category-badge id="mobile" color="red" label="Mobile" />
                 </div>
                 <p id="category-error" class="text-red-500 text-sm mt-1 hidden"></p>
             </div>

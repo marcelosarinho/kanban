@@ -9,3 +9,19 @@
 .badge-blue {
   @apply dark:has-[:checked]:text-blue-300 dark:has-[:checked]:bg-blue-900/30 dark:has-[:checked]:border-blue-700 dark:hover:bg-blue-900/30 dark:hover:text-blue-300 dark:hover:border-blue-700 has-[:checked]:text-blue-700 has-[:checked]:bg-blue-100 has-[:checked]:border-blue-300 hover:bg-blue-100 hover:border-blue-300 hover:text-blue-700
 }
+
+.badge-green {
+  @apply dark:has-[:checked]:text-green-300 dark:has-[:checked]:bg-green-900/30 dark:has-[:checked]:border-green-700 dark:hover:bg-green-900/30 dark:hover:text-green-300 dark:hover:border-green-700 has-[:checked]:text-green-700 has-[:checked]:bg-green-100 has-[:checked]:border-green-300 hover:bg-green-100 hover:border-green-300 hover:text-green-700
+}
+
+.badge-orange {
+  @apply dark:has-[:checked]:text-orange-300 dark:has-[:checked]:bg-orange-900/30 dark:has-[:checked]:border-orange-700 dark:hover:bg-orange-900/30 dark:hover:text-orange-300 dark:hover:border-orange-700 has-[:checked]:text-orange-700 has-[:checked]:bg-orange-100 has-[:checked]:border-orange-300 hover:bg-orange-100 hover:border-orange-300 hover:text-orange-700
+}
+
+.badge-pink {
+  @apply dark:has-[:checked]:text-pink-300 dark:has-[:checked]:bg-pink-900/30 dark:has-[:checked]:border-pink-700 dark:hover:bg-pink-900/30 dark:hover:text-pink-300 dark:hover:border-pink-700 has-[:checked]:text-pink-700 has-[:checked]:bg-pink-100 has-[:checked]:border-pink-300 hover:bg-pink-100 hover:border-pink-300 hover:text-pink-700
+}
+
+.badge-red {
+  @apply dark:has-[:checked]:text-red-300 dark:has-[:checked]:bg-red-900/30 dark:has-[:checked]:border-red-700 dark:hover:bg-red-900/30 dark:hover:text-red-300 dark:hover:border-red-700 has-[:checked]:text-red-700 has-[:checked]:bg-red-100 has-[:checked]:border-red-300 hover:bg-red-100 hover:border-red-300 hover:text-red-700
+}
