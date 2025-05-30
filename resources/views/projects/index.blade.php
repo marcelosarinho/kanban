@@ -77,6 +77,8 @@
 
             <p id="kanban-description" class="text-sm text-gray-500 dark:text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
 
+            <x-card />
+
             <div class="flex justify-between w-full mb-4">
                 <x-button id="btn-add-task" type="button" bgColor="bg-primary" textColor="text-white">
                     <i class="ph-bold ph-plus text-lg"></i>
