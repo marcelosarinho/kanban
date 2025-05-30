@@ -77,8 +77,6 @@
 
             <p id="kanban-description" class="text-sm text-gray-500 dark:text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
 
-            <x-card />
-
             <div class="flex justify-between w-full mb-4">
                 <x-button id="btn-add-task" type="button" bgColor="bg-primary" textColor="text-white">
                     <i class="ph-bold ph-plus text-lg"></i>
@@ -91,7 +89,9 @@
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         A fazer
                     </header>
-                    <div class="p-3 h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700"></div>
+                    <div class="p-3 h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
+                        <x-card />
+                    </div>
                 </div>
                 <div id="in-progress-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
