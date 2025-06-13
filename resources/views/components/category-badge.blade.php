@@ -6,7 +6,7 @@
         'orange' => 'badge-orange',
         'pink' => 'badge-pink',
         'red' => 'badge-red',
-    ]
+    ];
 @endphp
 
 <label class="{{ $colors[$color] }} dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 has-[:disabled]:opacity-50 border-[1.5px]

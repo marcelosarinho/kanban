@@ -15,13 +15,13 @@
 
     <div class="flex justify-between items-end my-3">
         <div class="flex items-center gap-1">
-            <input class="size-4 border border-red-500" type="checkbox" name="{{ $id }}" id="{{ $id }}">
+            <input class="size-4" type="checkbox" name="{{ $id }}" id="{{ $id }}">
             <label class="text-sm" for="{{ $id }}">Concluída</label>
         </div>
         <select class="text-sm border rounded p-0.5" name="{{ $priority }}" id="{{ $priority }}">
-            <option value="low">Baixa</option>
-            <option value="medium">Média</option>
-            <option value="high">Alta</option>
+            <option value="low" {{ $priority == 'low' ? 'selected' : '' }}>Baixa</option>
+            <option value="medium" {{ $priority == 'medium' ? 'selected' : '' }}>Média</option>
+            <option value="high" {{ $priority == 'high' ? 'selected' : '' }}>Alta</option>
         </select>
     </div>
 
@@ -37,9 +37,7 @@
     </div>
 
     <div class="my-5 flex justify-between">
-        <div
-            class="w-fit flex items-center text-xs font-semibold bg-blue-100 text-blue-700 border-[1.5px] rounded-full px-3 py-0.5 border-blue-300">
-            {{ $category }}</div>
+        <x-card-priority-badge priority="{{ $priority }}" />
         <button>
             <i class="ph-bold ph-chat"></i>
         </button>
