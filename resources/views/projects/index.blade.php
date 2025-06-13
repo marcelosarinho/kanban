@@ -70,7 +70,7 @@
             </div>
         </nav>
 
-        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50 h-screen max-h-screen">
+        <main class="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50">
             <h1 id="kanban-title" class="text-3xl font-bold mb-4 dark:text-gray-300">
                 Kanban
             </h1>
@@ -89,8 +89,7 @@
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         A fazer
                     </header>
-                    <div class="p-3 h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
-                        <x-card />
+                    <div class="flex flex-col max-h-full gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-x-auto">
                     </div>
                 </div>
                 <div id="in-progress-section" class="col-lg-3 h-100">
@@ -271,6 +270,7 @@
         loadProjects();
         loadTheme();
         loadSelectedProject();
+        loadProjectTasks();
     })
 
     $.ajaxSetup({
@@ -292,6 +292,74 @@
             `)
         })
     }
+
+    function loadProjectTasks(tasks) {
+        $('#to-do-section > div').empty();
+        $('#in-progress-section > div').empty();
+        $('#testing-section > div').empty();
+        $('#implemented-section > div').empty();
+
+        if (tasks) {
+            tasks.forEach((task) => {
+                renderTask(task);
+            })
+        }
+    }
+
+    function renderTask(task) {
+        if (task.status === 'todo') {
+            $('#to-do-section > div').append(`
+                <x-card
+                    id="${task.id}"
+                    name="${task.name}"
+                    description="${task.description}"
+                    priority="${task.priority}"
+                    category="${task.category}"
+                    status="${task.status}"
+                />
+            `)
+        }
+
+        if (task.status === 'in_progress') {
+            $('#in-progress-section > div').append(`
+                <x-card
+                    id="${task.id}"
+                    name="${task.name}"
+                    description="${task.description}"
+                    priority="${task.priority}"
+                    category="${task.category}"
+                    status="${task.status}"
+                />
+            `)
+        }
+
+        if (task.status === 'testing') {
+            $('#testing-section > div').append(`
+                <x-card
+                    id="${task.id}"
+                    name="${task.name}"
+                    description="${task.description}"
+                    priority="${task.priority}"
+                    category="${task.category}"
+                    status="${task.status}"
+                />
+            `)
+        }
+
+        if (task.status === 'implemented') {
+            $('#implemented-section > div').append(`
+                <x-card
+                    id="${task.id}"
+                    name="${task.name}"
+                    description="${task.description}"
+                    priority="${task.priority}"
+                    category="${task.category}"
+                    status="${task.status}"
+                />
+            `)
+        }
+    }
+
 
     function loadTheme() {
         const theme = localStorage.getItem('theme');
@@ -322,9 +390,7 @@
                 $('#kanban-description').text(response.description);
                 localStorage.setItem('project', response.id);
 
-                tasks.map((task) => {
-                    console.log(task);
-                })
+                loadProjectTasks(tasks);
             },
             error: function(error) {
                 console.error(error);
