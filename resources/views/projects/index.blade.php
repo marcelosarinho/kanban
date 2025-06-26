@@ -85,14 +85,14 @@
             </div>
 
             <div class="flex gap-4">
-                <div id="to-do-section" class="col-lg-3 h-100">
+                <div id="todo-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         A fazer
                     </header>
                     <div class="flex flex-col max-h-full gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-x-auto">
                     </div>
                 </div>
-                <div id="in-progress-section" class="col-lg-3 h-100">
+                <div id="in_progress-section" class="col-lg-3 h-100">
                     <header class="text-2xl font-bold mb-2 dark:text-gray-300">
                         Em progresso
                     </header>
@@ -294,8 +294,8 @@
     }
 
     function loadProjectTasks(tasks) {
-        $('#to-do-section > div').empty();
-        $('#in-progress-section > div').empty();
+        $('#todo-section > div').empty();
+        $('#in_progress-section > div').empty();
         $('#testing-section > div').empty();
         $('#implemented-section > div').empty();
 
@@ -307,57 +307,16 @@
     }
 
     function renderTask(task) {
-        if (task.status === 'todo') {
-            $('#to-do-section > div').append(`
-                <x-card
-                    id="${task.id}"
-                    name="${task.name}"
-                    description="${task.description}"
-                    priority="${task.priority}"
-                    category="${task.category}"
-                    status="${task.status}"
-                />
-            `)
-        }
-
-        if (task.status === 'in_progress') {
-            $('#in-progress-section > div').append(`
-                <x-card
-                    id="${task.id}"
-                    name="${task.name}"
-                    description="${task.description}"
-                    priority="${task.priority}"
-                    category="${task.category}"
-                    status="${task.status}"
-                />
-            `)
-        }
-
-        if (task.status === 'testing') {
-            $('#testing-section > div').append(`
-                <x-card
-                    id="${task.id}"
-                    name="${task.name}"
-                    description="${task.description}"
-                    priority="${task.priority}"
-                    category="${task.category}"
-                    status="${task.status}"
-                />
-            `)
-        }
-
-        if (task.status === 'implemented') {
-            $('#implemented-section > div').append(`
-                <x-card
-                    id="${task.id}"
-                    name="${task.name}"
-                    description="${task.description}"
-                    priority="${task.priority}"
-                    category="${task.category}"
-                    status="${task.status}"
-                />
-            `)
-        }
+        $(`#${task.status}-section > div`).append(`
+            <x-card
+                id="${task.id}"
+                name="${task.name}"
+                description="${task.description}"
+                priority="${task.priority}"
+                category="${task.category}"
+                status="${task.status}"
+            />
+        `)
     }
 
 
@@ -469,7 +428,7 @@
     })
 
     $('#btn-add-card').on('click', function () {
-        $('#to-do-section > div').append(`
+        $('#todo-section > div').append(`
             <div id="card-inicial" class="bg-gray-100 rounded-md border-2 border-gray-300 px-2 py-3 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300">
                 <div class="flex items-center justify-between mb-4">
                     <div id="badges" class="flex gap-2">
