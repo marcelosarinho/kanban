@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [theme, setTheme] = useState('light');
+  const [themeDropdown, setThemeDropdown] = useState(false);
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
@@ -13,6 +14,10 @@ function App() {
       document.exitFullscreen();
       return;
     }
+  }
+
+  function toggleThemeDropdown() {
+    setThemeDropdown(!themeDropdown);
   }
 
   return (
@@ -40,26 +45,28 @@ function App() {
         <nav
           className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
         >
-          <button className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
+          <button onClick={toggleThemeDropdown} className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
             <i className="ph ph-sun text-2xl dark:text-gray-300"></i>
           </button>
           <button onClick={toggleFullScreen} className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
             <i className="ph ph-arrows-out text-2xl dark:text-gray-300"></i>
           </button>
-          <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300">
-            <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-              <i className="mr-2 ph ph-moon text-xl"></i>
-              Escuro
+          {themeDropdown && (
+            <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300">
+              <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+                <i className="mr-2 ph ph-moon text-xl"></i>
+                Escuro
+              </div>
+              <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+                <i className="mr-2 ph ph-sun text-xl"></i>
+                Claro
+              </div>
+              <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+                <i className="mr-2 ph ph-moon-stars text-xl"></i>
+                Sistema
+              </div>
             </div>
-            <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-              <i className="mr-2 ph ph-sun text-xl"></i>
-              Claro
-            </div>
-            <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-              <i className="mr-2 ph ph-moon-stars text-xl"></i>
-              Sistema
-            </div>
-          </div>
+          )}
         </nav>
 
         <main className="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50">

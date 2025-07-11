@@ -7,6 +7,18 @@
   --color-success: #52e9af;
   --color-info: #8952e9;
   --color-danger: #e95252;
+
   --font-suse: 'SUSE', sans-serif;
+
+  --animate-in: in 0.2s linear;
+
+  @keyframes in {
+    0% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
