@@ -70,7 +70,7 @@ function App() {
           <p className="text-sm text-gray-500 dark:text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
 
           <div className="flex justify-between w-full mb-4">
-            <button type="button" className="bg-primary text-white">
+            <button type="button" className="bg-success text-black">
               <i className="ph-bold ph-plus text-lg"></i>
               Adicionar tarefa
             </button>
