@@ -3,6 +3,18 @@ import { useEffect, useState } from 'react';
 function App() {
   const [theme, setTheme] = useState('light');
 
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      return;
+    }
+
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+      return;
+    }
+  }
+
   return (
     <>
       <aside className="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
@@ -28,10 +40,10 @@ function App() {
         <nav
           className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
         >
-          <button className='flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
+          <button className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
             <i className="ph ph-sun text-2xl dark:text-gray-300"></i>
           </button>
-          <button className='flex items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
+          <button onClick={toggleFullScreen} className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
             <i className="ph ph-arrows-out text-2xl dark:text-gray-300"></i>
           </button>
           <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 hidden text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300">
