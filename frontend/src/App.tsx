@@ -48,7 +48,7 @@ function App() {
           </Button>
 
           <div
-            className="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center border dark:bg-slate-800 dark:border-slate-700"
+            className="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center border border-gray-300 dark:bg-slate-800 dark:border-slate-700"
           >
             <input type="text" className="outline-none px-0.5 text-sm bg-gray-50 dark:bg-slate-800 dark:text-gray-300" />
             <button className="flex items-center p-0.5">
