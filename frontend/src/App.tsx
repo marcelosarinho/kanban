@@ -20,6 +20,10 @@ function App() {
     setThemeDropdown(!themeDropdown);
   }
 
+  useEffect(() => {
+    console.log(theme);
+  }, [theme]);
+
   return (
     <>
       <aside className="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
@@ -53,15 +57,15 @@ function App() {
           </button>
           {themeDropdown && (
             <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300">
-              <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+              <div onClick={() => setTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                 <i className="mr-2 ph ph-moon text-xl"></i>
                 Escuro
               </div>
-              <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+              <div onClick={() => setTheme('light')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                 <i className="mr-2 ph ph-sun text-xl"></i>
                 Claro
               </div>
-              <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+              <div onClick={() => setTheme('system')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                 <i className="mr-2 ph ph-moon-stars text-xl"></i>
                 Sistema
               </div>
