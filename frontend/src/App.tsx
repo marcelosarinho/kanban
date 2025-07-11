@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [theme, setTheme] = useState('light');
   const [themeDropdown, setThemeDropdown] = useState(false);
 
   function toggleFullScreen() {
@@ -20,9 +19,22 @@ function App() {
     setThemeDropdown(!themeDropdown);
   }
 
+  function changeTheme(selectedTheme: string) {
+    if (selectedTheme === 'dark' || selectedTheme === 'light') {
+      localStorage.setItem('theme', selectedTheme);
+      document.documentElement.classList.toggle('dark', selectedTheme === 'dark');
+      return;
+    }
+
+    localStorage.removeItem('theme');
+    document.documentElement.classList.toggle('dark', window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }
+
   useEffect(() => {
-    console.log(theme);
-  }, [theme]);
+    const theme = localStorage.getItem('theme');
+
+    document.documentElement.classList.toggle('dark', theme === 'dark' || !("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }, [])
 
   return (
     <>
@@ -57,15 +69,15 @@ function App() {
           </button>
           {themeDropdown && (
             <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
-              <div onClick={() => setTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+              <div onClick={() => changeTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                 <i className="mr-2 ph ph-moon text-xl"></i>
                 Escuro
               </div>
-              <div onClick={() => setTheme('light')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+              <div onClick={() => changeTheme('light')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                 <i className="mr-2 ph ph-sun text-xl"></i>
                 Claro
               </div>
-              <div onClick={() => setTheme('system')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+              <div onClick={() => changeTheme('system')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                 <i className="mr-2 ph ph-moon-stars text-xl"></i>
                 Sistema
               </div>
