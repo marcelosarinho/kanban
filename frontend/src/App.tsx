@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Button from './components/Button';
 
 function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
@@ -41,10 +42,10 @@ function App() {
       <aside className="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div className="flex flex-col items-center px-2">
           <h3 className="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
-          <button type="button" className="bg-primary text-white">
+          <Button type="button">
             <i className="ph-bold ph-plus text-lg"></i>
             Adicionar projeto
-          </button>
+          </Button>
 
           <div
             className="mt-6 rounded py-0.5 px-1 bg-gray-50 h-fit flex items-center border dark:bg-slate-800 dark:border-slate-700"
@@ -93,10 +94,10 @@ function App() {
           <p className="text-sm text-gray-500 dark:text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
 
           <div className="flex justify-between w-full mb-4">
-            <button type="button" className="bg-success text-black">
+            <Button type="button" variant="success">
               <i className="ph-bold ph-plus text-lg"></i>
               Adicionar tarefa
-            </button>
+            </Button>
           </div>
 
           <div className="flex gap-4">

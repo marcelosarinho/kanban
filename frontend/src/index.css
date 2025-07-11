@@ -22,3 +22,18 @@
   }
 }
 
+.btn-primary {
+  @apply bg-primary text-white;
+}
+
+.btn-success {
+  @apply bg-success text-black;
+}
+
+.btn-info {
+  @apply bg-info text-white;
+}
+
+.btn-danger {
+  @apply bg-danger text-white;
+}
