@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
 import Button from './components/Button';
+import Modal from './components/Modal';
+import ModalHeader from './components/ModalHeader';
+import ModalTitle from './components/ModalTitle';
+import ModalClose from './components/ModalClose';
+import ModalBody from './components/ModalBody';
+import ModalFooter from './components/ModalFooter';
 
 function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
@@ -39,6 +45,20 @@ function App() {
 
   return (
     <>
+      <Modal>
+        <ModalHeader>
+          <ModalTitle>Modal Title</ModalTitle>
+          <ModalClose />
+        </ModalHeader>
+        <ModalBody>
+          <p>Modal Body</p>
+        </ModalBody>
+        <ModalFooter>
+          <Button>Salvar</Button>
+          <Button variant="secondary">Cancelar</Button>
+        </ModalFooter>
+      </Modal>
+
       <aside className="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div className="flex flex-col items-center px-2">
           <h3 className="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
