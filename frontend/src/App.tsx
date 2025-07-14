@@ -6,6 +6,7 @@ import ModalTitle from './components/ModalTitle';
 import ModalClose from './components/ModalClose';
 import ModalBody from './components/ModalBody';
 import ModalFooter from './components/ModalFooter';
+import Input from './components/Input';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -87,7 +88,7 @@ function App() {
         </ModalHeader>
         <ModalBody>
           <form>
-            <input type="text" />
+            <Input id="project-name" label="Nome do projeto" type="text" onChange={(e) => console.log(e.target.value)} />
           </form>
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum temporibus magnam, enim, quas consequuntur ipsa, delectus inventore quo maxime unde excepturi. Quaerat beatae facilis ipsum architecto amet unde deleniti mollitia?</p>
         </ModalBody>
