@@ -86,6 +86,9 @@ function App() {
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
         <ModalBody>
+          <form>
+            <input type="text" />
+          </form>
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum temporibus magnam, enim, quas consequuntur ipsa, delectus inventore quo maxime unde excepturi. Quaerat beatae facilis ipsum architecto amet unde deleniti mollitia?</p>
         </ModalBody>
         <ModalFooter>
