@@ -7,6 +7,7 @@ import ModalClose from './components/ModalClose';
 import ModalBody from './components/ModalBody';
 import ModalFooter from './components/ModalFooter';
 import Input from './components/Input';
+import Textarea from './components/Textarea';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -87,10 +88,11 @@ function App() {
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
         <ModalBody>
-          <form>
-            <Input id="project-name" label="Nome do projeto" type="text" onChange={(e) => console.log(e.target.value)} />
+          <form className='flex flex-col gap-3'>
+            <Input id="project-name" label="Nome do projeto"/>
+
+            <Textarea id="project-description" label="Descrição do projeto"/>
           </form>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum temporibus magnam, enim, quas consequuntur ipsa, delectus inventore quo maxime unde excepturi. Quaerat beatae facilis ipsum architecto amet unde deleniti mollitia?</p>
         </ModalBody>
         <ModalFooter>
           <Button>Salvar</Button>
