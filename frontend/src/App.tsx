@@ -54,6 +54,14 @@ function App() {
     iconElement?.classList.add(icon);
   }
 
+  function openModal(id: string) {
+    const modal = document.getElementById(id) as HTMLDialogElement;
+
+    if (modal) {
+      modal.show();
+    }
+  }
+
   useEffect(() => {
     const theme = localStorage.getItem('theme');
     
@@ -64,7 +72,7 @@ function App() {
 
   return (
     <>
-      <Modal>
+      <Modal id="create-project-modal">
         <ModalHeader>
           <ModalTitle>Modal Title</ModalTitle>
           <ModalClose />
@@ -81,7 +89,7 @@ function App() {
       <aside className="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div className="flex flex-col items-center px-2">
           <h3 className="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
-          <Button type="button">
+          <Button type="button" onClick={() => openModal('create-project-modal')}>
             <i className="ph-bold ph-plus text-lg"></i>
             Adicionar projeto
           </Button>
