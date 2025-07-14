@@ -10,6 +10,7 @@ import Input from './components/Input';
 import Textarea from './components/Textarea';
 import SidebarCard from './components/SidebarCard';
 import CategoryBadge from './components/CategoryBadge';
+import Select from './components/Select';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -113,12 +114,11 @@ function App() {
 
             <Textarea id="task-description" label="Descrição da tarefa"/>
 
-            <select name="task_priority" id="task_priority" className="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
-                focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary dark:text-gray-300">
+            <Select label="Prioridade" name="task_priority" id="task_priority">
                 <option value="low">Baixa</option>
                 <option value="medium">Média</option>
                 <option value="high">Alta</option>
-            </select>
+            </Select>
 
             <div className="flex gap-3">
               <CategoryBadge color="purple" label="UI/UX" />
@@ -129,13 +129,12 @@ function App() {
               <CategoryBadge color="red" label="Mobile" />
             </div>
 
-            <select name="task_status" id="task_status" className="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
-                focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary dark:text-gray-300">
+            <Select label="Status" name="task_status" id="task_status">
                 <option value="todo">A fazer</option>
                 <option value="in_progress">Em progresso</option>
                 <option value="testing">Testando</option>
                 <option value="implemented">Implementado</option>
-            </select>
+            </Select>
           </form>
         </ModalBody>
         <ModalFooter>
