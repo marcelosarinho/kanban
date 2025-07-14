@@ -4,7 +4,7 @@ export default function ModalFooter(props: ComponentProps<'footer'>) {
   const { children, ...rest } = props;
 
   return (
-    <footer {...rest}>
+    <footer className="flex justify-end gap-3" {...rest}>
       {children}
     </footer>
   )
