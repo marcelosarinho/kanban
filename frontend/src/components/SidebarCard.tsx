@@ -17,6 +17,9 @@ export default function SidebarCard(props: SidebarCardProps) {
         <Button variant="transparent">
           <i className="ph ph-trash text-lg text-danger group-hover:text-red-600 transition-colors"></i>
         </Button>
+        <Button variant="transparent">
+          <i className="ph ph-pencil-simple text-lg text-info group-hover:text-info/60 transition-colors"></i>
+        </Button>
       </div>
     </div>
   )
