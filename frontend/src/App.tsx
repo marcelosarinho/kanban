@@ -9,6 +9,7 @@ import ModalFooter from './components/ModalFooter';
 import Input from './components/Input';
 import Textarea from './components/Textarea';
 import SidebarCard from './components/SidebarCard';
+import CategoryBadge from './components/CategoryBadge';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -101,6 +102,48 @@ function App() {
         </ModalFooter>
       </Modal>
 
+      <Modal id="create-task-modal">
+        <ModalHeader>
+          <ModalTitle>Adicionar tarefa</ModalTitle>
+          <ModalClose onClick={() => closeModal('create-task-modal')} />
+        </ModalHeader>
+        <ModalBody>
+          <form className='flex flex-col gap-3'>
+            <Input id="task-name" label="Nome da tarefa"/>
+
+            <Textarea id="task-description" label="Descrição da tarefa"/>
+
+            <select name="task_priority" id="task_priority" className="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary dark:text-gray-300">
+                <option value="low">Baixa</option>
+                <option value="medium">Média</option>
+                <option value="high">Alta</option>
+            </select>
+
+            <div className="flex gap-3">
+              <CategoryBadge color="purple" label="UI/UX" />
+              <CategoryBadge color="blue" label="Front-end" />
+              <CategoryBadge color="green" label="Back-end" />
+              <CategoryBadge color="orange" label="Banco de dados" />
+              <CategoryBadge color="pink" label="DevOps" />
+              <CategoryBadge color="red" label="Mobile" />
+            </div>
+
+            <select name="task_status" id="task_status" className="px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4
+                focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary dark:text-gray-300">
+                <option value="todo">A fazer</option>
+                <option value="in_progress">Em progresso</option>
+                <option value="testing">Testando</option>
+                <option value="implemented">Implementado</option>
+            </select>
+          </form>
+        </ModalBody>
+        <ModalFooter>
+          <Button>Salvar</Button>
+          <Button onClick={() => closeModal('create-task-modal')} variant="outline-primary">Cancelar</Button>
+        </ModalFooter>
+      </Modal>
+
       <aside className="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
         <div className="flex flex-col items-center px-2">
           <h3 className="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
@@ -158,7 +201,7 @@ function App() {
           <p className="text-sm text-gray-500 dark:text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
 
           <div className="flex justify-between w-full mb-4">
-            <Button type="button" variant="success">
+            <Button onClick={() => openModal('create-task-modal')} type="button" variant="success">
               <i className="ph-bold ph-plus text-lg"></i>
               Adicionar tarefa
             </Button>
