@@ -6,9 +6,11 @@ export default function SidebarCard() {
       <h2 className="font-semibold truncate">Projeto</h2>
       <h6 className="text-sm truncate leading-tight">Descrição</h6>
 
-      <Button>
-        <i className="ph ph-trash text-xl text-danger group-hover:text-red-600 transition-colors"></i>
-      </Button>
+      <div className="flex items-center justify-end">
+        <Button variant="transparent">
+          <i className="ph ph-trash text-lg text-danger group-hover:text-red-600 transition-colors"></i>
+        </Button>
+      </div>
     </div>
   )
 }

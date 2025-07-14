@@ -49,3 +49,7 @@
 .btn-outline-primary {
   @apply border-primary text-primary;
 }
+
+.btn-transparent {
+  @apply flex items-center justify-center bg-transparent hover:bg-gray-300 dark:hover:bg-slate-800 rounded-full p-1 cursor-pointer transition-colors;
+}

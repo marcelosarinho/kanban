@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 
 type ButtonProps = {
-  variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info' | 'light' | 'dark' | 'link' | 'outline-primary';
+  variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info' | 'light' | 'dark' | 'link' | 'outline-primary' | 'transparent';
 } & ComponentProps<'button'>;
 
 const variants: { [key: string]: string } = {
@@ -10,6 +10,7 @@ const variants: { [key: string]: string } = {
   'success': 'btn btn-success',
   'info': 'btn btn-info',
   'outline-primary': 'btn btn-outline btn-outline-primary',
+  'transparent': 'btn-transparent',
 }
 
 export default function Button(props: ButtonProps) {
