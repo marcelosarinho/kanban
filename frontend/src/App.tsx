@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     const theme = localStorage.getItem('theme');
 
-    document.documentElement.classList.toggle('dark', theme === 'dark' || !("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, [])
 
   return (
