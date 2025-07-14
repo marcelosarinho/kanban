@@ -1,0 +1,31 @@
+.btn {
+  @apply flex items-center rounded-md gap-1 px-3 py-2 hover:-translate-y-1 cursor-pointer transition text-sm font-medium;
+}
+
+.btn-primary {
+  @apply bg-primary text-white;
+}
+
+.btn-success {
+  @apply bg-success text-black;
+}
+
+.btn-info {
+  @apply bg-info text-white;
+}
+
+.btn-danger {
+  @apply bg-danger text-white;
+}
+
+.btn-outline {
+  @apply border;
+}
+
+.btn-outline-primary {
+  @apply border-primary text-primary;
+}
+
+.btn-transparent {
+  @apply flex items-center justify-center bg-transparent hover:bg-gray-300 dark:hover:bg-slate-900 rounded-full p-1 cursor-pointer transition-colors;
+}
