@@ -118,7 +118,7 @@ function App() {
             </button>
           </div>
           <div className="mt-4 flex flex-col w-full gap-3">
-            <SidebarCard />
+            <SidebarCard name="Projeto" description="Descrição" />
           </div>
         </div>
       </aside>
