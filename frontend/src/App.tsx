@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from './components/Button';
 import Modal from './components/Modal';
 import ModalHeader from './components/ModalHeader';
@@ -7,8 +7,16 @@ import ModalClose from './components/ModalClose';
 import ModalBody from './components/ModalBody';
 import ModalFooter from './components/ModalFooter';
 
+const themeIcons: { [key: string]: string } = {
+  light: 'ph-sun',
+  dark: 'ph-moon',
+  system: 'ph-moon-stars',
+}
+
 function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
+
+  const themeIconRef = useRef<HTMLElement>(null);
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
@@ -27,6 +35,8 @@ function App() {
   }
 
   function changeTheme(selectedTheme: string) {
+    changeIconTheme(themeIcons[selectedTheme]);
+
     if (selectedTheme === 'dark' || selectedTheme === 'light') {
       localStorage.setItem('theme', selectedTheme);
       document.documentElement.classList.toggle('dark', selectedTheme === 'dark');
@@ -37,11 +47,20 @@ function App() {
     document.documentElement.classList.toggle('dark', window.matchMedia("(prefers-color-scheme: dark)").matches);
   }
 
+  function changeIconTheme(icon: string) {
+    const iconElement = themeIconRef.current;
+
+    iconElement?.classList.remove('ph-sun', 'ph-moon', 'ph-moon-stars');
+    iconElement?.classList.add(icon);
+  }
+
   useEffect(() => {
     const theme = localStorage.getItem('theme');
+    
+    changeIconTheme(themeIcons[theme || 'system']);
 
     document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }, [])
+  }, []);
 
   return (
     <>
@@ -83,7 +102,7 @@ function App() {
           className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
         >
           <button onClick={toggleThemeDropdown} className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
-            <i className="ph ph-sun text-2xl dark:text-gray-300"></i>
+            <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
           </button>
           <button onClick={toggleFullScreen} className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
             <i className="ph ph-arrows-out text-2xl dark:text-gray-300"></i>
