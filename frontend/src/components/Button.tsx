@@ -1,10 +1,6 @@
 import type { ComponentProps } from "react";
 
-type ButtonProps = {
-  variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info' | 'light' | 'dark' | 'link' | 'outline-primary' | 'transparent';
-} & ComponentProps<'button'>;
-
-const variants: { [key: string]: string } = {
+const variants = {
   'primary': 'btn btn-primary',
   'danger': 'btn btn-danger',
   'success': 'btn btn-success',
@@ -12,6 +8,10 @@ const variants: { [key: string]: string } = {
   'outline-primary': 'btn btn-outline btn-outline-primary',
   'transparent': 'btn-transparent',
 }
+
+type ButtonProps = {
+  variant?: keyof typeof variants;
+} & ComponentProps<'button'>;
 
 export default function Button(props: ButtonProps) {
   const { type, children, variant = 'primary', ...rest } = props;
