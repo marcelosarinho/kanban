@@ -37,3 +37,11 @@
 .btn-danger {
   @apply bg-danger text-white;
 }
+
+.btn-outline {
+  @apply border;
+}
+
+.btn-outline-primary {
+  @apply border-primary text-primary;
+}

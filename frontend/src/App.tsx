@@ -82,7 +82,7 @@ function App() {
         </ModalBody>
         <ModalFooter>
           <Button>Salvar</Button>
-          <Button variant="secondary">Cancelar</Button>
+          <Button variant="outline-primary">Cancelar</Button>
         </ModalFooter>
       </Modal>
 
