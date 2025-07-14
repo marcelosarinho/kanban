@@ -5,11 +5,11 @@ type ButtonProps = {
 } & ComponentProps<'button'>;
 
 const variants: { [key: string]: string } = {
-  'primary': 'btn-primary',
-  'danger': 'btn-danger',
-  'success': 'btn-success',
-  'info': 'btn-info',
-  'outline-primary': 'btn-outline btn-outline-primary',
+  'primary': 'btn btn-primary',
+  'danger': 'btn btn-danger',
+  'success': 'btn btn-success',
+  'info': 'btn btn-info',
+  'outline-primary': 'btn btn-outline btn-outline-primary',
 }
 
 export default function Button(props: ButtonProps) {
@@ -18,7 +18,7 @@ export default function Button(props: ButtonProps) {
   return (
     <button
       type={type}
-      className={`flex items-center rounded-md gap-1 px-3 py-2 hover:-translate-y-1 cursor-pointer transition text-sm font-medium ${variants[variant]}`}
+      className={variants[variant]}
       {...rest}
     >
       {children}
