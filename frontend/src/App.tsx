@@ -62,6 +62,14 @@ function App() {
     }
   }
 
+  function closeModal(id: string) {
+    const modal = document.getElementById(id) as HTMLDialogElement;
+
+    if (modal) {
+      modal.close();
+    }
+  }
+
   useEffect(() => {
     const theme = localStorage.getItem('theme');
     
@@ -75,14 +83,14 @@ function App() {
       <Modal id="create-project-modal">
         <ModalHeader>
           <ModalTitle>Adicionar projeto</ModalTitle>
-          <ModalClose />
+          <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
         <ModalBody>
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum temporibus magnam, enim, quas consequuntur ipsa, delectus inventore quo maxime unde excepturi. Quaerat beatae facilis ipsum architecto amet unde deleniti mollitia?</p>
         </ModalBody>
         <ModalFooter>
           <Button>Salvar</Button>
-          <Button variant="outline-primary">Cancelar</Button>
+          <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
         </ModalFooter>
       </Modal>
 
