@@ -8,6 +8,7 @@ import ModalBody from './components/ModalBody';
 import ModalFooter from './components/ModalFooter';
 import Input from './components/Input';
 import Textarea from './components/Textarea';
+import SidebarCard from './components/SidebarCard';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -116,7 +117,9 @@ function App() {
               <i className="ph ph-magnifying-glass text-xl dark:text-gray-300"></i>
             </button>
           </div>
-          <div className="mt-4 flex flex-col w-full gap-3"></div>
+          <div className="mt-4 flex flex-col w-full gap-3">
+            <SidebarCard />
+          </div>
         </div>
       </aside>
       <section className="ml-52">
