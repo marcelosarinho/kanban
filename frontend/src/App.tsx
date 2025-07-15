@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import Button from './components/Button';
 import Modal from './components/Modal';
 import ModalHeader from './components/ModalHeader';
@@ -20,8 +20,11 @@ const themeIcons: { [key: string]: string } = {
 
 function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const themeIconRef = useRef<HTMLElement>(null);
+
+  const disabledCategories = selectedCategories.length >= 3;
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
@@ -75,6 +78,18 @@ function App() {
     }
   }
 
+  function handleCategoryToggle(e: ChangeEvent<HTMLInputElement>) {
+    const isCategoryChecked = e.target.checked;
+    const name = e.target.name;
+
+    if (isCategoryChecked) {
+      setSelectedCategories([...selectedCategories, name]);
+      return;
+    }
+
+    setSelectedCategories(selectedCategories.filter(category => category !== name));
+  }
+
   useEffect(() => {
     const theme = localStorage.getItem('theme');
     
@@ -121,14 +136,14 @@ function App() {
             </Select>
 
             <div className="flex flex-col">
-              <label className='mb-3' htmlFor="categories">Categorias</label>
+              <label className='mb-3'>Categorias</label>
               <div className="flex gap-3">
-                <CategoryBadge color="purple" label="UI/UX" />
-                <CategoryBadge color="blue" label="Front-end" />
-                <CategoryBadge color="green" label="Back-end" />
-                <CategoryBadge color="orange" label="Banco de dados" />
-                <CategoryBadge color="pink" label="DevOps" />
-                <CategoryBadge color="red" label="Mobile" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('ui_ux')} onChange={handleCategoryToggle} color="purple" label="UI/UX" name="ui_ux" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('frontend')} onChange={handleCategoryToggle} color="blue" label="Front-end" name="frontend" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('backend')} onChange={handleCategoryToggle} color="green" label="Back-end" name="backend" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('database')} onChange={handleCategoryToggle} color="orange" label="Banco de dados" name="database" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('devops')} onChange={handleCategoryToggle} color="pink" label="DevOps" name="devops" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('mobile')} onChange={handleCategoryToggle} color="red" label="Mobile" name="mobile" />
               </div>
             </div>
 
