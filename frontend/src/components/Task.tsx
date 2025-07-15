@@ -27,9 +27,9 @@ export default function Task() {
     </div>
 
     <div className="flex justify-between items-end my-3">
-        <div className="flex items-center gap-1">
-            <input className="size-4" type="checkbox" name="" id=""/>
-            <label className="text-sm" htmlFor="">Concluída</label>
+        <div className="flex items-center gap-1.5 font-medium">
+            <input className="size-4" type="checkbox" name="done" id="done"/>
+            <label className="text-sm" htmlFor="done">Concluída</label>
         </div>
         <select className="text-sm border rounded p-0.5" name="" id="">
             <option value="low">Baixa</option>
