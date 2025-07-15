@@ -13,15 +13,21 @@ export default function TaskPriorityBadge(props: TaskPriorityBadgeProps) {
 
   return (
     <div className="flex flex-wrap gap-1">
-      <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
-        <span className="text-xs mr-2">●</span> Baixa prioridade
-      </div>
-      <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
-        <span className="text-xs mr-2">●●</span> Média prioridade
-      </div>
-      <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
-        <span className="text-xs mr-2">●●●</span> Alta prioridade
-      </div>
+      {priority === 'low' && (
+        <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
+          <span className="text-xs mr-2">●</span> Baixa prioridade
+        </div>
+      )}
+      {priority === 'medium' && (
+        <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
+          <span className="text-xs mr-2">●●</span> Média prioridade
+        </div>
+      )}
+      {priority === 'high' && (
+        <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
+          <span className="text-xs mr-2">●●●</span> Alta prioridade
+        </div>
+      )}
     </div>
   )
 }

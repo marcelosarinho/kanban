@@ -50,7 +50,7 @@ export default function Task() {
     </div>
 
     <div className="my-5 flex justify-between">
-      <TaskPriorityBadge />
+      <TaskPriorityBadge priority="low"/>
       <button className="flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-200 transition-colors">
         <i className="ph-bold ph-chat"></i>
       </button>
