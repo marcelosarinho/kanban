@@ -14,8 +14,8 @@ export default function Task() {
 
     <header className="flex justify-between items-center">
         <div className="flex flex-wrap gap-1">
-          <TaskCategoryBadge />
-          <TaskCategoryBadge />
+          <TaskCategoryBadge category="frontend" />
+          <TaskCategoryBadge category="backend" />
         </div>
         <div className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
             <div className="size-3 bg-blue-500 rounded-full"></div>
