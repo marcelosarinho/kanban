@@ -120,13 +120,16 @@ function App() {
                 <option value="high">Alta</option>
             </Select>
 
-            <div className="flex gap-3">
-              <CategoryBadge color="purple" label="UI/UX" />
-              <CategoryBadge color="blue" label="Front-end" />
-              <CategoryBadge color="green" label="Back-end" />
-              <CategoryBadge color="orange" label="Banco de dados" />
-              <CategoryBadge color="pink" label="DevOps" />
-              <CategoryBadge color="red" label="Mobile" />
+            <div className="flex flex-col">
+              <label className='mb-3' htmlFor="categories">Categorias</label>
+              <div className="flex gap-3">
+                <CategoryBadge color="purple" label="UI/UX" />
+                <CategoryBadge color="blue" label="Front-end" />
+                <CategoryBadge color="green" label="Back-end" />
+                <CategoryBadge color="orange" label="Banco de dados" />
+                <CategoryBadge color="pink" label="DevOps" />
+                <CategoryBadge color="red" label="Mobile" />
+              </div>
             </div>
 
             <Select label="Status" name="task_status" id="task_status">
