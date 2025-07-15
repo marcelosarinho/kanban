@@ -3,15 +3,18 @@
 //   description: string;
 // }
 
-import CategoryBadge from "./CategoryBadge"
+import TaskCategoryBadge from "./TaskCategoryBadge"
 
 export default function Task() {
   return (
     <div className="p-4 border border-l-4 border-blue-500 rounded-md bg-white dark:bg-slate-800 dark:border-blue-700 dark:text-gray-300">
-    <input type="hidden" name="{{ $id }}" id="{{ $id }}" />
+    <input type="hidden" name="" id="" />
 
     <header className="flex justify-between items-center">
-        <CategoryBadge color="blue" label="UI/Ux" />
+        <div className="flex flex-wrap gap-1">
+          <TaskCategoryBadge />
+          <TaskCategoryBadge />
+        </div>
         <div className="border rounded py-1.5 px-2 border-dashed border-gray-300 hover:cursor-pointer hover:bg-gray-100 transition-colors">
             <div className="size-3 bg-blue-500 rounded-full"></div>
         </div>
@@ -27,7 +30,7 @@ export default function Task() {
             <input className="size-4" type="checkbox" name="" id=""/>
             <label className="text-sm" htmlFor="">Concluída</label>
         </div>
-        <select className="text-sm border rounded p-0.5" name="{{ $priority }}" id="{{ $priority }}">
+        <select className="text-sm border rounded p-0.5" name="" id="">
             <option value="low">Baixa</option>
             <option value="medium">Média</option>
             <option value="high">Alta</option>
@@ -46,7 +49,6 @@ export default function Task() {
     </div>
 
     <div className="my-5 flex justify-between">
-      Oi
         <button>
             <i className="ph-bold ph-chat"></i>
         </button>
