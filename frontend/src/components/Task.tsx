@@ -4,6 +4,7 @@
 // }
 
 import TaskCategoryBadge from "./TaskCategoryBadge"
+import TaskPriorityBadge from "./TaskPriorityBadge"
 
 export default function Task() {
   return (
@@ -49,9 +50,10 @@ export default function Task() {
     </div>
 
     <div className="my-5 flex justify-between">
-        <button>
-            <i className="ph-bold ph-chat"></i>
-        </button>
+      <TaskPriorityBadge />
+      <button className="flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-200 transition-colors">
+        <i className="ph-bold ph-chat"></i>
+      </button>
     </div>
 </div>
   )
