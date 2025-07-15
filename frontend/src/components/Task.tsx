@@ -6,8 +6,11 @@
 import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
+import { useState } from "react"
 
 export default function Task() {
+  const [toggleColorDropdown, setToggleColorDropdown] = useState(false);
+
   return (
     <div className="p-4 border border-l-4 border-blue-500 rounded-md bg-white dark:bg-slate-800 dark:border-blue-700 dark:text-gray-300">
     <input type="hidden" name="" id="" />
@@ -19,6 +22,36 @@ export default function Task() {
         </div>
         <div className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
             <div className="size-3 bg-blue-500 rounded-full"></div>
+        </div>
+        <div className="absolute bg-white text-sm p-2 rounded-md flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <span className="bg-blue-500 rounded-full size-3"></span>
+            <span>Azul</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="bg-red-500 rounded-full size-3"></span>
+            <span>Vermelho</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="bg-green-500 rounded-full size-3"></span>
+            <span>Verde</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="bg-yellow-500 rounded-full size-3"></span>
+            <span>Amarelo</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="bg-purple-500 rounded-full size-3"></span>
+            <span>Roxo</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="bg-pink-500 rounded-full size-3"></span>
+            <span>Rosa</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="bg-orange-500 rounded-full size-3"></span>
+            <span>Laranja</span>
+          </div>
         </div>
     </header>
 
