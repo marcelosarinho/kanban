@@ -31,7 +31,7 @@ export default function Task() {
             <input className="size-4" type="checkbox" name="done" id="done"/>
             <label className="text-sm" htmlFor="done">Concluída</label>
         </div>
-        <select className="text-sm border rounded p-0.5" name="" id="">
+        <select className="text-sm border rounded p-1 border-gray-300" name="priority" id="priority">
             <option value="low">Baixa</option>
             <option value="medium">Média</option>
             <option value="high">Alta</option>
