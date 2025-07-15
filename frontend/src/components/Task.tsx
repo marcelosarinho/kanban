@@ -29,10 +29,16 @@ export default function Task() {
 
     <div className="flex justify-between items-end my-3">
         <div className="flex items-center gap-1.5 font-medium">
-            <input className="size-4" type="checkbox" name="done" id="done"/>
-            <label className="text-sm" htmlFor="done">Concluída</label>
+            <input
+              className="peer appearance-none size-4 border border-gray-300 rounded-xs dark:border-slate-600 checked:bg-success transition-colors"
+              type="checkbox"
+              name="done"
+              id="done"
+            />
+            <i className="ph-bold ph-check hidden peer-checked:block absolute text-black"></i>
+            <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor="done">Concluída</label>
         </div>
-        <select className="text-sm border rounded p-1 border-gray-300" name="priority" id="priority">
+        <select className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name="priority" id="priority">
             <option value="low">Baixa</option>
             <option value="medium">Média</option>
             <option value="high">Alta</option>
