@@ -17,7 +17,7 @@ export default function Task() {
           <TaskCategoryBadge />
           <TaskCategoryBadge />
         </div>
-        <div className="border rounded py-1.5 px-2 border-dashed border-gray-300 hover:cursor-pointer hover:bg-gray-100 transition-colors">
+        <div className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
             <div className="size-3 bg-blue-500 rounded-full"></div>
         </div>
     </header>

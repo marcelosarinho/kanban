@@ -1,7 +1,27 @@
-export default function TaskPriorityBadge() {
+const variants = {
+  low: 'badge-success',
+  medium: 'badge-warning',
+  high: 'badge-danger',
+}
+
+type TaskPriorityBadgeProps = {
+  priority: keyof typeof variants;
+}
+
+export default function TaskPriorityBadge(props: TaskPriorityBadgeProps) {
+  const { priority } = props;
+
   return (
-    <div className="w-fit flex items-center text-xs font-semibold bg-blue-100 text-blue-700 border-[1.5px] rounded-full px-3 py-0.5 border-blue-300">
-      Baixa
+    <div className="flex flex-wrap gap-1">
+      <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
+        <span className="text-xs mr-2">●</span> Baixa prioridade
+      </div>
+      <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
+        <span className="text-xs mr-2">●●</span> Média prioridade
+      </div>
+      <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
+        <span className="text-xs mr-2">●●●</span> Alta prioridade
+      </div>
     </div>
   )
 }
