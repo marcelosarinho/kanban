@@ -23,13 +23,13 @@ export const BUTTON_VARIANTS = {
 }
 
 export const TASK_COLORS = {
-  blue: { bg: 'task-blue-background', border: 'task-blue-border' },
-  red: { bg: 'task-red-background', border: 'task-red-border' },
-  green: { bg: 'task-green-background', border: 'task-green-border' },
-  yellow: { bg: 'task-yellow-background', border: 'task-yellow-border' },
-  purple: { bg: 'task-purple-background', border: 'task-purple-border' },
-  pink: { bg: 'task-pink-background', border: 'task-pink-border' },
-  orange: { bg: 'task-orange-background', border: 'task-orange-border' },
+  blue: { bg: 'task-blue-background', border: 'task-blue-border', label: 'Azul' },
+  red: { bg: 'task-red-background', border: 'task-red-border', label: 'Vermelho' },
+  green: { bg: 'task-green-background', border: 'task-green-border', label: 'Verde' },
+  yellow: { bg: 'task-yellow-background', border: 'task-yellow-border', label: 'Amarelo' },
+  purple: { bg: 'task-purple-background', border: 'task-purple-border', label: 'Roxo' },
+  pink: { bg: 'task-pink-background', border: 'task-pink-border', label: 'Rosa' },
+  orange: { bg: 'task-orange-background', border: 'task-orange-border', label: 'Laranja' },
 }
 
 export const TASK_PRIORITIES = {
