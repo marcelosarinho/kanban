@@ -37,3 +37,10 @@ export const TASK_PRIORITIES = {
   medium: { color: 'badge-warning', label: 'Média', dots: 2 },
   high: { color: 'badge-danger', label: 'Alta', dots: 3 },
 }
+
+export const TASK_STATUSES = {
+  todo: 'A fazer',
+  in_progress: 'Em progresso',
+  testing: 'Testando',
+  implemented: 'Implementado',
+}

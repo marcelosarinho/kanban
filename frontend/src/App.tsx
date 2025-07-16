@@ -14,7 +14,7 @@ import Select from './components/Select';
 import Task from './components/Task';
 import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phosphor-icons/react';
 import Searchbar from './components/Searchbar';
-import { CATEGORIES, TASK_PRIORITIES } from './libs/constants';
+import { CATEGORIES, TASK_PRIORITIES, TASK_STATUSES } from './libs/constants';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -155,10 +155,9 @@ function App() {
             </div>
 
             <Select label="Status" name="task_status" id="task_status">
-                <option value="todo">A fazer</option>
-                <option value="in_progress">Em progresso</option>
-                <option value="testing">Testando</option>
-                <option value="implemented">Implementado</option>
+                {Object.entries(TASK_STATUSES).map(([key, value]) => (
+                  <option key={key} value={key}>{value}</option>
+                ))}
             </Select>
           </form>
         </ModalBody>
