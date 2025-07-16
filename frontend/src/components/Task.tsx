@@ -5,19 +5,10 @@ import { useState } from "react"
 import { ChatIcon, CheckIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import Textarea from "./Textarea";
-
-const taskColors = {
-  blue: { bg: 'bg-blue-500 dark:bg-blue-700', border: 'border-blue-500 dark:border-blue-700' },
-  red: { bg: 'bg-red-500 dark:bg-red-700', border: 'border-red-500 dark:border-red-700' },
-  green: { bg: 'bg-green-500 dark:bg-green-700', border: 'border-green-500 dark:border-green-700' },
-  yellow: { bg: 'bg-yellow-500 dark:bg-yellow-700', border: 'border-yellow-500 dark:border-yellow-700' },
-  purple: { bg: 'bg-purple-500 dark:bg-purple-700', border: 'border-purple-500 dark:border-purple-700' },
-  pink: { bg: 'bg-pink-500 dark:bg-pink-700', border: 'border-pink-500 dark:border-pink-700' },
-  orange: { bg: 'bg-orange-500 dark:bg-orange-700', border: 'border-orange-500 dark:border-orange-700' },
-}
+import { TASK_COLORS } from "../libs/constants";
 
 type TaskProps = {
-  color: keyof typeof taskColors;
+  color: keyof typeof TASK_COLORS;
 }
 
 export default function Task(props: TaskProps) {
@@ -29,7 +20,7 @@ export default function Task(props: TaskProps) {
   });
 
   return (
-    <div className={`p-4 border border-l-4 ${taskColors[color].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
+    <div className={`p-4 border border-l-4 ${TASK_COLORS[color].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
     <header className="flex justify-between items-center">
         <div className="flex flex-wrap gap-1">
           <TaskCategoryBadge category="frontend" />
@@ -40,36 +31,36 @@ export default function Task(props: TaskProps) {
             className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors z-50"
             onClick={() => setToggleElement({...toggleElement, color: !toggleElement.color})}
           >
-            <div className={`size-3 rounded-full ${taskColors[color].bg}`}></div>
+            <div className={`size-3 rounded-full ${TASK_COLORS[color].bg}`}></div>
           </div>
           {toggleElement.color && (
             <div className="absolute right-0 bg-white border border-gray-300 dark:bg-slate-800 dark:border-slate-600 text-sm p-1 rounded-md flex flex-col select-none">
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${taskColors.blue.bg}`}></span>
+                <span className={`rounded-full size-3 ${TASK_COLORS.blue.bg}`}></span>
                 <span>Azul</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${taskColors.red.bg}`}></span>
+                <span className={`rounded-full size-3 ${TASK_COLORS.red.bg}`}></span>
                 <span>Vermelho</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${taskColors.green.bg}`}></span>
+                <span className={`rounded-full size-3 ${TASK_COLORS.green.bg}`}></span>
                 <span>Verde</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${taskColors.yellow.bg}`}></span>
+                <span className={`rounded-full size-3 ${TASK_COLORS.yellow.bg}`}></span>
                 <span>Amarelo</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${taskColors.purple.bg}`}></span>
+                <span className={`rounded-full size-3 ${TASK_COLORS.purple.bg}`}></span>
                 <span>Roxo</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${taskColors.pink.bg}`}></span>
+                <span className={`rounded-full size-3 ${TASK_COLORS.pink.bg}`}></span>
                 <span>Rosa</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${taskColors.orange.bg}`}></span>
+                <span className={`rounded-full size-3 ${TASK_COLORS.orange.bg}`}></span>
                 <span>Laranja</span>
               </div>
             </div>
