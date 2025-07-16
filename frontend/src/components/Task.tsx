@@ -105,7 +105,7 @@ export default function Task() {
 
     {toggleComment && (
       <div className="mb-2">
-        <Textarea label="Comentários" />
+        <Textarea />
       </div>
     )}
 

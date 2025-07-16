@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 
 type TextareaProps = {
-  label: string;
+  label?: string;
 } & ComponentProps<'textarea'>
 
 export default function Textarea(props: TextareaProps) {
@@ -9,7 +9,7 @@ export default function Textarea(props: TextareaProps) {
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="w-fit block mb-1 dark:text-gray-300">{label}</label>
+      {label && <label htmlFor={id} className="w-fit block mb-1 dark:text-gray-300">{label}</label>}
       <textarea
         id={id}
         {...rest}
