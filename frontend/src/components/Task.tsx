@@ -6,14 +6,16 @@
 import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ChatIcon, CheckIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import Textarea from "./Textarea";
 
 export default function Task() {
-  const [toggleColorDropdown, setToggleColorDropdown] = useState(false);
-  const [toggleComment, setToggleComment] = useState(false);
+  const [toggleElement, setToggleElement] = useState({
+    color: false,
+    comment: false,
+  });
 
   return (
     <div className="p-4 border border-l-4 border-blue-500 rounded-md bg-white dark:bg-slate-800 dark:border-blue-700 dark:text-gray-300">
@@ -27,11 +29,11 @@ export default function Task() {
         <div className="relative">
           <div
             className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors z-50"
-            onClick={() => setToggleColorDropdown(!toggleColorDropdown)}
+            onClick={() => setToggleElement({...toggleElement, color: !toggleElement.color})}
           >
             <div className="size-3 bg-blue-500 rounded-full"></div>
           </div>
-          {toggleColorDropdown && (
+          {toggleElement.color && (
             <div className="absolute right-0 bg-white border border-gray-300 dark:border-slate-600 text-sm p-1 rounded-md flex flex-col select-none">
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
                 <span className="bg-blue-500 rounded-full size-3"></span>
@@ -97,13 +99,13 @@ export default function Task() {
       <TaskPriorityBadge priority="low"/>
       <button
         className="flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-200 dark:hover:bg-slate-900 transition-colors"
-        onClick={() => setToggleComment(!toggleComment)}
+        onClick={() => setToggleElement({...toggleElement, comment: !toggleElement.comment})}
       >
         <ChatIcon weight="bold" />
       </button>
     </div>
 
-    {toggleComment && (
+    {toggleElement.comment && (
       <div className="mb-2">
         <Textarea className="dark:border-slate-600!" />
       </div>
