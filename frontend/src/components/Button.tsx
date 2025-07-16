@@ -6,12 +6,12 @@ type ButtonProps = {
 } & ComponentProps<'button'>;
 
 export default function Button(props: ButtonProps) {
-  const { type, children, variant = 'primary', ...rest } = props;
+  const { type, children, variant = 'primary', className, ...rest } = props;
 
   return (
     <button
       type={type}
-      className={BUTTON_VARIANTS[variant]}
+      className={`${BUTTON_VARIANTS[variant]} ${className}`}
       {...rest}
     >
       {children}
