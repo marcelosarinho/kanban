@@ -14,6 +14,7 @@ import Select from './components/Select';
 import Task from './components/Task';
 import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phosphor-icons/react';
 import Searchbar from './components/Searchbar';
+import { CATEGORIES, TASK_PRIORITIES } from './libs/constants';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -133,20 +134,23 @@ function App() {
             <Textarea id="task-description" label="Descrição da tarefa"/>
 
             <Select label="Prioridade" name="task_priority" id="task_priority">
-                <option value="low">Baixa</option>
-                <option value="medium">Média</option>
-                <option value="high">Alta</option>
+              {Object.entries(TASK_PRIORITIES).map(([key, value]) => (
+                <option key={key} value={key}>{value.label}</option>
+              ))}
             </Select>
 
             <div className="flex flex-col">
               <label className='mb-3'>Categorias</label>
               <div className="flex gap-3">
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('ui_ux')} onChange={handleCategoryToggle} category="ui_ux" name="ui_ux" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('frontend')} onChange={handleCategoryToggle} category="frontend" name="frontend" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('backend')} onChange={handleCategoryToggle} category="backend" name="backend" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('database')} onChange={handleCategoryToggle} category="database" name="database" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('devops')} onChange={handleCategoryToggle} category="devops" name="devops" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('mobile')} onChange={handleCategoryToggle} category="mobile" name="mobile" />
+                {Object.keys(CATEGORIES).map((category) => (
+                  <CategoryBadge
+                    key={category}
+                    disabled={disabledCategories && !selectedCategories.includes(category)}
+                    onChange={handleCategoryToggle}
+                    category={category as keyof typeof CATEGORIES}
+                    name={category}
+                  />
+                ))}
               </div>
             </div>
 
