@@ -1,0 +1,55 @@
+.task-blue-background {
+  @apply bg-blue-500 dark:bg-blue-700;
+}
+
+.task-red-background {
+  @apply bg-red-500 dark:bg-red-700;
+}
+
+.task-green-background {
+  @apply bg-green-500 dark:bg-green-700;
+}
+
+.task-yellow-background {
+  @apply bg-yellow-500 dark:bg-yellow-700;
+}
+
+.task-purple-background {
+  @apply bg-purple-500 dark:bg-purple-700;
+}
+
+.task-pink-background {
+  @apply bg-pink-500 dark:bg-pink-700;
+}
+
+.task-orange-background {
+  @apply bg-orange-500 dark:bg-orange-700;
+}
+
+.task-blue-border {
+  @apply border-blue-500 dark:border-blue-700;
+}
+
+.task-red-border {
+  @apply border-red-500 dark:border-red-700;
+}
+
+.task-green-border {
+  @apply border-green-500 dark:border-green-700;
+}
+
+.task-yellow-border {
+  @apply border-yellow-500 dark:border-yellow-700;
+}
+
+.task-purple-border {
+  @apply border-purple-500 dark:border-purple-700;
+}
+
+.task-pink-border {
+  @apply border-pink-500 dark:border-pink-700;
+}
+
+.task-orange-border {
+  @apply border-orange-500 dark:border-orange-700;
+}

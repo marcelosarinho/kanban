@@ -23,13 +23,13 @@ export const BUTTON_VARIANTS = {
 }
 
 export const TASK_COLORS = {
-  blue: { bg: 'bg-blue-500 dark:bg-blue-700', border: 'border-blue-500 dark:border-blue-700' },
-  red: { bg: 'bg-red-500 dark:bg-red-700', border: 'border-red-500 dark:border-red-700' },
-  green: { bg: 'bg-green-500 dark:bg-green-700', border: 'border-green-500 dark:border-green-700' },
-  yellow: { bg: 'bg-yellow-500 dark:bg-yellow-700', border: 'border-yellow-500 dark:border-yellow-700' },
-  purple: { bg: 'bg-purple-500 dark:bg-purple-700', border: 'border-purple-500 dark:border-purple-700' },
-  pink: { bg: 'bg-pink-500 dark:bg-pink-700', border: 'border-pink-500 dark:border-pink-700' },
-  orange: { bg: 'bg-orange-500 dark:bg-orange-700', border: 'border-orange-500 dark:border-orange-700' },
+  blue: { bg: 'task-blue-background', border: 'task-blue-border' },
+  red: { bg: 'task-red-background', border: 'task-red-border' },
+  green: { bg: 'task-green-background', border: 'task-green-border' },
+  yellow: { bg: 'task-yellow-background', border: 'task-yellow-border' },
+  purple: { bg: 'task-purple-background', border: 'task-purple-border' },
+  pink: { bg: 'task-pink-background', border: 'task-pink-border' },
+  orange: { bg: 'task-orange-background', border: 'task-orange-border' },
 }
 
 export const TASK_PRIORITIES = {
