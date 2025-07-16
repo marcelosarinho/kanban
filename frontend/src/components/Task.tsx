@@ -90,7 +90,7 @@ export default function Task(props: TaskProps) {
               name="done"
               id="done"
             />
-            <CheckIcon weight="bold" className="hidden peer-checked:block absolute text-black" />
+            <CheckIcon weight="bold" className="pointer-events-none hidden peer-checked:block absolute text-black" />
             <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor="done">Concluída</label>
         </div>
         <select className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name="priority" id="priority">
