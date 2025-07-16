@@ -141,12 +141,12 @@ function App() {
             <div className="flex flex-col">
               <label className='mb-3'>Categorias</label>
               <div className="flex gap-3">
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('ui_ux')} onChange={handleCategoryToggle} color="purple" label="UI/UX" name="ui_ux" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('frontend')} onChange={handleCategoryToggle} color="blue" label="Front-end" name="frontend" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('backend')} onChange={handleCategoryToggle} color="green" label="Back-end" name="backend" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('database')} onChange={handleCategoryToggle} color="orange" label="Banco de dados" name="database" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('devops')} onChange={handleCategoryToggle} color="pink" label="DevOps" name="devops" />
-                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('mobile')} onChange={handleCategoryToggle} color="red" label="Mobile" name="mobile" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('ui_ux')} onChange={handleCategoryToggle} category="ui_ux" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('frontend')} onChange={handleCategoryToggle} category="frontend" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('backend')} onChange={handleCategoryToggle} category="backend" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('database')} onChange={handleCategoryToggle} category="database" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('devops')} onChange={handleCategoryToggle} category="devops" />
+                <CategoryBadge disabled={disabledCategories && !selectedCategories.includes('mobile')} onChange={handleCategoryToggle} category="mobile" />
               </div>
             </div>
 

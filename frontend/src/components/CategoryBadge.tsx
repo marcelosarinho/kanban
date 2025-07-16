@@ -1,26 +1,25 @@
 import type { ComponentProps } from "react";
 
-const colors = {
-  purple: 'badge-purple',
-  blue: 'badge-blue',
-  green: 'badge-green',
-  orange: 'badge-orange',
-  pink: 'badge-pink',
-  red: 'badge-red',
+const categories = {
+  frontend: { color: 'badge-blue', name: 'Front-end' },
+  backend: { color: 'badge-green', name: 'Back-end' },
+  mobile: { color: 'badge-red', name: 'Mobile' },
+  ui_ux: { color: 'badge-purple', name: 'UI/UX' },
+  devops: { color: 'badge-pink', name: 'DevOps' },
+  database: { color: 'badge-orange', name: 'Banco de dados' },
 }
 
 type CategoryBadgeProps = {
-  color: keyof typeof colors;
-  label: string;
+  category: keyof typeof categories;
 } & ComponentProps<'input'>
 
 export default function CategoryBadge(props: CategoryBadgeProps) {
-  const { color, label, disabled, ...rest } = props;
+  const { category, disabled, ...rest } = props;
 
   return (
-    <label className={`dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 has-[:disabled]:opacity-50 border-[1.5px] transition-colors border-gray-300 rounded-full py-1 px-2 cursor-pointer ${colors[color]}`}>
+    <label className={`dark:bg-slate-800 dark:border-slate-950 dark:text-gray-300 has-[:disabled]:opacity-50 border-[1.5px] transition-colors border-gray-300 rounded-full py-1 px-2 cursor-pointer ${categories[category].color}`}>
       <input disabled={disabled} className="hidden" type="checkbox" {...rest} />
-      {label}
+      {categories[category].name}
     </label>
   )
 }
