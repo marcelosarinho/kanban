@@ -110,7 +110,7 @@ function App() {
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
         <ModalBody>
-          <form className='flex flex-col gap-3'>
+          <form className="flex flex-col gap-3">
             <Input id="project-name" label="Nome do projeto"/>
 
             <Textarea id="project-description" label="Descrição do projeto"/>
@@ -128,7 +128,7 @@ function App() {
           <ModalClose onClick={() => closeModal('create-task-modal')} />
         </ModalHeader>
         <ModalBody>
-          <form className='flex flex-col gap-3'>
+          <form className="flex flex-col gap-3">
             <Input id="task-name" label="Nome da tarefa"/>
 
             <Textarea id="task-description" label="Descrição da tarefa"/>
@@ -140,7 +140,7 @@ function App() {
             </Select>
 
             <div className="flex flex-col">
-              <label className='mb-3'>Categorias</label>
+              <label className="mb-3">Categorias</label>
               <div className="flex gap-3">
                 {Object.keys(CATEGORIES).map((category) => (
                   <CategoryBadge
@@ -175,7 +175,7 @@ function App() {
             Adicionar projeto
           </Button>
 
-          <Searchbar />
+          <Searchbar className="mt-6" />
           <div className="mt-4 flex flex-col w-full gap-3">
             <SidebarCard name="Projeto" description="Descrição" />
           </div>
@@ -185,10 +185,10 @@ function App() {
         <nav
           className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
         >
-          <button onClick={toggleThemeDropdown} className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
+          <button onClick={toggleThemeDropdown} className="flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1">
             <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
           </button>
-          <button onClick={toggleFullScreen} className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
+          <button onClick={toggleFullScreen} className="flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1">
             <ArrowsOutIcon weight="bold" className="text-2xl dark:text-gray-300" />
           </button>
           {themeDropdown && (
@@ -228,14 +228,16 @@ function App() {
               <header className="text-2xl font-bold mb-2 dark:text-gray-300">
                 A fazer
               </header>
+              <Searchbar className="mb-3" />
               <div className="flex flex-col max-h-full gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-x-auto">
-                <Task color='blue' />
+                <Task color="blue" />
               </div>
             </div>
             <div className="col-lg-3 h-100">
               <header className="text-2xl font-bold mb-2 dark:text-gray-300">
                 Em progresso
               </header>
+              <Searchbar className="mb-3" />
               <div className="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
                 <div></div>
               </div>
@@ -244,6 +246,7 @@ function App() {
               <header className="text-2xl font-bold mb-2 dark:text-gray-300">
                 Testando
               </header>
+              <Searchbar className="mb-3" />
               <div className="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
                 <div></div>
               </div>
@@ -252,6 +255,7 @@ function App() {
               <header className="text-2xl font-bold mb-2 dark:text-gray-300">
                 Implementado
               </header>
+              <Searchbar className="mb-3" />
               <div className="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
                 <div></div>
               </div>
