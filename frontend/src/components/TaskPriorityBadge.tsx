@@ -1,7 +1,7 @@
 const variants = {
-  low: 'badge-success',
-  medium: 'badge-warning',
-  high: 'badge-danger',
+  low: { color: 'badge-success', label: 'Baixa prioridade', dots: 1 },
+  medium: { color: 'badge-warning', label: 'Média prioridade', dots: 2 },
+  high: { color: 'badge-danger', label: 'Alta prioridade', dots: 3 },
 }
 
 type TaskPriorityBadgeProps = {
@@ -13,21 +13,9 @@ export default function TaskPriorityBadge(props: TaskPriorityBadgeProps) {
 
   return (
     <div className="flex flex-wrap gap-1">
-      {priority === 'low' && (
-        <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
-          <span className="text-xs mr-2">●</span> Baixa prioridade
-        </div>
-      )}
-      {priority === 'medium' && (
-        <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
-          <span className="text-xs mr-2">●●</span> Média prioridade
-        </div>
-      )}
-      {priority === 'high' && (
-        <div className={`${variants[priority]} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
-          <span className="text-xs mr-2">●●●</span> Alta prioridade
-        </div>
-      )}
+      <div className={`${variants[priority].color} inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors w-fit`}>
+        <span className="text-xs mr-2">{'●'.repeat(variants[priority].dots)}</span> {variants[priority].label}
+      </div>
     </div>
   )
 }
