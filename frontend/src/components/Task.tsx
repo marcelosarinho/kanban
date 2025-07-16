@@ -7,7 +7,8 @@ import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
 import { useState } from "react"
-import { ChatIcon, CheckIcon } from "@phosphor-icons/react";
+import { ChatIcon, CheckIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
+import Button from "./Button";
 
 export default function Task() {
   const [toggleColorDropdown, setToggleColorDropdown] = useState(false);
@@ -96,6 +97,15 @@ export default function Task() {
         <ChatIcon weight="bold" />
       </button>
     </div>
+
+    <footer className="flex gap-1 justify-end">
+      <Button variant="transparent">
+        <PencilSimpleIcon weight="bold" />
+      </Button>
+      <Button variant="transparent">
+        <TrashIcon className="text-danger" weight="bold" />
+      </Button>
+    </footer>
 </div>
   )
 }
