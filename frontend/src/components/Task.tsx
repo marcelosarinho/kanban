@@ -5,7 +5,7 @@ import { useState } from "react"
 import { ChatIcon, CheckIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import Textarea from "./Textarea";
-import { TASK_COLORS } from "../libs/constants";
+import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
 
 type TaskProps = {
   color: keyof typeof TASK_COLORS;
@@ -85,9 +85,9 @@ export default function Task(props: TaskProps) {
             <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor="done">Concluída</label>
         </div>
         <select className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name="priority" id="priority">
-            <option value="low">Baixa</option>
-            <option value="medium">Média</option>
-            <option value="high">Alta</option>
+            {Object.entries(TASK_PRIORITIES).map(([key, value]) => (
+              <option key={key} value={key}>{value.label}</option>
+            ))}
         </select>
     </div>
 

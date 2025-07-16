@@ -33,7 +33,7 @@ export const TASK_COLORS = {
 }
 
 export const TASK_PRIORITIES = {
-  low: { color: 'badge-success', label: 'Baixa prioridade', dots: 1 },
-  medium: { color: 'badge-warning', label: 'Média prioridade', dots: 2 },
-  high: { color: 'badge-danger', label: 'Alta prioridade', dots: 3 },
+  low: { color: 'badge-success', label: 'Baixa', dots: 1 },
+  medium: { color: 'badge-warning', label: 'Média', dots: 2 },
+  high: { color: 'badge-danger', label: 'Alta', dots: 3 },
 }
