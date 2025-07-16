@@ -1,16 +1,8 @@
 import type { ComponentProps } from "react";
-
-const variants = {
-  'primary': 'btn btn-primary',
-  'danger': 'btn btn-danger',
-  'success': 'btn btn-success',
-  'info': 'btn btn-info',
-  'outline-primary': 'btn btn-outline btn-outline-primary',
-  'transparent': 'btn-transparent',
-}
+import { BUTTON_VARIANTS } from "../libs/constants";
 
 type ButtonProps = {
-  variant?: keyof typeof variants;
+  variant?: keyof typeof BUTTON_VARIANTS;
 } & ComponentProps<'button'>;
 
 export default function Button(props: ButtonProps) {
@@ -19,7 +11,7 @@ export default function Button(props: ButtonProps) {
   return (
     <button
       type={type}
-      className={variants[variant]}
+      className={BUTTON_VARIANTS[variant]}
       {...rest}
     >
       {children}
