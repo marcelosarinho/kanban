@@ -35,34 +35,12 @@ export default function Task(props: TaskProps) {
           </div>
           {toggleElement.color && (
             <div className="absolute right-0 bg-white border border-gray-300 dark:bg-slate-800 dark:border-slate-600 text-sm p-1 rounded-md flex flex-col select-none">
-              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${TASK_COLORS.blue.bg}`}></span>
-                <span>Azul</span>
-              </div>
-              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${TASK_COLORS.red.bg}`}></span>
-                <span>Vermelho</span>
-              </div>
-              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${TASK_COLORS.green.bg}`}></span>
-                <span>Verde</span>
-              </div>
-              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${TASK_COLORS.yellow.bg}`}></span>
-                <span>Amarelo</span>
-              </div>
-              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${TASK_COLORS.purple.bg}`}></span>
-                <span>Roxo</span>
-              </div>
-              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${TASK_COLORS.pink.bg}`}></span>
-                <span>Rosa</span>
-              </div>
-              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className={`rounded-full size-3 ${TASK_COLORS.orange.bg}`}></span>
-                <span>Laranja</span>
-              </div>
+              {Object.entries(TASK_COLORS).map(([key, value]) => (
+                <div key={key} className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
+                  <span className={`rounded-full size-3 ${value.bg}`}></span>
+                  <span>{value.label}</span>
+                </div>
+              ))}
             </div>
           )}
         </div>
