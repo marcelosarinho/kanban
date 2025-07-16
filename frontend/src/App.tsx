@@ -12,6 +12,7 @@ import SidebarCard from './components/SidebarCard';
 import CategoryBadge from './components/CategoryBadge';
 import Select from './components/Select';
 import Task from './components/Task';
+import { ArrowsOutIcon, MagnifyingGlassIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phosphor-icons/react';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -166,7 +167,7 @@ function App() {
         <div className="flex flex-col items-center px-2">
           <h3 className="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
           <Button type="button" onClick={() => openModal('create-project-modal')}>
-            <i className="ph-bold ph-plus text-lg"></i>
+            <PlusIcon weight="bold" className="text-lg" />
             Adicionar projeto
           </Button>
 
@@ -175,7 +176,7 @@ function App() {
           >
             <input type="text" className="outline-none px-0.5 text-sm bg-gray-50 dark:bg-slate-800 dark:text-gray-300 w-full" />
             <button className="flex items-center p-0.5">
-              <i className="ph ph-magnifying-glass text-xl dark:text-gray-300"></i>
+              <MagnifyingGlassIcon className="text-xl dark:text-gray-300" />
             </button>
           </div>
           <div className="mt-4 flex flex-col w-full gap-3">
@@ -191,20 +192,20 @@ function App() {
             <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
           </button>
           <button onClick={toggleFullScreen} className='flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1'>
-            <i className="ph ph-arrows-out text-2xl dark:text-gray-300"></i>
+            <ArrowsOutIcon weight="bold" className="text-2xl dark:text-gray-300" />
           </button>
           {themeDropdown && (
             <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
               <div onClick={() => changeTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-                <i className="mr-2 ph ph-moon text-xl"></i>
+                <MoonIcon className="mr-2 text-xl" />
                 Escuro
               </div>
               <div onClick={() => changeTheme('light')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-                <i className="mr-2 ph ph-sun text-xl"></i>
+                <SunIcon className="mr-2 text-xl" />
                 Claro
               </div>
               <div onClick={() => changeTheme('system')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-                <i className="mr-2 ph ph-moon-stars text-xl"></i>
+                <MoonStarsIcon className="mr-2 text-xl" />
                 Sistema
               </div>
             </div>
@@ -220,7 +221,7 @@ function App() {
 
           <div className="flex justify-between w-full mb-4">
             <Button onClick={() => openModal('create-task-modal')} type="button" variant="success">
-              <i className="ph-bold ph-plus text-lg"></i>
+              <PlusIcon weight="bold" className="text-lg" />
               Adicionar tarefa
             </Button>
           </div>

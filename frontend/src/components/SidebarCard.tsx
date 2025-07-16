@@ -1,3 +1,4 @@
+import { PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 
 type SidebarCardProps = {
@@ -15,10 +16,10 @@ export default function SidebarCard(props: SidebarCardProps) {
 
       <div className="flex items-center justify-end">
         <Button variant="transparent">
-          <i className="ph ph-trash text-lg text-danger group-hover:text-red-600 transition-colors"></i>
+          <TrashIcon weight="bold" className="text-lg text-danger group-hover:text-red-600 transition-colors" />
         </Button>
         <Button variant="transparent">
-          <i className="ph ph-pencil-simple text-lg text-info group-hover:text-info/60 transition-colors"></i>
+          <PencilSimpleIcon weight="bold" className="text-lg text-info group-hover:text-info/60 transition-colors" />
         </Button>
       </div>
     </div>

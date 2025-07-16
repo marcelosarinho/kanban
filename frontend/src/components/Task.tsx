@@ -7,6 +7,7 @@ import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
 import { useState } from "react"
+import { ChatIcon, CheckIcon } from "@phosphor-icons/react";
 
 export default function Task() {
   const [toggleColorDropdown, setToggleColorDropdown] = useState(false);
@@ -68,7 +69,7 @@ export default function Task() {
               name="done"
               id="done"
             />
-            <i className="ph-bold ph-check hidden peer-checked:block absolute text-black"></i>
+            <CheckIcon weight="bold" className="hidden peer-checked:block absolute text-black" />
             <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor="done">Concluída</label>
         </div>
         <select className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name="priority" id="priority">
@@ -85,7 +86,7 @@ export default function Task() {
     <div className="my-5 flex justify-between">
       <TaskPriorityBadge priority="low"/>
       <button className="flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-200 transition-colors">
-        <i className="ph-bold ph-chat"></i>
+        <ChatIcon weight="bold" />
       </button>
     </div>
 </div>
