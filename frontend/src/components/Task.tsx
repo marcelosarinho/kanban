@@ -43,7 +43,7 @@ export default function Task(props: TaskProps) {
             <div className={`size-3 rounded-full ${taskColors[color].bg}`}></div>
           </div>
           {toggleElement.color && (
-            <div className="absolute right-0 bg-white border border-gray-300 dark:border-slate-600 text-sm p-1 rounded-md flex flex-col select-none">
+            <div className="absolute right-0 bg-white border border-gray-300 dark:bg-slate-800 dark:border-slate-600 text-sm p-1 rounded-md flex flex-col select-none">
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
                 <span className={`rounded-full size-3 ${taskColors.blue.bg}`}></span>
                 <span>Azul</span>
