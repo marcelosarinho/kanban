@@ -21,38 +21,45 @@ export default function Task() {
           <TaskCategoryBadge category="frontend" />
           <TaskCategoryBadge category="backend" />
         </div>
-        <div className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+        <div className="relative">
+          <div
+            className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors z-50"
+            onClick={() => setToggleColorDropdown(!toggleColorDropdown)}
+          >
             <div className="size-3 bg-blue-500 rounded-full"></div>
-        </div>
-        <div className="absolute bg-white text-sm p-2 rounded-md flex flex-col gap-2">
-          <div className="flex items-center gap-2">
-            <span className="bg-blue-500 rounded-full size-3"></span>
-            <span>Azul</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="bg-red-500 rounded-full size-3"></span>
-            <span>Vermelho</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="bg-green-500 rounded-full size-3"></span>
-            <span>Verde</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="bg-yellow-500 rounded-full size-3"></span>
-            <span>Amarelo</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="bg-purple-500 rounded-full size-3"></span>
-            <span>Roxo</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="bg-pink-500 rounded-full size-3"></span>
-            <span>Rosa</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="bg-orange-500 rounded-full size-3"></span>
-            <span>Laranja</span>
-          </div>
+          {toggleColorDropdown && (
+            <div className="absolute right-0 bg-white border border-gray-300 dark:border-slate-600 text-sm p-1 rounded-md flex flex-col select-none">
+              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
+                <span className="bg-blue-500 rounded-full size-3"></span>
+                <span>Azul</span>
+              </div>
+              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
+                <span className="bg-red-500 rounded-full size-3"></span>
+                <span>Vermelho</span>
+              </div>
+              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
+                <span className="bg-green-500 rounded-full size-3"></span>
+                <span>Verde</span>
+              </div>
+              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
+                <span className="bg-yellow-500 rounded-full size-3"></span>
+                <span>Amarelo</span>
+              </div>
+              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
+                <span className="bg-purple-500 rounded-full size-3"></span>
+                <span>Roxo</span>
+              </div>
+              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
+                <span className="bg-pink-500 rounded-full size-3"></span>
+                <span>Rosa</span>
+              </div>
+              <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
+                <span className="bg-orange-500 rounded-full size-3"></span>
+                <span>Laranja</span>
+              </div>
+            </div>
+          )}
         </div>
     </header>
 
