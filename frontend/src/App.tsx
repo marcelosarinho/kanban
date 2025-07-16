@@ -15,6 +15,7 @@ import Task from './components/Task';
 import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phosphor-icons/react';
 import Searchbar from './components/Searchbar';
 import { CATEGORIES, TASK_PRIORITIES, TASK_STATUSES } from './libs/constants';
+import StatusColumn from './components/StatusColumn';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -224,42 +225,11 @@ function App() {
           </div>
 
           <div className="flex gap-4">
-            <div className="col-lg-3 h-100">
-              <header className="text-2xl font-bold mb-2 dark:text-gray-300">
-                A fazer
-              </header>
-              <Searchbar className="mb-3" />
-              <div className="flex flex-col max-h-full gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-x-auto">
-                <Task color="blue" />
-              </div>
-            </div>
-            <div className="col-lg-3 h-100">
-              <header className="text-2xl font-bold mb-2 dark:text-gray-300">
-                Em progresso
-              </header>
-              <Searchbar className="mb-3" />
-              <div className="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
-                <div></div>
-              </div>
-            </div>
-            <div className="col-lg-3 h-100">
-              <header className="text-2xl font-bold mb-2 dark:text-gray-300">
-                Testando
-              </header>
-              <Searchbar className="mb-3" />
-              <div className="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
-                <div></div>
-              </div>
-            </div>
-            <div className="col-lg-3 h-100">
-              <header className="text-2xl font-bold mb-2 dark:text-gray-300">
-                Implementado
-              </header>
-              <Searchbar className="mb-3" />
-              <div className="h-96 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700">
-                <div></div>
-              </div>
-            </div>
+            {Object.entries(TASK_STATUSES).map(([key, value]) => (
+              <StatusColumn key={key} status={value}>
+                <Task color='blue' />
+              </StatusColumn>
+            ))}
           </div>
         </main>
       </section>
