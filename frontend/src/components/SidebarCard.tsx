@@ -15,10 +15,10 @@ export default function SidebarCard(props: SidebarCardProps) {
       <h6 title={description} className="text-sm truncate leading-tight">{description}</h6>
 
       <div className="flex items-center justify-end">
-        <Button variant="transparent">
+        <Button variant="transparent" title="Editar">
           <PencilSimpleIcon weight="bold" className="text-lg text-info transition-colors" />
         </Button>
-        <Button variant="transparent">
+        <Button variant="transparent" title="Deletar">
           <TrashIcon weight="bold" className="text-lg text-danger transition-colors" />
         </Button>
       </div>
