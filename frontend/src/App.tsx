@@ -232,7 +232,7 @@ function App() {
                 A fazer
               </header>
               <div className="flex flex-col max-h-full gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-x-auto">
-                <Task />
+                <Task color='blue' />
               </div>
             </div>
             <div className="col-lg-3 h-100">

@@ -1,8 +1,3 @@
-// type TaskProps = {
-//   name: string;
-//   description: string;
-// }
-
 import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
@@ -11,16 +6,30 @@ import { ChatIcon, CheckIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icon
 import Button from "./Button";
 import Textarea from "./Textarea";
 
-export default function Task() {
+const taskColors = {
+  blue: { bg: 'bg-blue-500 dark:bg-blue-700', border: 'border-blue-500 dark:border-blue-700' },
+  red: { bg: 'bg-red-500 dark:bg-red-700', border: 'border-red-500 dark:border-red-700' },
+  green: { bg: 'bg-green-500 dark:bg-green-700', border: 'border-green-500 dark:border-green-700' },
+  yellow: { bg: 'bg-yellow-500 dark:bg-yellow-700', border: 'border-yellow-500 dark:border-yellow-700' },
+  purple: { bg: 'bg-purple-500 dark:bg-purple-700', border: 'border-purple-500 dark:border-purple-700' },
+  pink: { bg: 'bg-pink-500 dark:bg-pink-700', border: 'border-pink-500 dark:border-pink-700' },
+  orange: { bg: 'bg-orange-500 dark:bg-orange-700', border: 'border-orange-500 dark:border-orange-700' },
+}
+
+type TaskProps = {
+  color: keyof typeof taskColors;
+}
+
+export default function Task(props: TaskProps) {
+  const { color } = props;
+
   const [toggleElement, setToggleElement] = useState({
     color: false,
     comment: false,
   });
 
   return (
-    <div className="p-4 border border-l-4 border-blue-500 rounded-md bg-white dark:bg-slate-800 dark:border-blue-700 dark:text-gray-300">
-    <input type="hidden" name="" id="" />
-
+    <div className={`p-4 border border-l-4 ${taskColors[color].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
     <header className="flex justify-between items-center">
         <div className="flex flex-wrap gap-1">
           <TaskCategoryBadge category="frontend" />
@@ -31,36 +40,36 @@ export default function Task() {
             className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors z-50"
             onClick={() => setToggleElement({...toggleElement, color: !toggleElement.color})}
           >
-            <div className="size-3 bg-blue-500 rounded-full"></div>
+            <div className={`size-3 rounded-full ${taskColors[color].bg}`}></div>
           </div>
           {toggleElement.color && (
             <div className="absolute right-0 bg-white border border-gray-300 dark:border-slate-600 text-sm p-1 rounded-md flex flex-col select-none">
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className="bg-blue-500 rounded-full size-3"></span>
+                <span className={`rounded-full size-3 ${taskColors.blue.bg}`}></span>
                 <span>Azul</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className="bg-red-500 rounded-full size-3"></span>
+                <span className={`rounded-full size-3 ${taskColors.red.bg}`}></span>
                 <span>Vermelho</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className="bg-green-500 rounded-full size-3"></span>
+                <span className={`rounded-full size-3 ${taskColors.green.bg}`}></span>
                 <span>Verde</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className="bg-yellow-500 rounded-full size-3"></span>
+                <span className={`rounded-full size-3 ${taskColors.yellow.bg}`}></span>
                 <span>Amarelo</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className="bg-purple-500 rounded-full size-3"></span>
+                <span className={`rounded-full size-3 ${taskColors.purple.bg}`}></span>
                 <span>Roxo</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className="bg-pink-500 rounded-full size-3"></span>
+                <span className={`rounded-full size-3 ${taskColors.pink.bg}`}></span>
                 <span>Rosa</span>
               </div>
               <div className="hover:bg-gray-100 dark:hover:bg-slate-700 flex items-center gap-2 p-1 rounded-xs cursor-pointer">
-                <span className="bg-orange-500 rounded-full size-3"></span>
+                <span className={`rounded-full size-3 ${taskColors.orange.bg}`}></span>
                 <span>Laranja</span>
               </div>
             </div>
