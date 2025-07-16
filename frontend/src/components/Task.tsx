@@ -6,7 +6,7 @@
 import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ChatIcon, CheckIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import Textarea from "./Textarea";
@@ -105,7 +105,7 @@ export default function Task() {
 
     {toggleComment && (
       <div className="mb-2">
-        <Textarea />
+        <Textarea className="dark:border-slate-600!" />
       </div>
     )}
 
