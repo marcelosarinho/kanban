@@ -27,7 +27,7 @@ function App() {
 
   const themeIconRef = useRef<HTMLElement>(null);
 
-  const disabledCategories = selectedCategories.length >= 3;
+  const disabledCategories = selectedCategories.length >= 2;
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
