@@ -16,10 +16,10 @@ export default function SidebarCard(props: SidebarCardProps) {
 
       <div className="flex items-center justify-end">
         <Button variant="transparent">
-          <TrashIcon weight="bold" className="text-lg text-danger group-hover:text-red-600 transition-colors" />
+          <PencilSimpleIcon weight="bold" className="text-lg text-info group-hover:text-info/60 transition-colors" />
         </Button>
         <Button variant="transparent">
-          <PencilSimpleIcon weight="bold" className="text-lg text-info group-hover:text-info/60 transition-colors" />
+          <TrashIcon weight="bold" className="text-lg text-danger group-hover:text-red-600 transition-colors" />
         </Button>
       </div>
     </div>

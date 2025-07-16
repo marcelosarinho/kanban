@@ -9,9 +9,11 @@ import ProgressBar from "./ProgressBar"
 import { useState } from "react"
 import { ChatIcon, CheckIcon, PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
+import Textarea from "./Textarea";
 
 export default function Task() {
   const [toggleColorDropdown, setToggleColorDropdown] = useState(false);
+  const [toggleComment, setToggleComment] = useState(false);
 
   return (
     <div className="p-4 border border-l-4 border-blue-500 rounded-md bg-white dark:bg-slate-800 dark:border-blue-700 dark:text-gray-300">
@@ -93,10 +95,19 @@ export default function Task() {
 
     <div className="my-5 flex justify-between">
       <TaskPriorityBadge priority="low"/>
-      <button className="flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-200 transition-colors">
+      <button
+        className="flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-200 dark:hover:bg-slate-900 transition-colors"
+        onClick={() => setToggleComment(!toggleComment)}
+      >
         <ChatIcon weight="bold" />
       </button>
     </div>
+
+    {toggleComment && (
+      <div className="mb-2">
+        <Textarea label="Comentários" />
+      </div>
+    )}
 
     <footer className="flex gap-1 justify-end">
       <Button variant="transparent">
