@@ -24,3 +24,7 @@
     }
   }
 }
+
+.tooltip {
+  @apply bg-red-500;
+}

@@ -6,6 +6,7 @@ import { ChatIcon, CheckIcon, PencilSimpleIcon, SquaresFourIcon, TrashIcon } fro
 import Button from "./Button";
 import Textarea from "./Textarea";
 import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
+import { Tooltip } from "react-tooltip";
 
 type TaskProps = {
   color: keyof typeof TASK_COLORS;
@@ -76,13 +77,15 @@ export default function Task(props: TaskProps) {
 
     <div className="my-5 flex justify-between">
       <TaskPriorityBadge priority="low"/>
-      <button
+      <Button
+        id="comments"
         title="Comentários"
-        className="flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-200 dark:hover:bg-slate-900 transition-colors"
+        variant="transparent"
         onClick={() => setToggleElement({...toggleElement, comment: !toggleElement.comment})}
       >
         <ChatIcon weight="bold" />
-      </button>
+        <Tooltip anchorSelect="#comments" content="Comentários" disableStyleInjection className="rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 px-2 py-1 text-sm" />
+      </Button>
     </div>
 
     {toggleElement.comment && (
@@ -100,11 +103,13 @@ export default function Task(props: TaskProps) {
       </div>
 
       <div className="flex gap-1">
-        <Button variant="transparent" title="Editar">
+        <Button id="edit" variant="transparent" title="Editar">
           <PencilSimpleIcon weight="bold" />
+          <Tooltip anchorSelect="#edit" content="Editar" disableStyleInjection className="rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 px-2 py-1 text-sm" />
         </Button>
-        <Button variant="transparent" title="Deletar">
+        <Button id="delete" variant="transparent" title="Deletar">
           <TrashIcon className="text-danger" weight="bold" />
+          <Tooltip anchorSelect="#delete" content="Deletar" disableStyleInjection className="rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 px-2 py-1 text-sm" />
         </Button>
       </div>
     </footer>
