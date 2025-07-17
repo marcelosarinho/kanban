@@ -6,7 +6,7 @@ import { ChatIcon, CheckIcon, PencilSimpleIcon, SquaresFourIcon, TrashIcon } fro
 import Button from "./Button";
 import Textarea from "./Textarea";
 import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
-import { Tooltip } from "react-tooltip";
+import CustomTooltip from "./CustomTooltip";
 
 type TaskProps = {
   color: keyof typeof TASK_COLORS;
@@ -84,7 +84,7 @@ export default function Task(props: TaskProps) {
         onClick={() => setToggleElement({...toggleElement, comment: !toggleElement.comment})}
       >
         <ChatIcon weight="bold" />
-        <Tooltip anchorSelect="#comments" content="Comentários" disableStyleInjection className="rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 px-2 py-1 text-sm" />
+        <CustomTooltip anchorSelect="#comments" content="Comentários" />
       </Button>
     </div>
 
@@ -105,11 +105,11 @@ export default function Task(props: TaskProps) {
       <div className="flex gap-1">
         <Button id="edit" variant="transparent" title="Editar">
           <PencilSimpleIcon weight="bold" />
-          <Tooltip anchorSelect="#edit" content="Editar" disableStyleInjection className="rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 px-2 py-1 text-sm" />
+          <CustomTooltip anchorSelect="#edit" content="Editar" />
         </Button>
         <Button id="delete" variant="transparent" title="Deletar">
           <TrashIcon className="text-danger" weight="bold" />
-          <Tooltip anchorSelect="#delete" content="Deletar" disableStyleInjection className="rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 px-2 py-1 text-sm" />
+          <CustomTooltip anchorSelect="#delete" content="Deletar" />
         </Button>
       </div>
     </footer>
