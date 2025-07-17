@@ -29,7 +29,6 @@ export default function Task(props: TaskProps) {
         </div>
         <div className="relative">
           <div
-            title="Selecionar cor"
             className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors z-50"
             onClick={() => setToggleElement({...toggleElement, color: !toggleElement.color})}
           >
@@ -79,7 +78,6 @@ export default function Task(props: TaskProps) {
       <TaskPriorityBadge priority="low"/>
       <Button
         id="comments"
-        title="Comentários"
         variant="transparent"
         onClick={() => setToggleElement({...toggleElement, comment: !toggleElement.comment})}
       >
@@ -96,18 +94,18 @@ export default function Task(props: TaskProps) {
 
     <footer className="flex justify-between items-center">
       <div>
-        <Button className="text-xs!" variant="info" title="">
+        <Button className="text-xs!" variant="info">
           <SquaresFourIcon weight="bold" />
           Categorias
         </Button>
       </div>
 
       <div className="flex gap-1">
-        <Button id="edit" variant="transparent" title="Editar">
+        <Button id="edit" variant="transparent">
           <PencilSimpleIcon weight="bold" />
           <CustomTooltip anchorSelect="#edit" content="Editar" />
         </Button>
-        <Button id="delete" variant="transparent" title="Deletar">
+        <Button id="delete" variant="transparent">
           <TrashIcon className="text-danger" weight="bold" />
           <CustomTooltip anchorSelect="#delete" content="Deletar" />
         </Button>
