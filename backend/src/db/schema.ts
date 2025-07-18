@@ -56,3 +56,9 @@ export const subtasksRelations = relations(subtasksTable, ({ one }) => ({
     references: [tasksTable.id],
   }),
 }));
+
+export const schema = {
+  projectsTable,
+  tasksTable,
+  subtasksTable,
+};

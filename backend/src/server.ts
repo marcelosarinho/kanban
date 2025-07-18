@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
+import { getProjects } from "./routes/get-projects";
 
 const server = fastify();
 server.register(cors, {
@@ -15,6 +16,4 @@ server.listen({ port: 8080 }, (err, address) => {
   console.log(`Server running at ${address}`)
 });
 
-server.get("/ping", () => {
-  return { message: "pong" };
-});
+server.register(getProjects);
