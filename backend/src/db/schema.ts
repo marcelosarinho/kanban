@@ -1,8 +1,8 @@
 import { boolean, decimal, doublePrecision, pgEnum, real, timestamp } from "drizzle-orm/pg-core";
 import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
-const priorityEnum = pgEnum('priority', ['low', 'medium', 'high']);
-const statusEnum = pgEnum('status', ['todo', 'in_progress', 'testing', 'implemented']);
+export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high']);
+export const statusEnum = pgEnum('status', ['todo', 'in_progress', 'testing', 'implemented']);
 
 export const projectsTable = pgTable('projects', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),

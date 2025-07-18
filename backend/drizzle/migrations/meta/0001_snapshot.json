@@ -1,5 +1,5 @@
 {
-  "id": "3845af17-5f3d-48aa-b1bf-c7b94bf24b87",
+  "id": "f4f39a11-f900-4784-b425-6521feeb8d92",
   "prevId": "29fc2c95-25ea-4c81-b77c-87d8cc67e786",
   "version": "7",
   "dialect": "postgresql",
@@ -172,7 +172,27 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.priority": {
+      "name": "priority",
+      "schema": "public",
+      "values": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "public.status": {
+      "name": "status",
+      "schema": "public",
+      "values": [
+        "todo",
+        "in_progress",
+        "testing",
+        "implemented"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},
