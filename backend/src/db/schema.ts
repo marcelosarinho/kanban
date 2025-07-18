@@ -5,7 +5,7 @@ import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high']);
 export const statusEnum = pgEnum('status', ['todo', 'in_progress', 'testing', 'implemented']);
 
-export const projectsTable = pgTable('projects', {
+export const projects = pgTable('projects', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull().unique(),
   description: varchar({ length: 255 }).notNull(),
@@ -13,11 +13,11 @@ export const projectsTable = pgTable('projects', {
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })
 
-export const projectsRelations = relations(projectsTable, ({ many }) => ({
-  tasks: many(tasksTable),
+export const projectsRelations = relations(projects, ({ many }) => ({
+  tasks: many(tasks),
 }));
 
-export const tasksTable = pgTable('tasks', {
+export const tasks = pgTable('tasks', {
   id: integer().primaryKey().generatedByDefaultAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 255 }),
@@ -28,37 +28,37 @@ export const tasksTable = pgTable('tasks', {
   color: varchar({ length: 20 }),
   done: boolean().notNull().default(false),
   status: statusEnum().notNull(),
-  projectId: integer('project_id').notNull().references(() => projectsTable.id, { onDelete: 'cascade' }),
+  projectId: integer('project_id').notNull().references(() => projects.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })
 
-export const tasksRelations = relations(tasksTable, ({ one, many }) => ({
-  projects: one(projectsTable, {
-    fields: [tasksTable.projectId],
-    references: [projectsTable.id],
+export const tasksRelations = relations(tasks, ({ one, many }) => ({
+  projects: one(projects, {
+    fields: [tasks.projectId],
+    references: [projects.id],
   }),
-  subtasks: many(subtasksTable),
+  subtasks: many(subtasks),
 }));
 
-export const subtasksTable = pgTable('subtasks', {
+export const subtasks = pgTable('subtasks', {
   id: integer().primaryKey().generatedByDefaultAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
   done: boolean().notNull().default(false),
-  taskId: integer('task_id').notNull().references(() => tasksTable.id, { onDelete: 'cascade' }),
+  taskId: integer('task_id').notNull().references(() => tasks.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })
 
-export const subtasksRelations = relations(subtasksTable, ({ one }) => ({
-  tasks: one(tasksTable, {
-    fields: [subtasksTable.taskId],
-    references: [tasksTable.id],
+export const subtasksRelations = relations(subtasks, ({ one }) => ({
+  tasks: one(tasks, {
+    fields: [subtasks.taskId],
+    references: [tasks.id],
   }),
 }));
 
 export const schema = {
-  projectsTable,
-  tasksTable,
-  subtasksTable,
+  projects,
+  tasks,
+  subtasks,
 };
