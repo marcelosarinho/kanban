@@ -1,0 +1,2 @@
+ALTER TABLE "subtasks" ADD COLUMN "task_id" integer NOT NULL;--> statement-breakpoint
+ALTER TABLE "subtasks" ADD CONSTRAINT "subtasks_task_id_tasks_id_fk" FOREIGN KEY ("task_id") REFERENCES "public"."tasks"("id") ON DELETE cascade ON UPDATE no action;

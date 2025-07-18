@@ -33,17 +33,26 @@ export const tasksTable = pgTable('tasks', {
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })
 
-export const tasksRelations = relations(tasksTable, ({ one }) => ({
+export const tasksRelations = relations(tasksTable, ({ one, many }) => ({
   projects: one(projectsTable, {
     fields: [tasksTable.projectId],
     references: [projectsTable.id],
   }),
+  subtasks: many(subtasksTable),
 }));
 
 export const subtasksTable = pgTable('subtasks', {
   id: integer().primaryKey().generatedByDefaultAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
   done: boolean().notNull().default(false),
+  taskId: integer('task_id').notNull().references(() => tasksTable.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })
+
+export const subtasksRelations = relations(subtasksTable, ({ one }) => ({
+  tasks: one(tasksTable, {
+    fields: [subtasksTable.taskId],
+    references: [tasksTable.id],
+  }),
+}));
