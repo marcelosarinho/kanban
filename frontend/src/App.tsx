@@ -16,6 +16,7 @@ import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phos
 import Searchbar from './components/Searchbar';
 import { CATEGORIES, TASK_PRIORITIES, TASK_STATUSES } from './libs/constants';
 import StatusColumn from './components/StatusColumn';
+import SidebarCardSkeleton from './components/SidebarCardSkeleton';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -179,6 +180,7 @@ function App() {
           <Searchbar className="mt-6" />
           <div className="mt-4 flex flex-col w-full gap-3">
             <SidebarCard name="Projeto" description="Descrição" />
+            <SidebarCardSkeleton />
           </div>
         </div>
       </aside>
