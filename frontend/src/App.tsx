@@ -17,6 +17,7 @@ import Searchbar from './components/Searchbar';
 import { CATEGORIES, TASK_PRIORITIES, TASK_STATUSES } from './libs/constants';
 import StatusColumn from './components/StatusColumn';
 import SidebarCardSkeleton from './components/SidebarCardSkeleton';
+import TaskSkeleton from './components/TaskSkeleton';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -192,7 +193,7 @@ function App() {
             <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
           </button>
           <button onClick={toggleFullScreen} className="flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1">
-            <ArrowsOutIcon weight="bold" className="text-2xl dark:text-gray-300" />
+            <ArrowsOutIcon className="text-2xl dark:text-gray-300" />
           </button>
           {themeDropdown && (
             <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
@@ -227,11 +228,12 @@ function App() {
           </div>
 
           <div className="flex gap-4">
-            {Object.entries(TASK_STATUSES).map(([key, value]) => (
-              <StatusColumn key={key} status={value}>
-                <Task color='blue' />
-              </StatusColumn>
-            ))}
+            <StatusColumn status="todo">
+              <TaskSkeleton />
+            </StatusColumn>
+            <StatusColumn status="in_progress">
+              <Task color="blue" />
+            </StatusColumn>
           </div>
         </main>
       </section>

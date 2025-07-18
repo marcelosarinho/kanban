@@ -1,8 +1,9 @@
 import type { ReactElement } from "react";
 import Searchbar from "./Searchbar";
+import { TASK_STATUSES } from "../libs/constants";
 
 type StatusColumnProps = {
-  status: string;
+  status: keyof typeof TASK_STATUSES;
   children?: ReactElement | undefined | null;
 }
 
@@ -12,7 +13,7 @@ export default function StatusColumn(props: StatusColumnProps) {
   return (
     <div className="col-lg-3 h-100">
       <header className="text-2xl font-bold mb-2 dark:text-gray-300">
-        {status}
+        {TASK_STATUSES[status]}
       </header>
       <Searchbar className="mb-3" />
       <div className="flex flex-col max-h-full gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-x-auto">
