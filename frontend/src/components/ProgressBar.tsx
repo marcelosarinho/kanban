@@ -3,12 +3,10 @@ export default function ProgressBar() {
     <div className="flex flex-col">
       <div className="flex justify-between">
         <small>Progresso</small>
-        <small>20%</small>
+        <small>66%</small>
       </div>
 
-      <div className="w-full h-2 bg-gray-200 dark:bg-slate-700 rounded-full">
-        <div className="h-2 bg-success rounded-full w-2/3"></div>
-      </div>
+      <progress className="h-2 bg-success rounded-full w-full" value="66" max="100"></progress>
     </div>
   )
 }

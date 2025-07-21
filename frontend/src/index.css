@@ -3,6 +3,7 @@
 @import "./styles/badges.css";
 @import "./styles/tasks.css";
 @import "./styles/scrollbar.css";
+@import "./styles/progressbar.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
