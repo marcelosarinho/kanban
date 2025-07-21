@@ -11,7 +11,7 @@ import Textarea from './components/Textarea';
 import SidebarCard from './components/SidebarCard';
 import CategoryBadge from './components/CategoryBadge';
 import Select from './components/Select';
-import Task from './components/Task';
+// import Task from './components/Task';
 import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phosphor-icons/react';
 import Searchbar from './components/Searchbar';
 import { CATEGORIES, TASK_PRIORITIES, TASK_STATUSES } from './libs/constants';
@@ -223,12 +223,11 @@ function App() {
           </header>
 
           <div className="flex gap-4">
-            <StatusColumn status="todo">
-              <TaskSkeleton />
-            </StatusColumn>
-            <StatusColumn status="in_progress">
-              <Task color="blue" />
-            </StatusColumn>
+            {Object.keys(TASK_STATUSES).map((key) => (
+              <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
+                <TaskSkeleton />
+              </StatusColumn>
+            ))}
           </div>
         </main>
       </section>
