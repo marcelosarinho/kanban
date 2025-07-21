@@ -17,7 +17,7 @@ import { CATEGORIES, TASK_PRIORITIES, TASK_STATUSES } from './libs/constants';
 import StatusColumn from './components/StatusColumn';
 import SidebarCardSkeleton from './components/SidebarCardSkeleton';
 import TaskSkeleton from './components/TaskSkeleton';
-// import Task from './components/Task';
+import Task from './components/Task';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -225,6 +225,7 @@ function App() {
           <div className="flex gap-4">
             {Object.keys(TASK_STATUSES).map((key) => (
               <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
+                <Task />
                 <TaskSkeleton />
               </StatusColumn>
             ))}
