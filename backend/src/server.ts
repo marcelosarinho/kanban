@@ -4,6 +4,7 @@ import { getProjects } from "./routes/get-projects";
 import { createProject } from "./routes/create-project";
 import { updateProject } from "./routes/update-project";
 import { createTask } from "./routes/create-task";
+import { updateTask } from "./routes/update-task";
 
 const server = fastify();
 server.register(cors, {
@@ -23,3 +24,4 @@ server.register(getProjects);
 server.register(createProject);
 server.register(updateProject);
 server.register(createTask);
+server.register(updateTask);
