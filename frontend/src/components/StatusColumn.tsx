@@ -24,7 +24,7 @@ export default function StatusColumn(props: StatusColumnProps) {
         </Button>
       </div>
       <Searchbar className="mb-2" />
-      <div className="flex flex-col max-h-full gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-y-scroll">
+      <div className="flex flex-col max-h-full gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-y-auto">
         {children}
       </div>
     </div>

@@ -179,8 +179,17 @@ function App() {
           </Button>
 
           <Searchbar className="mt-6" />
-          <div className="mt-4 flex flex-col w-full gap-3">
+          <div className="mt-4 flex flex-col w-full gap-3 overflow-y-scroll max-h-full">
             <SidebarCard name="Projeto" description="Descrição" />
+            <SidebarCardSkeleton />
+            <SidebarCardSkeleton />
+            <SidebarCardSkeleton />
+            <SidebarCardSkeleton />
+            <SidebarCardSkeleton />
+            <SidebarCardSkeleton />
+            <SidebarCardSkeleton />
+            <SidebarCardSkeleton />
+            <SidebarCardSkeleton />
             <SidebarCardSkeleton />
           </div>
         </div>
