@@ -179,7 +179,7 @@ function App() {
           </Button>
 
           <Searchbar className="mt-6" />
-          <div className="mt-4 flex flex-col w-full gap-3 overflow-y-scroll max-h-full">
+          <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen pr-1.5">
             <SidebarCard name="Projeto" description="Descrição" />
             <SidebarCardSkeleton />
             <SidebarCardSkeleton />
