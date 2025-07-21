@@ -9,7 +9,7 @@ import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
 import CustomTooltip from "./CustomTooltip";
 
 type TaskProps = {
-  color: keyof typeof TASK_COLORS;
+  color?: keyof typeof TASK_COLORS;
 }
 
 export default function Task(props: TaskProps) {
@@ -21,7 +21,7 @@ export default function Task(props: TaskProps) {
   });
 
   return (
-    <div className={`p-4 border border-l-4 ${TASK_COLORS[color].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
+    <div className={`p-4 border border-l-4 ${TASK_COLORS[color || 'none'].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
       <header className="flex justify-between items-center">
           <div className="flex flex-wrap gap-1">
             <TaskCategoryBadge category="frontend" />
@@ -32,7 +32,7 @@ export default function Task(props: TaskProps) {
               className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors z-50"
               onClick={() => setToggleElement({...toggleElement, color: !toggleElement.color})}
             >
-              <div className={`size-3 rounded-full ${TASK_COLORS[color].bg}`}></div>
+              <div className={`size-3 rounded-full ${TASK_COLORS[color || 'none'].bg}`}></div>
             </div>
             {toggleElement.color && (
               <div className="absolute right-0 bg-white border border-gray-300 dark:bg-slate-800 dark:border-slate-600 text-sm p-1 rounded-md flex flex-col select-none">

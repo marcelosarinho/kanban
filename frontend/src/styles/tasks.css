@@ -26,6 +26,10 @@
   @apply bg-orange-500 dark:bg-orange-700;
 }
 
+.task-none-background {
+  @apply bg-white dark:bg-slate-800
+}
+
 .task-none-border {
   @apply border-gray-300 dark:border-slate-700;
 }
