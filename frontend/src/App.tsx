@@ -214,11 +214,13 @@ function App() {
         </nav>
 
         <main className="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50">
-          <h1 className="text-3xl font-bold mb-4 dark:text-gray-300">
-            Kanban
-          </h1>
+          <header className='text-center'>
+            <h1 className="text-3xl font-bold mb-2 dark:text-gray-300">
+              Kanban
+            </h1>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
+          </header>
 
           <div className="flex gap-4">
             <StatusColumn status="todo">
