@@ -2,7 +2,7 @@ import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
 import { useState } from "react"
-import { ChatIcon, CheckIcon, PencilSimpleIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
+import { ChatIcon, CheckIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import Textarea from "./Textarea";
 import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
@@ -93,23 +93,15 @@ export default function Task(props: TaskProps) {
       )}
 
       <footer className="flex justify-between items-center">
-        <div>
-          <Button className="text-xs!" variant="info">
-            <SquaresFourIcon weight="bold" />
-            Categorias
-          </Button>
-        </div>
+        <Button className="text-xs!" variant="info">
+          <SquaresFourIcon weight="bold" />
+          Categorias
+        </Button>
 
-        <div className="flex gap-1">
-          <Button id="edit" variant="transparent">
-            <PencilSimpleIcon weight="bold" />
-            <CustomTooltip anchorSelect="#edit" content="Editar" />
-          </Button>
-          <Button id="delete" variant="transparent">
-            <TrashIcon className="text-danger" weight="bold" />
-            <CustomTooltip anchorSelect="#delete" content="Deletar" />
-          </Button>
-        </div>
+        <Button id="delete" variant="transparent">
+          <TrashIcon className="text-danger" weight="bold" />
+          <CustomTooltip anchorSelect="#delete" content="Deletar" />
+        </Button>
       </footer>
     </div>
   )
