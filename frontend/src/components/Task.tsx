@@ -7,6 +7,7 @@ import Button from "./Button";
 import Textarea from "./Textarea";
 import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
 import CustomTooltip from "./CustomTooltip";
+import Subtasks from "./Subtasks";
 
 type TaskProps = {
   color?: keyof typeof TASK_COLORS;
@@ -72,6 +73,10 @@ export default function Task(props: TaskProps) {
 
       <div className="my-3">
           <ProgressBar />
+      </div>
+
+      <div>
+        <Subtasks />
       </div>
 
       <div className="my-5 flex justify-between">
