@@ -35,10 +35,7 @@ export default function TaskSkeleton() {
     
           <footer className="flex justify-between items-center">
             <div className="rounded-md bg-gray-300 dark:bg-slate-600 h-7 w-24 animate-pulse"></div>
-            <div className="flex gap-1">
-              <div className="rounded-full size-5 bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
-              <div className="rounded-full size-5 bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
-            </div>
+            <div className="rounded-full size-5 bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
           </footer>
         </div>
   )
