@@ -28,29 +28,16 @@ export default function TaskSkeleton() {
               <div className="rounded-full h-2.5 w-full bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
           </div>
     
-          <div className="my-5 flex justify-between">
-            <div>
-              <div className="rounded-full h-2.5 w-full bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
-            </div>
-    
-            <div className="flex gap-1">
-              <div className="rounded-full h-2.5 w-full bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
-              <div className="rounded-full h-2.5 w-full bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
-            </div>
-          </div>
-    
-          <div className="my-3">
-              <div className="rounded-full h-2.5 w-full bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
+          <div className="my-5 flex justify-between items-center">    
+              <div className="rounded-full w-2/4 h-5 bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
+              <div className="rounded-full size-5 bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
           </div>
     
           <footer className="flex justify-between items-center">
-            <div>
-              <div className="text-xs"></div>
-            </div>
-    
+            <div className="rounded-md bg-gray-300 dark:bg-slate-600 h-7 w-24 animate-pulse"></div>
             <div className="flex gap-1">
-              <div></div>
-              <div></div>
+              <div className="rounded-full size-5 bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
+              <div className="rounded-full size-5 bg-gray-300 dark:bg-slate-600 animate-pulse"></div>
             </div>
           </footer>
         </div>
