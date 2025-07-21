@@ -218,14 +218,7 @@ function App() {
             Kanban
           </h1>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
-
-          <div className="flex justify-between w-full mb-4">
-            <Button onClick={() => openModal('create-task-modal')} type="button" variant="success">
-              <PlusIcon weight="bold" className="text-lg" />
-              Adicionar tarefa
-            </Button>
-          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
 
           <div className="flex gap-4">
             <StatusColumn status="todo">
