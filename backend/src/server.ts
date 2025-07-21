@@ -2,6 +2,7 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import { getProjects } from "./routes/get-projects";
 import { createProject } from "./routes/create-project";
+import { updateProject } from "./routes/update-project";
 
 const server = fastify();
 server.register(cors, {
@@ -19,3 +20,4 @@ server.listen({ port: 8080 }, (err, address) => {
 
 server.register(getProjects);
 server.register(createProject);
+server.register(updateProject);
