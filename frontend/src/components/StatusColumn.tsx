@@ -6,7 +6,7 @@ import { PlusIcon } from "@phosphor-icons/react";
 
 type StatusColumnProps = {
   status: keyof typeof TASK_STATUSES;
-  children?: ReactElement | undefined | null;
+  children?: ReactElement | ReactElement[] | undefined | null;
 }
 
 export default function StatusColumn(props: StatusColumnProps) {

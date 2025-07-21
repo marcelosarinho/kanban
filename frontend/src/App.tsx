@@ -11,13 +11,13 @@ import Textarea from './components/Textarea';
 import SidebarCard from './components/SidebarCard';
 import CategoryBadge from './components/CategoryBadge';
 import Select from './components/Select';
-// import Task from './components/Task';
 import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phosphor-icons/react';
 import Searchbar from './components/Searchbar';
 import { CATEGORIES, TASK_PRIORITIES, TASK_STATUSES } from './libs/constants';
 import StatusColumn from './components/StatusColumn';
 import SidebarCardSkeleton from './components/SidebarCardSkeleton';
 import TaskSkeleton from './components/TaskSkeleton';
+// import Task from './components/Task';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
