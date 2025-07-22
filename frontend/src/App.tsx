@@ -112,14 +112,14 @@ function App() {
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
         <ModalBody>
-          <form className="flex flex-col gap-3">
+          <form id="create-project-form" className="flex flex-col gap-3">
             <Input id="project-name" label="Nome do projeto"/>
 
             <Textarea id="project-description" label="Descrição do projeto"/>
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button>Salvar</Button>
+          <Button form="create-project-form">Salvar</Button>
           <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
         </ModalFooter>
       </Modal>
