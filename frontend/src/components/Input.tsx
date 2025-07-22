@@ -2,10 +2,11 @@ import type { ComponentProps } from "react";
 
 type InputProps = {
   label: string;
+  error?: string;
 } & ComponentProps<'input'>;
 
 export default function Input(props: InputProps) {
-  const { label, type = 'text', id, ...rest } = props;
+  const { label, type = 'text', error, id, ...rest } = props;
 
   return (
     <div className="flex flex-col">
@@ -14,8 +15,9 @@ export default function Input(props: InputProps) {
         id={id}
         type={type}
         {...rest}
-        className="text-sm px-2 py-1.5 border border-gray-300 rounded w-full dark:bg-slate-800 dark:border-slate-950 focus-visible:ring-4 focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary dark:text-gray-300"
+        className={`text-sm px-2 py-1.5 border ${error ? 'border-danger' : 'border-gray-300 dark:border-slate-950'} rounded w-full dark:bg-slate-800 focus-visible:ring-4 focus-visible:ring-primary/40 focus-visible:outline-none focus-visible:border focus-visible:border-primary dark:text-gray-300`}
       />
+      <p className="text-danger text-sm mt-1">{error}</p>
     </div>
   )
 }
