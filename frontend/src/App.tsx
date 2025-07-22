@@ -17,12 +17,17 @@ import StatusColumn from './components/StatusColumn';
 import SidebarCardSkeleton from './components/SidebarCardSkeleton';
 import TaskSkeleton from './components/TaskSkeleton';
 import Task from './components/Task';
+import { useForm } from 'react-hook-form';
+import type z from 'zod';
+import type { projectSchema } from './schemas/projects';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
   dark: 'ph-moon',
   system: 'ph-moon-stars',
 }
+
+type Inputs = z.infer<typeof projectSchema>;
 
 function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
@@ -31,6 +36,12 @@ function App() {
   const themeIconRef = useRef<HTMLElement>(null);
 
   const disabledCategories = selectedCategories.length >= 2;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
