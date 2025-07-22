@@ -126,7 +126,7 @@ function App() {
 
       const json = await response.json();
 
-      console.log(json);
+      toast.success(json.message);
     } catch (error) {
       console.error(error);
     } finally {
@@ -135,9 +135,6 @@ function App() {
   }
 
   useEffect(() => {
-    toast.success('Oi', { duration: 100000});
-    toast.error('Oi', { duration: 100000});
-
     const theme = localStorage.getItem('theme');
     
     changeIconTheme(themeIcons[theme || 'system']);
