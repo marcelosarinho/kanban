@@ -1,5 +1,6 @@
 import { CaretDownIcon, CaretRightIcon, CheckIcon, PlusIcon, XIcon } from "@phosphor-icons/react";
 import Button from "./Button";
+import { useState } from "react";
 
 type SubtasksProps = {
   title: string;
@@ -10,6 +11,8 @@ type SubtasksProps = {
 export default function Subtasks(props: SubtasksProps) {
   const { title, open, onClick } = props;
 
+  const [newTask, setNewTask] = useState(false);
+
   return (
     <>
       <div onClick={onClick} className="flex gap-1.5 items-center hover:bg-gray-100 dark:hover:bg-slate-700 p-1 rounded transition-colors cursor-pointer">
@@ -18,7 +21,7 @@ export default function Subtasks(props: SubtasksProps) {
         ) : (
           <CaretRightIcon weight="bold" className="text-sm"/>
         )}
-        <span className="text-sm select-none">Subtarefas</span>
+        <span className="text-sm select-none">Subtarefas (2/4)</span>
       </div>
 
       {open && (
@@ -38,10 +41,25 @@ export default function Subtasks(props: SubtasksProps) {
                 <XIcon className="dark:text-slate-500" />
               </Button>
             </li>
-            <li className="flex items-center gap-1.5 text-xs cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 p-1 rounded transition-colors w-fit">
-              <PlusIcon weight="bold" className="text-sm"/>
-              Nova subtarefa
-            </li>
+            {!newTask && (
+              <li onClick={() => setNewTask(true)} className="flex items-center gap-1.5 text-xs cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 p-1 rounded transition-colors w-fit">
+                <PlusIcon weight="bold" className="text-sm"/>
+                Nova subtarefa
+              </li>
+            )}
+            {newTask && (
+              <div className="flex justify-between items-center text-sm">
+                <input className="w-2/3 border border-gray-300 dark:border-slate-600 outline-none px-1 py-0.5 rounded focus-visible:border-primary" type="text" />
+                <div className="flex gap-2">
+                  <button onClick={() => setNewTask(false)} className="hover:bg-gray-100 dark:hover:bg-slate-700 h-fit p-0.5 rounded cursor-pointer transition-colors">
+                    <CheckIcon weight="bold" className="text-success" />
+                  </button>
+                  <button onClick={() => setNewTask(false)} className="hover:bg-gray-100 dark:hover:bg-slate-700 h-fit p-0.5 rounded cursor-pointer transition-colors">
+                    <XIcon weight="bold" className="text-danger" />
+                  </button>
+                </div>
+              </div>
+            )}
           </ul>
         </div>
       )}
