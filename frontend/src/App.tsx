@@ -10,10 +10,9 @@ import Input from './components/Input';
 import Textarea from './components/Textarea';
 import SidebarCard from './components/SidebarCard';
 import CategoryBadge from './components/CategoryBadge';
-import Select from './components/Select';
 import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phosphor-icons/react';
 import Searchbar from './components/Searchbar';
-import { CATEGORIES, TASK_PRIORITIES, TASK_STATUSES } from './libs/constants';
+import { CATEGORIES, TASK_STATUSES } from './libs/constants';
 import StatusColumn from './components/StatusColumn';
 import SidebarCardSkeleton from './components/SidebarCardSkeleton';
 import TaskSkeleton from './components/TaskSkeleton';
@@ -125,49 +124,26 @@ function App() {
         </ModalFooter>
       </Modal>
 
-      <Modal id="create-task-modal">
+      <Modal id="select-category-modal">
         <ModalHeader>
-          <ModalTitle>Adicionar tarefa</ModalTitle>
-          <ModalClose onClick={() => closeModal('create-task-modal')} />
+          <ModalTitle>Selecionar categorias</ModalTitle>
+          <ModalClose onClick={() => closeModal('select-category-modal')} />
         </ModalHeader>
         <ModalBody>
           <form className="flex flex-col gap-3">
-            <Input id="task-name" label="Nome da tarefa"/>
-
-            <Textarea id="task-description" label="Descrição da tarefa"/>
-
-            <Select label="Prioridade" name="task_priority" id="task_priority">
-              {Object.entries(TASK_PRIORITIES).map(([key, value]) => (
-                <option key={key} value={key}>{value.label}</option>
+            <div className="flex gap-3">
+              {Object.keys(CATEGORIES).map((category) => (
+                <CategoryBadge
+                  key={category}
+                  disabled={disabledCategories && !selectedCategories.includes(category)}
+                  onChange={handleCategoryToggle}
+                  category={category as keyof typeof CATEGORIES}
+                  name={category}
+                />
               ))}
-            </Select>
-
-            <div className="flex flex-col">
-              <label className="mb-3">Categorias</label>
-              <div className="flex gap-3">
-                {Object.keys(CATEGORIES).map((category) => (
-                  <CategoryBadge
-                    key={category}
-                    disabled={disabledCategories && !selectedCategories.includes(category)}
-                    onChange={handleCategoryToggle}
-                    category={category as keyof typeof CATEGORIES}
-                    name={category}
-                  />
-                ))}
-              </div>
             </div>
-
-            <Select label="Status" name="task_status" id="task_status">
-                {Object.entries(TASK_STATUSES).map(([key, value]) => (
-                  <option key={key} value={key}>{value}</option>
-                ))}
-            </Select>
           </form>
         </ModalBody>
-        <ModalFooter>
-          <Button>Salvar</Button>
-          <Button onClick={() => closeModal('create-task-modal')} variant="outline-primary">Cancelar</Button>
-        </ModalFooter>
       </Modal>
 
       <aside className="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
@@ -234,7 +210,7 @@ function App() {
           <div className="flex gap-4">
             {Object.keys(TASK_STATUSES).map((key) => (
               <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
-                <Task />
+                <Task onClick={() => openModal('select-category-modal')} />
                 <TaskSkeleton />
               </StatusColumn>
             ))}

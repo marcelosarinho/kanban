@@ -11,10 +11,11 @@ import Subtasks from "./Subtasks";
 
 type TaskProps = {
   color?: keyof typeof TASK_COLORS;
+  onClick: () => void;
 }
 
 export default function Task(props: TaskProps) {
-  const { color } = props;
+  const { color, onClick } = props;
 
   const [toggleElement, setToggleElement] = useState({
     color: false,
@@ -97,7 +98,7 @@ export default function Task(props: TaskProps) {
       )}
 
       <footer className="flex justify-between items-center">
-        <Button className="text-xs!" variant="info">
+        <Button onClick={onClick} className="text-xs!" variant="info">
           <SquaresFourIcon weight="bold" />
           Categorias
         </Button>
