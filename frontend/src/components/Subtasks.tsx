@@ -1,14 +1,26 @@
 import { CaretDownIcon, CaretRightIcon, CheckIcon } from "@phosphor-icons/react";
 
-export default function Subtasks() {
+type SubtasksProps = {
+  title: string;
+  open: boolean;
+  onClick: () => void;
+}
+
+export default function Subtasks(props: SubtasksProps) {
+  const { title, open, onClick } = props;
+
   return (
     <>
-      <div className="flex gap-1.5 items-center hover:bg-gray-100 dark:hover:bg-slate-700 p-1 rounded transition-colors cursor-pointer">
-          <CaretRightIcon weight="bold" className="text-sm"/>
+      <div onClick={onClick} className="flex gap-1.5 items-center hover:bg-gray-100 dark:hover:bg-slate-700 p-1 rounded transition-colors cursor-pointer">
+        {open ? (
           <CaretDownIcon weight="bold" className="text-sm"/>
-          <span className="text-sm">Subtarefas (2/4)</span>
-        </div>
+        ) : (
+          <CaretRightIcon weight="bold" className="text-sm"/>
+        )}
+        <span className="text-sm select-none">Subtarefas</span>
+      </div>
 
+      {open && (
         <div className="border-l-2 border-gray-300 dark:border-slate-700 p-1 pl-3">
           <ul className="space-y-2">
             <li className="flex items-start gap-2">
@@ -17,11 +29,12 @@ export default function Subtasks() {
                 <CheckIcon weight="bold" className="absolute top-0 hidden peer-checked:block pointer-events-none text-black" />
               </div>
               <label className="text-sm select-none peer-has-checked:line-through" htmlFor="subtask">
-                Subtarefa
+                {title}
               </label>
             </li>
           </ul>
         </div>
+      )}
     </>
   )
 }

@@ -19,6 +19,7 @@ export default function Task(props: TaskProps) {
   const [toggleElement, setToggleElement] = useState({
     color: false,
     comment: false,
+    subtasks: false,
   });
 
   return (
@@ -75,9 +76,7 @@ export default function Task(props: TaskProps) {
           <ProgressBar />
       </div>
 
-      <div>
-        <Subtasks />
-      </div>
+      <Subtasks onClick={() => setToggleElement({...toggleElement, subtasks: !toggleElement.subtasks})} title="teste" open={toggleElement.subtasks} />
 
       <div className="my-5 flex justify-between">
         <TaskPriorityBadge priority="low"/>
