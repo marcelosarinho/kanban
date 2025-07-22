@@ -21,6 +21,7 @@ import { useForm } from 'react-hook-form';
 import type z from 'zod';
 import { projectSchema } from './schemas/projects';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Loading from './components/Loading';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -110,8 +111,9 @@ function App() {
     setSelectedCategories(selectedCategories.filter(category => category !== name));
   }
 
-  function onSubmit() {
-    console.log('submit');
+  function onSubmit(data: Inputs) {
+    console.log(data);
+    return;
   }
 
   useEffect(() => {
@@ -130,14 +132,19 @@ function App() {
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
         <ModalBody>
-          <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className="flex flex-col gap-3">
-            <Input error={errors.name?.message} {...register('name')} id="project-name" label="Nome do projeto"/>
+          <form onSubmit={handleSubmit(onSubmit)} id="create-project-form">
+            <fieldset className="flex flex-col gap-6">
+              <Input error={errors.name?.message} {...register('name')} id="project-name" label="Nome do projeto"/>
 
-            <Textarea error={errors.description?.message} {...register('description')} id="project-description" label="Descrição do projeto"/>
+              <Textarea error={errors.description?.message} {...register('description')} id="project-description" label="Descrição do projeto"/>
+            </fieldset>
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button form="create-project-form">Salvar</Button>
+          <Button className='flex items-center' form="create-project-form">
+            <Loading loading={false} />
+            Salvar
+          </Button>
           <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
         </ModalFooter>
       </Modal>
