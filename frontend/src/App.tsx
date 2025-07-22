@@ -113,7 +113,7 @@ function App() {
     setSelectedCategories(selectedCategories.filter(category => category !== name));
   }
 
-  async function onSubmit(data: Inputs) {
+  async function onSubmit(data: Inputs) {    
     try {
       setLoading(true);
       const response = await fetch('http://localhost:8080/projects', {
@@ -127,6 +127,8 @@ function App() {
       const json = await response.json();
 
       toast.success(json.message);
+
+      closeModal('create-project-modal');
     } catch (error) {
       console.error(error);
     } finally {
