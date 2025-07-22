@@ -9,12 +9,18 @@ export default function Subtasks() {
           <span className="text-sm">Subtarefas (2/4)</span>
         </div>
 
-        <div className="flex items-center gap-1.5 border-l border-l-red-500 p-1 pl-2">
-          <input name="subtask" id="subtask" type="checkbox" className="peer appearance-none size-4 border border-gray-300 rounded-xs dark:border-slate-600 checked:bg-success transition-colors" />
-          <CheckIcon weight="bold" className="absolute hidden peer-checked:block pointer-events-none text-black" />
-          <label className="text-sm select-none flex items-center has-checked:line-through gap-1.5" htmlFor="subtask">
-            Subtarefa
-          </label>
+        <div className="border-l-2 border-gray-300 dark:border-slate-700 p-1 pl-3">
+          <ul className="space-y-2">
+            <li className="flex items-start gap-2">
+              <div className="relative peer">
+                <input name="subtask" id="subtask" type="checkbox" className="peer appearance-none size-4 border border-gray-300 rounded-xs dark:border-slate-600 checked:bg-success transition-colors" />
+                <CheckIcon weight="bold" className="absolute top-0 hidden peer-checked:block pointer-events-none text-black" />
+              </div>
+              <label className="text-sm select-none peer-has-checked:line-through" htmlFor="subtask">
+                Subtarefa
+              </label>
+            </li>
+          </ul>
         </div>
     </>
   )

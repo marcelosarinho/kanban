@@ -11,7 +11,7 @@ export default function Button(props: ButtonProps) {
   return (
     <button
       type={type}
-      className={`${BUTTON_VARIANTS[variant]} ${className}`}
+      className={`${BUTTON_VARIANTS[variant]} ${className ?? ''}`}
       {...rest}
     >
       {children}
