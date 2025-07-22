@@ -34,6 +34,7 @@ type Inputs = z.infer<typeof projectSchema>;
 function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const themeIconRef = useRef<HTMLElement>(null);
 
@@ -111,9 +112,25 @@ function App() {
     setSelectedCategories(selectedCategories.filter(category => category !== name));
   }
 
-  function onSubmit(data: Inputs) {
-    console.log(data);
-    return;
+  async function onSubmit(data: Inputs) {
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:8080/projects', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      const json = await response.json();
+
+      console.log(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -131,22 +148,22 @@ function App() {
           <ModalTitle>Adicionar projeto</ModalTitle>
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
-        <ModalBody>
-          <form onSubmit={handleSubmit(onSubmit)} id="create-project-form">
-            <fieldset className="flex flex-col gap-6">
+        <fieldset disabled={loading} className="disabled:opacity-50">
+          <ModalBody>
+            <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className='flex flex-col gap-3'>
               <Input error={errors.name?.message} {...register('name')} id="project-name" label="Nome do projeto"/>
 
               <Textarea error={errors.description?.message} {...register('description')} id="project-description" label="Descrição do projeto"/>
-            </fieldset>
-          </form>
-        </ModalBody>
-        <ModalFooter>
-          <Button className='flex items-center' form="create-project-form">
-            <Loading loading={false} />
-            Salvar
-          </Button>
-          <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
-        </ModalFooter>
+            </form>
+          </ModalBody>
+          <ModalFooter>
+            <Button className="flex items-center" form="create-project-form">
+              <Loading loading={loading} />
+              Salvar
+            </Button>
+            <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
+          </ModalFooter>
+        </fieldset>
       </Modal>
 
       <Modal id="select-category-modal">
