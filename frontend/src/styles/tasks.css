@@ -27,7 +27,7 @@
 }
 
 .task-none-background {
-  @apply bg-white dark:bg-slate-800
+  @apply bg-gray-300 dark:bg-slate-700;
 }
 
 .task-none-border {

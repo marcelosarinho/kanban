@@ -30,7 +30,7 @@ export const TASK_COLORS = {
   purple: { bg: 'task-purple-background', border: 'task-purple-border', label: 'Roxo' },
   pink: { bg: 'task-pink-background', border: 'task-pink-border', label: 'Rosa' },
   orange: { bg: 'task-orange-background', border: 'task-orange-border', label: 'Laranja' },
-  none: { bg: 'task-none-background', border: 'task-none-border', label: 'Nenhuma cor' },
+  none: { bg: 'task-none-background', border: 'task-none-border', label: 'Sem cor' },
 }
 
 export const TASK_PRIORITIES = {
