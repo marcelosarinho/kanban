@@ -133,7 +133,7 @@ function App() {
           <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className="flex flex-col gap-3">
             <Input error={errors.name?.message} {...register('name')} id="project-name" label="Nome do projeto"/>
 
-            <Textarea {...register('description')} id="project-description" label="Descrição do projeto"/>
+            <Textarea error={errors.description?.message} {...register('description')} id="project-description" label="Descrição do projeto"/>
           </form>
         </ModalBody>
         <ModalFooter>
