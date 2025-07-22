@@ -8,6 +8,7 @@ import { updateTask } from "./routes/update-task";
 import { deleteTask } from "./routes/delete-task";
 import { deleteProject } from "./routes/delete-project";
 import { createSubtask } from "./routes/create-subtask";
+import { deleteSubtask } from "./routes/delete-subtask";
 
 const server = fastify();
 server.register(cors, {
@@ -31,3 +32,4 @@ server.register(updateTask);
 server.register(deleteTask);
 server.register(deleteProject);
 server.register(createSubtask);
+server.register(deleteSubtask);
