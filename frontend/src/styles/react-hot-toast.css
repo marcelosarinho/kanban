@@ -1,0 +1,7 @@
+.react-hot-toast {
+  @apply bg-white text-black border border-gray-300;
+}
+
+.dark .react-hot-toast {
+  @apply bg-slate-900 text-white border-slate-700;
+}

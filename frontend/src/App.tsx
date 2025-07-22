@@ -22,6 +22,7 @@ import type z from 'zod';
 import { projectSchema } from './schemas/projects';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Loading from './components/Loading';
+import toast, { Toaster } from 'react-hot-toast';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -134,6 +135,9 @@ function App() {
   }
 
   useEffect(() => {
+    toast.success('Oi', { duration: 100000});
+    toast.error('Oi', { duration: 100000});
+
     const theme = localStorage.getItem('theme');
     
     changeIconTheme(themeIcons[theme || 'system']);
@@ -143,6 +147,24 @@ function App() {
 
   return (
     <>
+      <Toaster
+        position='bottom-right'
+        toastOptions={{
+          success: {
+            iconTheme: {
+              primary: 'var(--color-success)',
+              secondary: 'black',
+            }
+          },
+          error: {
+            iconTheme: {
+              primary: 'var(--color-danger)',
+              secondary: 'white',
+            }
+          },
+          className: 'react-hot-toast',
+        }}
+      />
       <Modal id="create-project-modal">
         <ModalHeader>
           <ModalTitle>Adicionar projeto</ModalTitle>

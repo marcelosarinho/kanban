@@ -4,6 +4,7 @@
 @import "./styles/tasks.css";
 @import "./styles/scrollbar.css";
 @import "./styles/progressbar.css";
+@import "./styles/react-hot-toast.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -25,8 +26,4 @@
       opacity: 1;
     }
   }
-}
-
-.tooltip {
-  @apply bg-red-500;
 }
