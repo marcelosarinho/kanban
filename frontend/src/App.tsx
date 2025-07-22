@@ -19,7 +19,8 @@ import TaskSkeleton from './components/TaskSkeleton';
 import Task from './components/Task';
 import { useForm } from 'react-hook-form';
 import type z from 'zod';
-import type { projectSchema } from './schemas/projects';
+import { projectSchema } from './schemas/projects';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -41,7 +42,9 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    resolver: zodResolver(projectSchema),
+  });
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
@@ -107,6 +110,10 @@ function App() {
     setSelectedCategories(selectedCategories.filter(category => category !== name));
   }
 
+  function onSubmit() {
+    console.log('submit');
+  }
+
   useEffect(() => {
     const theme = localStorage.getItem('theme');
     
@@ -123,10 +130,10 @@ function App() {
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
         <ModalBody>
-          <form id="create-project-form" className="flex flex-col gap-3">
-            <Input id="project-name" label="Nome do projeto"/>
+          <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className="flex flex-col gap-3">
+            <Input {...register('name')} id="project-name" label="Nome do projeto"/>
 
-            <Textarea id="project-description" label="Descrição do projeto"/>
+            <Textarea {...register('description')} id="project-description" label="Descrição do projeto"/>
           </form>
         </ModalBody>
         <ModalFooter>
