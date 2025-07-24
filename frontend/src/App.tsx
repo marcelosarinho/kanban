@@ -36,7 +36,10 @@ type Inputs = z.infer<typeof projectSchema>;
 function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState({
+    createProject: false,
+    getProjects: false,
+  });
   const [projects, setProjects] = useState<Project[]>([]);
 
   const themeIconRef = useRef<HTMLElement>(null);
@@ -117,7 +120,7 @@ function App() {
 
   async function onSubmit(data: Inputs) {    
     try {
-      setLoading(true);
+      setLoading({ ...loading, createProject: true });
       const response = await fetch('http://localhost:8080/projects', {
         method: 'POST',
         headers: {
@@ -134,18 +137,21 @@ function App() {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
+      setLoading({ ...loading, createProject: false });
     }
   }
 
   async function getProjects() {
     try {
+      setLoading({ ...loading, getProjects: true });
       const response = await fetch('http://localhost:8080/projects');
       const data = await response.json();
 
       setProjects(data);
     } catch {
       toast.error('Erro ao trazer projetos!');
+    } finally {
+      setLoading({ ...loading, getProjects: false });
     }
   }
 
@@ -183,7 +189,7 @@ function App() {
           <ModalTitle>Adicionar projeto</ModalTitle>
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
-        <fieldset disabled={loading} className="disabled:opacity-50">
+        <fieldset disabled={loading.createProject} className="disabled:opacity-50">
           <ModalBody>
             <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className='flex flex-col gap-3'>
               <Input error={errors.name?.message} {...register('name')} id="project-name" label="Nome do projeto"/>
@@ -193,7 +199,7 @@ function App() {
           </ModalBody>
           <ModalFooter>
             <Button className="flex items-center" form="create-project-form">
-              <Loading loading={loading} />
+              <Loading loading={loading.createProject} />
               Salvar
             </Button>
             <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
@@ -236,7 +242,14 @@ function App() {
             {projects.map((project) => (
               <SidebarCard key={project.id} name={project.name} description={project.description} />
             ))}
-            <SidebarCardSkeleton />
+            {loading.getProjects && (
+              <>
+                <SidebarCardSkeleton />
+                <SidebarCardSkeleton />
+                <SidebarCardSkeleton />
+                <SidebarCardSkeleton />
+              </>
+            )}
           </div>
         </div>
       </aside>
