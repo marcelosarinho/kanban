@@ -134,8 +134,10 @@ function App() {
       toast.success(json.message);
 
       closeModal('create-project-modal');
+      getProjects();
     } catch (error) {
       console.error(error);
+      toast.error('Erro ao criar projeto!');
     } finally {
       setLoading({ ...loading, createProject: false });
     }
