@@ -23,6 +23,7 @@ import { projectSchema } from './schemas/projects';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Loading from './components/Loading';
 import toast, { Toaster } from 'react-hot-toast';
+import type { Project } from './types/project';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -36,6 +37,7 @@ function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
 
   const themeIconRef = useRef<HTMLElement>(null);
 
@@ -136,12 +138,24 @@ function App() {
     }
   }
 
+  async function getProjects() {
+    try {
+      const response = await fetch('http://localhost:8080/projects');
+      const data = await response.json();
+
+      setProjects(data);
+    } catch {
+      toast.error('Erro ao trazer projetos!');
+    }
+  }
+
   useEffect(() => {
     const theme = localStorage.getItem('theme');
-    
-    changeIconTheme(themeIcons[theme || 'system']);
 
+    changeIconTheme(themeIcons[theme || 'system']);
     document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+    getProjects();
   }, []);
 
   return (
@@ -219,16 +233,9 @@ function App() {
 
           <Searchbar className="mt-6" />
           <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen">
-            <SidebarCard name="Projeto" description="Descrição" />
-            <SidebarCardSkeleton />
-            <SidebarCardSkeleton />
-            <SidebarCardSkeleton />
-            <SidebarCardSkeleton />
-            <SidebarCardSkeleton />
-            <SidebarCardSkeleton />
-            <SidebarCardSkeleton />
-            <SidebarCardSkeleton />
-            <SidebarCardSkeleton />
+            {projects.map((project) => (
+              <SidebarCard key={project.id} name={project.name} description={project.description} />
+            ))}
             <SidebarCardSkeleton />
           </div>
         </div>
