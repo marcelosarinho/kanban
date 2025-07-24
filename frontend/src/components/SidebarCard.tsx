@@ -1,6 +1,7 @@
 import { PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import CustomTooltip from "./CustomTooltip";
+import toast from "react-hot-toast";
 
 type SidebarCardProps = {
   id: string;
@@ -11,8 +12,17 @@ type SidebarCardProps = {
 export default function SidebarCard(props: SidebarCardProps) {
   const { id, name, description } = props;
 
-  function deleteProject() {
-    console.log(id);
+  async function deleteProject() {
+    try {
+      await fetch(`http://localhost:8080/projects/${id}`, {
+        method: 'DELETE',
+      })
+
+      toast.success('Projeto deletado com sucesso!');
+    } catch (error) {
+      console.log(error);
+      toast.error('Erro ao deletar projeto!');
+    }
   }
 
   function updateProject() {
