@@ -224,6 +224,15 @@ function App() {
         </fieldset>
       </Modal>
 
+      <Modal id="delete-project-modal">
+        <ModalHeader>
+          <ModalTitle>Deletar projeto ?</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+          <p></p>
+        </ModalBody>
+      </Modal>
+
       <Modal id="select-category-modal">
         <ModalHeader>
           <ModalTitle>Selecionar categorias</ModalTitle>
