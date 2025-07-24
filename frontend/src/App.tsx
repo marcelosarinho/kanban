@@ -184,6 +184,7 @@ function App() {
             }
           },
           className: 'react-hot-toast',
+          duration: 3000,
         }}
       />
       <Modal id="create-project-modal">
