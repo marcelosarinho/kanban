@@ -240,7 +240,7 @@ function App() {
           <Searchbar className="mt-6" />
           <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen">
             {projects.map((project) => (
-              <SidebarCard key={project.id} name={project.name} description={project.description} />
+              <SidebarCard key={project.id} id={project.id} name={project.name} description={project.description} />
             ))}
             {loading.getProjects && (
               <>

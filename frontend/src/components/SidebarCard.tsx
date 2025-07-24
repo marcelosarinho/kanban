@@ -3,12 +3,21 @@ import Button from "./Button";
 import CustomTooltip from "./CustomTooltip";
 
 type SidebarCardProps = {
+  id: string;
   name: string;
   description: string;
 }
 
 export default function SidebarCard(props: SidebarCardProps) {
-  const { name, description } = props;
+  const { id, name, description } = props;
+
+  function deleteProject() {
+    console.log(id);
+  }
+
+  function updateProject() {
+    console.log(id);
+  }
 
   return (
     <div className="bg-gray-100 py-2 px-3 rounded border border-gray-300 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300 hover:border-primary transition-colors">
@@ -19,11 +28,11 @@ export default function SidebarCard(props: SidebarCardProps) {
       <CustomTooltip anchorSelect={`#${description}`} content={description} />
 
       <div className="flex items-center justify-end">
-        <Button id={`edit_${name}`} variant="transparent">
+        <Button id={`edit_${name}`} variant="transparent" onClick={updateProject}>
           <PencilSimpleIcon weight="bold" className="text-lg text-info transition-colors" />
           <CustomTooltip anchorSelect={`#edit_${name}`} content="Editar" />
         </Button>
-        <Button id={`delete_${name}`} variant="transparent">
+        <Button id={`delete_${name}`} variant="transparent" onClick={deleteProject}>
           <TrashIcon weight="bold" className="text-lg text-danger transition-colors" />
           <CustomTooltip anchorSelect={`#delete_${name}`} content="Deletar" />
         </Button>
