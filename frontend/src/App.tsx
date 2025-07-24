@@ -149,7 +149,7 @@ function App() {
 
       setProjects(data);
     } catch {
-      toast.error('Erro ao trazer projetos!');
+      toast.error('Erro ao buscar projetos!');
     } finally {
       setLoading({ ...loading, getProjects: false });
     }
