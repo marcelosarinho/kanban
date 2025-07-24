@@ -1,29 +1,16 @@
 import { PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import CustomTooltip from "./CustomTooltip";
-import toast from "react-hot-toast";
 
 type SidebarCardProps = {
   id: string;
   name: string;
   description: string;
+  deleteProject: (id: string) => void;
 }
 
 export default function SidebarCard(props: SidebarCardProps) {
-  const { id, name, description } = props;
-
-  async function deleteProject() {
-    try {
-      await fetch(`http://localhost:8080/projects/${id}`, {
-        method: 'DELETE',
-      })
-
-      toast.success('Projeto deletado com sucesso!');
-    } catch (error) {
-      console.log(error);
-      toast.error('Erro ao deletar projeto!');
-    }
-  }
+  const { id, name, description, deleteProject } = props;
 
   function updateProject() {
     console.log(id);
@@ -42,7 +29,7 @@ export default function SidebarCard(props: SidebarCardProps) {
           <PencilSimpleIcon weight="bold" className="text-lg text-info transition-colors" />
           <CustomTooltip anchorSelect={`#edit_${name}`} content="Editar" />
         </Button>
-        <Button id={`delete_${name}`} variant="transparent" onClick={deleteProject}>
+        <Button id={`delete_${name}`} variant="transparent" onClick={() => deleteProject(id)}>
           <TrashIcon weight="bold" className="text-lg text-danger transition-colors" />
           <CustomTooltip anchorSelect={`#delete_${name}`} content="Deletar" />
         </Button>

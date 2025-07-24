@@ -157,6 +157,19 @@ function App() {
     }
   }
 
+  async function deleteProject(id: string) {
+      try {
+        await fetch(`http://localhost:8080/projects/${id}`, {
+          method: 'DELETE',
+        })
+  
+        toast.success('Projeto deletado com sucesso!');
+      } catch (error) {
+        console.log(error);
+        toast.error('Erro ao deletar projeto!');
+      }
+    }
+
   useEffect(() => {
     const theme = localStorage.getItem('theme');
 
@@ -243,7 +256,13 @@ function App() {
           <Searchbar className="mt-6" />
           <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen">
             {projects.map((project) => (
-              <SidebarCard key={project.id} id={project.id} name={project.name} description={project.description} />
+              <SidebarCard
+                key={project.id}
+                id={project.id}
+                name={project.name}
+                description={project.description}
+                deleteProject={deleteProject}
+              />
             ))}
             {loading.getProjects && (
               <>
