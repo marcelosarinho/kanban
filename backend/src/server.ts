@@ -13,6 +13,7 @@ import { deleteSubtask } from "./routes/delete-subtask";
 const server = fastify();
 server.register(cors, {
     origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
 });
 
 server.listen({ port: 8080 }, (err, address) => {
