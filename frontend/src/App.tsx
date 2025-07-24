@@ -164,6 +164,7 @@ function App() {
         })
   
         toast.success('Projeto deletado com sucesso!');
+        getProjects();
       } catch (error) {
         console.log(error);
         toast.error('Erro ao deletar projeto!');
