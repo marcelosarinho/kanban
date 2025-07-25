@@ -38,9 +38,11 @@ function App() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState({
     createProject: false,
+    deleteProject: false,
     getProjects: false,
   });
   const [projects, setProjects] = useState<Project[]>([]);
+  const [project, setProject] = useState<Project | null>(null);
 
   const themeIconRef = useRef<HTMLElement>(null);
 
@@ -90,8 +92,12 @@ function App() {
     iconElement?.classList.add(icon);
   }
 
-  function openModal(id: string) {
+  function openModal(id: string, project?: Project) {
     const modal = document.getElementById(id) as HTMLDialogElement;
+
+    if (project) {
+      setProject(project);
+    }
 
     if (modal) {
       modal.show();
@@ -157,17 +163,26 @@ function App() {
     }
   }
 
-  async function deleteProject(id: string) {
+  async function deleteProject() {
       try {
-        await fetch(`http://localhost:8080/projects/${id}`, {
+        setLoading({ ...loading, deleteProject: true });
+        if (!project?.id) {
+          toast.error('Erro ao deletar projeto!');
+          return;
+        }
+
+        await fetch(`http://localhost:8080/projects/${project.id}`, {
           method: 'DELETE',
         })
   
         toast.success('Projeto deletado com sucesso!');
+        closeModal('delete-project-modal');
         getProjects();
       } catch (error) {
         console.log(error);
         toast.error('Erro ao deletar projeto!');
+      } finally {
+        setLoading({ ...loading, deleteProject: false });
       }
     }
 
@@ -226,11 +241,21 @@ function App() {
 
       <Modal id="delete-project-modal">
         <ModalHeader>
-          <ModalTitle>Deletar projeto ?</ModalTitle>
+          <ModalTitle>Deletar projeto?</ModalTitle>
         </ModalHeader>
         <ModalBody>
-          <p></p>
+          <p>Tem certeza de que deseja deletar o projeto {project?.name}?</p>
         </ModalBody>
+        <ModalFooter>
+          <Button disabled={loading.deleteProject} onClick={() => deleteProject()} variant="primary">
+            <Loading loading={loading.deleteProject} />
+            Deletar
+          </Button>
+          <Button disabled={loading.deleteProject} onClick={() => closeModal('delete-project-modal')} variant="outline-primary">
+            <Loading loading={loading.deleteProject} />
+            Cancelar
+          </Button>
+        </ModalFooter>
       </Modal>
 
       <Modal id="select-category-modal">
@@ -268,10 +293,8 @@ function App() {
             {projects.map((project) => (
               <SidebarCard
                 key={project.id}
-                id={project.id}
-                name={project.name}
-                description={project.description}
-                deleteProject={deleteProject}
+                project={project}
+                openModal={openModal}
               />
             ))}
             {loading.getProjects && (
