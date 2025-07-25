@@ -21,7 +21,6 @@ import { useForm } from 'react-hook-form';
 import type z from 'zod';
 import { projectSchema } from './schemas/projects';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Loading from './components/Loading';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 
@@ -230,8 +229,7 @@ function App() {
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button className="flex items-center" form="create-project-form">
-              <Loading loading={loading.createProject} />
+            <Button loading={loading.createProject} className="flex items-center" form="create-project-form">
               Salvar
             </Button>
             <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
@@ -247,12 +245,10 @@ function App() {
           <p>Tem certeza de que deseja deletar o projeto {project?.name}?</p>
         </ModalBody>
         <ModalFooter>
-          <Button disabled={loading.deleteProject} onClick={() => deleteProject()} variant="primary">
-            <Loading loading={loading.deleteProject} />
+          <Button loading={loading.deleteProject} onClick={() => deleteProject()} variant="primary">
             Deletar
           </Button>
-          <Button disabled={loading.deleteProject} onClick={() => closeModal('delete-project-modal')} variant="outline-primary">
-            <Loading loading={loading.deleteProject} />
+          <Button loading={loading.deleteProject} onClick={() => closeModal('delete-project-modal')} variant="outline-primary">
             Cancelar
           </Button>
         </ModalFooter>
