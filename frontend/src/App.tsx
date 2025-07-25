@@ -229,9 +229,7 @@ function App() {
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button loading={loading.createProject} className="flex items-center" form="create-project-form">
-              Salvar
-            </Button>
+            <Button loading={loading.createProject} className="flex items-center" form="create-project-form">Salvar</Button>
             <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
           </ModalFooter>
         </fieldset>
@@ -245,12 +243,8 @@ function App() {
           <p>Tem certeza de que deseja deletar o projeto {project?.name}?</p>
         </ModalBody>
         <ModalFooter>
-          <Button loading={loading.deleteProject} onClick={() => deleteProject()} variant="primary">
-            Deletar
-          </Button>
-          <Button loading={loading.deleteProject} onClick={() => closeModal('delete-project-modal')} variant="outline-primary">
-            Cancelar
-          </Button>
+          <Button loading={loading.deleteProject} onClick={() => deleteProject()} variant="primary">Deletar</Button>
+          <Button onClick={() => closeModal('delete-project-modal')} variant="outline-primary">Cancelar</Button>
         </ModalFooter>
       </Modal>
 
