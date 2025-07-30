@@ -42,6 +42,7 @@ function App() {
   });
   const [projects, setProjects] = useState<Project[]>([]);
   const [project, setProject] = useState<Project | null>(null);
+  const [searchProjects, setSearchProjects] = useState('');
 
   const themeIconRef = useRef<HTMLElement>(null);
 
@@ -199,21 +200,21 @@ function App() {
       }
     }
 
-    async function handleSearch(e: ChangeEvent<HTMLInputElement>) {
-      const search = e.target.value;
-
+    async function handleSearchProjects() {
       try {
-        setLoading({ ...loading, getProjects: true });
-
-        const response = await fetch(`http://localhost:8080/projects/search?search=${search}`);
+        const response = await fetch(`http://localhost:8080/projects/search?search=${searchProjects}`);
         const data = await response.json();
 
-        console.log(data);
+        setProjects(data);
       } catch (error) {
         console.log(error);
         toast.error('Erro ao buscar projetos!');
       }
     }
+
+  useEffect(() => {
+    handleSearchProjects();
+  }, [searchProjects]);
 
   useEffect(() => {
     const theme = localStorage.getItem('theme');
@@ -308,7 +309,7 @@ function App() {
             Adicionar projeto
           </Button>
 
-          <Searchbar onSearch={handleSearch} className="mt-6" />
+          <Searchbar value={searchProjects} onSearch={(e) => setSearchProjects(e.target.value)} className="mt-6" />
           <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen">
             {projects.map((project) => (
               <SidebarCard
