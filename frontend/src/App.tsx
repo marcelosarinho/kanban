@@ -51,6 +51,7 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<Inputs>({
     resolver: zodResolver(projectSchema),
   });
@@ -91,11 +92,16 @@ function App() {
     iconElement?.classList.add(icon);
   }
 
-  function openModal(id: string, project?: Project) {
+  function openModal(id: string, project?: Project, edit?: boolean) {
     const modal = document.getElementById(id) as HTMLDialogElement;
 
     if (project) {
       setProject(project);
+
+      if (edit) {
+        setValue('name', project.name);
+        setValue('description', project.description);
+      }
     }
 
     if (modal) {
@@ -105,10 +111,17 @@ function App() {
 
   function closeModal(id: string) {
     const modal = document.getElementById(id) as HTMLDialogElement;
+    setProject(null);
+    resetForm();
 
     if (modal) {
       modal.close();
     }
+  }
+
+  function resetForm() {
+    setValue('name', '');
+    setValue('description', '');
   }
 
   function handleCategoryToggle(e: ChangeEvent<HTMLInputElement>) {

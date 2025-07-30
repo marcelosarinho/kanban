@@ -5,7 +5,7 @@ import type { Project } from "../types/project";
 
 type SidebarCardProps = {
   project: Project;
-  openModal: (modalId: string, project?: Project) => void;
+  openModal: (modalId: string, project?: Project, edit?: boolean) => void;
 }
 
 export default function SidebarCard(props: SidebarCardProps) {
@@ -20,7 +20,7 @@ export default function SidebarCard(props: SidebarCardProps) {
       <CustomTooltip anchorSelect={`#${project.description}`} content={project.description} />
 
       <div className="flex items-center justify-end">
-        <Button id={`edit_${project.name}`} variant="transparent">
+        <Button id={`edit_${project.name}`} variant="transparent" onClick={() => openModal('create-project-modal', project, true)}>
           <PencilSimpleIcon weight="bold" className="text-lg text-info transition-colors" />
           <CustomTooltip anchorSelect={`#edit_${project.name}`} content="Editar" />
         </Button>
