@@ -23,7 +23,8 @@ import { projectSchema } from './schemas/projects';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { getProjectsApi } from './api';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -40,9 +41,8 @@ function App() {
   const [loading, setLoading] = useState({
     createProject: false,
     deleteProject: false,
-    getProjects: false,
   });
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projectsOld, setProjectsOld] = useState<Project[]>([]);
   const [project, setProject] = useState<Project | null>(null);
   const [searchProjects, setSearchProjects] = useState('');
 
@@ -167,47 +167,52 @@ function App() {
 
   async function getProjects() {
     try {
-      setLoading({ ...loading, getProjects: true });
       const response = await fetch('http://localhost:8080/projects');
       const data = await response.json();
 
-      setProjects(data);
+      setProjectsOld(data);
     } catch {
       toast.error('Erro ao buscar projetos!');
-    } finally {
-      setLoading({ ...loading, getProjects: false });
     }
   }
 
-  async function deleteProject() {
-      try {
-        setLoading({ ...loading, deleteProject: true });
-        if (!project?.id) {
-          toast.error('Erro ao deletar projeto!');
-          return;
-        }
+  const {
+    isPending: isPendingProjects,
+    isError: isErrorProjects,
+    isSuccess: isSuccessProjects,
+    error: errorProjects,
+    data: projects
+  } = useQuery({ queryKey: ['projects'], queryFn: getProjectsApi })
 
-        await fetch(`http://localhost:8080/projects/${project.id}`, {
-          method: 'DELETE',
-        })
-  
-        toast.success('Projeto deletado com sucesso!');
-        closeModal('delete-project-modal');
-        getProjects();
-      } catch (error) {
-        console.log(error);
+  async function deleteProject() {
+    try {
+      setLoading({ ...loading, deleteProject: true });
+      if (!project?.id) {
         toast.error('Erro ao deletar projeto!');
-      } finally {
-        setLoading({ ...loading, deleteProject: false });
+        return;
       }
+
+      await fetch(`http://localhost:8080/projects/${project.id}`, {
+        method: 'DELETE',
+      })
+
+      toast.success('Projeto deletado com sucesso!');
+      closeModal('delete-project-modal');
+      getProjects();
+    } catch (error) {
+      console.log(error);
+      toast.error('Erro ao deletar projeto!');
+    } finally {
+      setLoading({ ...loading, deleteProject: false });
     }
+  }
 
     async function handleSearchProjects() {
       try {
         const response = await fetch(`http://localhost:8080/projects/search?search=${searchProjects}`);
         const data = await response.json();
 
-        setProjects(data);
+        setProjectsOld(data);
       } catch (error) {
         console.log(error);
         toast.error('Erro ao buscar projetos!');
@@ -223,8 +228,6 @@ function App() {
 
     changeIconTheme(themeIcons[theme || 'system']);
     document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-    getProjects();
   }, []);
 
   return (
@@ -314,14 +317,14 @@ function App() {
 
             <Searchbar value={searchProjects} onSearch={(e) => setSearchProjects(e.target.value)} className="mt-6" />
             <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen">
-              {projects.map((project) => (
+              {projects?.map((project: Project) => (
                 <SidebarCard
                   key={project.id}
                   project={project}
                   openModal={openModal}
                 />
               ))}
-              {loading.getProjects && (
+              {isPendingProjects && (
                 <>
                   <SidebarCardSkeleton />
                   <SidebarCardSkeleton />
