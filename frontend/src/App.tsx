@@ -179,7 +179,6 @@ function App() {
   const {
     isPending: isPendingProjects,
     isError: isErrorProjects,
-    isSuccess: isSuccessProjects,
     error: errorProjects,
     data: projects
   } = useQuery({ queryKey: ['projects'], queryFn: getProjectsApi })
@@ -222,6 +221,12 @@ function App() {
   useEffect(() => {
     handleSearchProjects();
   }, [searchProjects]);
+
+  useEffect(() => {
+    if (isErrorProjects) {
+      toast.error('Erro ao buscar projetos!');
+    }
+  }, [isErrorProjects])
 
   useEffect(() => {
     const theme = localStorage.getItem('theme');
