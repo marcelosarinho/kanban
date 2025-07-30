@@ -156,7 +156,7 @@ function App() {
       getProjects();
     } catch (error) {
       console.error(error);
-      toast.error('Erro ao criar projeto!');
+      toast.error(`Erro ao ${project ? 'editar' : 'criar'} projeto!`);
     } finally {
       setLoading({ ...loading, createProject: false });
     }
