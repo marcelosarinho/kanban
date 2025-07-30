@@ -139,8 +139,9 @@ function App() {
   async function onSubmit(data: Inputs) {    
     try {
       setLoading({ ...loading, createProject: true });
-      const response = await fetch('http://localhost:8080/projects', {
-        method: 'POST',
+
+      const response = await fetch(`http://localhost:8080/projects${project ? `/${project.id}` : ''}`, {
+        method: project ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -230,7 +231,7 @@ function App() {
       />
       <Modal id="create-project-modal">
         <ModalHeader>
-          <ModalTitle>Adicionar projeto</ModalTitle>
+          <ModalTitle>{project ? 'Editar' : 'Adicionar'} projeto</ModalTitle>
           <ModalClose onClick={() => closeModal('create-project-modal')} />
         </ModalHeader>
         <fieldset disabled={loading.createProject} className="disabled:opacity-50">
@@ -242,7 +243,7 @@ function App() {
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button loading={loading.createProject} className="flex items-center" form="create-project-form">Salvar</Button>
+            <Button loading={loading.createProject} className="flex items-center" form="create-project-form">{project ? 'Salvar' : 'Criar'}</Button>
             <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
           </ModalFooter>
         </fieldset>
