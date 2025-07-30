@@ -1,8 +1,8 @@
 import type { Project } from "../types/project";
 
-export async function getProjects() {
+export async function getProjects(search?: string) {
   try {
-    const response = await fetch('http://localhost:8080/projects');
+    const response = await fetch('http://localhost:8080/projects' + (search ? `?search=${search}` : ''));
     return await response.json();
   } catch (error) {
     console.error('Erro ao buscar projetos!', error);

@@ -24,7 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { getProjects } from './api';
+import { getProjects, searchProject } from './api';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -42,9 +42,8 @@ function App() {
     createProject: false,
     deleteProject: false,
   });
-  const [projectsOld, setProjectsOld] = useState<Project[]>([]);
   const [project, setProject] = useState<Project | null>(null);
-  const [searchProjects, setSearchProjects] = useState('');
+  const [projectsQuery, setProjectsQuery] = useState('');
 
   const themeIconRef = useRef<HTMLElement>(null);
 
@@ -171,7 +170,10 @@ function App() {
     error: errorProjects,
     data: projects,
     refetch: refetchProjects,
-  } = useQuery({ queryKey: ['projects'], queryFn: getProjects })
+  } = useQuery({
+    queryKey: ['projects', projectsQuery],
+    queryFn: () => getProjects(projectsQuery)
+  })
 
   async function deleteProject() {
     try {
@@ -195,22 +197,6 @@ function App() {
       setLoading({ ...loading, deleteProject: false });
     }
   }
-
-    async function handleSearchProjects() {
-      try {
-        const response = await fetch(`http://localhost:8080/projects/search?search=${searchProjects}`);
-        const data = await response.json();
-
-        setProjectsOld(data);
-      } catch (error) {
-        console.log(error);
-        toast.error('Erro ao buscar projetos!');
-      }
-    }
-
-  useEffect(() => {
-    handleSearchProjects();
-  }, [searchProjects]);
 
   useEffect(() => {
     if (isErrorProjects) {
@@ -310,7 +296,7 @@ function App() {
               Adicionar projeto
             </Button>
 
-            <Searchbar value={searchProjects} onSearch={(e) => setSearchProjects(e.target.value)} className="mt-6" />
+            <Searchbar value={projectsQuery} onSearch={(e) => setProjectsQuery(e.target.value)} className="mt-6" />
             <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen">
               {projects?.map((project: Project) => (
                 <SidebarCard
