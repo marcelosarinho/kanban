@@ -46,3 +46,21 @@ export async function deleteProject(id: string) {
     return false;
   }
 }
+
+export async function updateProject(project: Project) {
+  try {
+    const response = await fetch(`http://localhost:8080/projects/${project.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(project)
+    })
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error('Erro ao atualizar projeto!', error);
+  }
+}
