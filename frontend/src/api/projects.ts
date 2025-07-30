@@ -1,6 +1,6 @@
 import type { Project } from "../types/project";
 
-export async function getProjectsApi() {
+export async function getProjects() {
   try {
     const response = await fetch('http://localhost:8080/projects');
     return await response.json();

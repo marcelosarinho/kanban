@@ -24,7 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { getProjectsApi } from './api';
+import { getProjects } from './api';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -156,7 +156,7 @@ function App() {
       toast.success(json.message);
 
       closeModal('create-project-modal');
-      getProjects();
+      refetchProjects();
     } catch (error) {
       console.error(error);
       toast.error(`Erro ao ${project ? 'editar' : 'criar'} projeto!`);
@@ -165,23 +165,13 @@ function App() {
     }
   }
 
-  async function getProjects() {
-    try {
-      const response = await fetch('http://localhost:8080/projects');
-      const data = await response.json();
-
-      setProjectsOld(data);
-    } catch {
-      toast.error('Erro ao buscar projetos!');
-    }
-  }
-
   const {
     isPending: isPendingProjects,
     isError: isErrorProjects,
     error: errorProjects,
-    data: projects
-  } = useQuery({ queryKey: ['projects'], queryFn: getProjectsApi })
+    data: projects,
+    refetch: refetchProjects,
+  } = useQuery({ queryKey: ['projects'], queryFn: getProjects })
 
   async function deleteProject() {
     try {
@@ -197,7 +187,7 @@ function App() {
 
       toast.success('Projeto deletado com sucesso!');
       closeModal('delete-project-modal');
-      getProjects();
+      refetchProjects();
     } catch (error) {
       console.log(error);
       toast.error('Erro ao deletar projeto!');
