@@ -64,3 +64,14 @@ export async function updateProject(project: Project) {
     console.error('Erro ao atualizar projeto!', error);
   }
 }
+
+export async function searchProject(search: string) {
+  try {
+    const response = await fetch(`http://localhost:8080/projects/search?search=${search}`);
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error('Erro ao buscar projetos!', error);
+  }
+}
