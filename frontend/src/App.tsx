@@ -199,8 +199,20 @@ function App() {
       }
     }
 
-    function handleSearch(e: ChangeEvent<HTMLInputElement>) {
-      console.log(e.target.value);
+    async function handleSearch(e: ChangeEvent<HTMLInputElement>) {
+      const search = e.target.value;
+
+      try {
+        setLoading({ ...loading, getProjects: true });
+
+        const response = await fetch(`http://localhost:8080/projects/search?search=${search}`);
+        const data = await response.json();
+
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+        toast.error('Erro ao buscar projetos!');
+      }
     }
 
   useEffect(() => {
