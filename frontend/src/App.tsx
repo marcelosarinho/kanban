@@ -199,6 +199,10 @@ function App() {
       }
     }
 
+    function handleSearch(e: ChangeEvent<HTMLInputElement>) {
+      console.log(e.target.value);
+    }
+
   useEffect(() => {
     const theme = localStorage.getItem('theme');
 
@@ -292,7 +296,7 @@ function App() {
             Adicionar projeto
           </Button>
 
-          <Searchbar className="mt-6" />
+          <Searchbar onSearch={handleSearch} className="mt-6" />
           <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen">
             {projects.map((project) => (
               <SidebarCard
