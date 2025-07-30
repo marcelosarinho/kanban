@@ -28,3 +28,21 @@ export async function createProject(project: Project) {
     console.error('Erro ao criar projeto!', error);
   }
 }
+
+export async function deleteProject(id: string) {
+  try {
+    if (!id) {
+      console.error('Projeto não encontrado!');
+      return;
+    }
+
+    await fetch(`http://localhost:8080/projects/${id}`, {
+      method: 'DELETE',
+    })
+
+    return true;
+  } catch (error) {
+    console.error('Erro ao deletar projeto!', error);
+    return false;
+  }
+}
