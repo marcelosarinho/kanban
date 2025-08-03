@@ -2,12 +2,13 @@ import { CircleNotchIcon } from "@phosphor-icons/react";
 
 type LoadingProps = {
   loading: boolean;
+  className?: string;
 }
 
 export default function Loading(props: LoadingProps) {
-  const { loading } = props;
+  const { loading, className } = props;
 
   return (
-    loading && <CircleNotchIcon className="mr-1 animate-spin text-lg" />
+    loading && <CircleNotchIcon className={`animate-spin ${className ?? ''}`} />
   )
 }

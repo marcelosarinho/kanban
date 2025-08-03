@@ -25,6 +25,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { getProjects, searchProject } from './api';
+import Loading from './components/Loading';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -170,6 +171,7 @@ function App() {
     error: errorProjects,
     data: projects,
     refetch: refetchProjects,
+
   } = useQuery({
     queryKey: ['projects', projectsQuery],
     queryFn: () => getProjects(projectsQuery)
