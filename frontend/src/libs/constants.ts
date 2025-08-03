@@ -1,10 +1,23 @@
-export const THEME_ICONS = {
+import type {
+  CategoryItem,
+  CategoryOption,
+  ButtonOption,
+  ThemeIcon,
+  ThemeOption,
+  Color,
+  TaskItem,
+  TaskPriorityItem,
+  TaskPriorityOption,
+  TaskStatusOption
+} from "../types/constants"
+
+export const THEME_ICONS: Record<ThemeOption, ThemeIcon> = {
   light: 'ph-sun',
   dark: 'ph-moon',
   system: 'ph-moon-stars',
 }
 
-export const CATEGORIES = {
+export const CATEGORIES: Record<CategoryOption, CategoryItem> = {
   frontend: { color: 'badge-blue', name: 'Front-end' },
   backend: { color: 'badge-green', name: 'Back-end' },
   mobile: { color: 'badge-red', name: 'Mobile' },
@@ -13,7 +26,7 @@ export const CATEGORIES = {
   database: { color: 'badge-orange', name: 'Banco de dados' },
 }
 
-export const BUTTON_VARIANTS = {
+export const BUTTON_VARIANTS: Record<ButtonOption, string> = {
   'primary': 'btn btn-primary',
   'danger': 'btn btn-danger',
   'success': 'btn btn-success',
@@ -22,7 +35,7 @@ export const BUTTON_VARIANTS = {
   'transparent': 'btn-transparent',
 }
 
-export const TASK_COLORS = {
+export const TASK_COLORS: Record<Color, TaskItem> = {
   blue: { bg: 'task-blue-background', border: 'task-blue-border', label: 'Azul' },
   red: { bg: 'task-red-background', border: 'task-red-border', label: 'Vermelho' },
   green: { bg: 'task-green-background', border: 'task-green-border', label: 'Verde' },
@@ -33,13 +46,13 @@ export const TASK_COLORS = {
   none: { bg: 'task-none-background', border: 'task-none-border', label: 'Sem cor' },
 }
 
-export const TASK_PRIORITIES = {
+export const TASK_PRIORITIES: Record<TaskPriorityOption, TaskPriorityItem> = {
   low: { color: 'badge-success', label: 'Baixa', dots: 1 },
   medium: { color: 'badge-warning', label: 'Média', dots: 2 },
   high: { color: 'badge-danger', label: 'Alta', dots: 3 },
 }
 
-export const TASK_STATUSES = {
+export const TASK_STATUSES: Record<TaskStatusOption, string> = {
   todo: 'A fazer',
   in_progress: 'Em progresso',
   testing: 'Testando',
