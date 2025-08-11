@@ -24,8 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
-import { createProject, getProjects, searchProject, updateProject } from './api';
-import Loading from './components/Loading';
+import { createProject, getProjects, updateProject } from './api';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
