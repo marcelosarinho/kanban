@@ -190,6 +190,32 @@ function App() {
     )
   }
 
+  function renderTasks() {
+    if (!initialLoading) {
+      return (
+        Object.keys(TASK_STATUSES).map((key) => (
+          <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
+            <TaskSkeleton />
+            <TaskSkeleton />
+          </StatusColumn>
+        ))
+      )
+    }
+
+    if (project) {
+      return (
+        Object.keys(TASK_STATUSES).map((key) => (
+          <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
+            <Task onClick={() => openModal('select-category-modal')} />
+            <TaskSkeleton />
+          </StatusColumn>
+        ))
+      )
+    }
+
+    return null;
+  }
+
   async function onSubmit(data: Inputs) {
     if (project) {
       updateProjectMutation.mutate({
@@ -390,14 +416,7 @@ function App() {
             {renderProjectHeader()}
 
             <div className="flex gap-4">
-              {project && (
-                Object.keys(TASK_STATUSES).map((key) => (
-                  <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
-                    <Task onClick={() => openModal('select-category-modal')} />
-                    <TaskSkeleton />
-                  </StatusColumn>
-                ))
-              )}
+              {renderTasks()}
             </div>
           </main>
         </section>
