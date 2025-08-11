@@ -32,7 +32,7 @@ export default function Task(props: TaskProps) {
           </div>
           <div className="relative">
             <div
-              className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors z-50"
+              className="border rounded py-1.5 px-2 border-dashed border-gray-300 dark:border-slate-600 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-900 transition-colors z-50"
               onClick={() => setToggleElement({...toggleElement, color: !toggleElement.color})}
             >
               <div className={`size-3 rounded-full ${TASK_COLORS[color || 'none'].bg}`}></div>
