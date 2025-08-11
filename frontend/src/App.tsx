@@ -307,7 +307,7 @@ function App() {
             </Button>
 
             <Searchbar value={projectsQuery} onSearch={(e) => setProjectsQuery(e.target.value)} className="mt-6" />
-            <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto max-h-screen">
+            <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto overflow-x-hidden max-h-screen">
               {projects?.map((project: Project) => (
                 <SidebarCard
                   key={project.id}
