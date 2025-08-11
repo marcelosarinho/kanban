@@ -1,7 +1,10 @@
-export type Project = {
-  id: string;
+export type CreateProject = {
   name: string;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
+}
+
+export type UpdateProject = {
+  id: string;
+  name?: string;
+  description?: string;
 }

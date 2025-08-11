@@ -1,4 +1,4 @@
-import type { Project } from "../types/project";
+import type { CreateProject, UpdateProject } from "../types/project";
 
 export async function getProjects(search?: string) {
   try {
@@ -9,7 +9,7 @@ export async function getProjects(search?: string) {
   }
 }
 
-export async function createProject(project: Project) {
+export async function createProject(project: CreateProject) {
   try {
     const response = await fetch('http://localhost:8080/projects', {
       method: 'POST',
@@ -45,7 +45,7 @@ export async function deleteProject(id: string) {
   }
 }
 
-export async function updateProject(project: Project) {
+export async function updateProject(project: UpdateProject) {
   try {
     const response = await fetch(`http://localhost:8080/projects/${project.id}`, {
       method: 'PUT',
