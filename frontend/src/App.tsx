@@ -237,7 +237,7 @@ function App() {
             <ModalTitle>{project ? 'Editar' : 'Adicionar'} projeto</ModalTitle>
             <ModalClose onClick={() => closeModal('create-project-modal')} />
           </ModalHeader>
-          <fieldset disabled={loading.createProject} className="disabled:opacity-50">
+          <fieldset disabled={createProjectMutation.isPending} className="disabled:opacity-50">
             <ModalBody>
               <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className='flex flex-col gap-3'>
                 <Input error={errors.name?.message} {...register('name')} id="project-name" label="Nome do projeto"/>
@@ -246,7 +246,7 @@ function App() {
               </form>
             </ModalBody>
             <ModalFooter>
-              <Button loading={loading.createProject} className="flex items-center" form="create-project-form">{project ? 'Salvar' : 'Criar'}</Button>
+              <Button loading={createProjectMutation.isPending} className="flex items-center" form="create-project-form">{project ? 'Salvar' : 'Criar'}</Button>
               <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
             </ModalFooter>
           </fieldset>
