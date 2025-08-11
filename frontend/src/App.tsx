@@ -155,7 +155,6 @@ function App() {
   const {
     isPending: isPendingProjects,
     isError: isErrorProjects,
-    error: errorProjects,
     data: projects,
     refetch: refetchProjects,
   } = useQuery({
@@ -185,7 +184,7 @@ function App() {
     onError: () => {
       toast.error('Erro ao atualizar projeto!');
     },
-  })
+  });
 
   async function deleteProject() {
     try {
