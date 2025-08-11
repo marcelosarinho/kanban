@@ -334,7 +334,7 @@ function App() {
             </div>
           </div>
         </aside>
-        <section className="ml-52">
+        <section className="ml-52 overflow-hidden">
           <nav
             className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
           >
@@ -363,21 +363,25 @@ function App() {
           </nav>
 
           <main className="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50">
-            <header className='text-center'>
+            <header className="text-center">
               <h1 className="text-3xl font-bold mb-2 dark:text-gray-300">
-                Kanban
+                {project?.name ?? 'Nenhum projeto selecionado'}
               </h1>
 
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, et.</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                {project?.description ?? 'Selecione um projeto na lista de projetos ao lado'}
+              </p>
             </header>
 
             <div className="flex gap-4">
-              {Object.keys(TASK_STATUSES).map((key) => (
-                <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
-                  <Task onClick={() => openModal('select-category-modal')} />
-                  <TaskSkeleton />
-                </StatusColumn>
-              ))}
+              {project && (
+                Object.keys(TASK_STATUSES).map((key) => (
+                  <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
+                    <Task onClick={() => openModal('select-category-modal')} />
+                    <TaskSkeleton />
+                  </StatusColumn>
+                ))
+              )}
             </div>
           </main>
         </section>
