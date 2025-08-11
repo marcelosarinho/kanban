@@ -38,10 +38,6 @@ const queryClient = new QueryClient();
 function App() {
   const [themeDropdown, setThemeDropdown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [loading, setLoading] = useState({
-    createProject: false,
-    deleteProject: false,
-  });
   const [project, setProject] = useState<Project | null>(null);
   const [projectsQuery, setProjectsQuery] = useState('');
 
