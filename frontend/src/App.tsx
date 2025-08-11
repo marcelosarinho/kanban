@@ -237,7 +237,7 @@ function App() {
             <ModalTitle>{project ? 'Editar' : 'Adicionar'} projeto</ModalTitle>
             <ModalClose onClick={() => closeModal('create-project-modal')} />
           </ModalHeader>
-          <fieldset disabled={createProjectMutation.isPending} className="disabled:opacity-50">
+          <fieldset disabled={createProjectMutation.isPending || updateProjectMutation.isPending} className="disabled:opacity-50">
             <ModalBody>
               <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className='flex flex-col gap-3'>
                 <Input error={errors.name?.message} {...register('name')} id="project-name" label="Nome do projeto"/>
@@ -246,7 +246,7 @@ function App() {
               </form>
             </ModalBody>
             <ModalFooter>
-              <Button loading={createProjectMutation.isPending} className="flex items-center" form="create-project-form">{project ? 'Salvar' : 'Criar'}</Button>
+              <Button loading={createProjectMutation.isPending || updateProjectMutation.isPending} className="flex items-center" form="create-project-form">{project ? 'Salvar' : 'Criar'}</Button>
               <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
             </ModalFooter>
           </fieldset>
@@ -260,7 +260,7 @@ function App() {
             <p>Tem certeza de que deseja deletar o projeto {project?.name}?</p>
           </ModalBody>
           <ModalFooter>
-            <Button loading={loading.deleteProject} onClick={() => deleteProjectMutation.mutate(project?.id)} variant="primary">Deletar</Button>
+            <Button loading={deleteProjectMutation.isPending} onClick={() => deleteProjectMutation.mutate(project?.id)} variant="primary">Deletar</Button>
             <Button onClick={() => closeModal('delete-project-modal')} variant="outline-primary">Cancelar</Button>
           </ModalFooter>
         </Modal>
