@@ -204,11 +204,12 @@ function App() {
     }
 
     if (project) {
+      // const tasks = project.tasks;
+
       return (
         Object.keys(TASK_STATUSES).map((key) => (
           <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
             <Task onClick={() => openModal('select-category-modal')} />
-            <TaskSkeleton />
           </StatusColumn>
         ))
       )
