@@ -26,6 +26,7 @@ import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
 import { createProject, deleteProject, getProjects, updateProject } from './api';
 import Loading from './components/Loading';
+import StatusColumnSkeleton from './components/StatusColumnSkeleton';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -194,10 +195,10 @@ function App() {
     if (!initialLoading) {
       return (
         Object.keys(TASK_STATUSES).map((key) => (
-          <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
+          <StatusColumnSkeleton key={key}>
             <TaskSkeleton />
             <TaskSkeleton />
-          </StatusColumn>
+          </StatusColumnSkeleton>
         ))
       )
     }
