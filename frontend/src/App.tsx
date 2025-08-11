@@ -162,6 +162,7 @@ function App() {
         key={project.id}
         project={project}
         openModal={openModal}
+        onClick={() => setProject(project)}
       />
     ))
   }
@@ -363,12 +364,12 @@ function App() {
           </nav>
 
           <main className="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50">
-            <header className="text-center">
+            <header className="text-center mb-8">
               <h1 className="text-3xl font-bold mb-2 dark:text-gray-300">
                 {project?.name ?? 'Nenhum projeto selecionado'}
               </h1>
 
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 {project?.description ?? 'Selecione um projeto na lista de projetos ao lado'}
               </p>
             </header>
