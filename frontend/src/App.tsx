@@ -363,8 +363,8 @@ function App() {
             )}
           </nav>
 
-          <main className="flex flex-col items-center justify-center px-6 pt-20 dark:bg-slate-950 bg-gray-50">
-            <header className="text-center mb-8">
+          <main className="flex flex-col items-center px-6 pt-20 dark:bg-slate-950 bg-gray-50 h-screen gap-6">
+            <header className="text-center w-full">
               <h1 className="text-3xl font-bold mb-2 dark:text-gray-300">
                 {project?.name ?? 'Nenhum projeto selecionado'}
               </h1>
