@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ChangeEvent } from 'react';
+import { useDeferredValue, useEffect, useRef, useState, type ChangeEvent } from 'react';
 import Button from './components/Button';
 import Modal from './components/Modal';
 import ModalHeader from './components/ModalHeader';
@@ -44,6 +44,7 @@ function App() {
   const [initialLoading, setInitialLoading] = useState(true);
 
   const themeIconRef = useRef<HTMLElement>(null);
+  const deferredProjectsQuery = useDeferredValue(projectsQuery);
 
   const disabledCategories = selectedCategories.length >= 2;
 
@@ -184,7 +185,7 @@ function App() {
     data: projects,
     refetch: refetchProjects,
   } = useQuery({
-    queryKey: ['projects', projectsQuery],
+    queryKey: ['projects', deferredProjectsQuery],
     queryFn: () => getProjects(projectsQuery),
   });
 
