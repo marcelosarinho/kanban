@@ -171,7 +171,7 @@ function App() {
   function renderProjectHeader() {
     if (initialLoading) {
       return (
-        <header className="flex flex-col items-center">
+        <header className="flex flex-col items-center w-full">
           <div className="bg-gray-300 dark:bg-slate-600 h-9 rounded-full mb-3 animate-pulse w-1/3"></div>
           <div className="bg-gray-300 dark:bg-slate-600 h-5 rounded-full animate-pulse w-1/3"></div>
         </header>
@@ -192,7 +192,7 @@ function App() {
   }
 
   function renderTasks() {
-    if (!initialLoading) {
+    if (initialLoading) {
       return (
         Object.keys(TASK_STATUSES).map((key) => (
           <StatusColumnSkeleton key={key}>
