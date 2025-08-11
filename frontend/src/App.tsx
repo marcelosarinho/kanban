@@ -24,7 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
-import { createProject, getProjects, updateProject } from './api';
+import { createProject, deleteProject, getProjects, updateProject } from './api';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -185,28 +185,17 @@ function App() {
     },
   });
 
-  async function deleteProject() {
-    try {
-      setLoading({ ...loading, deleteProject: true });
-      if (!project?.id) {
-        toast.error('Erro ao deletar projeto!');
-        return;
-      }
-
-      await fetch(`http://localhost:8080/projects/${project.id}`, {
-        method: 'DELETE',
-      })
-
-      toast.success('Projeto deletado com sucesso!');
-      closeModal('delete-project-modal');
+  const deleteProjectMutation = useMutation({
+    mutationFn: (id?: string) => deleteProject(id),
+    onSuccess: () => {
       refetchProjects();
-    } catch (error) {
-      console.log(error);
+      closeModal('delete-project-modal');
+      toast.success('Projeto deletado com sucesso!');
+    },
+    onError: () => {
       toast.error('Erro ao deletar projeto!');
-    } finally {
-      setLoading({ ...loading, deleteProject: false });
-    }
-  }
+    },
+  })
 
   useEffect(() => {
     if (isErrorProjects) {
@@ -271,7 +260,7 @@ function App() {
             <p>Tem certeza de que deseja deletar o projeto {project?.name}?</p>
           </ModalBody>
           <ModalFooter>
-            <Button loading={loading.deleteProject} onClick={() => deleteProject()} variant="primary">Deletar</Button>
+            <Button loading={loading.deleteProject} onClick={() => deleteProjectMutation.mutate(project?.id)} variant="primary">Deletar</Button>
             <Button onClick={() => closeModal('delete-project-modal')} variant="outline-primary">Cancelar</Button>
           </ModalFooter>
         </Modal>

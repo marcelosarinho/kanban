@@ -27,7 +27,7 @@ export async function createProject(project: CreateProject) {
   }
 }
 
-export async function deleteProject(id: string) {
+export async function deleteProject(id?: string) {
   try {
     if (!id) {
       console.error('Projeto não encontrado!');
