@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
-import { ilike, or } from "drizzle-orm";
+import { desc, ilike, or } from "drizzle-orm";
 import { projects } from "../db/schema";
 
 export async function getProjects(app: FastifyInstance) {
@@ -14,7 +14,8 @@ export async function getProjects(app: FastifyInstance) {
         where,
         with: {
           tasks: true,
-        }
+        },
+        orderBy: [desc(projects.createdAt)],
       });
 
       return results;
