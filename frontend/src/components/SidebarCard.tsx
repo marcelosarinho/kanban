@@ -17,10 +17,10 @@ export default function SidebarCard(props: SidebarCardProps) {
 
   return (
     <div className="bg-gray-100 py-2 px-3 rounded border border-gray-300 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300 hover:border-primary transition-colors">
-      <h2 id={underscoredProjectName} className="w-fit font-semibold truncate">{project.name}</h2>
+      <h2 id={underscoredProjectName} className="w-full font-semibold truncate">{project.name}</h2>
       <CustomTooltip anchorSelect={`#${underscoredProjectName}`} content={project.name} />
 
-      <h6 id={underscoredProjectDescription} className="w-fit text-sm truncate leading-tight">{project.description}</h6>
+      <h6 id={underscoredProjectDescription} className="w-full text-sm truncate leading-tight">{project.description}</h6>
       <CustomTooltip anchorSelect={`#${underscoredProjectDescription}`} content={project.description} />
 
       <div className="flex items-center justify-end">
