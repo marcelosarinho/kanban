@@ -23,8 +23,8 @@ import { projectSchema } from './schemas/projects';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { getProjects, searchProject } from './api';
+import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
+import { createProject, getProjects, searchProject } from './api';
 import Loading from './components/Loading';
 
 const themeIcons: { [key: string]: string } = {
@@ -139,30 +139,8 @@ function App() {
     setSelectedCategories(selectedCategories.filter(category => category !== name));
   }
 
-  async function onSubmit(data: Inputs) {    
-    try {
-      setLoading({ ...loading, createProject: true });
-
-      const response = await fetch(`http://localhost:8080/projects${project ? `/${project.id}` : ''}`, {
-        method: project ? 'PUT' : 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-
-      const json = await response.json();
-
-      toast.success(json.message);
-
-      closeModal('create-project-modal');
-      refetchProjects();
-    } catch (error) {
-      console.error(error);
-      toast.error(`Erro ao ${project ? 'editar' : 'criar'} projeto!`);
-    } finally {
-      setLoading({ ...loading, createProject: false });
-    }
+  async function onSubmit(data: Inputs) {
+    createProjectMutation.mutate(data);
   }
 
   const {
@@ -171,10 +149,21 @@ function App() {
     error: errorProjects,
     data: projects,
     refetch: refetchProjects,
-
   } = useQuery({
     queryKey: ['projects', projectsQuery],
     queryFn: () => getProjects(projectsQuery)
+  });
+
+  const createProjectMutation = useMutation({
+    mutationFn: createProject,
+    onSuccess: () => {
+      refetchProjects();
+      closeModal('create-project-modal');
+      toast.success('Projeto criado com sucesso!');
+    },
+    onError: () => {
+      toast.error('Erro ao criar projeto!');
+    },
   })
 
   async function deleteProject() {
