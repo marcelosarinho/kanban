@@ -167,6 +167,29 @@ function App() {
     ))
   }
 
+  function renderProjectHeader() {
+    if (initialLoading) {
+      return (
+        <header className="flex flex-col items-center">
+          <div className="bg-gray-300 dark:bg-slate-600 h-9 rounded-full mb-3 animate-pulse w-1/3"></div>
+          <div className="bg-gray-300 dark:bg-slate-600 h-5 rounded-full animate-pulse w-1/3"></div>
+        </header>
+      )
+    }
+
+    return (
+      <header className="text-center w-full">
+        <h1 className="text-3xl font-bold mb-2 dark:text-gray-300">
+          {project?.name ?? 'Nenhum projeto selecionado'}
+        </h1>
+
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          {project?.description ?? 'Selecione um projeto na lista de projetos ao lado'}
+        </p>
+      </header>
+    )
+  }
+
   async function onSubmit(data: Inputs) {
     if (project) {
       updateProjectMutation.mutate({
@@ -364,15 +387,7 @@ function App() {
           </nav>
 
           <main className="flex flex-col items-center px-6 pt-20 dark:bg-slate-950 bg-gray-50 h-screen gap-6">
-            <header className="text-center w-full">
-              <h1 className="text-3xl font-bold mb-2 dark:text-gray-300">
-                {project?.name ?? 'Nenhum projeto selecionado'}
-              </h1>
-
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {project?.description ?? 'Selecione um projeto na lista de projetos ao lado'}
-              </p>
-            </header>
+            {renderProjectHeader()}
 
             <div className="flex gap-4">
               {project && (
