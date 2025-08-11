@@ -24,7 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
-import { createProject, getProjects, searchProject } from './api';
+import { createProject, getProjects, searchProject, updateProject } from './api';
 import Loading from './components/Loading';
 
 const themeIcons: { [key: string]: string } = {
@@ -140,6 +140,15 @@ function App() {
   }
 
   async function onSubmit(data: Inputs) {
+    if (project) {
+      updateProjectMutation.mutate({
+        id: project.id,
+        name: data.name,
+        description: data.description,
+      });
+      return;
+    }
+
     createProjectMutation.mutate(data);
   }
 
@@ -163,6 +172,18 @@ function App() {
     },
     onError: () => {
       toast.error('Erro ao criar projeto!');
+    },
+  });
+
+  const updateProjectMutation = useMutation({
+    mutationFn: updateProject,
+    onSuccess: () => {
+      refetchProjects();
+      closeModal('create-project-modal');
+      toast.success('Projeto atualizado com sucesso!');
+    },
+    onError: () => {
+      toast.error('Erro ao atualizar projeto!');
     },
   })
 
