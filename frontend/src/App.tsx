@@ -25,6 +25,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
 import { createProject, deleteProject, getProjects, updateProject } from './api';
+import Loading from './components/Loading';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -40,6 +41,7 @@ function App() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [project, setProject] = useState<Project | null>(null);
   const [projectsQuery, setProjectsQuery] = useState('');
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const themeIconRef = useRef<HTMLElement>(null);
 
@@ -134,6 +136,35 @@ function App() {
     setSelectedCategories(selectedCategories.filter(category => category !== name));
   }
 
+  function renderProjects() {
+    if (!initialLoading && isPendingProjects) {
+      return (
+        <div className="flex items-start justify-center h-screen">
+          <Loading className='font-bold text-3xl text-primary' loading={isPendingProjects} />
+        </div>
+      )
+    }
+
+    if (initialLoading) {
+      return (
+        <>
+          <SidebarCardSkeleton />
+          <SidebarCardSkeleton />
+          <SidebarCardSkeleton />
+          <SidebarCardSkeleton />
+        </>
+      )
+    }
+
+    return projects?.map((project: Project) => (
+      <SidebarCard
+        key={project.id}
+        project={project}
+        openModal={openModal}
+      />
+    ))
+  }
+
   async function onSubmit(data: Inputs) {
     if (project) {
       updateProjectMutation.mutate({
@@ -154,7 +185,7 @@ function App() {
     refetch: refetchProjects,
   } = useQuery({
     queryKey: ['projects', projectsQuery],
-    queryFn: () => getProjects(projectsQuery)
+    queryFn: () => getProjects(projectsQuery),
   });
 
   const createProjectMutation = useMutation({
@@ -191,17 +222,22 @@ function App() {
     onError: () => {
       toast.error('Erro ao deletar projeto!');
     },
-  })
+  });
 
   useEffect(() => {
     if (isErrorProjects) {
       toast.error('Erro ao buscar projetos!');
     }
-  }, [isErrorProjects])
+  }, [isErrorProjects]);
+
+  useEffect(() => {
+    if (projects && initialLoading) {
+      setInitialLoading(false);
+    }
+  }, [projects, initialLoading]);
 
   useEffect(() => {
     const theme = localStorage.getItem('theme');
-
     changeIconTheme(themeIcons[theme || 'system']);
     document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, []);
@@ -293,21 +329,7 @@ function App() {
 
             <Searchbar value={projectsQuery} onSearch={(e) => setProjectsQuery(e.target.value)} className="mt-6" />
             <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto overflow-x-hidden max-h-screen">
-              {projects?.map((project: Project) => (
-                <SidebarCard
-                  key={project.id}
-                  project={project}
-                  openModal={openModal}
-                />
-              ))}
-              {isPendingProjects && (
-                <>
-                  <SidebarCardSkeleton />
-                  <SidebarCardSkeleton />
-                  <SidebarCardSkeleton />
-                  <SidebarCardSkeleton />
-                </>
-              )}
+              {renderProjects()}
             </div>
           </div>
         </aside>
