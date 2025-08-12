@@ -29,6 +29,7 @@ import Loading from './components/Loading';
 import StatusColumnSkeleton from './components/StatusColumnSkeleton';
 import type { Task as TaskType } from './types/task';
 import type { TaskStatusOption } from './types/constants';
+import { createTask } from './api/task';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -213,7 +214,11 @@ function App() {
 
       return (
         Object.keys(TASK_STATUSES).map((key) => (
-          <StatusColumn key={key} status={key as TaskStatusOption}>
+          <StatusColumn
+            key={key}
+            status={key as TaskStatusOption}
+            createTask={() => createTaskMutation.mutate({ status: key as TaskStatusOption, id: project.id })}
+          >
             {groupedTasks[key as TaskStatusOption].map((task: TaskType) => (
               <Task key={task.id} onClick={() => console.log(task)} />
             ))}
@@ -295,6 +300,17 @@ function App() {
     onError: () => {
       toast.error('Erro ao deletar projeto!');
     },
+  });
+
+  const createTaskMutation = useMutation({
+    mutationFn: ({ status, id }: { status: TaskStatusOption, id?: string }) => createTask(status, id),
+    onSuccess: () => {
+      refetchProjects();
+      toast.success('Tarefa criada com sucesso!');
+    },
+    onError: () => {
+      toast.error('Erro ao criar tarefa!');
+    }
   });
 
   useEffect(() => {

@@ -8,10 +8,11 @@ import type { TaskStatusOption } from "../types/constants";
 type StatusColumnProps = {
   status: TaskStatusOption;
   children?: ReactElement | ReactElement[] | undefined | null;
+  createTask: () => void;
 }
 
 export default function StatusColumn(props: StatusColumnProps) {
-  const { status, children } = props;
+  const { status, children, createTask } = props;
 
   return (
     <div className="col-lg-3 max-h-3/6">
@@ -20,7 +21,7 @@ export default function StatusColumn(props: StatusColumnProps) {
           {TASK_STATUSES[status]}
         </header>
 
-        <Button variant="success">
+        <Button variant="success" onClick={createTask}>
           <PlusIcon weight="bold" className="text-xs" />
         </Button>
       </div>
