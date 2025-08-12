@@ -27,6 +27,8 @@ import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tansta
 import { createProject, deleteProject, getProjects, updateProject } from './api';
 import Loading from './components/Loading';
 import StatusColumnSkeleton from './components/StatusColumnSkeleton';
+import type { Task as TaskType } from './types/task';
+import type { TaskStatusOption } from './types/constants';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -204,25 +206,35 @@ function App() {
     }
 
     if (project) {
-      // const tasks = project.tasks;
+      const tasks = project.tasks;
+
+      const groupedTasks = groupTasks(tasks);
 
       return (
         Object.keys(TASK_STATUSES).map((key) => (
           <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
-            <Task onClick={() => openModal('select-category-modal')} />
-            <Task onClick={() => openModal('select-category-modal')} />
-            <Task onClick={() => openModal('select-category-modal')} />
-            <Task onClick={() => openModal('select-category-modal')} />
-            <Task onClick={() => openModal('select-category-modal')} />
-            <Task onClick={() => openModal('select-category-modal')} />
-            <Task onClick={() => openModal('select-category-modal')} />
-            <Task onClick={() => openModal('select-category-modal')} />
+            {groupedTasks[key as TaskStatusOption].map((task: TaskType) => (
+              <Task key={task.id} onClick={() => console.log(task)} />
+            ))}
           </StatusColumn>
         ))
       )
     }
 
     return null;
+  }
+
+  function groupTasks(tasks: TaskType[]) {
+    const grouped = Object.keys(TASK_STATUSES).reduce((acc, status) => {
+      acc[status as TaskStatusOption] = [];
+      return acc;
+    }, {} as Record<TaskStatusOption, TaskType[]>);
+
+    tasks.forEach((task: TaskType) => {
+      grouped[task.status].push(task);
+    });
+
+    return grouped;
   }
 
   async function onSubmit(data: Inputs) {
