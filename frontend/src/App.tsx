@@ -210,6 +210,13 @@ function App() {
         Object.keys(TASK_STATUSES).map((key) => (
           <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
             <Task onClick={() => openModal('select-category-modal')} />
+            <Task onClick={() => openModal('select-category-modal')} />
+            <Task onClick={() => openModal('select-category-modal')} />
+            <Task onClick={() => openModal('select-category-modal')} />
+            <Task onClick={() => openModal('select-category-modal')} />
+            <Task onClick={() => openModal('select-category-modal')} />
+            <Task onClick={() => openModal('select-category-modal')} />
+            <Task onClick={() => openModal('select-category-modal')} />
           </StatusColumn>
         ))
       )
@@ -417,7 +424,7 @@ function App() {
           <main className="flex flex-col items-center px-6 pt-20 dark:bg-slate-950 bg-gray-50 h-screen gap-6">
             {renderProjectHeader()}
 
-            <div className="flex gap-4">
+            <div className="grid grid-cols-4 gap-4">
               {renderTasks()}
             </div>
           </main>
