@@ -152,10 +152,9 @@ function App() {
     if (initialLoading) {
       return (
         <>
-          <SidebarCardSkeleton />
-          <SidebarCardSkeleton />
-          <SidebarCardSkeleton />
-          <SidebarCardSkeleton />
+          {Array.from({ length: 4 }).map((_, index) => (
+            <SidebarCardSkeleton key={index} />
+          ))}
         </>
       )
     }
