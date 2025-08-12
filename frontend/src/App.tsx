@@ -208,7 +208,7 @@ function App() {
     }
 
     if (project) {
-      const tasks = project.tasks;
+      const tasks: TaskType[] = [];
 
       const groupedTasks = groupTasks(tasks);
 

@@ -12,9 +12,6 @@ export async function getProjects(app: FastifyInstance) {
 
       const results = await db.query.projects.findMany({
         where,
-        with: {
-          tasks: true,
-        },
         orderBy: [desc(projects.createdAt)],
       });
 
