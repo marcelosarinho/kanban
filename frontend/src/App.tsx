@@ -197,8 +197,9 @@ function App() {
       return (
         Object.keys(TASK_STATUSES).map((key) => (
           <StatusColumnSkeleton key={key}>
-            <TaskSkeleton />
-            <TaskSkeleton />
+            {Array.from({ length: 2 }).map((_, index) => (
+              <TaskSkeleton key={index} />
+            ))}
           </StatusColumnSkeleton>
         ))
       )
