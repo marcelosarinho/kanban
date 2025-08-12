@@ -6,13 +6,5 @@ export type Project = {
   updatedAt: string;
 }
 
-export type CreateProject = {
-  name: string;
-  description: string;
-}
-
-export type UpdateProject = {
-  id: string;
-  name?: string;
-  description?: string;
-}
+export type CreateProject = Pick<Project, 'name' | 'description'>;
+export type UpdateProject = Omit<Project, 'createdAt' | 'updatedAt'>;
