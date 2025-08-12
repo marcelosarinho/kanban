@@ -159,12 +159,13 @@ function App() {
       )
     }
 
-    return projects?.map((project: Project) => (
+    return projects?.map((p: Project) => (
       <SidebarCard
-        key={project.id}
-        project={project}
+        key={p.id}
+        project={p}
         openModal={openModal}
-        onClick={() => setProject(project)}
+        selected={p.id === project?.id}
+        onClick={() => setProject(p)}
       />
     ))
   }

@@ -7,18 +7,19 @@ import { addUnderscoresToText } from "../utils/functions";
 type SidebarCardProps = {
   project: Project;
   openModal: (modalId: string, project?: Project, edit?: boolean) => void;
+  selected: boolean;
   onClick: () => void;
 }
 
 export default function SidebarCard(props: SidebarCardProps) {
-  const { project, openModal, onClick } = props;
+  const { project, openModal, selected, onClick } = props;
 
   const underscoredProjectName = addUnderscoresToText(project.name);
   const underscoredProjectDescription = addUnderscoresToText(project.description);
 
   return (
     <div
-      className="bg-gray-100 py-2 px-3 rounded border border-gray-300 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300 hover:border-primary transition-colors"
+      className={`bg-gray-100 py-2 px-3 rounded dark:bg-slate-800 dark:text-gray-300 cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors ${selected ? 'border border-primary' : 'border border-gray-300 dark:border-slate-700'}`}
       onClick={onClick}
     >
       <h2 id={underscoredProjectName} className="max-w-full w-fit font-semibold truncate">{project.name}</h2>
