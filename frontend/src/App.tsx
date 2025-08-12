@@ -212,7 +212,7 @@ function App() {
 
       return (
         Object.keys(TASK_STATUSES).map((key) => (
-          <StatusColumn key={key} status={key as keyof typeof TASK_STATUSES}>
+          <StatusColumn key={key} status={key as TaskStatusOption}>
             {groupedTasks[key as TaskStatusOption].map((task: TaskType) => (
               <Task key={task.id} onClick={() => console.log(task)} />
             ))}
