@@ -1,12 +1,18 @@
-export default function ProgressBar() {
+type ProgressBarProps = {
+  progress: number;
+}
+
+export default function ProgressBar(props: ProgressBarProps) {
+  const { progress } = props;
+
   return (
     <div className="flex flex-col">
       <div className="flex justify-between">
         <small>Progresso</small>
-        <small>66%</small>
+        <small>{progress}%</small>
       </div>
 
-      <progress className="h-2 bg-success rounded-full w-full" value="66" max="100"></progress>
+      <progress className="h-2 bg-success rounded-full w-full" value={progress} max="100"></progress>
     </div>
   )
 }

@@ -8,14 +8,17 @@ import Textarea from "./Textarea";
 import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
 import CustomTooltip from "./CustomTooltip";
 import Subtasks from "./Subtasks";
+import type { Task } from "../types/task";
+import type { CategoryOption } from "../types/constants";
 
 type TaskProps = {
   color?: keyof typeof TASK_COLORS;
   onClick: () => void;
+  task: Task;
 }
 
 export default function Task(props: TaskProps) {
-  const { color, onClick } = props;
+  const { color, onClick, task } = props;
 
   const [toggleElement, setToggleElement] = useState({
     color: false,
@@ -23,12 +26,15 @@ export default function Task(props: TaskProps) {
     subtasks: false,
   });
 
+  const taskCategories = task.category?.split(',') as CategoryOption[];
+
   return (
     <div className={`p-4 border border-l-4 ${TASK_COLORS[color || 'none'].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
       <header className="flex justify-between items-center">
           <div className="flex flex-wrap gap-1">
-            <TaskCategoryBadge category="frontend" />
-            <TaskCategoryBadge category="backend" />
+            {taskCategories?.map((category) => (
+              <TaskCategoryBadge key={category} category={category} />
+            ))}
           </div>
           <div className="relative">
             <div
@@ -51,13 +57,14 @@ export default function Task(props: TaskProps) {
       </header>
 
       <div className="my-2">
-          <h1 className="font-medium text-lg">Nome</h1>
-          <p className="text-sm leading-tight">Descrição</p>
+          <h1 className="font-medium text-lg">{task.name}</h1>
+          <p className="text-sm leading-tight">{task.description}</p>
       </div>
 
       <div className="flex justify-between items-center my-3">
           <div className="flex items-center gap-1.5 font-medium">
               <input
+                checked={task.done}
                 className="peer appearance-none size-4 border border-gray-300 rounded-xs dark:border-slate-600 checked:bg-success transition-colors"
                 type="checkbox"
                 name="done"
@@ -66,7 +73,7 @@ export default function Task(props: TaskProps) {
               <CheckIcon weight="bold" className="pointer-events-none hidden peer-checked:block absolute text-black" />
               <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor="done">Concluída</label>
           </div>
-          <select className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name="priority" id="priority">
+          <select value={task.priority} className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name="priority" id="priority">
               {Object.entries(TASK_PRIORITIES).map(([key, value]) => (
                 <option key={key} value={key}>{value.label}</option>
               ))}

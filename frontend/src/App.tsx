@@ -220,19 +220,19 @@ function App() {
 
     if (project) {
       return Object.keys(TASK_STATUSES).map((key) => {
-        const status = key as TaskStatusOption;
+        const status: TaskStatusOption = key as TaskStatusOption;
         const filteredTasks = searchTasks(status);
 
         return (
           <StatusColumn
             key={key}
-            status={key as TaskStatusOption}
-            createTask={() => createTaskMutation.mutate({ status: key as TaskStatusOption, id: project.id })}
+            status={status}
+            createTask={() => createTaskMutation.mutate({ status, id: project.id })}
             setTaskQuery={setTasksQuery}
             value={deferredTasksQuery[status]}
           >
             {filteredTasks.map((task: TaskType) => (
-              <Task onClick={() => console.log('oi')} key={task.id} />
+              <Task onClick={() => console.log('oi')} key={task.id} task={task} />
             ))}
           </StatusColumn>
         )

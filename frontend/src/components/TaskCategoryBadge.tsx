@@ -1,7 +1,8 @@
 import { CATEGORIES } from "../libs/constants";
+import type { CategoryOption } from "../types/constants";
 
 type TaskCategoryBadgeProps = {
-  category: keyof typeof CATEGORIES;
+  category: CategoryOption;
 }
 
 export default function TaskCategoryBadge(props: TaskCategoryBadgeProps) {
