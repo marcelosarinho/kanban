@@ -11,15 +11,21 @@ export async function getTasks(app: FastifyInstance) {
 
       const results = await db.select().from(tasks).where(eq(tasks.projectId, id));
 
+      const statuses: Record<TaskStatusOption, Task[]> = {
+        todo: [],
+        in_progress: [],
+        testing: [],
+        implemented: [],
+      };
+
       const groupedTasks = results.reduce((acc, task) => {
         if (!acc[task.status]) {
-          console.log(task.status);
           acc[task.status] = [];
         }
 
         acc[task.status].push(task as unknown as Task);
         return acc;
-      }, {} as Record<TaskStatusOption, Task[]>);
+      }, statuses);
 
       return reply.status(200).send(groupedTasks);
     } catch (error) {
