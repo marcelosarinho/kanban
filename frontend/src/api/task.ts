@@ -1,5 +1,17 @@
 import type { TaskStatusOption } from "../types/constants";
 
+export async function getTasks(projectId: string) {
+  try {
+    const response = await fetch(`http://localhost:8080/projects/${projectId}/tasks`);
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function createTask(status: TaskStatusOption, projectId?: string) {
   if (!projectId) {
     console.error('Projeto não encontrado!');
