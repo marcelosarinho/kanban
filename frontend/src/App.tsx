@@ -29,7 +29,7 @@ import Loading from './components/Loading';
 import StatusColumnSkeleton from './components/StatusColumnSkeleton';
 import type { Task as TaskType } from './types/task';
 import type { TaskStatusOption } from './types/constants';
-import { createTask } from './api/task';
+import { createTask, getTasks } from './api/task';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -213,10 +213,6 @@ function App() {
     }
 
     if (project) {
-      const tasks: TaskType[] = [];
-
-      const groupedTasks = groupTasks(tasks);
-
       return (
         Object.keys(TASK_STATUSES).map((key) => (
           <StatusColumn
@@ -224,7 +220,7 @@ function App() {
             status={key as TaskStatusOption}
             createTask={() => createTaskMutation.mutate({ status: key as TaskStatusOption, id: project.id })}
           >
-            {groupedTasks[key as TaskStatusOption].map((task: TaskType) => (
+            {tasks?.[key as TaskStatusOption].map((task: TaskType) => (
               <Task key={task.id} onClick={() => console.log(task)} />
             ))}
           </StatusColumn>
@@ -233,19 +229,6 @@ function App() {
     }
 
     return null;
-  }
-
-  function groupTasks(tasks: TaskType[]) {
-    const grouped = Object.keys(TASK_STATUSES).reduce((acc, status) => {
-      acc[status as TaskStatusOption] = [];
-      return acc;
-    }, {} as Record<TaskStatusOption, TaskType[]>);
-
-    tasks.forEach((task: TaskType) => {
-      grouped[task.status].push(task);
-    });
-
-    return grouped;
   }
 
   async function onSubmit(data: Inputs) {
@@ -307,10 +290,19 @@ function App() {
     },
   });
 
+  const {
+    isError: isErrorTasks,
+    data: tasks,
+    refetch: refetchTasks,
+  } = useQuery({
+    queryKey: ['tasks', project?.id],
+    queryFn: () => getTasks(project?.id),
+  })
+
   const createTaskMutation = useMutation({
     mutationFn: ({ status, id }: { status: TaskStatusOption, id?: string }) => createTask(status, id),
     onSuccess: () => {
-      refetchProjects();
+      refetchTasks();
       toast.success('Tarefa criada com sucesso!');
     },
     onError: () => {
@@ -322,7 +314,11 @@ function App() {
     if (isErrorProjects) {
       toast.error('Erro ao buscar projetos!');
     }
-  }, [isErrorProjects]);
+
+    if (isErrorTasks) {
+      toast.error('Erro ao buscar tarefas!');
+    }
+  }, [isErrorProjects, isErrorTasks]);
 
   useEffect(() => {
     if (projects && initialLoading) {
