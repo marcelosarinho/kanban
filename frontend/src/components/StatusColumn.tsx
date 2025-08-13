@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { InputHTMLAttributes, ReactElement, SetStateAction } from "react";
 import Searchbar from "./Searchbar";
 import { TASK_STATUSES } from "../libs/constants";
 import Button from "./Button";
@@ -9,10 +9,12 @@ type StatusColumnProps = {
   status: TaskStatusOption;
   children?: ReactElement | ReactElement[] | undefined | null;
   createTask: () => void;
+  setTaskQuery: (value: SetStateAction<{ todo: string; in_progress: string; testing: string; implemented: string; }>) => void;
+  value: InputHTMLAttributes<HTMLInputElement>['value'];
 }
 
 export default function StatusColumn(props: StatusColumnProps) {
-  const { status, children, createTask } = props;
+  const { status, children, createTask, setTaskQuery, value} = props;
 
   return (
     <div className="col-lg-3 max-h-3/6">
@@ -26,7 +28,7 @@ export default function StatusColumn(props: StatusColumnProps) {
         </Button>
       </div>
 
-      <Searchbar onSearch={() => console.log('search')} className="mb-2" />
+      <Searchbar onSearch={(e) => setTaskQuery((prev) => ({ ...prev, [status]: e.target.value }))} className="mb-2" value={value} />
 
       <div className="flex flex-col max-h-1/3 gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-y-auto">
         {children}

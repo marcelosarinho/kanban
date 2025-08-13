@@ -45,12 +45,23 @@ function App() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [project, setProject] = useState<Project | null>(null);
   const [projectsQuery, setProjectsQuery] = useState('');
+  const [tasksQuery, setTasksQuery] = useState({
+    todo: '',
+    in_progress: '',
+    testing: '',
+    implemented: '',
+  });
   const [initialLoading, setInitialLoading] = useState(true);
 
   const themeIconRef = useRef<HTMLElement>(null);
   const deferredProjectsQuery = useDeferredValue(projectsQuery);
+  const deferredTasksQuery = useDeferredValue(tasksQuery);
 
   const disabledCategories = selectedCategories.length >= 2;
+
+  const theme = localStorage.getItem('theme');
+  changeIconTheme(themeIcons[theme || 'system']);
+  document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const {
     register,
@@ -208,22 +219,31 @@ function App() {
     }
 
     if (project) {
-      return (
-        Object.keys(TASK_STATUSES).map((key) => (
+      return Object.keys(TASK_STATUSES).map((key) => {
+        const status = key as TaskStatusOption;
+        const filteredTasks = searchTasks(status);
+
+        return (
           <StatusColumn
             key={key}
             status={key as TaskStatusOption}
             createTask={() => createTaskMutation.mutate({ status: key as TaskStatusOption, id: project.id })}
+            setTaskQuery={setTasksQuery}
+            value={deferredTasksQuery[status]}
           >
-            {tasks?.[key as TaskStatusOption].map((task: TaskType) => (
-              <Task key={task.id} onClick={() => console.log(task)} />
+            {filteredTasks.map((task: TaskType) => (
+              <Task onClick={() => console.log('oi')} key={task.id} />
             ))}
           </StatusColumn>
-        ))
-      )
+        )
+      })
     }
 
     return null;
+  }
+
+  function searchTasks(status: TaskStatusOption) {
+    return tasks?.[status].filter((t: TaskType) => t.name.toLowerCase().includes(deferredTasksQuery[status].toLowerCase())) ?? [];
   }
 
   async function onSubmit(data: Inputs) {
@@ -292,7 +312,7 @@ function App() {
   } = useQuery({
     queryKey: ['tasks', project?.id],
     queryFn: () => getTasks(project?.id),
-  })
+  });
 
   const createTaskMutation = useMutation({
     mutationFn: ({ status, id }: { status: TaskStatusOption, id?: string }) => createTask(status, id),
@@ -320,12 +340,6 @@ function App() {
       setInitialLoading(false);
     }
   }, [projects, initialLoading]);
-
-  useEffect(() => {
-    const theme = localStorage.getItem('theme');
-    changeIconTheme(themeIcons[theme || 'system']);
-    document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -412,7 +426,7 @@ function App() {
               Adicionar projeto
             </Button>
 
-            <Searchbar value={projectsQuery} onSearch={(e) => setProjectsQuery(e.target.value)} className="mt-6" />
+            <Searchbar value={deferredProjectsQuery} onSearch={(e) => setProjectsQuery(e.target.value)} className="mt-6" />
             <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto overflow-x-hidden max-h-screen">
               {renderProjects()}
             </div>
