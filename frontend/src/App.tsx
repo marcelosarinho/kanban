@@ -166,14 +166,9 @@ function App() {
         project={p}
         openModal={openModal}
         selected={p.id === project?.id}
-        onClick={() => selectProject(p)}
+        onClick={() => setProject(p)}
       />
     ))
-  }
-  
-  function selectProject(project: Project) {
-    setProject(project);
-
   }
 
   function renderProjectHeader() {
