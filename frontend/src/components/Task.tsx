@@ -2,7 +2,7 @@ import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
 import { useState } from "react"
-import { ChatIcon, CheckIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
+import { ChatIcon, CheckCircleIcon, CheckFatIcon, CheckIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import Textarea from "./Textarea";
 import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
@@ -28,7 +28,11 @@ export default function Task(props: TaskProps) {
   const taskCategories = task.category?.split(',') as CategoryOption[] || ["none"];
 
   return (
-    <div className={`p-4 border border-l-4 ${TASK_COLORS[task.color || 'none'].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
+    <div className={`relative p-4 border border-l-4 ${task.done ? 'opacity-50' : ''} ${TASK_COLORS[task.color || 'none'].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
+      {task.done && (
+        <CheckCircleIcon size={24} weight="fill" className="absolute right-0 top-0 z-[1] text-success" />
+      )}
+
       <header className="flex justify-between items-center">
           <div className="flex flex-wrap gap-1">
             {taskCategories.map((category) => (
@@ -56,8 +60,8 @@ export default function Task(props: TaskProps) {
       </header>
 
       <div className="my-2">
-          <h1 className="font-medium text-lg">{task.name}</h1>
-          <p className="text-sm leading-tight">{task.description}</p>
+          <h1 className={`font-medium text-lg ${task.done ? 'line-through' : ''}`}>{task.name}</h1>
+          <p className={`text-sm leading-tight ${task.done ? 'line-through' : ''}`}>{task.description}</p>
       </div>
 
       <div className="flex justify-between items-center my-3">
