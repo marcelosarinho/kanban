@@ -12,13 +12,12 @@ import type { Task } from "../types/task";
 import type { CategoryOption } from "../types/constants";
 
 type TaskProps = {
-  color?: keyof typeof TASK_COLORS;
   onClick: () => void;
   task: Task;
 }
 
 export default function Task(props: TaskProps) {
-  const { color, onClick, task } = props;
+  const { onClick, task } = props;
 
   const [toggleElement, setToggleElement] = useState({
     color: false,
