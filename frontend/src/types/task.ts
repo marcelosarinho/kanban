@@ -15,3 +15,12 @@ export type Task = {
   updatedAt: string;
   projectId: string;
 }
+
+export type UpdateTaskName = Pick<Task, 'id' | 'name'>;
+export type UpdateTaskDescription = Pick<Task, 'id' | 'description'>;
+export type UpdateTaskPriority = Pick<Task, 'id' | 'priority'>;
+export type UpdateTaskCategory = Pick<Task, 'id' | 'category'>;
+export type UpdateTaskCommentary = Pick<Task, 'id' | 'commentary'>;
+export type UpdateTaskColor = Pick<Task, 'id' | 'color'>;
+export type UpdateTaskDone = Pick<Task, 'id' | 'done'>;
+export type UpdateTaskStatus = Pick<Task, 'id' | 'status'>;
