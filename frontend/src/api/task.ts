@@ -1,5 +1,5 @@
 import type { Project } from "../types/project";
-import type { TaskStatusOption, UpdateTask } from "../types/task";
+import type { Task, TaskStatusOption } from "../types/task";
 
 export async function getTasks(projectId?: Pick<Project, 'id'>) {
   if (!projectId) {
@@ -41,7 +41,7 @@ export async function createTask(status: TaskStatusOption, projectId?: Pick<Proj
   }
 }
 
-export async function updateTask(task: UpdateTask, projectId?: Pick<Project, 'id'>) {
+export async function updateTask(task: Task, projectId?: Pick<Project, 'id'>) {
   if (!projectId) {
     console.log('Projeto não encontrado!');
     return;
@@ -53,7 +53,7 @@ export async function updateTask(task: UpdateTask, projectId?: Pick<Project, 'id
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ body: task.body }),
+      body: JSON.stringify(task),
     });
 
     const data = await response.json();
