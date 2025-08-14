@@ -66,13 +66,13 @@ export default function Task(props: TaskProps) {
                 checked={task.done}
                 className="peer appearance-none size-4 border border-gray-300 rounded-xs dark:border-slate-600 checked:bg-success transition-colors"
                 type="checkbox"
-                name="done"
-                id="done"
+                name={`done_${task.id}`}
+                id={`done_${task.id}`}
               />
               <CheckIcon weight="bold" className="pointer-events-none hidden peer-checked:block absolute text-black" />
-              <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor="done">Concluída</label>
+              <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor={`done_${task.id}`}>Concluída</label>
           </div>
-          <select value={task.priority} className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name="priority" id="priority">
+          <select value={task.priority} className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name={`priority_${task.id}`} id={`priority_${task.id}`}>
               {Object.entries(TASK_PRIORITIES).map(([key, value]) => (
                 <option key={key} value={key}>{value.label}</option>
               ))}
@@ -88,18 +88,18 @@ export default function Task(props: TaskProps) {
       <div className="my-5 flex justify-between">
         <TaskPriorityBadge priority={task.priority}/>
         <Button
-          id="comments"
+          id={`comments_${task.id}`}
           variant="transparent"
           onClick={() => setToggleElement({...toggleElement, comment: !toggleElement.comment})}
         >
           <ChatIcon weight="bold" />
-          <CustomTooltip anchorSelect="#comments" content="Comentários" />
+          <CustomTooltip anchorSelect={`#comments_${task.id}`} content="Comentários" />
         </Button>
       </div>
 
       {toggleElement.comment && (
         <div className="mb-2">
-          <Textarea value={task.commentary} className="dark:border-slate-600!" />
+          <Textarea name={`commentary_${task.id}`} value={task.commentary} className="dark:border-slate-600!" />
         </div>
       )}
 
@@ -109,9 +109,9 @@ export default function Task(props: TaskProps) {
           Categorias
         </Button>
 
-        <Button id="delete" variant="transparent">
+        <Button id={`delete_${task.id}`} variant="transparent">
           <TrashIcon className="text-danger" weight="bold" />
-          <CustomTooltip anchorSelect="#delete" content="Deletar" />
+          <CustomTooltip anchorSelect={`#delete_${task.id}`} content="Deletar" />
         </Button>
       </footer>
     </div>
