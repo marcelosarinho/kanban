@@ -1,5 +1,5 @@
 import type { Project } from "../types/project";
-import type { TaskStatusOption } from "../types/task";
+import type { TaskStatusOption, UpdateTask } from "../types/task";
 
 export async function getTasks(projectId?: Pick<Project, 'id'>) {
   if (!projectId) {
@@ -41,19 +41,19 @@ export async function createTask(status: TaskStatusOption, projectId?: Pick<Proj
   }
 }
 
-export async function updateTask(params: any, projectId?: Pick<Project, 'id'>) {
+export async function updateTask(task: UpdateTask, projectId?: Pick<Project, 'id'>) {
   if (!projectId) {
     console.log('Projeto não encontrado!');
     return;
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/projects/${projectId}/tasks/${params.taskId}`, {
+    const response = await fetch(`http://localhost:8080/projects/${projectId}/tasks/${task.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ body: params.body }),
+      body: JSON.stringify({ body: task.body }),
     });
 
     const data = await response.json();

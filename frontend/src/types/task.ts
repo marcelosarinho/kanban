@@ -25,6 +25,15 @@ export type UpdateTaskColor = Pick<Task, 'id' | 'color'>;
 export type UpdateTaskDone = Pick<Task, 'id' | 'done'>;
 export type UpdateTaskStatus = Pick<Task, 'id' | 'status'>;
 
+export type UpdateTask = UpdateTaskName
+| UpdateTaskDescription
+| UpdateTaskPriority
+| UpdateTaskCategory
+| UpdateTaskCommentary
+| UpdateTaskColor
+| UpdateTaskDone
+| UpdateTaskStatus;
+
 export type TaskPriorityOption = 'low' | 'medium' | 'high';
 export type TaskStatusOption = 'todo' | 'in_progress' | 'testing' | 'implemented';
 
