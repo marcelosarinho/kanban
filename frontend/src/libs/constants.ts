@@ -5,11 +5,8 @@ import type {
   ThemeIcon,
   ThemeOption,
   Color,
-  TaskItem,
-  TaskPriorityItem,
-  TaskPriorityOption,
-  TaskStatusOption
 } from "../types/constants"
+import type { TaskItem, TaskPriorityItem, TaskPriorityOption, TaskStatusOption } from "../types/task"
 
 export const THEME_ICONS: Record<ThemeOption, ThemeIcon> = {
   light: 'ph-sun',

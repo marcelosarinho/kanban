@@ -3,7 +3,7 @@ import Searchbar from "./Searchbar";
 import { TASK_STATUSES } from "../libs/constants";
 import Button from "./Button";
 import { PlusIcon } from "@phosphor-icons/react";
-import type { TaskStatusOption } from "../types/constants";
+import type { TaskStatusOption } from "../types/task";
 
 type StatusColumnProps = {
   status: TaskStatusOption;

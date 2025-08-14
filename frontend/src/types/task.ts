@@ -1,4 +1,4 @@
-import type { CategoryOption, Color, TaskPriorityOption, TaskStatusOption } from "./constants";
+import type { CategoryOption, Color } from "./constants";
 
 export type Task = {
   id: string;
@@ -24,3 +24,18 @@ export type UpdateTaskCommentary = Pick<Task, 'id' | 'commentary'>;
 export type UpdateTaskColor = Pick<Task, 'id' | 'color'>;
 export type UpdateTaskDone = Pick<Task, 'id' | 'done'>;
 export type UpdateTaskStatus = Pick<Task, 'id' | 'status'>;
+
+export type TaskPriorityOption = 'low' | 'medium' | 'high';
+export type TaskStatusOption = 'todo' | 'in_progress' | 'testing' | 'implemented';
+
+export type TaskItem = {
+  bg: string;
+  border: string;
+  label: string;
+}
+
+export type TaskPriorityItem = {
+  color: string;
+  label: string;
+  dots: number;
+}

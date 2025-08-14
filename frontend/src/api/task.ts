@@ -1,4 +1,4 @@
-import type { TaskStatusOption } from "../types/constants";
+import type { TaskStatusOption } from "../types/task";
 
 export async function getTasks(projectId?: string) {
   if (!projectId) {

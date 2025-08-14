@@ -27,8 +27,7 @@ import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tansta
 import { createProject, deleteProject, getProjects, updateProject } from './api';
 import Loading from './components/Loading';
 import StatusColumnSkeleton from './components/StatusColumnSkeleton';
-import type { Task as TaskType } from './types/task';
-import type { TaskStatusOption } from './types/constants';
+import type { Task as TaskType, TaskStatusOption } from './types/task';
 import { createTask, getTasks } from './api/task';
 
 const themeIcons: { [key: string]: string } = {
