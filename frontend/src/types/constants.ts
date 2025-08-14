@@ -1,4 +1,4 @@
-export type CategoryOption = 'frontend' | 'backend' | 'mobile' | 'ui_ux' | 'devops' | 'database';
+export type CategoryOption = 'frontend' | 'backend' | 'mobile' | 'ui_ux' | 'devops' | 'database' | 'none';
 
 export type CategoryItem = {
   color: string;

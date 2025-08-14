@@ -22,6 +22,22 @@
   @apply dark:has-[:checked]:text-red-300 dark:has-[:checked]:bg-red-900/30 dark:has-[:checked]:border-red-700 dark:hover:bg-red-900/30 dark:hover:text-red-300 dark:hover:border-red-700 has-[:checked]:text-red-700 has-[:checked]:bg-red-100 has-[:checked]:border-red-300 hover:bg-red-100 hover:border-red-300 hover:text-red-700
 }
 
+.badge-none {
+  @apply dark:has-[:checked]:text-gray-300 dark:has-[:checked]:bg-gray-900/30 dark:has-[:checked]:border-gray-700 dark:hover:bg-gray-900/30 dark:hover:text-gray-300 dark:hover:border-gray-700 has-[:checked]:text-gray-700 has-[:checked]:bg-gray-100 has-[:checked]:border-gray-300 hover:bg-gray-100 hover:border-gray-300 hover:text-gray-700
+}
+
+.badge-danger {
+  @apply bg-red-100 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800 
+}
+
+.badge-warning {
+  @apply bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800
+}
+
+.badge-success {
+  @apply bg-green-100 text-green-800 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800
+}
+
 .task.badge-purple {
   @apply dark:text-purple-300 dark:bg-purple-900/30 dark:border-purple-700 text-purple-700 bg-purple-100 border-purple-300
 }
@@ -46,14 +62,6 @@
   @apply dark:text-red-300 dark:bg-red-900/30 dark:border-red-700 text-red-700 bg-red-100 border-red-300
 }
 
-.badge-danger {
-  @apply bg-red-100 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800 
-}
-
-.badge-warning {
-  @apply bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800
-}
-
-.badge-success {
-  @apply bg-green-100 text-green-800 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800
+.task.badge-none {
+  @apply dark:text-gray-300 dark:bg-gray-900/30 dark:border-gray-700 text-gray-700 bg-gray-100 border-gray-300
 }

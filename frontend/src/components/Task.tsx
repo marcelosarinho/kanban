@@ -25,13 +25,13 @@ export default function Task(props: TaskProps) {
     subtasks: false,
   });
 
-  const taskCategories = task.category?.split(',') as CategoryOption[];
+  const taskCategories = task.category?.split(',') as CategoryOption[] || ["none"];
 
   return (
     <div className={`p-4 border border-l-4 ${TASK_COLORS[task.color || 'none'].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
       <header className="flex justify-between items-center">
           <div className="flex flex-wrap gap-1">
-            {taskCategories?.map((category) => (
+            {taskCategories.map((category) => (
               <TaskCategoryBadge key={category} category={category} />
             ))}
           </div>

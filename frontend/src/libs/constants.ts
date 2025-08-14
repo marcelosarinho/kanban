@@ -24,6 +24,7 @@ export const CATEGORIES: Record<CategoryOption, CategoryItem> = {
   ui_ux: { color: 'badge-purple', name: 'UI/UX' },
   devops: { color: 'badge-pink', name: 'DevOps' },
   database: { color: 'badge-orange', name: 'Banco de dados' },
+  none: { color: 'badge-none', name: 'Sem categoria' },
 }
 
 export const BUTTON_VARIANTS: Record<ButtonOption, string> = {
