@@ -81,13 +81,13 @@ export default function Task(props: TaskProps) {
       </div>
 
       <div className="my-3">
-          <ProgressBar />
+        <ProgressBar progress={task.progress} />
       </div>
 
       <Subtasks onClick={() => setToggleElement({...toggleElement, subtasks: !toggleElement.subtasks})} title="teste" open={toggleElement.subtasks} />
 
       <div className="my-5 flex justify-between">
-        <TaskPriorityBadge priority="low"/>
+        <TaskPriorityBadge priority={task.priority}/>
         <Button
           id="comments"
           variant="transparent"
@@ -100,7 +100,7 @@ export default function Task(props: TaskProps) {
 
       {toggleElement.comment && (
         <div className="mb-2">
-          <Textarea className="dark:border-slate-600!" />
+          <Textarea value={task.commentary} className="dark:border-slate-600!" />
         </div>
       )}
 
