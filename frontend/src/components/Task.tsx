@@ -61,7 +61,7 @@ export default function Task(props: TaskProps) {
       </div>
 
       <div className="flex justify-between items-center my-3">
-          <div className="flex items-center gap-1.5 font-medium">
+          <div className="relative flex items-center gap-1.5 font-medium">
               <input
                 checked={task.done}
                 className="peer appearance-none size-4 border border-gray-300 rounded-xs dark:border-slate-600 checked:bg-success transition-colors"
@@ -70,7 +70,9 @@ export default function Task(props: TaskProps) {
                 id={`done_${task.id}`}
               />
               <CheckIcon weight="bold" className="pointer-events-none hidden peer-checked:block absolute text-black" />
-              <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor={`done_${task.id}`}>Concluída</label>
+              <label className="select-none text-sm peer-checked:line-through transition-normal" htmlFor={`done_${task.id}`}>
+                Concluída
+              </label>
           </div>
           <select value={task.priority} className="text-sm border rounded p-1 border-gray-300 dark:border-slate-600" name={`priority_${task.id}`} id={`priority_${task.id}`}>
               {Object.entries(TASK_PRIORITIES).map(([key, value]) => (
