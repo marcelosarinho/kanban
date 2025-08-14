@@ -2,7 +2,7 @@ import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
 import { useState } from "react"
-import { ChatIcon, CheckCircleIcon, CheckFatIcon, CheckIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
+import { ChatIcon, CheckCircleIcon, CheckIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import Textarea from "./Textarea";
 import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";

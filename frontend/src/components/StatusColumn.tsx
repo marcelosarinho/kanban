@@ -28,7 +28,12 @@ export default function StatusColumn(props: StatusColumnProps) {
         </Button>
       </div>
 
-      <Searchbar onSearch={(e) => setTaskQuery((prev) => ({ ...prev, [status]: e.target.value }))} className="mb-2" value={value} />
+      <Searchbar
+        onSearch={(e) => setTaskQuery((prev) => ({ ...prev, [status]: e.target.value }))}
+        className="mb-2"
+        name={`${status}_query`}
+        value={value}
+      />
 
       <div className="flex flex-col max-h-1/3 gap-3 p-3 w-72 rounded border border-gray-300 bg-white dark:bg-slate-900 dark:border-slate-700 overflow-y-auto">
         {children}

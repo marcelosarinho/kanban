@@ -371,7 +371,7 @@ function App() {
           <fieldset disabled={createProjectMutation.isPending || updateProjectMutation.isPending} className="disabled:opacity-50">
             <ModalBody>
               <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className='flex flex-col gap-3'>
-                <Input error={errors.name?.message} {...register('name')} id="project-name" label="Nome do projeto"/>
+                <Input error={errors.name?.message} {...register('name')} autoComplete='off' id="project-name" label="Nome do projeto"/>
 
                 <Textarea error={errors.description?.message} {...register('description')} id="project-description" label="Descrição do projeto"/>
               </form>
@@ -426,7 +426,13 @@ function App() {
               Adicionar projeto
             </Button>
 
-            <Searchbar value={deferredProjectsQuery} onSearch={(e) => setProjectsQuery(e.target.value)} className="mt-6" />
+            <Searchbar
+              name="projects_query"
+              value={deferredProjectsQuery}
+              onSearch={(e) => setProjectsQuery(e.target.value)}
+              className="mt-6"
+            />
+
             <div className="mt-4 flex flex-col w-full gap-3 overflow-y-auto overflow-x-hidden max-h-screen">
               {renderProjects()}
             </div>
