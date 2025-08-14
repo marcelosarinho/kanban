@@ -39,3 +39,21 @@ export async function createTask(status: TaskStatusOption, projectId?: string) {
     console.error('Erro ao criar tarefa!', error);
   }
 }
+
+export async function updateTask(params: any) {
+  try {
+    const response = await fetch(`http://localhost:8080/projects/${params.projectId}/tasks/${params.taskId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ body: params.body }),
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
