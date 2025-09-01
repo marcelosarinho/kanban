@@ -29,6 +29,7 @@ import Loading from './components/Loading';
 import StatusColumnSkeleton from './components/StatusColumnSkeleton';
 import type { Task as TaskType, TaskStatusOption } from './types/task';
 import { createTask, getTasks } from './api/task';
+import { MAX_CATEGORIES_LENGTH } from './libs/constants';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -56,7 +57,7 @@ function App() {
   const deferredProjectsQuery = useDeferredValue(projectsQuery);
   const deferredTasksQuery = useDeferredValue(tasksQuery);
 
-  const disabledCategories = selectedCategories.length >= 2;
+  const disabledCategories = selectedCategories.length >= MAX_CATEGORIES_LENGTH;
 
   const theme = localStorage.getItem('theme');
   changeIconTheme(themeIcons[theme || 'system']);

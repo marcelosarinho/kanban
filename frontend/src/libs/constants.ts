@@ -8,6 +8,8 @@ import type {
 } from "../types/constants"
 import type { TaskItem, TaskPriorityItem, TaskPriorityOption, TaskStatusOption } from "../types/task"
 
+export const MAX_CATEGORIES_LENGTH = 2;
+
 export const THEME_ICONS: Record<ThemeOption, ThemeIcon> = {
   light: 'ph-sun',
   dark: 'ph-moon',
