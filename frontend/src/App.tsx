@@ -294,7 +294,7 @@ function App() {
   });
 
   const deleteProjectMutation = useMutation({
-    mutationFn: (id?: string) => deleteProject(id),
+    mutationFn: (id?: string) => deleteProject({ id }),
     onSuccess: () => {
       refetchProjects();
       closeModal('delete-project-modal');
