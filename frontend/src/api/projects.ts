@@ -1,4 +1,4 @@
-import type { Project, UpdateProject } from "../types/project";
+import type { Project } from "../types/project";
 
 export async function getProjects(search?: string) {
   try {
@@ -45,7 +45,7 @@ export async function deleteProject(id?: string) {
   }
 }
 
-export async function updateProject(project: UpdateProject) {
+export async function updateProject(project: Omit<Project, 'createdAt' | 'updatedAt'>) {
   try {
     const response = await fetch(`http://localhost:8080/projects/${project.id}`, {
       method: 'PUT',

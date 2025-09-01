@@ -5,5 +5,3 @@ export type Project = {
   createdAt: string;
   updatedAt: string;
 }
-
-export type UpdateProject = Omit<Project, 'createdAt' | 'updatedAt'>;
