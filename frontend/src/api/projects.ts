@@ -1,4 +1,4 @@
-import type { CreateProject, UpdateProject } from "../types/project";
+import type { Project, UpdateProject } from "../types/project";
 
 export async function getProjects(search?: string) {
   try {
@@ -9,7 +9,7 @@ export async function getProjects(search?: string) {
   }
 }
 
-export async function createProject(project: CreateProject) {
+export async function createProject(project: Pick<Project, 'name' | 'description'>) {
   try {
     const response = await fetch('http://localhost:8080/projects', {
       method: 'POST',
