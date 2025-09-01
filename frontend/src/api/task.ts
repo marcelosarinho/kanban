@@ -1,14 +1,14 @@
 import type { Project } from "../types/project";
 import type { Task, TaskStatusOption } from "../types/task";
 
-export async function getTasks(projectId?: Pick<Project, 'id'>) {
-  if (!projectId) {
+export async function getTasks({ id }: Pick<Project, 'id'>) {
+  if (!id) {
     console.error('Projeto não encontrado!');
     return;
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/projects/${projectId}/tasks`);
+    const response = await fetch(`http://localhost:8080/projects/${id}/tasks`);
 
     const data = await response.json();
 
@@ -18,14 +18,14 @@ export async function getTasks(projectId?: Pick<Project, 'id'>) {
   }
 }
 
-export async function createTask(status: TaskStatusOption, projectId?: Pick<Project, 'id'>) {
-  if (!projectId) {
+export async function createTask(status: TaskStatusOption, { id }: Pick<Project, 'id'>) {
+  if (!id) {
     console.error('Projeto não encontrado!');
     return;
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/projects/${projectId}/tasks`, {
+    const response = await fetch(`http://localhost:8080/projects/${id}/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

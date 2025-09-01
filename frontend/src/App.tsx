@@ -227,7 +227,7 @@ function App() {
           <StatusColumn
             key={key}
             status={status}
-            createTask={() => createTaskMutation.mutate({ status, id: project.id })}
+            createTask={() => createTaskMutation.mutate({ status, projectId: project.id })}
             setTaskQuery={setTasksQuery}
             value={deferredTasksQuery[status]}
           >
@@ -311,11 +311,11 @@ function App() {
     refetch: refetchTasks,
   } = useQuery({
     queryKey: ['tasks', project?.id],
-    queryFn: () => getTasks(project?.id),
+    queryFn: () => getTasks({ id: project?.id }),
   });
 
   const createTaskMutation = useMutation({
-    mutationFn: ({ status, id }: { status: TaskStatusOption, id?: string }) => createTask(status, id),
+    mutationFn: ({ status, projectId }: { status: TaskStatusOption, projectId?: string }) => createTask(status, { id: projectId }),
     onSuccess: () => {
       refetchTasks();
       toast.success('Tarefa criada com sucesso!');
