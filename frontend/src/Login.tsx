@@ -10,7 +10,7 @@ export default function Login() {
   return (
     <main className="flex justify-center items-center h-screen">
       {formType === 'login' && (
-        <div className="border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
+        <div className="min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="text-center dark:text-gray-300 text-2xl font-medium">Login</h1>
           </div>
@@ -33,7 +33,7 @@ export default function Login() {
         </div>
       )}
       {formType === 'register' && (
-        <div className="border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
+        <div className="min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="text-center dark:text-gray-300 text-2xl font-medium">Cadastre-se</h1>
           </div>
@@ -51,7 +51,7 @@ export default function Login() {
         </div>
       )}
       {formType === 'forgot-password' && (
-        <div className="border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
+        <div className="min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="text-center dark:text-gray-300 text-2xl font-medium">Esqueceu a senha?</h1>
           </div>
