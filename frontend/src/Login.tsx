@@ -10,7 +10,7 @@ export default function Login() {
 
   return (
     <main className="flex justify-center items-center h-screen">
-      <ThemeButton />
+      <ThemeButton className="fixed top-4 right-4" />
 
       {formType === 'login' && (
         <div className="animate-in min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">

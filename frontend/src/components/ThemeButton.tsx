@@ -7,7 +7,7 @@ const themeIcons: { [key: string]: string } = {
   system: 'ph-moon-stars',
 }
 
-export default function ThemeButton() {
+export default function ThemeButton({ className }: { className?: string }) {
   const [themeDropdown, setThemeDropdown] = useState(false);
 
   const themeIconRef = useRef<HTMLElement>(null);
@@ -45,12 +45,12 @@ export default function ThemeButton() {
   // }, []);
 
   return (
-    <div className="relative">
+    <div className={className}>
       <button onClick={toggleThemeDropdown} className="flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1">
         <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
       </button>
       {themeDropdown && (
-        <div className="absolute bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
+        <div className="absolute right-0 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
           <div onClick={() => changeTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
             <MoonIcon className="mr-2 text-xl" />
             Escuro
