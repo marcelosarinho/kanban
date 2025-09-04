@@ -1,5 +1,6 @@
 import { MoonIcon, MoonStarsIcon, SunIcon } from "@phosphor-icons/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { getCookie, removeCookie, setCookie } from "../utils/functions";
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -12,7 +13,7 @@ export default function ThemeButton({ className }: { className?: string }) {
 
   const themeIconRef = useRef<HTMLElement>(null);
 
-  const theme = localStorage.getItem('theme');
+  const theme = getCookie('theme');
   changeIconTheme(themeIcons[theme || 'system']);
   document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
@@ -20,12 +21,12 @@ export default function ThemeButton({ className }: { className?: string }) {
     changeIconTheme(themeIcons[selectedTheme]);
 
     if (selectedTheme === 'dark' || selectedTheme === 'light') {
-      localStorage.setItem('theme', selectedTheme);
+      setCookie('theme', selectedTheme);
       document.documentElement.classList.toggle('dark', selectedTheme === 'dark');
       return;
     }
 
-    localStorage.removeItem('theme');
+    removeCookie('theme');
     document.documentElement.classList.toggle('dark', window.matchMedia("(prefers-color-scheme: dark)").matches);
   }
 
@@ -36,17 +37,9 @@ export default function ThemeButton({ className }: { className?: string }) {
     iconElement?.classList.add(icon);
   }
 
-  function toggleThemeDropdown() {
-    setThemeDropdown(!themeDropdown);
-  }
-
-  // useEffect(() => {
-  //   changeIconTheme(themeIcons[theme || 'system']);
-  // }, []);
-
   return (
     <div className={className}>
-      <button onClick={toggleThemeDropdown} className="flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1">
+      <button onClick={() => setThemeDropdown(!themeDropdown)} className="flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1">
         <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
       </button>
       {themeDropdown && (
