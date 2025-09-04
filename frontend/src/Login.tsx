@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "./components/Button";
 import Input from "./components/Input";
+import ThemeButton from "./components/ThemeButton";
 
 type FormType = 'login' | 'register' | 'forgot-password';
 
@@ -9,6 +10,8 @@ export default function Login() {
 
   return (
     <main className="flex justify-center items-center h-screen">
+      <ThemeButton />
+
       {formType === 'login' && (
         <div className="animate-in min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
@@ -17,7 +20,7 @@ export default function Login() {
           <form className="p-6" action="">
             <fieldset className="flex flex-col gap-4">
               <Input className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-              <Input className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" />
+              <Input className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
               <span
                 onClick={() => setFormType('forgot-password')}
                 className="animate-slide-in-from-bottom text-sm text-primary cursor-pointer hover:text-primary/80 transition-colors"
@@ -41,7 +44,8 @@ export default function Login() {
             <fieldset className="flex flex-col gap-4">
               <Input className="animate-slide-in-from-bottom" label="Nome" type="text" name="name" id="name" />
               <Input className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-              <Input className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" />
+              <Input className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
+              <Input className="animate-slide-in-from-bottom" label="Confirmar senha" type="password" name="password_confirmation" id="password_confirmation" isPassword />
               <Button className="animate-slide-in-from-bottom justify-center">Cadastrar</Button>
             </fieldset>
           </form>

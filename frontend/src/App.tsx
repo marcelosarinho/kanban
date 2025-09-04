@@ -341,6 +341,11 @@ function App() {
     }
   }, [projects, initialLoading]);
 
+  useEffect(() => {
+    console.log(theme);
+    console.log(themeIconRef.current);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <>
