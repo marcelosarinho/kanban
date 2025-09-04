@@ -6,10 +6,10 @@ type InputProps = {
 } & ComponentProps<'input'>;
 
 export default function Input(props: InputProps) {
-  const { label, type = 'text', error, id, ...rest } = props;
+  const { label, className, type = 'text', error, id, ...rest } = props;
 
   return (
-    <div className="flex flex-col">
+    <div className={`flex flex-col ${className ?? ''}`}>
       <label htmlFor={id} className="w-fit block mb-1 dark:text-gray-300">{label}</label>
       <input
         id={id}
