@@ -30,6 +30,7 @@ import StatusColumnSkeleton from './components/StatusColumnSkeleton';
 import type { Task as TaskType, TaskStatusOption } from './types/task';
 import { createTask, getTasks } from './api/task';
 import { MAX_CATEGORIES_LENGTH } from './libs/constants';
+import { getCookie, removeCookie, setCookie } from './utils/functions';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -59,7 +60,7 @@ function App() {
 
   const disabledCategories = selectedCategories.length >= MAX_CATEGORIES_LENGTH;
 
-  const theme = localStorage.getItem('theme');
+  const theme = getCookie('theme');
   changeIconTheme(themeIcons[theme || 'system']);
   document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
@@ -92,12 +93,12 @@ function App() {
     changeIconTheme(themeIcons[selectedTheme]);
 
     if (selectedTheme === 'dark' || selectedTheme === 'light') {
-      localStorage.setItem('theme', selectedTheme);
+      setCookie('theme', selectedTheme);
       document.documentElement.classList.toggle('dark', selectedTheme === 'dark');
       return;
     }
 
-    localStorage.removeItem('theme');
+    removeCookie('theme');
     document.documentElement.classList.toggle('dark', window.matchMedia("(prefers-color-scheme: dark)").matches);
   }
 
@@ -340,11 +341,6 @@ function App() {
       setInitialLoading(false);
     }
   }, [projects, initialLoading]);
-
-  useEffect(() => {
-    console.log(theme);
-    console.log(themeIconRef.current);
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
