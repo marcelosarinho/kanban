@@ -232,7 +232,7 @@ function App() {
             value={deferredTasksQuery[status]}
           >
             {filteredTasks.map((task: TaskType) => (
-              <Task onClick={() => console.log('oi')} key={task.id} task={task} />
+              <Task onClick={() => console.log('oi')} key={task.id} task={task} projectId={project.id} />
             ))}
           </StatusColumn>
         )

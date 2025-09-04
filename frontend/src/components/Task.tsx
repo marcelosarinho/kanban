@@ -1,7 +1,7 @@
 import TaskCategoryBadge from "./TaskCategoryBadge"
 import TaskPriorityBadge from "./TaskPriorityBadge"
 import ProgressBar from "./ProgressBar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ChatIcon, CheckCircleIcon, CheckIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
 import Button from "./Button";
 import Textarea from "./Textarea";
@@ -10,14 +10,17 @@ import CustomTooltip from "./CustomTooltip";
 import Subtasks from "./Subtasks";
 import type { Task } from "../types/task";
 import type { CategoryOption } from "../types/constants";
+import { useMutation } from "@tanstack/react-query";
+import { updateTask } from "../api/task";
 
 type TaskProps = {
   onClick: () => void;
   task: Task;
+  projectId?: string;
 }
 
 export default function Task(props: TaskProps) {
-  const { onClick, task } = props;
+  const { onClick, task, projectId } = props;
 
   const [toggleElement, setToggleElement] = useState({
     color: false,
@@ -26,6 +29,23 @@ export default function Task(props: TaskProps) {
   });
 
   const taskCategories = task.category?.split(',') as CategoryOption[] || ["none"];
+
+  const [taskName, setTaskName] = useState(task.name);
+  const [taskDescription, setTaskDescription] = useState(task.description);
+
+  const updateTaskMutation = useMutation({
+    mutationFn: (task: Task) => updateTask(task, { id: projectId })
+  })
+
+  useEffect(() => {
+    if (taskName !== task.name) {
+      updateTaskMutation.mutate({...task, name: taskName});
+    }
+
+    if (taskDescription !== task.description) {
+      updateTaskMutation.mutate({...task, description: taskDescription});
+    }
+  }, [taskName, taskDescription]);
 
   return (
     <div className={`relative p-4 border border-l-4 ${task.done ? 'opacity-50' : ''} ${TASK_COLORS[task.color || 'none'].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
@@ -60,8 +80,17 @@ export default function Task(props: TaskProps) {
       </header>
 
       <div className="my-2">
-          <h1 className={`font-medium text-lg ${task.done ? 'line-through' : ''}`}>{task.name}</h1>
-          <p className={`text-sm leading-tight ${task.done ? 'line-through' : ''}`}>{task.description}</p>
+          <input
+            className={`mb-1 w-full px-1 font-medium text-lg focus-visible:rounded-xs focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-primary ${task.done ? 'line-through' : ''}`}
+            type="text"
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+          />
+          <textarea
+            className={`w-full px-1 resize-none text-sm leading-tight focus-visible:rounded-xs focus-visible:outline-none focus-visible:ring-[1.5px] focus-visible:ring-primary ${task.done ? 'line-through' : ''}`}
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
+          />
       </div>
 
       <div className="flex justify-between items-center my-3">

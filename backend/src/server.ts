@@ -14,7 +14,7 @@ import { getTasks } from "./routes/get-tasks";
 const server = fastify();
 server.register(cors, {
     origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 });
 
 server.listen({ port: 8080 }, (err, address) => {
