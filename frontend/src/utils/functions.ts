@@ -13,4 +13,8 @@ export function getCookie(name: string) {
   if (parts.length === 2) return parts.pop()?.split(';').shift();
 }
 
+export function removeCookie(name: string) {
+  document.cookie = `${name}=; path=/; max-age=0`;
+}
+
 // export function debounce<T extends (...args: any[]) => any>()
