@@ -2,11 +2,43 @@ import { useState } from "react";
 import Button from "./components/Button";
 import Input from "./components/Input";
 import ThemeButton from "./components/ThemeButton";
+import { userForgotPasswordSchema, userLoginSchema, userRegisterSchema } from "./schemas/user";
+import type z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type FormType = 'login' | 'register' | 'forgot-password';
 
+type InputsLogin = z.infer<typeof userLoginSchema>;
+type InputsRegister = z.infer<typeof userRegisterSchema>;
+type InputsForgotPassword = z.infer<typeof userForgotPasswordSchema>;
+
 export default function Login() {
   const [formType, setFormType] = useState<FormType>('login');
+
+  const {
+    register: registerLogin,
+    handleSubmit: handleLoginSubmit,
+    formState: { errors: loginErrors },
+  } = useForm<InputsLogin>({
+    resolver: zodResolver(userLoginSchema),
+  })
+
+  const {
+    register: registerRegister,
+    handleSubmit: handleRegisterSubmit,
+    formState: { errors: registerErrors },
+  } = useForm<InputsRegister>({
+    resolver: zodResolver(userRegisterSchema),
+  });
+
+  const {
+    register: registerForgotPassword,
+    handleSubmit: handleForgotPasswordSubmit,
+    formState: { errors: forgotPasswordErrors },
+  } = useForm<InputsForgotPassword>({
+    resolver: zodResolver(userForgotPasswordSchema),
+  });
 
   return (
     <main className="flex justify-center items-center h-screen">
@@ -17,7 +49,7 @@ export default function Login() {
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Login</h1>
           </div>
-          <form className="p-6" action="">
+          <form className="p-6">
             <fieldset className="flex flex-col gap-4">
               <Input className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
               <Input className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
