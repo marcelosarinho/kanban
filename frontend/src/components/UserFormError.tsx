@@ -1,8 +1,8 @@
-type LoginErrorProps = {
+type UserFormErrorProps = {
   error?: string;
 }
 
-export default function LoginError(props: LoginErrorProps) {
+export default function UserFormError(props: UserFormErrorProps) {
   const { error } = props;
 
   return (
