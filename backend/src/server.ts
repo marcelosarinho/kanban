@@ -12,6 +12,7 @@ import { deleteSubtask } from "./routes/delete-subtask";
 import { getTasks } from "./routes/get-tasks";
 import { createUser } from "./routes/create-user";
 import { forgotPassword } from "./routes/forgot-password";
+import { login } from "./routes/login";
 
 const server = fastify();
 server.register(cors, {
@@ -40,3 +41,4 @@ server.register(createSubtask);
 server.register(deleteSubtask);
 server.register(createUser);
 server.register(forgotPassword);
+server.register(login);
