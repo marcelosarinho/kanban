@@ -9,6 +9,7 @@ export const projects = pgTable('projects', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull().unique(),
   description: varchar({ length: 255 }).notNull(),
+  userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })
@@ -68,6 +69,10 @@ export const users = pgTable('users', {
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })
+
+export const usersRelations = relations(users, ({ many }) => ({
+  projects: many(projects),
+}))
 
 export const schema = {
   projects,
