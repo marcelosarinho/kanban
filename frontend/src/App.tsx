@@ -24,11 +24,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
-import { createProject, deleteProject, getProjects, updateProject } from './api';
+import { createProject, deleteProject, getProjects, updateProject, createTask, getTasks } from './api';
 import Loading from './components/Loading';
 import StatusColumnSkeleton from './components/StatusColumnSkeleton';
 import type { Task as TaskType, TaskStatusOption } from './types/task';
-import { createTask, getTasks } from './api/task';
 import { MAX_CATEGORIES_LENGTH } from './libs/constants';
 import { getCookie, removeCookie, setCookie } from './utils/functions';
 
