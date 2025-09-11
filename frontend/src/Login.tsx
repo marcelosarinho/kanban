@@ -73,17 +73,19 @@ export default function Login() {
           </div>
         </div>
       )}
+
       {formType === 'register' && (
         <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Cadastre-se</h1>
           </div>
-          <form className="p-6" action="">
+          <form onSubmit={handleRegisterSubmit(onSubmit)} className="p-6">
             <fieldset className="flex flex-col gap-4">
-              <Input className="animate-slide-in-from-bottom" label="Nome" type="text" name="name" id="name" />
-              <Input className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-              <Input className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
-              <Input className="animate-slide-in-from-bottom" label="Confirmar senha" type="password" name="password_confirmation" id="password_confirmation" isPassword />
+              <UserFormError error="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
+              <Input error={registerErrors.name?.message} {...registerRegister('name')} className="animate-slide-in-from-bottom" label="Nome" type="text" name="name" id="name" />
+              <Input error={registerErrors.email?.message} {...registerRegister('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
+              <Input error={registerErrors.password?.message} {...registerRegister('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
+              <Input error={registerErrors.password_confirmation?.message} {...registerRegister('password_confirmation')} className="animate-slide-in-from-bottom" label="Confirmar senha" type="password" name="password_confirmation" id="password_confirmation" isPassword />
               <Button className="animate-slide-in-from-bottom justify-center">Cadastrar</Button>
             </fieldset>
           </form>
@@ -92,15 +94,16 @@ export default function Login() {
           </div>
         </div>
       )}
+
       {formType === 'forgot-password' && (
         <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Esqueceu a senha?</h1>
           </div>
-          <form className="p-6" action="">
+          <form onSubmit={handleForgotPasswordSubmit(onSubmit)} className="p-6">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm mb-4">Um email será enviado com as instruções necessárias para redefinir sua senha.</p>
             <fieldset className="flex flex-col gap-4">
-              <Input className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
+              <Input error={forgotPasswordErrors.email?.message} {...registerForgotPassword('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
               <Button className="animate-slide-in-from-bottom justify-center">Recuperar</Button>
             </fieldset>
           </form>
