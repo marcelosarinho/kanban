@@ -36,6 +36,20 @@
       "when": 1752853006078,
       "tag": "0004_tasks-subtasks-one-to-many-relation",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1757617143343,
+      "tag": "0005_create-users-table",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1757617372072,
+      "tag": "0006_add-password-in-users-table",
+      "breakpoints": true
     }
   ]
 }

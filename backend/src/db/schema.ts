@@ -57,6 +57,18 @@ export const subtasksRelations = relations(subtasks, ({ one }) => ({
   }),
 }));
 
+export const users = pgTable('users', {
+  id: integer().primaryKey().generatedByDefaultAsIdentity(),
+  name: varchar({ length: 255 }).notNull(),
+  email: varchar({ length: 255 }).notNull().unique(),
+  password: varchar({ length: 255 }).notNull(),
+  verified: boolean().notNull().default(false),
+  verifyToken: varchar('verify_token', { length: 255 }),
+  verifyTokenExpiry: timestamp('verify_token_expiry', { mode: 'string' }),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
+})
+
 export const schema = {
   projects,
   tasks,
