@@ -81,4 +81,6 @@ export const schema = {
   projectsRelations,
   tasksRelations,
   subtasksRelations,
+  users,
+  usersRelations,
 };
