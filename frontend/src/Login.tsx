@@ -6,6 +6,7 @@ import { userForgotPasswordSchema, userLoginSchema, userRegisterSchema } from ".
 import type z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import LoginError from "./components/LoginError";
 
 type FormType = 'login' | 'register' | 'forgot-password';
 
@@ -40,19 +41,24 @@ export default function Login() {
     resolver: zodResolver(userForgotPasswordSchema),
   });
 
+  function onSubmit() {
+    console.log('foi');
+  }
+
   return (
     <main className="flex justify-center items-center h-screen">
       <ThemeButton className="fixed top-4 right-4" />
 
       {formType === 'login' && (
-        <div className="animate-in min-w-1/2 lg:min-w-1/3 xl:min-w-1/4 border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
+        <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Login</h1>
           </div>
-          <form className="p-6">
+          <form onSubmit={handleLoginSubmit(onSubmit)} className="p-6">
             <fieldset className="flex flex-col gap-4">
-              <Input className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-              <Input className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
+              <LoginError error="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
+              <Input error={loginErrors.email?.message} {...registerLogin('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
+              <Input error={loginErrors.password?.message} {...registerLogin('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
               <span
                 onClick={() => setFormType('forgot-password')}
                 className="animate-slide-in-from-bottom text-sm text-primary cursor-pointer hover:text-primary/80 transition-colors"
