@@ -45,12 +45,8 @@ export default function Login() {
 
   const registerMutation = useMutation({
     mutationFn: createUser,
-    onSuccess: (data) => {
-      console.log(data)
-      // setFormType('register-email-sent');
-    },
-    onError: (error) => {
-      console.log(error)
+    onSuccess: () => {
+      setFormType('register-email-sent');
     }
   })
 
