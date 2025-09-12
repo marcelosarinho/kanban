@@ -1,5 +1,11 @@
 export type User = {
+  id: string;
   name: string;
   email: string;
   password: string;
+  verified: boolean;
+  verifyToken: string;
+  verifyTokenExpires: string;
+  createdAt: string;
+  updatedAt: string;
 }
