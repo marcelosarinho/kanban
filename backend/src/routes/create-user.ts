@@ -4,6 +4,7 @@ import { db } from "..";
 import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
+import dayjs from "../lib/dayjs";
 
 export async function createUser(app: FastifyInstance) {
   app.post('/users', async (request: any, reply: any) => {
@@ -17,11 +18,11 @@ export async function createUser(app: FastifyInstance) {
       }
 
       if (user && !user.verified) {
-        if (user.verifyTokenExpiry && new Date(user.verifyTokenExpiry).getTime() < new Date().getTime()) {
+        if (user.verifyTokenExpiry && dayjs().isAfter(dayjs.utc(user.verifyTokenExpiry))) {
           const newVerifyToken = randomBytes(64).toString('hex');
-          const newVerifyTokenExpiry = new Date(Date.now() + 60 * 60 * 24 * 1000);
+          const newVerifyTokenExpiry = dayjs.utc().add(1, 'day').format();
 
-          await db.update(users).set({ verifyToken: newVerifyToken, verifyTokenExpiry: newVerifyTokenExpiry.toISOString() }).where(eq(users.email, user.email));
+          await db.update(users).set({ verifyToken: newVerifyToken, verifyTokenExpiry: newVerifyTokenExpiry }).where(eq(users.email, user.email));
         }
 
         return reply.status(200).send({ message: 'Enviado email de verificação!' });
@@ -29,9 +30,9 @@ export async function createUser(app: FastifyInstance) {
 
       const hashedPassword = await argon2.hash(password);
       const verifyToken = randomBytes(64).toString('hex');
-      const verifyTokenExpiry = new Date(Date.now() + 60 * 60 * 24 * 1000);
+      const verifyTokenExpiry = dayjs.utc().add(1, 'day').format();
 
-      await db.insert(users).values({ name, email, password: hashedPassword, verifyToken, verifyTokenExpiry: verifyTokenExpiry.toISOString() });
+      await db.insert(users).values({ name, email, password: hashedPassword, verifyToken, verifyTokenExpiry });
 
       return reply.status(201).send({ message: 'Usuário cadastrado com sucesso!' });
     } catch (error) {
