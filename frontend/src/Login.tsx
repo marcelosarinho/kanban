@@ -45,8 +45,12 @@ export default function Login() {
 
   const registerMutation = useMutation({
     mutationFn: createUser,
-    onSuccess: () => {
-      setFormType('register-email-sent');
+    onSuccess: (data) => {
+      console.log(data)
+      // setFormType('register-email-sent');
+    },
+    onError: (error) => {
+      console.log(error)
     }
   })
 
@@ -103,7 +107,7 @@ export default function Login() {
           <form onSubmit={handleRegisterSubmit(onSubmitRegister, onError)} className="p-6">
             <fieldset className="flex flex-col gap-4">
               {registerMutation.isError && (
-                <UserFormError error="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
+                <UserFormError error={registerMutation.error?.message} />
               )}
               <Input error={registerErrors.name?.message} {...registerRegister('name')} className="animate-slide-in-from-bottom" label="Nome" type="text" name="name" id="name" />
               <Input error={registerErrors.email?.message} {...registerRegister('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
@@ -141,7 +145,7 @@ export default function Login() {
           <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Email enviado</h1>
           </div>
-          <div className="p-6 border-t border-neutral-300 dark:border-slate-700">
+          <div className="p-6">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Um email foi enviado para o seu email com as instruções necessárias para redefinir sua senha.</p>
           </div>
         </div>
