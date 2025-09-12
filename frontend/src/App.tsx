@@ -19,7 +19,7 @@ import TaskSkeleton from './components/TaskSkeleton';
 import Task from './components/Task';
 import { useForm } from 'react-hook-form';
 import type z from 'zod';
-import { projectSchema } from './schemas/projects';
+import { projectSchema } from './schemas/project';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project } from './types/project';
