@@ -142,7 +142,7 @@ export default function Login() {
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Email enviado</h1>
           </div>
           <div className="p-6">
-            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Um email foi enviado para o seu email com as instruções necessárias para redefinir sua senha.</p>
+            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
           </div>
         </div>
       )}
