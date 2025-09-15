@@ -101,7 +101,7 @@ export default function Login() {
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Cadastre-se</h1>
           </div>
           <form onSubmit={handleRegisterSubmit(onSubmitRegister, onError)} className="p-6">
-            <fieldset className="flex flex-col gap-4">
+            <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4">
               {registerMutation.isError && (
                 <UserFormError error={registerMutation.error?.message} />
               )}
@@ -109,7 +109,7 @@ export default function Login() {
               <Input error={registerErrors.email?.message} {...registerRegister('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
               <Input error={registerErrors.password?.message} {...registerRegister('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
               <Input error={registerErrors.password_confirmation?.message} {...registerRegister('password_confirmation')} className="animate-slide-in-from-bottom" label="Confirmar senha" type="password" name="password_confirmation" id="password_confirmation" isPassword />
-              <Button type="submit" className="animate-slide-in-from-bottom justify-center">Cadastrar</Button>
+              <Button type="submit" className="animate-slide-in-from-bottom justify-center" loading={registerMutation.isPending}>Cadastrar</Button>
             </fieldset>
           </form>
           <div className="p-6 border-t border-neutral-300 dark:border-slate-700">
