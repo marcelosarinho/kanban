@@ -17,4 +17,12 @@ export function removeCookie(name: string) {
   document.cookie = `${name}=; path=/; max-age=0`;
 }
 
+export function censorEmail(email: string) {
+  const emailParts = email.split('@');
+  const firstEmailPart = emailParts[0].substring(1);
+  const teste = firstEmailPart.replace(/./g, '*');
+
+  console.log(teste);
+}
+
 // export function debounce<T extends (...args: any[]) => any>()

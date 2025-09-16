@@ -167,7 +167,7 @@ export default function Login() {
           </header>
           <div className="p-6">
             <p className="text-center dark:text-gray-300 text-md animate-slide-in-from-bottom">
-              Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login confirmando o código enviado para seu email.
+              Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login confirmando o código enviado para o email m*********@gmail.com.
             </p>
             <form className="mt-6">
               <fieldset>
