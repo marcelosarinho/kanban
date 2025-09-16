@@ -80,9 +80,9 @@ export default function Login() {
 
       {formType === 'login' && (
         <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
+          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Login</h1>
-          </div>
+          </header>
           <form onSubmit={handleLoginSubmit(onSubmitLogin)} className="p-6">
             <fieldset className="flex flex-col gap-4">
               <UserFormMessage variant="success" message="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
@@ -97,17 +97,17 @@ export default function Login() {
               <Button className="animate-slide-in-from-bottom justify-center">Entrar</Button>
             </fieldset>
           </form>
-          <div className="p-6 border-t border-neutral-300 dark:border-slate-700">
+          <footer className="p-6 border-t border-neutral-300 dark:border-slate-700">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Não tem conta? <span onClick={() => setFormType('register')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Cadastre-se de graça!</span></p>
-          </div>
+          </footer>
         </div>
       )}
 
       {formType === 'register' && (
         <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
+          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Cadastre-se</h1>
-          </div>
+          </header>
           <form onSubmit={handleRegisterSubmit(onSubmitRegister, onError)} className="p-6">
             <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4">
               {registerMutation.isError && (
@@ -120,17 +120,17 @@ export default function Login() {
               <Button type="submit" className="animate-slide-in-from-bottom justify-center" loading={registerMutation.isPending}>Cadastrar</Button>
             </fieldset>
           </form>
-          <div className="p-6 border-t border-neutral-300 dark:border-slate-700">
+          <footer className="p-6 border-t border-neutral-300 dark:border-slate-700">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Já tem conta? <span onClick={() => setFormType('login')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Faça login!</span></p>
-          </div>
+          </footer>
         </div>
       )}
 
       {formType === 'forgot-password' && (
         <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
+          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Esqueceu a senha?</h1>
-          </div>
+          </header>
           <form onSubmit={handleForgotPasswordSubmit(onSubmitForgotPassword)} className="p-6">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md mb-4">Um email será enviado com as instruções necessárias para redefinir sua senha.</p>
             <fieldset className="flex flex-col gap-4">
@@ -138,17 +138,18 @@ export default function Login() {
               <Button className="animate-slide-in-from-bottom justify-center">Recuperar</Button>
             </fieldset>
           </form>
-          <div className="p-6 border-t border-neutral-300 dark:border-slate-700">
+          <footer className="p-6 border-t border-neutral-300 dark:border-slate-700">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Lembrou sua senha? <span onClick={() => setFormType('login')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Faça login!</span></p>
-          </div>
+          </footer>
         </div>
       )}
 
       {formType === 'register-email-sent' && (
         <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <div className="border-b border-neutral-300 dark:border-slate-700 p-6">
+          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
+            <EnvelopeIcon className="mx-auto mb-3 animate-slide-in-from-bottom dark:text-gray-300" size={64} />
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Email enviado</h1>
-          </div>
+          </header>
           <div className="p-6">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
             <Button className="mx-auto mt-6" onClick={() => setFormType('login')}>Fazer login</Button>
@@ -166,7 +167,7 @@ export default function Login() {
           </header>
           <div className="p-6">
             <p className="text-center dark:text-gray-300 text-md animate-slide-in-from-bottom">
-              Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login.
+              Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login confirmando o código enviado para seu email.
             </p>
             <form className="mt-6">
               <fieldset>
