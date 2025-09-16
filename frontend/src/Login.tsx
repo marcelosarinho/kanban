@@ -124,7 +124,7 @@ export default function Login() {
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Esqueceu a senha?</h1>
           </div>
           <form onSubmit={handleForgotPasswordSubmit(onSubmitForgotPassword)} className="p-6">
-            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm mb-4">Um email será enviado com as instruções necessárias para redefinir sua senha.</p>
+            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md mb-4">Um email será enviado com as instruções necessárias para redefinir sua senha.</p>
             <fieldset className="flex flex-col gap-4">
               <Input error={forgotPasswordErrors.email?.message} {...registerForgotPassword('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
               <Button className="animate-slide-in-from-bottom justify-center">Recuperar</Button>
@@ -142,7 +142,7 @@ export default function Login() {
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Email enviado</h1>
           </div>
           <div className="p-6">
-            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
+            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
             <Button className="mx-auto mt-6" onClick={() => setFormType('login')}>Fazer login</Button>
           </div>
         </div>
