@@ -143,6 +143,7 @@ export default function Login() {
           </div>
           <div className="p-6">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
+            <Button className="mx-auto mt-6" onClick={() => setFormType('login')}>Fazer login</Button>
           </div>
         </div>
       )}
