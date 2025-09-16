@@ -30,11 +30,8 @@ export async function createUser(app: FastifyInstance) {
           const mail = await getMailClient();
 
           const message = await mail.sendMail({
-            from: {
-              name: 'Kanban',
-              address: 'kanban@kanban.com',
-            },
-            to: email,
+            from: 'marcelinhosarinho@gmail.com',
+            to: user.email,
             subject: 'Verifique seu email',
             html: `
             <div style="display: flex; flex-direction: column; align-items: center;">
@@ -53,7 +50,7 @@ export async function createUser(app: FastifyInstance) {
             ],
           });
 
-          console.log(nodemailer.getTestMessageUrl(message));
+          console.log(message.messageId);
         }
 
         return reply.status(200).send({ message: 'Enviado email de verificação!' });
