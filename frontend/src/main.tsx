@@ -12,8 +12,8 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       {/* <App /> */}
-      {/* <Login /> */}
-      <VerifyEmail />
+      <Login />
+      {/* <VerifyEmail /> */}
     </QueryClientProvider>
   </StrictMode>,
 )

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Input from "./components/Input";
 import ThemeButton from "./components/ThemeButton";
@@ -9,8 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { createUser } from "./api";
 import UserFormMessage from "./components/UserFormMessage";
+import { EnvelopeIcon } from "@phosphor-icons/react";
 
-type FormType = 'login' | 'register' | 'forgot-password' | 'register-email-sent';
+type FormType = 'login' | 'register' | 'forgot-password' | 'register-email-sent' | 'confirm-login';
 
 type InputsLogin = z.infer<typeof userLoginSchema>;
 type InputsRegister = z.infer<typeof userRegisterSchema>;
@@ -18,6 +19,13 @@ type InputsForgotPassword = z.infer<typeof userForgotPasswordSchema>;
 
 export default function Login() {
   const [formType, setFormType] = useState<FormType>('login');
+  const [code, setCode] = useState('');
+
+  useEffect(() => {
+    if (code.length === 6) {
+      console.log(code);
+    }
+  }, [code]);
 
   const {
     register: registerLogin,
@@ -55,7 +63,7 @@ export default function Login() {
   }
 
   function onSubmitLogin(data: InputsLogin) {
-    console.log(data);
+    setFormType('confirm-login');
   }
 
   function onSubmitForgotPassword(data: InputsForgotPassword) {
@@ -144,6 +152,28 @@ export default function Login() {
           <div className="p-6">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
             <Button className="mx-auto mt-6" onClick={() => setFormType('login')}>Fazer login</Button>
+          </div>
+        </div>
+      )}
+
+      {formType === 'confirm-login' && (
+        <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
+          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
+            <EnvelopeIcon className="mx-auto mb-3 animate-slide-in-from-bottom dark:text-gray-300" size={64} />
+            <h1 className="text-center dark:text-gray-300 text-2xl font-medium animate-slide-in-from-bottom">
+              Verificação de dispositivo
+            </h1>
+          </header>
+          <div className="p-6">
+            <p className="text-center dark:text-gray-300 text-md animate-slide-in-from-bottom">
+              Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login.
+            </p>
+            <form className="mt-6">
+              <fieldset>
+                <Input value={code} onChange={(e) => setCode(e.target.value)} className="animate-slide-in-from-bottom mb-4" id="code" label="Código de verificação" placeholder="XXXXXX" maxLength={6} />
+                <Button className="animate-slide-in-from-bottom justify-center w-full">Verificar</Button>
+              </fieldset>
+            </form>
           </div>
         </div>
       )}
