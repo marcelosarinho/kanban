@@ -6,9 +6,9 @@ import { userForgotPasswordSchema, userLoginSchema, userRegisterSchema } from ".
 import type z from "zod";
 import { useForm, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import UserFormError from "./components/UserFormError";
 import { useMutation } from "@tanstack/react-query";
 import { createUser } from "./api";
+import UserFormMessage from "./components/UserFormMessage";
 
 type FormType = 'login' | 'register' | 'forgot-password' | 'register-email-sent';
 
@@ -77,7 +77,7 @@ export default function Login() {
           </div>
           <form onSubmit={handleLoginSubmit(onSubmitLogin)} className="p-6">
             <fieldset className="flex flex-col gap-4">
-              <UserFormError error="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
+              <UserFormMessage variant="success" message="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
               <Input error={loginErrors.email?.message} {...registerLogin('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
               <Input error={loginErrors.password?.message} {...registerLogin('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
               <span
@@ -103,7 +103,7 @@ export default function Login() {
           <form onSubmit={handleRegisterSubmit(onSubmitRegister, onError)} className="p-6">
             <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4">
               {registerMutation.isError && (
-                <UserFormError error={registerMutation.error?.message} />
+                <UserFormMessage variant="error" message={registerMutation.error?.message} />
               )}
               <Input error={registerErrors.name?.message} {...registerRegister('name')} className="animate-slide-in-from-bottom" label="Nome" type="text" name="name" id="name" />
               <Input error={registerErrors.email?.message} {...registerRegister('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
