@@ -30,7 +30,10 @@ export async function createUser(app: FastifyInstance) {
           const mail = await getMailClient();
 
           const message = await mail.sendMail({
-            from: 'marcelinhosarinho@gmail.com',
+            from: {
+              name: 'Kanban',
+              address: process.env.GMAIL_USER!
+            },
             to: user.email,
             subject: 'Verifique seu email',
             html: `
@@ -43,14 +46,12 @@ export async function createUser(app: FastifyInstance) {
             </div>`,
             attachments: [
               {
-                filename: "mail.svg",
-                path: path.join(__dirname, '..', '..', 'public', 'mail.svg'),
+                filename: "mail.png",
+                path: path.join(__dirname, '..', '..', 'public', 'mail.png'),
                 cid: "mail@example.com"
               }
             ],
           });
-
-          console.log(message.messageId);
         }
 
         return reply.status(200).send({ message: 'Enviado email de verificação!' });
@@ -65,22 +66,20 @@ export async function createUser(app: FastifyInstance) {
       const mail = await getMailClient();
 
       const message = await mail.sendMail({
-        from: {
-          name: 'Kanban',
-          address: 'kanban@kanban.com',
-        },
+        from: process.env.GMAIL_USER,
         to: email,
         subject: 'Verifique seu email',
         html: `
-          <h1>Verifique seu email</h1>
-          <p>Por favor, verifique seu email para confirmar seu cadastro.</p>
-          <img src="cid:mail@example.com" alt="Mail"/>
-          <a href="http://localhost:3000/verify-email?token=${verifyToken}">Verificar email</a>
-        `,
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img style="width: 200px; height: 200px;" src="cid:mail@example.com" alt="Mail"/>
+            <h1>Verifique seu email</h1>
+            <p>Por favor, verifique seu email para confirmar seu cadastro.</p>
+            <a style="margin-top: 10px; color: white; text-decoration: none; padding: 12px; border-radius: 5px; background-color: #e3279a; font-size: 14px;" href="http://localhost:3000/verify-email?token=${verifyToken}">Verificar email</a>
+          </div>`,
         attachments: [
           {
-            filename: "mail.svg",
-            path: "../public/mail.svg",
+            filename: "mail.png",
+            path: path.join(__dirname, '..', '..', 'public', 'mail.png'),
             cid: "mail@example.com"
           }
         ]
