@@ -85,28 +85,6 @@ export default function Login() {
           </LoginCardBody>
         </LoginCard>
       )}
-
-      {formType === 'confirm-login' && (
-        <LoginCard>
-          <LoginCardHeader>
-            <EnvelopeIcon className="mx-auto mb-3 animate-slide-in-from-bottom dark:text-gray-300" size={64} />
-            <h1 className="text-center dark:text-gray-300 text-2xl font-medium animate-slide-in-from-bottom">
-              Verificação de dispositivo
-            </h1>
-          </LoginCardHeader>
-          <LoginCardBody>
-            <p className="text-center dark:text-gray-300 text-md animate-slide-in-from-bottom">
-              Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login confirmando o código enviado para o email {censorEmail(email)}.
-            </p>
-            <form className="mt-6">
-              <fieldset>
-                <Input value={code} onChange={(e) => setCode(e.target.value)} className="animate-slide-in-from-bottom mb-4" id="code" label="Código de verificação" placeholder="XXXXXX" maxLength={6} />
-                <Button className="animate-slide-in-from-bottom justify-center w-full">Verificar</Button>
-              </fieldset>
-            </form>
-          </LoginCardBody>
-        </LoginCard>
-      )}
     </>
   )
 }
