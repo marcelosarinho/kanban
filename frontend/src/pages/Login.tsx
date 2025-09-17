@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import Button from "./components/Button";
-import Input from "./components/Input";
-import ThemeButton from "./components/ThemeButton";
-import { userForgotPasswordSchema, userLoginSchema, userRegisterSchema } from "./schemas/user";
+import Button from "../components/Button";
+import Input from "../components/Input";
+import ThemeButton from "../components/ThemeButton";
+import { userForgotPasswordSchema, userLoginSchema, userRegisterSchema } from "../schemas/user";
 import type z from "zod";
 import { useForm, type FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { createUser } from "./api";
-import UserFormMessage from "./components/UserFormMessage";
+import { createUser } from "../api";
+import UserFormMessage from "../components/UserFormMessage";
 import { EnvelopeIcon } from "@phosphor-icons/react";
-import { censorEmail } from "./utils/functions";
-import LoginCardBody from "./components/LoginCardBody";
-import LoginCardHeader from "./components/LoginCardHeader";
-import LoginCard from "./components/LoginCard";
-import LoginCardFooter from "./components/LoginCardFooter";
+import { censorEmail } from "../utils/functions";
+import LoginCardBody from "../components/LoginCardBody";
+import LoginCardHeader from "../components/LoginCardHeader";
+import LoginCard from "../components/LoginCard";
+import LoginCardFooter from "../components/LoginCardFooter";
 
 type FormType = 'login' | 'register' | 'forgot-password' | 'register-email-sent' | 'confirm-login';
 
