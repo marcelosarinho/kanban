@@ -20,8 +20,8 @@ export async function forgotPassword(app: FastifyInstance) {
       const forgotPasswordTokenExpiry = dayjs.utc().add(15, 'minute').format();
 
       await db.update(users).set({
-        verifyForgotPasswordToken: forgotPasswordToken,
-        verifyForgotPasswordTokenExpiry: forgotPasswordTokenExpiry,
+        forgotPasswordToken,
+        forgotPasswordTokenExpiry,
       }).where(eq(users.email, email));
 
       return reply.status(200).send({ message: 'Email enviado com sucesso!' });
