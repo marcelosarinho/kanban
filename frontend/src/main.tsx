@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Login from './Login.tsx'
 import VerifyEmail from './VerifyEmail.tsx'
 import { BrowserRouter, Route, Routes } from 'react-router'
+import AuthLayout from './components/AuthLayout.tsx'
 
 const queryClient = new QueryClient();
 
@@ -14,8 +15,10 @@ createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path='login' element={<Login />} />
-          <Route path='verify-email' element={<VerifyEmail />} />
+          <Route element={<AuthLayout />}>
+            <Route path='login' element={<Login />} />
+            <Route path='verify-email' element={<VerifyEmail />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
