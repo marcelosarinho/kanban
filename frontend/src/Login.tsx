@@ -149,7 +149,7 @@ export default function Login() {
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md mb-4">Um email será enviado com as instruções necessárias para redefinir sua senha.</p>
             <fieldset className="flex flex-col gap-4">
               <Input error={forgotPasswordErrors.email?.message} {...registerForgotPassword('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-              <Button className="animate-slide-in-from-bottom justify-center">Recuperar</Button>
+              <Button className="animate-slide-in-from-bottom justify-center">Enviar</Button>
             </fieldset>
           </form>
           </LoginCardBody>
