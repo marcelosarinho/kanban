@@ -57,6 +57,13 @@
       "when": 1757618136933,
       "tag": "0007_users-projects-one-to-many-relation",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1758137638944,
+      "tag": "0008_add-forgot-password-token-to-users-table",
+      "breakpoints": true
     }
   ]
 }
