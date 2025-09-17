@@ -84,9 +84,7 @@ export default function Login() {
   const email = watchLogin('email');
 
   return (
-    <main className="flex justify-center items-center h-screen">
-      <ThemeButton className="fixed top-4 right-4" />
-
+    <>
       {formType === 'login' && (
         <LoginCard>
           <LoginCardHeader>
@@ -193,6 +191,6 @@ export default function Login() {
           </LoginCardBody>
         </LoginCard>
       )}
-    </main>
+    </>
   )
 }
