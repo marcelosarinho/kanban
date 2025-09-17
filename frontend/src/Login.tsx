@@ -11,6 +11,10 @@ import { createUser } from "./api";
 import UserFormMessage from "./components/UserFormMessage";
 import { EnvelopeIcon } from "@phosphor-icons/react";
 import { censorEmail } from "./utils/functions";
+import LoginCardBody from "./components/LoginCardBody";
+import LoginCardHeader from "./components/LoginCardHeader";
+import LoginCard from "./components/LoginCard";
+import LoginCardFooter from "./components/LoginCardFooter";
 
 type FormType = 'login' | 'register' | 'forgot-password' | 'register-email-sent' | 'confirm-login';
 
@@ -84,15 +88,16 @@ export default function Login() {
       <ThemeButton className="fixed top-4 right-4" />
 
       {formType === 'login' && (
-        <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
+        <LoginCard>
+          <LoginCardHeader>
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Login</h1>
-          </header>
-          <form onSubmit={handleLoginSubmit(onSubmitLogin)} className="p-6">
-            <fieldset className="flex flex-col gap-4">
-              <UserFormMessage variant="success" message="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
-              <Input error={loginErrors.email?.message} {...registerLogin('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-              <Input error={loginErrors.password?.message} {...registerLogin('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
+          </LoginCardHeader>
+          <LoginCardBody>
+            <form onSubmit={handleLoginSubmit(onSubmitLogin)}>
+              <fieldset className="flex flex-col gap-4">
+                <UserFormMessage variant="success" message="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
+                <Input error={loginErrors.email?.message} {...registerLogin('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
+                <Input error={loginErrors.password?.message} {...registerLogin('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
               <span
                 onClick={() => setFormType('forgot-password')}
                 className="animate-slide-in-from-bottom text-sm text-primary cursor-pointer hover:text-primary/80 transition-colors"
@@ -102,18 +107,20 @@ export default function Login() {
               <Button className="animate-slide-in-from-bottom justify-center">Entrar</Button>
             </fieldset>
           </form>
-          <footer className="p-6 border-t border-neutral-300 dark:border-slate-700">
+          </LoginCardBody>
+          <LoginCardFooter>
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Não tem conta? <span onClick={() => setFormType('register')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Cadastre-se de graça!</span></p>
-          </footer>
-        </div>
+          </LoginCardFooter>
+        </LoginCard>
       )}
 
       {formType === 'register' && (
-        <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
+        <LoginCard>
+          <LoginCardHeader>
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Cadastre-se</h1>
-          </header>
-          <form onSubmit={handleRegisterSubmit(onSubmitRegister, onError)} className="p-6">
+          </LoginCardHeader>
+          <LoginCardBody>
+            <form onSubmit={handleRegisterSubmit(onSubmitRegister, onError)}>
             <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4">
               {registerMutation.isError && (
                 <UserFormMessage variant="error" message={registerMutation.error?.message} />
@@ -125,52 +132,55 @@ export default function Login() {
               <Button type="submit" className="animate-slide-in-from-bottom justify-center" loading={registerMutation.isPending}>Cadastrar</Button>
             </fieldset>
           </form>
-          <footer className="p-6 border-t border-neutral-300 dark:border-slate-700">
+          </LoginCardBody>
+          <LoginCardFooter>
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Já tem conta? <span onClick={() => setFormType('login')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Faça login!</span></p>
-          </footer>
-        </div>
+          </LoginCardFooter>
+        </LoginCard>
       )}
 
       {formType === 'forgot-password' && (
-        <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
+        <LoginCard>
+          <LoginCardHeader>
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Esqueceu a senha?</h1>
-          </header>
-          <form onSubmit={handleForgotPasswordSubmit(onSubmitForgotPassword)} className="p-6">
+          </LoginCardHeader>
+          <LoginCardBody>
+            <form onSubmit={handleForgotPasswordSubmit(onSubmitForgotPassword)}>
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md mb-4">Um email será enviado com as instruções necessárias para redefinir sua senha.</p>
             <fieldset className="flex flex-col gap-4">
               <Input error={forgotPasswordErrors.email?.message} {...registerForgotPassword('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
               <Button className="animate-slide-in-from-bottom justify-center">Recuperar</Button>
             </fieldset>
           </form>
-          <footer className="p-6 border-t border-neutral-300 dark:border-slate-700">
+          </LoginCardBody>
+          <LoginCardFooter>
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Lembrou sua senha? <span onClick={() => setFormType('login')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Faça login!</span></p>
-          </footer>
-        </div>
+          </LoginCardFooter>
+        </LoginCard>
       )}
 
       {formType === 'register-email-sent' && (
-        <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
+        <LoginCard>
+          <LoginCardHeader>
             <EnvelopeIcon className="mx-auto mb-3 animate-slide-in-from-bottom dark:text-gray-300" size={64} />
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Email enviado</h1>
-          </header>
-          <div className="p-6">
+          </LoginCardHeader>
+          <LoginCardBody>
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
             <Button className="mx-auto mt-6" onClick={() => setFormType('login')}>Fazer login</Button>
-          </div>
-        </div>
+          </LoginCardBody>
+        </LoginCard>
       )}
 
       {formType === 'confirm-login' && (
-        <div className="animate-in min-w-1/2 max-w-sm lg:min-w-1/3 lg:max-w-lg xl:min-w-1/4 xl:max-w-xl border rounded-lg bg-white border-neutral-300 dark:bg-slate-900 dark:border-slate-700 shadow-lg">
-          <header className="border-b border-neutral-300 dark:border-slate-700 p-6">
+        <LoginCard>
+          <LoginCardHeader>
             <EnvelopeIcon className="mx-auto mb-3 animate-slide-in-from-bottom dark:text-gray-300" size={64} />
             <h1 className="text-center dark:text-gray-300 text-2xl font-medium animate-slide-in-from-bottom">
               Verificação de dispositivo
             </h1>
-          </header>
-          <div className="p-6">
+          </LoginCardHeader>
+          <LoginCardBody>
             <p className="text-center dark:text-gray-300 text-md animate-slide-in-from-bottom">
               Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login confirmando o código enviado para o email {censorEmail(email)}.
             </p>
@@ -180,8 +190,8 @@ export default function Login() {
                 <Button className="animate-slide-in-from-bottom justify-center w-full">Verificar</Button>
               </fieldset>
             </form>
-          </div>
-        </div>
+          </LoginCardBody>
+        </LoginCard>
       )}
     </main>
   )
