@@ -18,11 +18,11 @@ export function removeCookie(name: string) {
 }
 
 export function censorEmail(email: string) {
-  const emailParts = email.split('@');
-  const firstEmailPart = emailParts[0].substring(1);
-  const teste = firstEmailPart.replace(/./g, '*');
+  const [local, domain] = email.split('@');
+  const firstLetter = local[0];
+  const censored = '*'.repeat(local.length - 1);
 
-  console.log(teste);
+  return `${firstLetter}${censored}@${domain}`;
 }
 
 // export function debounce<T extends (...args: any[]) => any>()

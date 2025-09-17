@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createUser } from "./api";
 import UserFormMessage from "./components/UserFormMessage";
 import { EnvelopeIcon } from "@phosphor-icons/react";
+import { censorEmail } from "./utils/functions";
 
 type FormType = 'login' | 'register' | 'forgot-password' | 'register-email-sent' | 'confirm-login';
 
@@ -31,6 +32,7 @@ export default function Login() {
     register: registerLogin,
     handleSubmit: handleLoginSubmit,
     formState: { errors: loginErrors },
+    watch: watchLogin,
   } = useForm<InputsLogin>({
     resolver: zodResolver(userLoginSchema),
   })
@@ -64,6 +66,7 @@ export default function Login() {
 
   function onSubmitLogin(data: InputsLogin) {
     setFormType('confirm-login');
+    console.log(censorEmail(email));
   }
 
   function onSubmitForgotPassword(data: InputsForgotPassword) {
@@ -73,6 +76,8 @@ export default function Login() {
   function onError(errors: FieldErrors<InputsRegister>) {
     console.log(errors)
   }
+
+  const email = watchLogin('email');
 
   return (
     <main className="flex justify-center items-center h-screen">
@@ -167,7 +172,7 @@ export default function Login() {
           </header>
           <div className="p-6">
             <p className="text-center dark:text-gray-300 text-md animate-slide-in-from-bottom">
-              Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login confirmando o código enviado para o email m*********@gmail.com.
+              Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login confirmando o código enviado para o email {censorEmail(email)}.
             </p>
             <form className="mt-6">
               <fieldset>
