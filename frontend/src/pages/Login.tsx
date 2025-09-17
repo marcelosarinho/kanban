@@ -15,6 +15,7 @@ import LoginCardBody from "../components/LoginCardBody";
 import LoginCardHeader from "../components/LoginCardHeader";
 import LoginCard from "../components/LoginCard";
 import LoginCardFooter from "../components/LoginCardFooter";
+import { Link } from "react-router";
 
 type FormType = 'login' | 'register' | 'forgot-password' | 'register-email-sent' | 'confirm-login';
 
@@ -107,32 +108,7 @@ export default function Login() {
           </form>
           </LoginCardBody>
           <LoginCardFooter>
-            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Não tem conta? <span onClick={() => setFormType('register')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Cadastre-se de graça!</span></p>
-          </LoginCardFooter>
-        </LoginCard>
-      )}
-
-      {formType === 'register' && (
-        <LoginCard>
-          <LoginCardHeader>
-            <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Cadastre-se</h1>
-          </LoginCardHeader>
-          <LoginCardBody>
-            <form onSubmit={handleRegisterSubmit(onSubmitRegister, onError)}>
-            <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4">
-              {registerMutation.isError && (
-                <UserFormMessage variant="error" message={registerMutation.error?.message} />
-              )}
-              <Input error={registerErrors.name?.message} {...registerRegister('name')} className="animate-slide-in-from-bottom" label="Nome" type="text" name="name" id="name" />
-              <Input error={registerErrors.email?.message} {...registerRegister('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-              <Input error={registerErrors.password?.message} {...registerRegister('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
-              <Input error={registerErrors.password_confirmation?.message} {...registerRegister('password_confirmation')} className="animate-slide-in-from-bottom" label="Confirmar senha" type="password" name="password_confirmation" id="password_confirmation" isPassword />
-              <Button type="submit" className="animate-slide-in-from-bottom justify-center" loading={registerMutation.isPending}>Cadastrar</Button>
-            </fieldset>
-          </form>
-          </LoginCardBody>
-          <LoginCardFooter>
-            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Já tem conta? <span onClick={() => setFormType('login')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Faça login!</span></p>
+            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Não tem conta? <Link to="/sign-up" className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Cadastre-se de graça!</Link></p>
           </LoginCardFooter>
         </LoginCard>
       )}

@@ -7,6 +7,7 @@ import Login from './pages/Login.tsx'
 import VerifyEmail from './pages/VerifyEmail.tsx'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import AuthLayout from './components/AuthLayout.tsx'
+import Register from './pages/Register.tsx'
 
 const queryClient = new QueryClient();
 
@@ -17,8 +18,11 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
+            <Route path="sign-up" element={<Register />} />
             <Route path="verify-email" element={<VerifyEmail />} />
           </Route>
+
+          <Route index element={<App />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
