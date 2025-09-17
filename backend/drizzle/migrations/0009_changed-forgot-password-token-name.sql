@@ -1,0 +1,2 @@
+ALTER TABLE "users" RENAME COLUMN "verify_forgot_password_token" TO "forgot_password_token";--> statement-breakpoint
+ALTER TABLE "users" RENAME COLUMN "verify_forgot_password_token_expiry" TO "forgot_password_token_expiry";

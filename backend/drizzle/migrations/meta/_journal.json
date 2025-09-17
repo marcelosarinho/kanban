@@ -64,6 +64,13 @@
       "when": 1758137638944,
       "tag": "0008_add-forgot-password-token-to-users-table",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1758138535613,
+      "tag": "0009_changed-forgot-password-token-name",
+      "breakpoints": true
     }
   ]
 }

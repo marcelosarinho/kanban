@@ -66,8 +66,8 @@ export const users = pgTable('users', {
   verified: boolean().notNull().default(false),
   verifyToken: varchar('verify_token', { length: 255 }),
   verifyTokenExpiry: timestamp('verify_token_expiry', { mode: 'string' }),
-  verifyForgotPasswordToken: varchar('verify_forgot_password_token', { length: 255 }),
-  verifyForgotPasswordTokenExpiry: timestamp('verify_forgot_password_token_expiry', { mode: 'string' }),
+  forgotPasswordToken: varchar('forgot_password_token', { length: 255 }),
+  forgotPasswordTokenExpiry: timestamp('forgot_password_token_expiry', { mode: 'string' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })
