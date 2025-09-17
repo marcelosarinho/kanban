@@ -1,12 +1,12 @@
 import type { ComponentProps } from "react";
 
 export default function LoginCardBody(props: ComponentProps<'div'>) {
-  const { children, ...rest } = props;
+  const { children, className, ...rest } = props;
 
   return (
     <div
       {...rest}
-      className="p-6"
+      className={`p-6 ${className}`}
     >
       {children}
     </div>

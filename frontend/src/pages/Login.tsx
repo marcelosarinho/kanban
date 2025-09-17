@@ -6,7 +6,6 @@ import type z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import UserFormMessage from "../components/UserFormMessage";
-import { EnvelopeIcon } from "@phosphor-icons/react";
 import { censorEmail } from "../utils/functions";
 import LoginCardBody from "../components/LoginCardBody";
 import LoginCardHeader from "../components/LoginCardHeader";
