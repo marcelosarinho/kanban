@@ -17,9 +17,9 @@ type InputsRegister = z.infer<typeof userRegisterSchema>;
 
 export default function Register() {
   const {
-    register: registerRegister,
-    handleSubmit: handleRegisterSubmit,
-    formState: { errors: registerErrors },
+    register,
+    handleSubmit,
+    formState: { errors },
   } = useForm<InputsRegister>({
     resolver: zodResolver(userRegisterSchema),
   });
@@ -41,15 +41,15 @@ export default function Register() {
         <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Cadastre-se</h1>
       </LoginCardHeader>
       <LoginCardBody>
-        <form onSubmit={handleRegisterSubmit(onSubmitRegister)}>
+        <form onSubmit={handleSubmit(onSubmitRegister)}>
         <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4">
           {registerMutation.isError && (
             <UserFormMessage variant="error" message={registerMutation.error?.message} />
           )}
-          <Input error={registerErrors.name?.message} {...registerRegister('name')} className="animate-slide-in-from-bottom" label="Nome" type="text" name="name" id="name" />
-          <Input error={registerErrors.email?.message} {...registerRegister('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-          <Input error={registerErrors.password?.message} {...registerRegister('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
-          <Input error={registerErrors.password_confirmation?.message} {...registerRegister('password_confirmation')} className="animate-slide-in-from-bottom" label="Confirmar senha" type="password" name="password_confirmation" id="password_confirmation" isPassword />
+          <Input error={errors.name?.message} {...register('name')} className="animate-slide-in-from-bottom" label="Nome" type="text" name="name" id="name" />
+          <Input error={errors.email?.message} {...register('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
+          <Input error={errors.password?.message} {...register('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
+          <Input error={errors.password_confirmation?.message} {...register('password_confirmation')} className="animate-slide-in-from-bottom" label="Confirmar senha" type="password" name="password_confirmation" id="password_confirmation" isPassword />
           <Button type="submit" className="animate-slide-in-from-bottom justify-center" loading={registerMutation.isPending}>Cadastrar</Button>
         </fieldset>
       </form>

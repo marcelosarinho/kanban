@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import ThemeButton from "../components/ThemeButton";
-import { userForgotPasswordSchema, userLoginSchema, userRegisterSchema } from "../schemas/user";
+import { userLoginSchema } from "../schemas/user";
 import type z from "zod";
-import { useForm, type FieldErrors } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { createUser } from "../api";
 import UserFormMessage from "../components/UserFormMessage";
 import { EnvelopeIcon } from "@phosphor-icons/react";
 import { censorEmail } from "../utils/functions";
@@ -17,11 +14,9 @@ import LoginCard from "../components/LoginCard";
 import LoginCardFooter from "../components/LoginCardFooter";
 import { Link } from "react-router";
 
-type FormType = 'login' | 'register' | 'forgot-password' | 'register-email-sent' | 'confirm-login';
+type FormType = 'login' | 'forgot-password' | 'confirm-login';
 
 type InputsLogin = z.infer<typeof userLoginSchema>;
-type InputsRegister = z.infer<typeof userRegisterSchema>;
-type InputsForgotPassword = z.infer<typeof userForgotPasswordSchema>;
 
 export default function Login() {
   const [formType, setFormType] = useState<FormType>('login');
@@ -42,44 +37,9 @@ export default function Login() {
     resolver: zodResolver(userLoginSchema),
   })
 
-  const {
-    register: registerRegister,
-    handleSubmit: handleRegisterSubmit,
-    formState: { errors: registerErrors },
-  } = useForm<InputsRegister>({
-    resolver: zodResolver(userRegisterSchema),
-  });
-
-  const {
-    register: registerForgotPassword,
-    handleSubmit: handleForgotPasswordSubmit,
-    formState: { errors: forgotPasswordErrors },
-  } = useForm<InputsForgotPassword>({
-    resolver: zodResolver(userForgotPasswordSchema),
-  });
-
-  const registerMutation = useMutation({
-    mutationFn: createUser,
-    onSuccess: () => {
-      setFormType('register-email-sent');
-    }
-  })
-
-  function onSubmitRegister(data: InputsRegister) {
-    registerMutation.mutate(data);
-  }
-
   function onSubmitLogin(data: InputsLogin) {
     setFormType('confirm-login');
     console.log(censorEmail(email));
-  }
-
-  function onSubmitForgotPassword(data: InputsForgotPassword) {
-    console.log(data);
-  }
-
-  function onError(errors: FieldErrors<InputsRegister>) {
-    console.log(errors)
   }
 
   const email = watchLogin('email');
@@ -109,26 +69,6 @@ export default function Login() {
           </LoginCardBody>
           <LoginCardFooter>
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Não tem conta? <Link to="/sign-up" className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Cadastre-se de graça!</Link></p>
-          </LoginCardFooter>
-        </LoginCard>
-      )}
-
-      {formType === 'forgot-password' && (
-        <LoginCard>
-          <LoginCardHeader>
-            <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Esqueceu a senha?</h1>
-          </LoginCardHeader>
-          <LoginCardBody>
-            <form onSubmit={handleForgotPasswordSubmit(onSubmitForgotPassword)}>
-            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md mb-4">Um email será enviado com as instruções necessárias para redefinir sua senha.</p>
-            <fieldset className="flex flex-col gap-4">
-              <Input error={forgotPasswordErrors.email?.message} {...registerForgotPassword('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
-              <Button className="animate-slide-in-from-bottom justify-center">Enviar</Button>
-            </fieldset>
-          </form>
-          </LoginCardBody>
-          <LoginCardFooter>
-            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Lembrou sua senha? <span onClick={() => setFormType('login')} className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Faça login!</span></p>
           </LoginCardFooter>
         </LoginCard>
       )}
