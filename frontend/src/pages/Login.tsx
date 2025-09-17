@@ -72,19 +72,6 @@ export default function Login() {
           </LoginCardFooter>
         </LoginCard>
       )}
-
-      {formType === 'register-email-sent' && (
-        <LoginCard>
-          <LoginCardHeader>
-            <EnvelopeIcon className="mx-auto mb-3 animate-slide-in-from-bottom dark:text-gray-300" size={64} />
-            <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Email enviado</h1>
-          </LoginCardHeader>
-          <LoginCardBody>
-            <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
-            <Button className="mx-auto mt-6" onClick={() => setFormType('login')}>Fazer login</Button>
-          </LoginCardBody>
-        </LoginCard>
-      )}
     </>
   )
 }

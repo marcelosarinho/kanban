@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function VerifyDevice() {
   const [code, setCode] = useState('');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('teste@gmail.com');
 
   return (
     <LoginCard>
