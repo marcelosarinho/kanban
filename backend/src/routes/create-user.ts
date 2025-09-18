@@ -6,7 +6,6 @@ import { eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
 import dayjs from "../lib/dayjs";
 import { getMailClient } from "../lib/mail";
-import nodemailer from "nodemailer";
 import path from "path";
 
 export async function createUser(app: FastifyInstance) {
@@ -29,7 +28,7 @@ export async function createUser(app: FastifyInstance) {
         } else {
           const mail = await getMailClient();
 
-          const message = await mail.sendMail({
+          await mail.sendMail({
             from: {
               name: 'Kanban',
               address: process.env.GMAIL_USER!
@@ -63,7 +62,7 @@ export async function createUser(app: FastifyInstance) {
                     </tr>
                     <tr>
                       <td align="center" style="padding:30px 0;">
-                        <a href="http://localhost:3000/verify-email?token=${user.verifyToken}" 
+                        <a href="${process.env.WEB_BASE_URL}/verify-email?token=${user.verifyToken}" 
                             style="background-color:#e3279a; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:5px; font-size:15px; font-weight:bold; display:inline-block;">
                           Verificar Email
                         </a>
@@ -94,7 +93,7 @@ export async function createUser(app: FastifyInstance) {
 
       const mail = await getMailClient();
 
-      const message = await mail.sendMail({
+      await mail.sendMail({
         from: {
           name: 'Kanban',
           address: process.env.GMAIL_USER!
@@ -128,7 +127,7 @@ export async function createUser(app: FastifyInstance) {
                 </tr>
                 <tr>
                   <td align="center" style="padding:30px 0;">
-                    <a href="http://localhost:3000/verify-email?token=${verifyToken}" 
+                    <a href="${process.env.WEB_BASE_URL}/verify-email?token=${verifyToken}" 
                         style="background-color:#e3279a; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:5px; font-size:15px; font-weight:bold; display:inline-block;">
                       Verificar Email
                     </a>
@@ -146,8 +145,6 @@ export async function createUser(app: FastifyInstance) {
           }
         ]
       });
-
-      console.log(nodemailer.getTestMessageUrl(message));
 
       return reply.status(201).send({ message: 'Usuário cadastrado com sucesso!' });
     } catch (error) {
