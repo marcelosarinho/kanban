@@ -1,10 +1,10 @@
-import LoginCard from "../components/LoginCard";
-import LoginCardHeader from "../components/LoginCardHeader";
+import LoginCard from "../../components/LoginCard";
+import LoginCardHeader from "../../components/LoginCardHeader";
 import { EnvelopeIcon } from "@phosphor-icons/react";
-import LoginCardBody from "../components/LoginCardBody";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import { censorEmail } from "../utils/functions";
+import LoginCardBody from "../../components/LoginCardBody";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import { censorEmail } from "../../utils/functions";
 import { useState } from "react";
 
 export default function VerifyDevice() {

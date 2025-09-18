@@ -1,15 +1,15 @@
-import Button from "../components/Button";
-import Input from "../components/Input";
-import { userLoginSchema } from "../schemas/user";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import { userLoginSchema } from "../../schemas/user";
 import type z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import UserFormMessage from "../components/UserFormMessage";
-import { censorEmail } from "../utils/functions";
-import LoginCardBody from "../components/LoginCardBody";
-import LoginCardHeader from "../components/LoginCardHeader";
-import LoginCard from "../components/LoginCard";
-import LoginCardFooter from "../components/LoginCardFooter";
+import UserFormMessage from "../../components/UserFormMessage";
+import { censorEmail } from "../../utils/functions";
+import LoginCardBody from "../../components/LoginCardBody";
+import LoginCardHeader from "../../components/LoginCardHeader";
+import LoginCard from "../../components/LoginCard";
+import LoginCardFooter from "../../components/LoginCardFooter";
 import { Link } from "react-router";
 
 type InputsLogin = z.infer<typeof userLoginSchema>;
