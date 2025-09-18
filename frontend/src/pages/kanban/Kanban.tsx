@@ -1,10 +1,10 @@
 import { useDeferredValue, useEffect, useRef, useState, type ChangeEvent } from 'react';
-import Button from '../../components/Button';
-import Modal from '../../components/Modal';
-import ModalHeader from '../../components/ModalHeader';
-import ModalTitle from '../../components/ModalTitle';
-import ModalClose from '../../components/ModalClose';
-import ModalBody from '../../components/ModalBody';
+import Button from '@components/Button';
+import Modal from '@components/Modal';
+import ModalHeader from '@components/ModalHeader';
+import ModalTitle from '@components/ModalTitle';
+import ModalClose from '@components/ModalClose';
+import ModalBody from '@components/ModalBody';
 import ModalFooter from '../../components/ModalFooter';
 import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';

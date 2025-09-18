@@ -1,8 +1,8 @@
-import App from "../App";
+import Kanban from "../pages/kanban/Kanban";
 
 const appRoutes = {
   path: '/kanban',
-  Component: App,
+  Component: Kanban,
 }
 
 export default appRoutes;
