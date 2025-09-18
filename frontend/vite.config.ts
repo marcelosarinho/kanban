@@ -12,6 +12,7 @@ export default defineConfig({
       "@pages": "/src/pages",
       "@schemas": "/src/schemas",
       "@utils": "/src/utils",
+      "@api": "/src/api",
     }
   }
 })
