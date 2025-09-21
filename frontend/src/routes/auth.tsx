@@ -8,22 +8,10 @@ const authRoutes = {
   path: '/auth',
   Component: AuthLayout,
   children: [
-    {
-      path: 'login',
-      Component: Login,
-    },
-    {
-      path: 'sign-up',
-      Component: Register,
-    },
-    {
-      path: 'forgot-password',
-      Component: ForgotPassword,
-    },
-    {
-      path: 'reset-password',
-      Component: ResetPassword,
-    }
+    { path: 'login', Component: Login },
+    { path: 'sign-up', Component: Register },
+    { path: 'forgot-password', Component: ForgotPassword },
+    { path: 'reset-password/:token', Component: ResetPassword },
   ]
 };
 
