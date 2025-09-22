@@ -16,6 +16,11 @@ export const THEME_ICONS: Record<ThemeOption, React.ElementType> = {
   system: MoonStarsIcon,
 }
 
+export const THEME_ICONS_SIZE: Record<'sm' | 'lg', string> = {
+  sm: 'text-xl',
+  lg: 'text-2xl',
+}
+
 export const CATEGORIES: Record<CategoryOption, CategoryItem> = {
   frontend: { color: 'badge-blue', name: 'Front-end' },
   backend: { color: 'badge-green', name: 'Back-end' },
