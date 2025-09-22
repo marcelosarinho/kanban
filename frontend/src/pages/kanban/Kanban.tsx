@@ -1,4 +1,4 @@
-import { useDeferredValue, useEffect, useRef, useState, type ChangeEvent } from 'react';
+import { useDeferredValue, useEffect, useState, type ChangeEvent } from 'react';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
 import ModalHeader from '@components/ModalHeader';
@@ -10,7 +10,7 @@ import Input from '@components/Input';
 import Textarea from '@components/Textarea';
 import SidebarCard from '@components/SidebarCard';
 import CategoryBadge from '@components/CategoryBadge';
-import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SignOutIcon, SunIcon, UserGearIcon, UserIcon } from '@phosphor-icons/react';
+import { ArrowsOutIcon, PlusIcon, SignOutIcon, UserGearIcon, UserIcon } from '@phosphor-icons/react';
 import Searchbar from '@components/Searchbar';
 import { CATEGORIES, TASK_STATUSES } from '@libs/constants';
 import StatusColumn from '@components/StatusColumn';
@@ -29,16 +29,10 @@ import Loading from '@components/Loading';
 import StatusColumnSkeleton from '@components/StatusColumnSkeleton';
 import type { Task as TaskType, TaskStatusOption } from '../../types/task';
 import { MAX_CATEGORIES_LENGTH } from '@libs/constants';
-import { getCookie, removeCookie, setCookie } from '@utils/functions';
 import NavbarButton from '@components/navbar/NavbarButton';
 import Dropdown from '@components/Dropdown';
 import DropdownOption from '@components/DropdownOption';
-
-const themeIcons: { [key: string]: string } = {
-  light: 'ph-sun',
-  dark: 'ph-moon',
-  system: 'ph-moon-stars',
-}
+import { useTheme } from '@contexts/ThemeContext';
 
 type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
@@ -59,15 +53,12 @@ function Kanban() {
   });
   const [initialLoading, setInitialLoading] = useState(true);
 
-  const themeIconRef = useRef<HTMLElement>(null);
+  const { renderThemeIcon, changeTheme } = useTheme();
+
   const deferredProjectsQuery = useDeferredValue(projectsQuery);
   const deferredTasksQuery = useDeferredValue(tasksQuery);
 
   const disabledCategories = selectedCategories.length >= MAX_CATEGORIES_LENGTH;
-
-  const theme = getCookie('theme');
-  changeIconTheme(themeIcons[theme || 'system']);
-  document.documentElement.classList.toggle('dark', theme === 'dark' || !theme && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const {
     register,
@@ -85,26 +76,6 @@ function Kanban() {
     }
 
     document.exitFullscreen();
-  }
-
-  function changeTheme(selectedTheme: string) {
-    changeIconTheme(themeIcons[selectedTheme]);
-
-    if (selectedTheme === 'dark' || selectedTheme === 'light') {
-      setCookie('theme', selectedTheme);
-      document.documentElement.classList.toggle('dark', selectedTheme === 'dark');
-      return;
-    }
-
-    removeCookie('theme');
-    document.documentElement.classList.toggle('dark', window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }
-
-  function changeIconTheme(icon: string) {
-    const iconElement = themeIconRef.current;
-
-    iconElement?.classList.remove('ph-sun', 'ph-moon', 'ph-moon-stars');
-    iconElement?.classList.add(icon);
   }
 
   function openModal(id: string, project?: Project, edit?: boolean) {
@@ -442,7 +413,7 @@ function Kanban() {
             className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
           >
             <NavbarButton onClick={() => setDropdown({ ...dropdown, theme: !dropdown.theme })}>
-              <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
+              {renderThemeIcon()}
             </NavbarButton>
             <NavbarButton onClick={toggleFullScreen}>
               <ArrowsOutIcon className="text-2xl dark:text-gray-300" />
@@ -453,15 +424,15 @@ function Kanban() {
             {dropdown.theme && (
               <Dropdown className="right-12 top-10">
                 <DropdownOption onClick={() => changeTheme('dark')}>
-                  <MoonIcon className="mr-2 text-xl" />
+                  {renderThemeIcon('dark')}
                   Escuro
                 </DropdownOption>
                 <DropdownOption onClick={() => changeTheme('light')}>
-                  <SunIcon className="mr-2 text-xl" />
+                  {renderThemeIcon('light')}
                   Claro
                 </DropdownOption>
                 <DropdownOption onClick={() => changeTheme('system')}>
-                  <MoonStarsIcon className="mr-2 text-xl" />
+                  {renderThemeIcon('system')}
                   Sistema
                 </DropdownOption>
               </Dropdown>
