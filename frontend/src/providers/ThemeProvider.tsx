@@ -14,9 +14,9 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(selectedTheme);
   }
 
-  function renderThemeIcon() {
-    const Icon = THEME_ICONS[theme];
-    return <Icon className="text-xl dark:text-gray-300" />
+  function renderThemeIcon(themeOption?: ThemeOption) {
+    const Icon = THEME_ICONS[themeOption || theme];
+    return <Icon className={`text-xl dark:text-gray-300 ${themeOption ? 'mr-2' : ''}`} />
   }
 
   useEffect(() => {
