@@ -31,6 +31,8 @@ import type { Task as TaskType, TaskStatusOption } from '../../types/task';
 import { MAX_CATEGORIES_LENGTH } from '@libs/constants';
 import { getCookie, removeCookie, setCookie } from '@utils/functions';
 import NavbarButton from '@components/NavbarButton';
+import Dropdown from '@components/Dropdown';
+import DropdownOption from '@components/DropdownOption';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -449,32 +451,33 @@ function Kanban() {
               <UserIcon className="text-2xl dark:text-gray-300" />
             </NavbarButton>
             {dropdown.theme && (
-              <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
-                <div onClick={() => changeTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+              <Dropdown className="right-12 top-10">
+                <DropdownOption onClick={() => changeTheme('dark')}>
                   <MoonIcon className="mr-2 text-xl" />
                   Escuro
-                </div>
-                <div onClick={() => changeTheme('light')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+                </DropdownOption>
+                <DropdownOption onClick={() => changeTheme('light')}>
                   <SunIcon className="mr-2 text-xl" />
                   Claro
-                </div>
-                <div onClick={() => changeTheme('system')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+                </DropdownOption>
+                <DropdownOption onClick={() => changeTheme('system')}>
                   <MoonStarsIcon className="mr-2 text-xl" />
                   Sistema
-                </div>
-              </div>
+                </DropdownOption>
+              </Dropdown>
             )}
+
             {dropdown.user && (
-              <div className="absolute right-0 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
-                <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+              <Dropdown className="right-0 top-10">
+                <DropdownOption onClick={() => changeTheme('dark')}>
                   <UserGearIcon className="mr-2 text-xl" />
                   Perfil
-                </div>
-                <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+                </DropdownOption>
+                <DropdownOption onClick={() => changeTheme('dark')}>
                   <SignOutIcon className="mr-2 text-xl" />
                   Sair
-                </div>
-              </div>
+                </DropdownOption>
+              </Dropdown>
             )}
           </nav>
 
