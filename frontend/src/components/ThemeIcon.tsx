@@ -7,13 +7,13 @@ type ThemeIconProps = {
 }
 
 export default function ThemeIcon(props: ThemeIconProps) {
-  const { theme, size = 'lg' } = props;
+  const { theme, size } = props;
 
   function renderIcon() {
     const Icon = THEME_ICONS[theme];
     const iconSize = THEME_ICONS_SIZE[size];
 
-    return <Icon className={iconSize} />
+    return <Icon className={`${iconSize} dark:text-gray-300`} />
   }
 
   return (

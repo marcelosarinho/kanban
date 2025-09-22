@@ -1,8 +1,8 @@
-import React, { createContext, useContext } from "react";
+import { createContext, useContext } from "react";
 import type { ThemeOption } from "../types/constants";
 
 type ThemeContextType = {
-  renderThemeIcon: (themeOption?: ThemeOption) => React.ReactNode;
+  theme: ThemeOption;
   changeTheme: (selectedTheme: ThemeOption) => void;
 }
 

@@ -1,5 +1,4 @@
 import { ThemeContext } from "@contexts/ThemeContext";
-import { THEME_ICONS } from "@libs/constants";
 import { useEffect, useState, type ReactNode } from "react";
 import type { ThemeOption } from "types/constants";
 import { setCookie } from "@utils/functions";
@@ -14,17 +13,12 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(selectedTheme);
   }
 
-  function renderThemeIcon(themeOption?: ThemeOption) {
-    const Icon = THEME_ICONS[themeOption || theme];
-    return <Icon className={`text-2xl dark:text-gray-300 ${themeOption ? 'mr-2' : ''}`} />
-  }
-
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark' || theme === 'system' && window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ renderThemeIcon, changeTheme }}>
+    <ThemeContext.Provider value={{ theme, changeTheme }}>
       {children}
     </ThemeContext.Provider>
   )

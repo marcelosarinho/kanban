@@ -33,6 +33,7 @@ import NavbarButton from '@components/navbar/NavbarButton';
 import Dropdown from '@components/Dropdown';
 import DropdownOption from '@components/DropdownOption';
 import { useTheme } from '@contexts/ThemeContext';
+import ThemeIcon from '@components/ThemeIcon';
 
 type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
@@ -53,7 +54,7 @@ function Kanban() {
   });
   const [initialLoading, setInitialLoading] = useState(true);
 
-  const { renderThemeIcon, changeTheme } = useTheme();
+  const { theme, changeTheme } = useTheme();
 
   const deferredProjectsQuery = useDeferredValue(projectsQuery);
   const deferredTasksQuery = useDeferredValue(tasksQuery);
@@ -333,6 +334,7 @@ function Kanban() {
             duration: 3000,
           }}
         />
+
         <Modal id="create-project-modal">
           <ModalHeader>
             <ModalTitle>{project ? 'Editar' : 'Adicionar'} projeto</ModalTitle>
@@ -413,7 +415,7 @@ function Kanban() {
             className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
           >
             <NavbarButton onClick={() => setDropdown({ ...dropdown, theme: !dropdown.theme })}>
-              {renderThemeIcon()}
+              <ThemeIcon theme={theme} size="lg" />
             </NavbarButton>
             <NavbarButton onClick={toggleFullScreen}>
               <ArrowsOutIcon className="text-2xl dark:text-gray-300" />
@@ -424,15 +426,15 @@ function Kanban() {
             {dropdown.theme && (
               <Dropdown className="right-12 top-10">
                 <DropdownOption onClick={() => changeTheme('dark')}>
-                  {renderThemeIcon('dark')}
+                  <ThemeIcon theme="dark" size="sm" />
                   Escuro
                 </DropdownOption>
                 <DropdownOption onClick={() => changeTheme('light')}>
-                  {renderThemeIcon('light')}
+                  <ThemeIcon theme="light" size="sm" />
                   Claro
                 </DropdownOption>
                 <DropdownOption onClick={() => changeTheme('system')}>
-                  {renderThemeIcon('system')}
+                  <ThemeIcon theme="system" size="sm" />
                   Sistema
                 </DropdownOption>
               </Dropdown>
