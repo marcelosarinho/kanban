@@ -1,4 +1,3 @@
-import { MoonIcon, MoonStarsIcon, SunIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useTheme } from "@contexts/ThemeContext";
 
@@ -15,15 +14,15 @@ export default function ThemeButton({ className }: { className?: string }) {
       {themeDropdown && (
         <div className="absolute right-0 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
           <div onClick={() => changeTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-            <MoonIcon className="mr-2 text-xl" />
+            {renderThemeIcon('dark')}
             Escuro
           </div>
           <div onClick={() => changeTheme('light')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-            <SunIcon className="mr-2 text-xl" />
+            {renderThemeIcon('light')}
             Claro
           </div>
           <div onClick={() => changeTheme('system')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
-            <MoonStarsIcon className="mr-2 text-xl" />
+            {renderThemeIcon('system')}
             Sistema
           </div>
         </div>
