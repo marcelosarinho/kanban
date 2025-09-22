@@ -1,4 +1,4 @@
-import type { Project } from "../types/project";
+import type { Project } from "@custom-types/project";
 
 export async function getProjects(search?: string) {
   try {

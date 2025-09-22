@@ -1,5 +1,5 @@
-import TaskCategoryBadge from "@components/TaskCategoryBadge";
-import TaskPriorityBadge from "@components/TaskPriorityBadge";
+import TaskCategoryBadge from "@components/badge/TaskCategoryBadge";
+import TaskPriorityBadge from "@components/badge/TaskPriorityBadge";
 import { ArrowRightIcon, CodeIcon, FolderIcon, GithubLogoIcon, KanbanIcon, LightningIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
 import { useRef } from "react";
 import { Link } from "react-router";

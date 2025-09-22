@@ -15,6 +15,8 @@ export default defineConfig({
       "@api": "/src/api",
       "@contexts": "/src/contexts",
       "@providers": "/src/providers",
+      "@custom-types": "/src/types",
+      "@routes": "/src/routes",
     }
   }
 })

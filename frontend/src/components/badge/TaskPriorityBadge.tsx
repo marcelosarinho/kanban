@@ -1,4 +1,4 @@
-import { TASK_PRIORITIES } from "../libs/constants";
+import { TASK_PRIORITIES } from "@libs/constants";
 import type { ComponentProps } from "react";
 
 type TaskPriorityBadgeProps = {

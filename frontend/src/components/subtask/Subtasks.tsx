@@ -1,5 +1,5 @@
 import { CaretDownIcon, CaretRightIcon, CheckIcon, PlusIcon, XIcon } from "@phosphor-icons/react";
-import Button from "./Button";
+import Button from "@components/Button";
 import { useState } from "react";
 
 type SubtasksProps = {

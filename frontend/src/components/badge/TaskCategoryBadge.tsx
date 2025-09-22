@@ -1,5 +1,5 @@
-import { CATEGORIES } from "../libs/constants";
-import type { CategoryOption } from "../types/constants";
+import { CATEGORIES } from "@libs/constants";
+import type { CategoryOption } from "@custom-types/constants";
 import type { ComponentProps } from "react";
 
 type TaskCategoryBadgeProps = {

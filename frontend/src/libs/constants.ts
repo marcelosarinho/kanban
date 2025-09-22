@@ -4,8 +4,8 @@ import type {
   ButtonOption,
   ThemeOption,
   Color,
-} from "../types/constants"
-import type { TaskItem, TaskPriorityItem, TaskPriorityOption, TaskStatusOption } from "../types/task"
+} from "@custom-types/constants"
+import type { TaskItem, TaskPriorityItem, TaskPriorityOption, TaskStatusOption } from "@custom-types/task"
 import { MoonIcon, MoonStarsIcon, SunIcon } from "@phosphor-icons/react"
 
 export const MAX_CATEGORIES_LENGTH = 2;

@@ -1,8 +1,8 @@
-import Login from "../pages/auth/Login";
-import Register from "../pages/auth/Register";
-import ForgotPassword from "../pages/auth/ForgotPassword";
-import ResetPassword from "../pages/auth/ResetPassword";
-import AuthLayout from "../components/AuthLayout";
+import Login from "@pages/auth/Login";
+import Register from "@pages/auth/Register";
+import ForgotPassword from "@pages/auth/ForgotPassword";
+import ResetPassword from "@pages/auth/ResetPassword";
+import AuthLayout from "@components/auth/AuthLayout";
 
 const authRoutes = {
   path: '/auth',

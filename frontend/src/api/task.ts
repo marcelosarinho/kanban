@@ -1,5 +1,5 @@
-import type { Project } from "../types/project";
-import type { Task, TaskStatusOption } from "../types/task";
+import type { Project } from "@custom-types/project";
+import type { Task, TaskStatusOption } from "@custom-types/task";
 
 export async function getTasks({ id }: Pick<Project, 'id'>) {
   if (!id) {

@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { CATEGORIES } from "../libs/constants";
+import { CATEGORIES } from "@libs/constants";
 
 type CategoryBadgeProps = {
   category: keyof typeof CATEGORIES;

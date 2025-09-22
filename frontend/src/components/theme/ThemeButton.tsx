@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "@contexts/ThemeContext";
-import ThemeIcon from "./ThemeIcon";
+import ThemeIcon from "@components/theme/ThemeIcon";
 
 export default function ThemeButton({ className }: { className?: string }) {
   const { changeTheme, theme } = useTheme();

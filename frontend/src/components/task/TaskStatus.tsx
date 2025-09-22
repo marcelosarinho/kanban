@@ -1,11 +1,11 @@
 import type { InputHTMLAttributes, ReactElement, SetStateAction } from "react";
-import Searchbar from "./Searchbar";
-import { TASK_STATUSES } from "../libs/constants";
-import Button from "./Button";
+import Searchbar from "@components/Searchbar";
+import { TASK_STATUSES } from "@libs/constants";
+import Button from "@components/Button";
 import { PlusIcon } from "@phosphor-icons/react";
-import type { TaskStatusOption } from "../types/task";
+import type { TaskStatusOption } from "@custom-types/task";
 
-type StatusColumnProps = {
+type TaskStatusProps = {
   status: TaskStatusOption;
   children?: ReactElement | ReactElement[] | undefined | null;
   createTask: () => void;
@@ -13,7 +13,7 @@ type StatusColumnProps = {
   value: InputHTMLAttributes<HTMLInputElement>['value'];
 }
 
-export default function StatusColumn(props: StatusColumnProps) {
+export default function TaskStatus(props: TaskStatusProps) {
   const { status, children, createTask, setTaskQuery, value} = props;
 
   return (

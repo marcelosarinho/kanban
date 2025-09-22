@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
-import authRoutes from "./auth";
-import appRoutes from "./app";
+import authRoutes from "@routes/auth";
+import appRoutes from "@routes/app";
 import Error from "@pages/error/Error";
 import Home from "@pages/Home";
 

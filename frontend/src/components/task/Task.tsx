@@ -1,17 +1,17 @@
-import TaskCategoryBadge from "./TaskCategoryBadge"
-import TaskPriorityBadge from "./TaskPriorityBadge"
-import ProgressBar from "./ProgressBar"
+import TaskCategoryBadge from "@components/badge/TaskCategoryBadge"
+import TaskPriorityBadge from "@components/badge/TaskPriorityBadge"
+import ProgressBar from "@components/ProgressBar"
 import { useEffect, useState } from "react"
 import { ChatIcon, CheckCircleIcon, CheckIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
-import Button from "./Button";
-import Textarea from "./Textarea";
-import { TASK_COLORS, TASK_PRIORITIES } from "../libs/constants";
-import CustomTooltip from "./CustomTooltip";
-import Subtasks from "./Subtasks";
-import type { Task } from "../types/task";
-import type { CategoryOption } from "../types/constants";
+import Button from "@components/Button";
+import Textarea from "@components/Textarea";
+import { TASK_COLORS, TASK_PRIORITIES } from "@libs/constants";
+import CustomTooltip from "@components/CustomTooltip";
+import Subtasks from "@components/subtask/Subtasks";
+import type { Task } from "@custom-types/task";
+import type { CategoryOption } from "@custom-types/constants";
 import { useMutation } from "@tanstack/react-query";
-import { updateTask } from "../api/task";
+import { updateTask } from "@api/index";
 
 type TaskProps = {
   onClick: () => void;

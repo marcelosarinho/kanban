@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
-import { BUTTON_VARIANTS } from "../libs/constants";
-import Loading from "./Loading";
+import { BUTTON_VARIANTS } from "@libs/constants";
+import Loading from "@components/Loading";
 
 type ButtonProps = {
   variant?: keyof typeof BUTTON_VARIANTS;

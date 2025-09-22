@@ -1,4 +1,4 @@
-import type { CategoryOption, Color } from "./constants";
+import type { CategoryOption, Color } from "@custom-types/constants";
 
 export type Task = {
   id: string;

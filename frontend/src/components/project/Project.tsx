@@ -1,17 +1,17 @@
 import { PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
-import Button from "./Button";
-import CustomTooltip from "./CustomTooltip";
-import type { Project } from "../types/project";
-import { addUnderscoresToText } from "../utils/functions";
+import Button from "@components/Button";
+import CustomTooltip from "@components/CustomTooltip";
+import type { Project } from "@custom-types/project";
+import { addUnderscoresToText } from "@utils/functions";
 
-type SidebarCardProps = {
+type ProjectProps = {
   project: Project;
   openModal: (modalId: string, project?: Project, edit?: boolean) => void;
   selected: boolean;
   onClick: () => void;
 }
 
-export default function SidebarCard(props: SidebarCardProps) {
+export default function Project(props: ProjectProps) {
   const { project, openModal, selected, onClick } = props;
 
   const underscoredProjectName = addUnderscoresToText(project.name);

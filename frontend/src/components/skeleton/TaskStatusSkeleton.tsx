@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 
-export default function StatusColumnSkeleton({ children }: { children?: ReactElement | ReactElement[] | undefined | null; }) {
+export default function TaskStatusSkeleton({ children }: { children?: ReactElement | ReactElement[] | undefined | null; }) {
   return (
     <div className="col-lg-3 h-3/4">
       <div className="flex justify-between mb-2">

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import ThemeButton from "./ThemeButton";
+import ThemeButton from "@components/theme/ThemeButton";
 
 export default function AuthLayout() {
   return (

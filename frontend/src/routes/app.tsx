@@ -1,4 +1,4 @@
-import Kanban from "../pages/kanban/Kanban";
+import Kanban from "@pages/kanban/Kanban";
 
 const appRoutes = {
   path: '/kanban',

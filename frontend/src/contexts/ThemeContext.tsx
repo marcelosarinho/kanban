@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import type { ThemeOption } from "../types/constants";
+import type { ThemeOption } from "@custom-types/constants";
 
 type ThemeContextType = {
   theme: ThemeOption;

@@ -1,39 +1,39 @@
 import { useDeferredValue, useEffect, useState, type ChangeEvent } from 'react';
 import Button from '@components/Button';
-import Modal from '@components/Modal';
-import ModalHeader from '@components/ModalHeader';
-import ModalTitle from '@components/ModalTitle';
-import ModalClose from '@components/ModalClose';
-import ModalBody from '@components/ModalBody';
-import ModalFooter from '@components/ModalFooter';
+import Modal from '@components/modal/Modal';
+import ModalHeader from '@components/modal/ModalHeader';
+import ModalTitle from '@components/modal/ModalTitle';
+import ModalClose from '@components/modal/ModalClose';
+import ModalBody from '@components/modal/ModalBody';
+import ModalFooter from '@components/modal/ModalFooter';
 import Input from '@components/Input';
 import Textarea from '@components/Textarea';
-import SidebarCard from '@components/SidebarCard';
-import CategoryBadge from '@components/CategoryBadge';
+import Project from '@components/project/Project';
+import CategoryBadge from '@components/badge/CategoryBadge';
 import { ArrowsOutIcon, PlusIcon, SignOutIcon, UserGearIcon, UserIcon } from '@phosphor-icons/react';
 import Searchbar from '@components/Searchbar';
 import { CATEGORIES, TASK_STATUSES } from '@libs/constants';
-import StatusColumn from '@components/StatusColumn';
-import SidebarCardSkeleton from '@components/SidebarCardSkeleton';
-import TaskSkeleton from '@components/TaskSkeleton';
-import Task from '@components/Task';
+import TaskStatus from '@components/task/TaskStatus';
+import ProjectSkeleton from '@components/skeleton/ProjectSkeleton';
+import TaskSkeleton from '@components/skeleton/TaskSkeleton';
+import Task from '@components/task/Task';
 import { useForm } from 'react-hook-form';
 import type z from 'zod';
 import { projectSchema } from '@schemas/project';
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
-import type { Project } from '../../types/project';
+import type { Project as ProjectType } from '@custom-types/project';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
 import { createProject, deleteProject, getProjects, updateProject, createTask, getTasks } from '@api/index';
 import Loading from '@components/Loading';
-import StatusColumnSkeleton from '@components/StatusColumnSkeleton';
-import type { Task as TaskType, TaskStatusOption } from '../../types/task';
+import TaskStatusSkeleton from '@components/skeleton/TaskStatusSkeleton';
+import type { Task as TaskType, TaskStatusOption } from '@custom-types/task';
 import { MAX_CATEGORIES_LENGTH } from '@libs/constants';
 import NavbarButton from '@components/navbar/NavbarButton';
-import Dropdown from '@components/Dropdown';
-import DropdownOption from '@components/DropdownOption';
+import Dropdown from '@components/dropdown/Dropdown';
+import DropdownOption from '@components/dropdown/DropdownOption';
 import { useTheme } from '@contexts/ThemeContext';
-import ThemeIcon from '@components/ThemeIcon';
+import ThemeIcon from '@components/theme/ThemeIcon';
 
 type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
@@ -44,7 +44,7 @@ function Kanban() {
     user: false,
   })
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [project, setProject] = useState<Project | null>(null);
+  const [project, setProject] = useState<ProjectType | null>(null);
   const [projectsQuery, setProjectsQuery] = useState('');
   const [tasksQuery, setTasksQuery] = useState({
     todo: '',
@@ -79,7 +79,7 @@ function Kanban() {
     document.exitFullscreen();
   }
 
-  function openModal(id: string, project?: Project, edit?: boolean) {
+  function openModal(id: string, project?: ProjectType, edit?: boolean) {
     const modal = document.getElementById(id) as HTMLDialogElement;
 
     if (project) {
@@ -136,14 +136,14 @@ function Kanban() {
       return (
         <>
           {Array.from({ length: 4 }).map((_, index) => (
-            <SidebarCardSkeleton key={index} />
+            <ProjectSkeleton key={index} />
           ))}
         </>
       )
     }
 
-    return projects?.map((p: Project) => (
-      <SidebarCard
+    return projects?.map((p: ProjectType) => (
+      <Project
         key={p.id}
         project={p}
         openModal={openModal}
@@ -180,11 +180,11 @@ function Kanban() {
     if (initialLoading) {
       return (
         Object.keys(TASK_STATUSES).map((key) => (
-          <StatusColumnSkeleton key={key}>
+          <TaskStatusSkeleton key={key}>
             {Array.from({ length: 2 }).map((_, index) => (
               <TaskSkeleton key={index} />
             ))}
-          </StatusColumnSkeleton>
+          </TaskStatusSkeleton>
         ))
       )
     }
@@ -195,7 +195,7 @@ function Kanban() {
         const filteredTasks = searchTasks(status);
 
         return (
-          <StatusColumn
+          <TaskStatus
             key={key}
             status={status}
             createTask={() => createTaskMutation.mutate({ status, projectId: project.id })}
@@ -205,7 +205,7 @@ function Kanban() {
             {filteredTasks.map((task: TaskType) => (
               <Task onClick={() => console.log('oi')} key={task.id} task={task} projectId={project.id} />
             ))}
-          </StatusColumn>
+          </TaskStatus>
         )
       })
     }

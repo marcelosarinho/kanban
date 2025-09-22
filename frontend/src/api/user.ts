@@ -1,4 +1,4 @@
-import type { User } from "../types/user";
+import type { User } from "@custom-types/user";
 
 export async function createUser(user: Pick<User, 'name' | 'email' | 'password'>) {
   const response = await fetch('http://localhost:8080/users', {

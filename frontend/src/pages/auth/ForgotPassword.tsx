@@ -1,19 +1,19 @@
-import LoginCard from "../../components/LoginCard";
-import LoginCardHeader from "../../components/LoginCardHeader";
-import LoginCardBody from "../../components/LoginCardBody";
-import LoginCardFooter from "../../components/LoginCardFooter";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
+import LoginCard from "@components/auth/LoginCard";
+import LoginCardHeader from "@components/auth/LoginCardHeader";
+import LoginCardBody from "@components/auth/LoginCardBody";
+import LoginCardFooter from "@components/auth/LoginCardFooter";
+import Button from "@components/Button";
+import Input from "@components/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userForgotPasswordSchema } from "../../schemas/user";
+import { userForgotPasswordSchema } from "@schemas/user";
 import type z from "zod";
 import { Link } from "react-router";
 import { useMutation } from "@tanstack/react-query";
-import { forgotPassword } from "../../api";
+import { forgotPassword } from "@api/index";
 import { useState } from "react";
 import { EnvelopeIcon } from "@phosphor-icons/react";
-import UserFormMessage from "../../components/UserFormMessage";
+import UserFormMessage from "@components/auth/UserFormMessage";
 
 type InputsForgotPassword = z.infer<typeof userForgotPasswordSchema>;
 
