@@ -4,13 +4,18 @@ import type { ThemeOption } from "../types/constants";
 type ThemeContextType = {
   theme: ThemeOption;
   setTheme: React.Dispatch<React.SetStateAction<ThemeOption>>;
+  renderThemeIcon: () => React.ReactNode;
+  changeTheme: (selectedTheme: ThemeOption) => void;
 }
 
-export const ThemeContext = createContext<ThemeContextType>({
-  theme: "system",
-  setTheme: () => {},
-});
+export const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function useTheme() {
-  return useContext(ThemeContext);
+  const ctx = useContext(ThemeContext);
+
+  if (!ctx) {
+    throw new Error('useTheme deve ser usado dentro de um ThemeProvider');
+  }
+
+  return ctx;
 }

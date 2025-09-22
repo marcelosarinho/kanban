@@ -2,18 +2,18 @@ import type {
   CategoryItem,
   CategoryOption,
   ButtonOption,
-  ThemeIcon,
   ThemeOption,
   Color,
 } from "../types/constants"
 import type { TaskItem, TaskPriorityItem, TaskPriorityOption, TaskStatusOption } from "../types/task"
+import { MoonIcon, MoonStarsIcon, SunIcon } from "@phosphor-icons/react"
 
 export const MAX_CATEGORIES_LENGTH = 2;
 
-export const THEME_ICONS: Record<ThemeOption, ThemeIcon> = {
-  light: 'ph-sun',
-  dark: 'ph-moon',
-  system: 'ph-moon-stars',
+export const THEME_ICONS: Record<ThemeOption, React.ElementType> = {
+  light: SunIcon,
+  dark: MoonIcon,
+  system: MoonStarsIcon,
 }
 
 export const CATEGORIES: Record<CategoryOption, CategoryItem> = {
