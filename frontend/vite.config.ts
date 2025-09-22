@@ -13,6 +13,7 @@ export default defineConfig({
       "@schemas": "/src/schemas",
       "@utils": "/src/utils",
       "@api": "/src/api",
+      "@contexts": "/src/contexts",
     }
   }
 })
