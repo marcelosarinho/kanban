@@ -42,8 +42,10 @@ type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
 
 function Kanban() {
-  const [themeDropdown, setThemeDropdown] = useState(false);
-  const [userDropdown, setUserDropdown] = useState(false);
+  const [dropdown, setDropdown] = useState({
+    theme: false,
+    user: false,
+  })
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [project, setProject] = useState<Project | null>(null);
   const [projectsQuery, setProjectsQuery] = useState('');
@@ -437,16 +439,16 @@ function Kanban() {
           <nav
             className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
           >
-            <NavbarButton onClick={() => setThemeDropdown(!themeDropdown)}>
+            <NavbarButton onClick={() => setDropdown({ ...dropdown, theme: !dropdown.theme })}>
               <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
             </NavbarButton>
             <NavbarButton onClick={toggleFullScreen}>
               <ArrowsOutIcon className="text-2xl dark:text-gray-300" />
             </NavbarButton>
-            <NavbarButton onClick={() => setUserDropdown(!userDropdown)}>
+            <NavbarButton onClick={() => setDropdown({ ...dropdown, user: !dropdown.user })}>
               <UserIcon className="text-2xl dark:text-gray-300" />
             </NavbarButton>
-            {themeDropdown && (
+            {dropdown.theme && (
               <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
                 <div onClick={() => changeTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                   <MoonIcon className="mr-2 text-xl" />
@@ -462,7 +464,7 @@ function Kanban() {
                 </div>
               </div>
             )}
-            {userDropdown && (
+            {dropdown.user && (
               <div className="absolute right-0 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
                 <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                   <UserGearIcon className="mr-2 text-xl" />
