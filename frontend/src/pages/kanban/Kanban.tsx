@@ -30,7 +30,7 @@ import StatusColumnSkeleton from '@components/StatusColumnSkeleton';
 import type { Task as TaskType, TaskStatusOption } from '../../types/task';
 import { MAX_CATEGORIES_LENGTH } from '@libs/constants';
 import { getCookie, removeCookie, setCookie } from '@utils/functions';
-import NavbarButton from '@components/NavbarButton';
+import NavbarButton from '@components/navbar/NavbarButton';
 import Dropdown from '@components/Dropdown';
 import DropdownOption from '@components/DropdownOption';
 
