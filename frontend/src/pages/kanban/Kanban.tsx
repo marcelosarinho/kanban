@@ -443,11 +443,11 @@ function Kanban() {
             {dropdown.user && (
               <Dropdown className="right-0 top-10">
                 <DropdownOption onClick={() => changeTheme('dark')}>
-                  <UserGearIcon className="mr-2 text-xl" />
+                  <UserGearIcon className="text-xl" />
                   Perfil
                 </DropdownOption>
                 <DropdownOption onClick={() => changeTheme('dark')} className="text-danger">
-                  <SignOutIcon className="mr-2 text-xl" />
+                  <SignOutIcon className="text-xl" />
                   Sair
                 </DropdownOption>
               </Dropdown>

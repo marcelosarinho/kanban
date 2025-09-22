@@ -13,7 +13,7 @@ export default function ThemeButton({ className }: { className?: string }) {
         <ThemeIcon theme={theme} size="lg" />
       </button>
       {themeDropdown && (
-        <div className="absolute right-0 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
+        <div className="absolute right-0 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none animate-dropdown">
           <div onClick={() => changeTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800 gap-2">
             <ThemeIcon theme="dark" size="sm" />
             Escuro
