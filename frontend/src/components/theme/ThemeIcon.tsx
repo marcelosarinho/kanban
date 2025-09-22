@@ -3,11 +3,11 @@ import type { ThemeOption } from "types/constants"
 
 type ThemeIconProps = {
   theme: ThemeOption;
-  size: 'sm' | 'lg';
+  size?: 'sm' | 'lg';
 }
 
 export default function ThemeIcon(props: ThemeIconProps) {
-  const { theme, size } = props;
+  const { theme, size = 'sm' } = props;
 
   function renderIcon() {
     const Icon = THEME_ICONS[theme];
