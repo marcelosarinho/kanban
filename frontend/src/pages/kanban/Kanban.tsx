@@ -473,7 +473,7 @@ function Kanban() {
                   <UserGearIcon className="mr-2 text-xl" />
                   Perfil
                 </DropdownOption>
-                <DropdownOption onClick={() => changeTheme('dark')}>
+                <DropdownOption onClick={() => changeTheme('dark')} className="text-danger">
                   <SignOutIcon className="mr-2 text-xl" />
                   Sair
                 </DropdownOption>

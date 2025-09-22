@@ -18,6 +18,7 @@
   --font-suse: 'SUSE', sans-serif;
 
   --animate-in: in 0.5s linear;
+  --animate-dropdown: in 0.15s linear;
   --animate-slide-in-from-bottom: slide-in-from-bottom 0.2s linear;
 
   @keyframes in {
