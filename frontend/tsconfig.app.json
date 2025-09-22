@@ -33,6 +33,7 @@
       "@utils/*": ["utils/*"],
       "@api/*": ["api/*"],
       "@contexts/*": ["contexts/*"],
+      "@providers/*": ["providers/*"],
     }
   },
   "include": ["src"]
