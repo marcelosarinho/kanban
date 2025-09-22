@@ -10,7 +10,7 @@ import Input from '@components/Input';
 import Textarea from '@components/Textarea';
 import SidebarCard from '@components/SidebarCard';
 import CategoryBadge from '@components/CategoryBadge';
-import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SunIcon } from '@phosphor-icons/react';
+import { ArrowsOutIcon, MoonIcon, MoonStarsIcon, PlusIcon, SignOutIcon, SunIcon, UserGearIcon, UserIcon } from '@phosphor-icons/react';
 import Searchbar from '@components/Searchbar';
 import { CATEGORIES, TASK_STATUSES } from '@libs/constants';
 import StatusColumn from '@components/StatusColumn';
@@ -30,6 +30,7 @@ import StatusColumnSkeleton from '@components/StatusColumnSkeleton';
 import type { Task as TaskType, TaskStatusOption } from '../../types/task';
 import { MAX_CATEGORIES_LENGTH } from '@libs/constants';
 import { getCookie, removeCookie, setCookie } from '@utils/functions';
+import NavbarButton from '@components/NavbarButton';
 
 const themeIcons: { [key: string]: string } = {
   light: 'ph-sun',
@@ -42,6 +43,7 @@ const queryClient = new QueryClient();
 
 function Kanban() {
   const [themeDropdown, setThemeDropdown] = useState(false);
+  const [userDropdown, setUserDropdown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [project, setProject] = useState<Project | null>(null);
   const [projectsQuery, setProjectsQuery] = useState('');
@@ -78,14 +80,7 @@ function Kanban() {
       return;
     }
 
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-      return;
-    }
-  }
-
-  function toggleThemeDropdown() {
-    setThemeDropdown(!themeDropdown);
+    document.exitFullscreen();
   }
 
   function changeTheme(selectedTheme: string) {
@@ -442,12 +437,15 @@ function Kanban() {
           <nav
             className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
           >
-            <button onClick={toggleThemeDropdown} className="flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1">
+            <NavbarButton onClick={() => setThemeDropdown(!themeDropdown)}>
               <i ref={themeIconRef} className="ph ph-sun text-2xl dark:text-gray-300"></i>
-            </button>
-            <button onClick={toggleFullScreen} className="flex items-center justify-center cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-800 rounded-full p-1">
+            </NavbarButton>
+            <NavbarButton onClick={toggleFullScreen}>
               <ArrowsOutIcon className="text-2xl dark:text-gray-300" />
-            </button>
+            </NavbarButton>
+            <NavbarButton onClick={() => setUserDropdown(!userDropdown)}>
+              <UserIcon className="text-2xl dark:text-gray-300" />
+            </NavbarButton>
             {themeDropdown && (
               <div className="absolute right-12 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
                 <div onClick={() => changeTheme('dark')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
@@ -461,6 +459,18 @@ function Kanban() {
                 <div onClick={() => changeTheme('system')} className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
                   <MoonStarsIcon className="mr-2 text-xl" />
                   Sistema
+                </div>
+              </div>
+            )}
+            {userDropdown && (
+              <div className="absolute right-0 top-10 bg-white rounded-md mt-2 p-2 w-28 text-sm border border-gray-300 dark:bg-slate-900 dark:border-slate-700 dark:text-gray-300 select-none">
+                <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+                  <UserGearIcon className="mr-2 text-xl" />
+                  Perfil
+                </div>
+                <div className="rounded px-2 py-1 flex items-center hover:bg-gray-100 cursor-pointer dark:hover:bg-slate-800">
+                  <SignOutIcon className="mr-2 text-xl" />
+                  Sair
                 </div>
               </div>
             )}
