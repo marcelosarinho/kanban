@@ -34,6 +34,7 @@ import Dropdown from '@components/dropdown/Dropdown';
 import DropdownOption from '@components/dropdown/DropdownOption';
 import { useTheme } from '@contexts/ThemeContext';
 import ThemeIcon from '@components/theme/ThemeIcon';
+import Navbar from '@components/navbar/Navbar';
 
 type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
@@ -411,9 +412,7 @@ function Kanban() {
           </div>
         </aside>
         <section className="ml-52 overflow-hidden">
-          <nav
-            className="z-[1] fixed h-12 bg-white flex justify-end px-4 py-7 gap-3 items-center left-52 right-0 border-b border-gray-300 dark:bg-slate-900 dark:border-slate-700"
-          >
+          <Navbar>
             <NavbarButton onClick={() => setDropdown({ ...dropdown, theme: !dropdown.theme })}>
               <ThemeIcon theme={theme} size="lg" />
             </NavbarButton>
@@ -452,7 +451,7 @@ function Kanban() {
                 </DropdownOption>
               </Dropdown>
             )}
-          </nav>
+          </Navbar>
 
           <main className="flex flex-col items-center px-6 pt-20 dark:bg-slate-950 bg-gray-50 h-screen gap-6">
             {renderProjectHeader()}
