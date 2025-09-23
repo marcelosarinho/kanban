@@ -4,7 +4,10 @@ import ThemeButton from "@components/theme/ThemeButton";
 export default function AuthLayout() {
   return (
     <main className="flex justify-center items-center h-screen">
-      <ThemeButton className="fixed top-4 right-4" />
+      <ThemeButton
+        className="fixed top-4 right-4"
+        dropdownClassName="right-0"
+      />
 
       <Outlet />
     </main>
