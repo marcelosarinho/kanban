@@ -61,7 +61,7 @@ export default function Register() {
         </form>
         </LoginCardBody>
         <LoginCardFooter>
-          <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Já tem conta? <Link to="/login" className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Faça login!</Link></p>
+          <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-sm">Já tem conta? <Link to="/auth/login" className="text-primary cursor-pointer hover:text-primary/80 transition-colors">Faça login!</Link></p>
         </LoginCardFooter>
       </LoginCard>
       )}
@@ -74,7 +74,7 @@ export default function Register() {
           </LoginCardHeader>
           <LoginCardBody className="text-center">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
-            <Link to="/login" className="inline-block bg-primary text-white px-3 py-2 rounded-md text-sm font-medium mt-6 hover:-translate-y-1 transition">Fazer login</Link>
+            <Link to="/auth/login" className="inline-block bg-primary text-white px-3 py-2 rounded-md text-sm font-medium mt-6 hover:-translate-y-1 transition">Fazer login</Link>
           </LoginCardBody>
         </LoginCard>
       )}
