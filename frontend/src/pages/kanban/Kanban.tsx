@@ -10,7 +10,7 @@ import Input from '@components/Input';
 import Textarea from '@components/Textarea';
 import Project from '@components/project/Project';
 import CategoryBadge from '@components/badge/CategoryBadge';
-import { ArrowsOutIcon, PlusIcon, UserIcon } from '@phosphor-icons/react';
+import { ArrowsOutIcon, PlusIcon, SignOutIcon, UserGearIcon, UserIcon } from '@phosphor-icons/react';
 import Searchbar from '@components/Searchbar';
 import { CATEGORIES, TASK_STATUSES } from '@libs/constants';
 import TaskStatus from '@components/task/TaskStatus';
@@ -33,8 +33,8 @@ import NavbarButton from '@components/navbar/NavbarButton';
 import Dropdown from '@components/dropdown/Dropdown';
 import DropdownOption from '@components/dropdown/DropdownOption';
 import { useTheme } from '@contexts/ThemeContext';
+import ThemeIcon from '@components/theme/ThemeIcon';
 import Navbar from '@components/navbar/Navbar';
-import ThemeButton from '@components/theme/ThemeButton';
 
 type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
@@ -54,6 +54,8 @@ function Kanban() {
     implemented: '',
   });
   const [initialLoading, setInitialLoading] = useState(true);
+
+  const { theme, changeTheme } = useTheme();
 
   const deferredProjectsQuery = useDeferredValue(projectsQuery);
   const deferredTasksQuery = useDeferredValue(tasksQuery);
@@ -410,13 +412,34 @@ function Kanban() {
           </div>
         </aside>
         <section className="ml-52 overflow-hidden">
-          <Navbar actions={[
-            <ThemeButton key="theme" dropdownClassName="right-12 top-10" />,
-            <NavbarButton key="fullscreen" onClick={toggleFullScreen}><ArrowsOutIcon className="text-2xl dark:text-gray-300" /></NavbarButton>,
-            <NavbarButton key="user" onClick={() => setDropdown({ ...dropdown, user: !dropdown.user })}><UserIcon className="text-2xl dark:text-gray-300" /></NavbarButton>,
-          ]} />
+          <Navbar>
+            <NavbarButton onClick={() => setDropdown({ ...dropdown, theme: !dropdown.theme })}>
+              <ThemeIcon theme={theme} size="lg" />
+            </NavbarButton>
+            <NavbarButton onClick={toggleFullScreen}>
+              <ArrowsOutIcon className="text-2xl dark:text-gray-300" />
+            </NavbarButton>
+            <NavbarButton onClick={() => setDropdown({ ...dropdown, user: !dropdown.user })}>
+              <UserIcon className="text-2xl dark:text-gray-300" />
+            </NavbarButton>
+            {dropdown.theme && (
+              <Dropdown className="right-12 top-10">
+                <DropdownOption onClick={() => changeTheme('dark')}>
+                  <ThemeIcon theme="dark" />
+                  Escuro
+                </DropdownOption>
+                <DropdownOption onClick={() => changeTheme('light')}>
+                  <ThemeIcon theme="light" />
+                  Claro
+                </DropdownOption>
+                <DropdownOption onClick={() => changeTheme('system')}>
+                  <ThemeIcon theme="system" />
+                  Sistema
+                </DropdownOption>
+              </Dropdown>
+            )}
 
-            {/* {dropdown.user && (
+            {dropdown.user && (
               <Dropdown className="right-0 top-10">
                 <DropdownOption onClick={() => changeTheme('dark')}>
                   <UserGearIcon className="text-xl" />
@@ -427,7 +450,8 @@ function Kanban() {
                   Sair
                 </DropdownOption>
               </Dropdown>
-            )} */}
+            )}
+          </Navbar>
 
           <main className="flex flex-col items-center px-6 pt-20 dark:bg-slate-950 bg-gray-50 h-screen gap-6">
             {renderProjectHeader()}
