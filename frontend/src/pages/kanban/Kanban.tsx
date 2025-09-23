@@ -426,15 +426,15 @@ function Kanban() {
             {dropdown.theme && (
               <Dropdown className="right-12 top-10">
                 <DropdownOption onClick={() => changeTheme('dark')}>
-                  <ThemeIcon theme="dark" size="sm" />
+                  <ThemeIcon theme="dark" />
                   Escuro
                 </DropdownOption>
                 <DropdownOption onClick={() => changeTheme('light')}>
-                  <ThemeIcon theme="light" size="sm" />
+                  <ThemeIcon theme="light" />
                   Claro
                 </DropdownOption>
                 <DropdownOption onClick={() => changeTheme('system')}>
-                  <ThemeIcon theme="system" size="sm" />
+                  <ThemeIcon theme="system" />
                   Sistema
                 </DropdownOption>
               </Dropdown>
