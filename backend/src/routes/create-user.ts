@@ -25,8 +25,9 @@ export async function createUser(app: FastifyInstance) {
         if (user.verifyTokenExpiry && dayjs().isAfter(dayjs.utc(user.verifyTokenExpiry))) {
           verifyToken = randomBytes(64).toString('hex');
           verifyTokenExpiry = dayjs.utc().add(1, 'day').format();
+          const hashVerifyToken = await argon2.hash(verifyToken);
 
-          await db.update(users).set({ verifyToken, verifyTokenExpiry }).where(eq(users.email, user.email));
+          await db.update(users).set({ verifyToken: hashVerifyToken, verifyTokenExpiry }).where(eq(users.email, user.email));
         }
       }
 
@@ -34,8 +35,9 @@ export async function createUser(app: FastifyInstance) {
         const hashedPassword = await argon2.hash(password);
         verifyToken = randomBytes(64).toString('hex');
         verifyTokenExpiry = dayjs.utc().add(1, 'day').format();
+        const hashVerifyToken = await argon2.hash(verifyToken);
 
-        await db.insert(users).values({ name, email, password: hashedPassword, verifyToken, verifyTokenExpiry });
+        await db.insert(users).values({ name, email, password: hashedPassword, verifyToken: hashVerifyToken, verifyTokenExpiry });
       }
 
       const mail = await getMailClient();

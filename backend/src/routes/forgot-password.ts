@@ -6,6 +6,7 @@ import { randomBytes } from "crypto";
 import dayjs from "dayjs";
 import { getMailClient } from "../lib/mail";
 import path from "path";
+import argon2 from 'argon2';
 
 export async function forgotPassword(app: FastifyInstance) {
   app.post('/forgot-password', async (request: any, reply: any) => {
@@ -20,9 +21,10 @@ export async function forgotPassword(app: FastifyInstance) {
 
       const forgotPasswordToken = randomBytes(64).toString('hex');
       const forgotPasswordTokenExpiry = dayjs.utc().add(15, 'minute').format();
+      const hashForgotPasswordToken = await argon2.hash(forgotPasswordToken);
 
       await db.update(users).set({
-        forgotPasswordToken,
+        forgotPasswordToken: hashForgotPasswordToken,
         forgotPasswordTokenExpiry,
       }).where(eq(users.email, email));
 
