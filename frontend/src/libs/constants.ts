@@ -1,11 +1,5 @@
-import type {
-  CategoryItem,
-  CategoryOption,
-  ButtonOption,
-  ThemeOption,
-  Color,
-} from "@custom-types/constants"
-import type { TaskItem, TaskPriorityItem, TaskPriorityOption, TaskStatusOption } from "@custom-types/task"
+import type { CategoryItem, ThemeOption } from "@custom-types/constants"
+import type { TaskItem, TaskPriorityItem, TaskStatusOption } from "@custom-types/task"
 import { MoonIcon, MoonStarsIcon, SunIcon } from "@phosphor-icons/react"
 
 export const MAX_CATEGORIES_LENGTH = 2;
@@ -21,7 +15,7 @@ export const THEME_ICONS_SIZE: Record<'sm' | 'lg', string> = {
   lg: 'text-2xl',
 }
 
-export const CATEGORIES: Record<CategoryOption, CategoryItem> = {
+export const CATEGORIES: Record<string, CategoryItem> = {
   frontend: { color: 'badge-blue', name: 'Front-end' },
   backend: { color: 'badge-green', name: 'Back-end' },
   mobile: { color: 'badge-red', name: 'Mobile' },
@@ -31,7 +25,7 @@ export const CATEGORIES: Record<CategoryOption, CategoryItem> = {
   none: { color: 'badge-none', name: 'Sem categoria' },
 }
 
-export const BUTTON_VARIANTS: Record<ButtonOption, string> = {
+export const BUTTON_VARIANTS: Record<string, string> = {
   'primary': 'btn btn-primary',
   'danger': 'btn btn-danger',
   'success': 'btn btn-success',
@@ -40,7 +34,7 @@ export const BUTTON_VARIANTS: Record<ButtonOption, string> = {
   'transparent': 'btn-transparent',
 }
 
-export const TASK_COLORS: Record<Color, TaskItem> = {
+export const TASK_COLORS: Record<string, TaskItem> = {
   blue: { bg: 'task-blue-background', border: 'task-blue-border', label: 'Azul' },
   red: { bg: 'task-red-background', border: 'task-red-border', label: 'Vermelho' },
   green: { bg: 'task-green-background', border: 'task-green-border', label: 'Verde' },
@@ -51,7 +45,7 @@ export const TASK_COLORS: Record<Color, TaskItem> = {
   none: { bg: 'task-none-background', border: 'task-none-border', label: 'Sem cor' },
 }
 
-export const TASK_PRIORITIES: Record<TaskPriorityOption, TaskPriorityItem> = {
+export const TASK_PRIORITIES: Record<string, TaskPriorityItem> = {
   low: { color: 'badge-success', label: 'Baixa', dots: 1 },
   medium: { color: 'badge-warning', label: 'Média', dots: 2 },
   high: { color: 'badge-danger', label: 'Alta', dots: 3 },

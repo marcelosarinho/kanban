@@ -1,8 +1,9 @@
 import { TASK_PRIORITIES } from "@libs/constants";
 import type { ComponentProps } from "react";
+import type { TaskPriorityOption } from "@custom-types/task";
 
 type TaskPriorityBadgeProps = {
-  priority: keyof typeof TASK_PRIORITIES;
+  priority: TaskPriorityOption;
 } & ComponentProps<'div'>
 
 export default function TaskPriorityBadge(props: TaskPriorityBadgeProps) {

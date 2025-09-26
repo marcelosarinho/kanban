@@ -1,8 +1,9 @@
 import type { ComponentProps } from "react";
 import { CATEGORIES } from "@libs/constants";
+import type { CategoryOption } from "@custom-types/constants";
 
 type CategoryBadgeProps = {
-  category: keyof typeof CATEGORIES;
+  category: CategoryOption;
 } & ComponentProps<'input'>
 
 export default function CategoryBadge(props: CategoryBadgeProps) {

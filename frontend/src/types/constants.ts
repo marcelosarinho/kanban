@@ -1,4 +1,6 @@
-export type CategoryOption = 'frontend' | 'backend' | 'mobile' | 'ui_ux' | 'devops' | 'database' | 'none';
+import type { BUTTON_VARIANTS, CATEGORIES, TASK_COLORS } from "@libs/constants";
+
+export type CategoryOption = keyof typeof CATEGORIES;
 
 export type CategoryItem = {
   color: string;
@@ -7,5 +9,5 @@ export type CategoryItem = {
 
 export type ThemeOption = 'light' | 'dark' | 'system';
 export type ThemeIcon = 'ph-sun' | 'ph-moon' | 'ph-moon-stars';
-export type ButtonOption = 'primary' | 'danger' | 'success' | 'info' | 'outline-primary' | 'transparent';
-export type Color = 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'pink' | 'orange' | 'none';
+export type ButtonOption = keyof typeof BUTTON_VARIANTS;
+export type Color = keyof typeof TASK_COLORS;

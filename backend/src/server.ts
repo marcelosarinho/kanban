@@ -12,9 +12,11 @@ import { deleteSubtask } from "./routes/delete-subtask";
 import { getTasks } from "./routes/get-tasks";
 import { createUser } from "./routes/create-user";
 import { forgotPassword } from "./routes/forgot-password";
+import resetPasswordMiddleware from "./middlewares/reset-password";
 import { login } from "./routes/login";
 
 const server = fastify();
+
 server.register(cors, {
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
@@ -42,3 +44,5 @@ server.register(deleteSubtask);
 server.register(createUser);
 server.register(forgotPassword);
 server.register(login);
+
+resetPasswordMiddleware(server);

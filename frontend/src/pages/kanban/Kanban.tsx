@@ -35,6 +35,7 @@ import DropdownOption from '@components/dropdown/DropdownOption';
 import { useTheme } from '@contexts/ThemeContext';
 import ThemeIcon from '@components/theme/ThemeIcon';
 import Navbar from '@components/navbar/Navbar';
+import type { CategoryOption } from '@custom-types/constants';
 
 type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
@@ -382,7 +383,7 @@ function Kanban() {
                     key={category}
                     disabled={disabledCategories && !selectedCategories.includes(category)}
                     onChange={handleCategoryToggle}
-                    category={category as keyof typeof CATEGORIES}
+                    category={category as CategoryOption}
                     name={category}
                   />
                 ))}

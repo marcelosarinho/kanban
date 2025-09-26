@@ -1,4 +1,5 @@
 import type { CategoryOption, Color } from "@custom-types/constants";
+import type { TASK_PRIORITIES } from "@libs/constants";
 
 export type Task = {
   id: string;
@@ -16,7 +17,7 @@ export type Task = {
   projectId: string;
 }
 
-export type TaskPriorityOption = 'low' | 'medium' | 'high';
+export type TaskPriorityOption = keyof typeof TASK_PRIORITIES;
 export type TaskStatusOption = 'todo' | 'in_progress' | 'testing' | 'implemented';
 
 export type TaskItem = {

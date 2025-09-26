@@ -1,9 +1,10 @@
 import type { ComponentProps } from "react";
 import { BUTTON_VARIANTS } from "@libs/constants";
 import Loading from "@components/Loading";
+import type { ButtonOption } from "@custom-types/constants";
 
 type ButtonProps = {
-  variant?: keyof typeof BUTTON_VARIANTS;
+  variant?: ButtonOption;
   loading?: boolean;
 } & ComponentProps<'button'>;
 
