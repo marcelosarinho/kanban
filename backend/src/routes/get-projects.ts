@@ -4,7 +4,7 @@ import { desc, ilike, or } from "drizzle-orm";
 import { projects } from "../db/schema";
 
 export async function getProjects(app: FastifyInstance) {
-  app.get('/projects', async (request: any) => {
+  app.get('/projects', async (request: any, reply: any) => {
     try {
       const { search } = request.query;
 
@@ -15,7 +15,7 @@ export async function getProjects(app: FastifyInstance) {
         orderBy: [desc(projects.createdAt)],
       });
 
-      return results;
+      return reply.status(200).send(results);
     } catch (error) {
       console.log(error);
     }
