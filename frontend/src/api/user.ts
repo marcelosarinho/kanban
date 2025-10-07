@@ -39,3 +39,20 @@ export async function forgotPassword(email: Pick<User, 'email'>) {
 
   return data;
 }
+
+export async function verifyResetPassword(token: string, email: string) {
+  const response = await fetch(`http://localhost:8080/verify-reset-password?token=${token}&email=${email}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    return { valid: false, message: error.message };
+  }
+
+  return { valid: true, message: 'Token válido!' };
+}

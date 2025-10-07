@@ -11,7 +11,7 @@ const authRoutes = {
     { path: 'login', Component: Login },
     { path: 'sign-up', Component: Register },
     { path: 'forgot-password', Component: ForgotPassword },
-    { path: 'reset-password', middleware: [], Component: ResetPassword },
+    { path: 'reset-password', Component: ResetPassword },
   ]
 };
 

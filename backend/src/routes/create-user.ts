@@ -76,7 +76,7 @@ export async function createUser(app: FastifyInstance) {
                 </tr>
                 <tr>
                   <td align="center" style="padding:30px 0;">
-                    <a href="${process.env.WEB_BASE_URL}/verify-email?token=${verifyToken}" 
+                    <a href="${process.env.WEB_BASE_URL}/auth/verify-email?token=${verifyToken}" 
                         style="background-color:#e3279a; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:5px; font-size:15px; font-weight:bold; display:inline-block;">
                       Verificar Email
                     </a>
