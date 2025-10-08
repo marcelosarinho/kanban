@@ -56,3 +56,23 @@ export async function verifyResetPassword(token: string, email: string) {
 
   return { valid: true, message: 'Token válido!' };
 }
+
+export async function resetPassword(token: string, email: string, password: string, confirmPassword: string) {
+  const response = await fetch(`http://localhost:8080/reset-password`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ token, email, password, confirmPassword })
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    throw new Error(error.message);
+  }
+
+  const data = await response.json();
+
+  return data;
+}

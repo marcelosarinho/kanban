@@ -15,7 +15,7 @@ import { Link } from "react-router";
 import { useState } from "react";
 import { EnvelopeIcon } from "@phosphor-icons/react";
 
-type InputsRegister = z.infer<typeof userRegisterSchema>;
+type Inputs = z.infer<typeof userRegisterSchema>;
 
 export default function Register() {
   const [formType, setFormType] = useState<'register' | 'register-email-sent'>('register');
@@ -24,7 +24,7 @@ export default function Register() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InputsRegister>({
+  } = useForm<Inputs>({
     resolver: zodResolver(userRegisterSchema),
   });
 
@@ -35,7 +35,7 @@ export default function Register() {
     }
   });
 
-  function onSubmitRegister(data: InputsRegister) {
+  function onSubmit(data: Inputs) {
     registerMutation.mutate(data);
   }
 
@@ -47,7 +47,7 @@ export default function Register() {
           <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Cadastre-se</h1>
         </LoginCardHeader>
         <LoginCardBody>
-          <form onSubmit={handleSubmit(onSubmitRegister)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4">
             {registerMutation.isError && (
               <UserFormMessage variant="error" message={registerMutation.error?.message} />

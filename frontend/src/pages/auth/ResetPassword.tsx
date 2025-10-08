@@ -1,13 +1,21 @@
-import { verifyResetPassword } from "@api/user";
+import { resetPassword, verifyResetPassword } from "@api/user";
 import Button from "@components/Button";
 import Input from "@components/Input";
 import Loading from "@components/Loading";
 import LoginCard from "@components/auth/LoginCard";
 import LoginCardBody from "@components/auth/LoginCardBody";
 import LoginCardHeader from "@components/auth/LoginCardHeader";
+import UserFormMessage from "@components/auth/UserFormMessage";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeftIcon, XCircleIcon } from "@phosphor-icons/react";
+import { userResetPasswordSchema } from "@schemas/user";
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate, useSearchParams } from "react-router";
+import type z from "zod";
+
+type Inputs = z.infer<typeof userResetPasswordSchema>;
 
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
@@ -15,6 +23,25 @@ export default function ResetPassword() {
 
   const navigate = useNavigate();
   const { token, email } = Object.fromEntries(searchParams.entries());
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<Inputs>({
+    resolver: zodResolver(userResetPasswordSchema),
+  });
+
+  const resetPasswordMutation = useMutation({
+    mutationFn: resetPassword,
+    onSuccess: () => {
+
+    }
+  });
+
+  function onSubmit(data: Inputs) {
+    resetPasswordMutation.mutate(data);
+  }
 
   function renderResetPassword() {
     if (status?.valid) {
@@ -24,8 +51,9 @@ export default function ResetPassword() {
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Redefinir senha</h1>
           </LoginCardHeader>
           <LoginCardBody>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="flex flex-col gap-4">
+                <UserFormMessage variant="success" message="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
                 <Input className="animate-slide-in-from-bottom" label="Nova senha" type="password" name="password" id="password" isPassword />
                 <Input className="animate-slide-in-from-bottom" label="Confirmar nova senha" type="password" name="confirm-password" id="confirm-password" isPassword />
                 <Button className="animate-slide-in-from-bottom justify-center">Enviar</Button>

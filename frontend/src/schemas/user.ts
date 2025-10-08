@@ -19,3 +19,15 @@ export const userRegisterSchema = userSchema.extend({
 });
 
 export const userForgotPasswordSchema = userSchema.pick({ email: true });
+
+export const userResetPasswordSchema = userSchema.pick({ password: true }).extend({
+  token: z.string(),
+  email: z.string(),
+  password_confirmation: z.string()
+  .trim()
+  .min(4, 'Senha deve ter entre 4 a 60 caracteres!')
+  .max(60, 'Senha deve ter entre 4 a 60 caracteres!'),
+}).refine((data) => data.password === data.password_confirmation, {
+  message: 'As senhas não coincidem!',
+  path: ['password_confirmation'],
+});
