@@ -73,7 +73,7 @@ export default function ResetPassword() {
     }
 
     isValidResetPassword();
-  }, [token, email]);
+  }, []);
 
   return (
     status?.loading ? (

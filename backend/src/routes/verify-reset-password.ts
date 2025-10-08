@@ -19,15 +19,17 @@ export async function verifyResetPassword(app: FastifyInstance) {
       return reply.status(404).send({ message: 'Usuário não encontrado! Crie uma conta.' });
     }
 
-    if (user.forgotPasswordToken) {
-      const tokenMatch = await argon2.verify(user.forgotPasswordToken, token);
-
-      if (!tokenMatch) {
-        return reply.status(401).send({ message: 'Token inválido! Forneça um token válido.' });
-      }
+    if (!user.forgotPasswordToken || !user.forgotPasswordTokenExpiry) {
+      return reply.status(401).send({ message: 'Token inválido! Forneça um token válido.' });
     }
 
-    if (user.forgotPasswordTokenExpiry && dayjs().isAfter(dayjs.utc(user.forgotPasswordTokenExpiry))) {
+    const tokenMatch = await argon2.verify(user.forgotPasswordToken, token);
+
+    if (!tokenMatch) {
+      return reply.status(401).send({ message: 'Token inválido! Forneça um token válido.' });
+    }
+
+    if (dayjs().isAfter(dayjs.utc(user.forgotPasswordTokenExpiry))) {
       return reply.status(401).send({ message: 'Token expirado! Forneça um token válido.' });
     }
 
