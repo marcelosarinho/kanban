@@ -7,15 +7,17 @@ import LoginCardBody from "@components/auth/LoginCardBody";
 import LoginCardHeader from "@components/auth/LoginCardHeader";
 import { ArrowLeftIcon, XCircleIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 
 export default function ResetPassword() {
-  const [params] = useSearchParams();
-  const [isValid, setIsValid] = useState<{ valid: boolean, message: string} | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+  const [status, setStatus] = useState<{ loading: boolean, valid: boolean, message: string } | null>(null);
+
+  const navigate = useNavigate();
+  const { token, email } = Object.fromEntries(searchParams.entries());
 
   function renderResetPassword() {
-    if (isValid?.valid) {
+    if (status?.valid) {
       return (
         <LoginCard>
           <LoginCardHeader>
@@ -41,7 +43,7 @@ export default function ResetPassword() {
           <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Erro ao redefinir senha!</h1>
         </LoginCardHeader>
         <LoginCardBody className="text-center">
-          <p className="animate-slide-in-from-bottom dark:text-gray-300 text-md">{isValid?.message || 'Token inválido!'}</p>
+          <p className="animate-slide-in-from-bottom dark:text-gray-300 text-md">{status?.message || 'Token inválido!'}</p>
           <p className="animate-slide-in-from-bottom dark:text-gray-300 text-md">Por favor, tente novamente.</p>
 
           <Link
@@ -57,21 +59,25 @@ export default function ResetPassword() {
   }
 
   useEffect(() => {
+    if (!token || !email) {
+      navigate('/auth/login');
+      return;
+    }
+
     async function isValidResetPassword() {
-      setIsLoading(true);
-      const { token, email } = Object.fromEntries(params.entries());
-  
+      setStatus({ loading: true, valid: false, message: '' });
+
       const result = await verifyResetPassword(token, email);
-      setIsValid(result);
-      setIsLoading(false);
+
+      setStatus({ loading: false, valid: result.valid, message: result.message });
     }
 
     isValidResetPassword();
-  }, [params]);
+  }, [token, email]);
 
   return (
-    isLoading ? (
-      <Loading loading={isLoading} className="text-primary text-5xl" />
+    status?.loading ? (
+      <Loading loading={status.loading} className="text-primary text-5xl" />
     ) : (
       renderResetPassword()
     )
