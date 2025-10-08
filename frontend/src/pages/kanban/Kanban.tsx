@@ -10,7 +10,7 @@ import Input from '@components/Input';
 import Textarea from '@components/Textarea';
 import Project from '@components/project/Project';
 import CategoryBadge from '@components/badge/CategoryBadge';
-import { ArrowsOutIcon, PlusIcon, SignOutIcon, UserGearIcon, UserIcon } from '@phosphor-icons/react';
+import { ArrowsOutIcon, CheckIcon, PlusIcon, SignOutIcon, UserGearIcon, UserIcon, XIcon } from '@phosphor-icons/react';
 import Searchbar from '@components/Searchbar';
 import { CATEGORIES, TASK_STATUSES } from '@libs/constants';
 import TaskStatus from '@components/task/TaskStatus';
@@ -339,7 +339,7 @@ function Kanban() {
 
         <Modal id="create-project-modal">
           <ModalHeader>
-            <ModalTitle>{project ? 'Editar' : 'Adicionar'} projeto</ModalTitle>
+            <ModalTitle>{project ? 'Editar' : 'Criar'} projeto</ModalTitle>
             <ModalClose onClick={() => closeModal('create-project-modal')} />
           </ModalHeader>
           <fieldset disabled={createProjectMutation.isPending || updateProjectMutation.isPending} className="disabled:opacity-50">
@@ -351,8 +351,22 @@ function Kanban() {
               </form>
             </ModalBody>
             <ModalFooter>
-              <Button loading={createProjectMutation.isPending || updateProjectMutation.isPending} className="flex items-center" form="create-project-form">{project ? 'Salvar' : 'Criar'}</Button>
-              <Button onClick={() => closeModal('create-project-modal')} variant="outline-primary">Cancelar</Button>
+              <Button
+                loading={createProjectMutation.isPending || updateProjectMutation.isPending}
+                className="flex items-center"
+                form="create-project-form"
+              >
+                <CheckIcon weight="bold" className="text-lg" />
+                {project ? 'Salvar' : 'Criar'}
+              </Button>
+
+              <Button
+                onClick={() => closeModal('create-project-modal')}
+                variant="outline-primary"
+              >
+                <XIcon className="text-lg" />
+                Cancelar
+              </Button>
             </ModalFooter>
           </fieldset>
         </Modal>
@@ -397,7 +411,7 @@ function Kanban() {
             <h3 className="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
             <Button type="button" onClick={() => openModal('create-project-modal')}>
               <PlusIcon weight="bold" className="text-lg" />
-              Adicionar projeto
+              Novo projeto
             </Button>
 
             <Searchbar

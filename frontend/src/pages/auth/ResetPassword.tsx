@@ -5,7 +5,7 @@ import Loading from "@components/Loading";
 import LoginCard from "@components/auth/LoginCard";
 import LoginCardBody from "@components/auth/LoginCardBody";
 import LoginCardHeader from "@components/auth/LoginCardHeader";
-import { XCircleIcon } from "@phosphor-icons/react";
+import { ArrowLeftIcon, XCircleIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 
@@ -43,9 +43,12 @@ export default function ResetPassword() {
         <LoginCardBody className="text-center">
           <p className="animate-slide-in-from-bottom dark:text-gray-300 text-md">{isValid?.message || 'Token inválido!'}</p>
           <p className="animate-slide-in-from-bottom dark:text-gray-300 text-md">Por favor, tente novamente.</p>
+
           <Link
-            to="/auth/login"
-            className="inline-block bg-primary text-white px-3 py-2 rounded-md text-sm font-medium mt-6 hover:-translate-y-1 transition">
+              to="/auth/login"
+              className="mx-auto flex gap-1 w-fit bg-primary text-white px-3 py-2 rounded-md text-sm font-medium mt-6 hover:-translate-y-1 transition"
+            >
+              <ArrowLeftIcon weight="bold" className="text-lg" />
               Retornar
           </Link>
         </LoginCardBody>
