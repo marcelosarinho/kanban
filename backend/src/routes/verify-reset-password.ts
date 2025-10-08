@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
-import dayjs from "dayjs";
+import dayjs from "../lib/dayjs";
 import { db } from "..";
 import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
 import argon2 from 'argon2';
 
-export default async function verifyResetPassword(app: FastifyInstance) {
+export async function verifyResetPassword(app: FastifyInstance) {
   app.get('/verify-reset-password', async (request: any, reply: any) => {
     const { token, email } = request.query;
 
@@ -19,7 +19,7 @@ export default async function verifyResetPassword(app: FastifyInstance) {
       return reply.status(404).send({ message: 'Usuário não encontrado! Crie uma conta.' });
     }
 
-    if (user && user.forgotPasswordToken) {
+    if (user.forgotPasswordToken) {
       const tokenMatch = await argon2.verify(user.forgotPasswordToken, token);
 
       if (!tokenMatch) {
@@ -27,7 +27,7 @@ export default async function verifyResetPassword(app: FastifyInstance) {
       }
     }
 
-    if (user && user.forgotPasswordTokenExpiry && dayjs().isAfter(dayjs.utc(user.forgotPasswordTokenExpiry))) {
+    if (user.forgotPasswordTokenExpiry && dayjs().isAfter(dayjs.utc(user.forgotPasswordTokenExpiry))) {
       return reply.status(401).send({ message: 'Token expirado! Forneça um token válido.' });
     }
 

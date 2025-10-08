@@ -3,7 +3,7 @@ import { db } from "..";
 import { users } from "../db/schema";
 import { and, eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
-import dayjs from "dayjs";
+import dayjs from "../lib/dayjs";
 import { getMailClient } from "../lib/mail";
 import path from "path";
 import argon2 from 'argon2';
