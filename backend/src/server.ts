@@ -12,7 +12,7 @@ import { deleteSubtask } from "./routes/delete-subtask";
 import { getTasks } from "./routes/get-tasks";
 import { createUser } from "./routes/create-user";
 import { forgotPassword } from "./routes/forgot-password";
-import { login } from "./routes/login";
+import { authenticate } from "./routes/authenticate";
 import { verifyResetPassword } from "./routes/verify-reset-password";
 import { resetPassword } from "./routes/reset-password";
 
@@ -44,6 +44,6 @@ server.register(createSubtask);
 server.register(deleteSubtask);
 server.register(createUser);
 server.register(forgotPassword);
-server.register(login);
+server.register(authenticate);
 server.register(verifyResetPassword);
 server.register(resetPassword);

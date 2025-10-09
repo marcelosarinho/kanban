@@ -11,7 +11,7 @@ import { ArrowLeftIcon, XCircleIcon } from "@phosphor-icons/react";
 import { userResetPasswordSchema } from "@schemas/user";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { useForm, type SubmitErrorHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import type z from "zod";
 
@@ -41,9 +41,6 @@ export default function ResetPassword() {
     }
   });
 
-  const onError: SubmitErrorHandler<Inputs> = (errors) =>
-    console.log(errors)
-
   function onSubmit(data: Inputs) {
     console.log(data);
 
@@ -58,7 +55,7 @@ export default function ResetPassword() {
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Redefinir senha</h1>
           </LoginCardHeader>
           <LoginCardBody>
-            <form onSubmit={handleSubmit(onSubmit, onError)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset disabled={resetPasswordMutation.isPending} className="flex flex-col gap-4">
                 {resetPasswordMutation.isSuccess && (
                   <UserFormMessage variant="success" message="Senha redefinida com sucesso! Redirecionando para a tela de login..." />

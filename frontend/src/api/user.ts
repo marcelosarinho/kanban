@@ -20,6 +20,26 @@ export async function createUser(user: Pick<User, 'name' | 'email' | 'password'>
   return data;
 }
 
+export async function authenticate(user: Pick<User, 'email' | 'password'>) {
+  const response = await fetch('http://localhost:8080/authenticate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user)
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    throw new Error(error.message);
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
 export async function forgotPassword(email: Pick<User, 'email'>) {
   const response = await fetch('http://localhost:8080/forgot-password', {
     method: 'POST',

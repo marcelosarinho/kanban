@@ -6,10 +6,19 @@ import Input from "@components/Input";
 import Button from "@components/Button";
 import { censorEmail } from "@utils/functions";
 import { useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router";
 
 export default function VerifyDevice() {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+
+  const email = state;
+
   const [code, setCode] = useState('');
-  const [email, setEmail] = useState('teste@gmail.com');
+
+  if (!state) {
+    return <Navigate to="/auth/login" replace />;
+  }
 
   return (
     <LoginCard>

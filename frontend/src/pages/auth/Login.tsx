@@ -5,26 +5,36 @@ import type z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import UserFormMessage from "@components/auth/UserFormMessage";
-import { censorEmail } from "@utils/functions";
 import LoginCardBody from "@components/auth/LoginCardBody";
 import LoginCardHeader from "@components/auth/LoginCardHeader";
 import LoginCard from "@components/auth/LoginCard";
 import LoginCardFooter from "@components/auth/LoginCardFooter";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useMutation } from "@tanstack/react-query";
+import { authenticate } from "@api/user";
 
-type InputsLogin = z.infer<typeof userLoginSchema>;
+type Inputs = z.infer<typeof userLoginSchema>;
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InputsLogin>({
+  } = useForm<Inputs>({
     resolver: zodResolver(userLoginSchema),
   })
 
-  function onSubmitLogin(data: InputsLogin) {
-    console.log(censorEmail(data.email));
+  const loginMutation = useMutation({
+    mutationFn: authenticate,
+    onSuccess: (_, variables) => {
+      navigate('/auth/verify-device', { state: variables.email });
+    }
+  })
+
+  function onSubmit(data: Inputs) {
+    loginMutation.mutate(data);
   }
 
   return (
@@ -33,12 +43,14 @@ export default function Login() {
         <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Login</h1>
       </LoginCardHeader>
       <LoginCardBody>
-        <form onSubmit={handleSubmit(onSubmitLogin)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="flex flex-col gap-4">
-            <UserFormMessage variant="success" message="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
+            {loginMutation.isError && (
+              <UserFormMessage variant="error" message={loginMutation.error?.message} />
+            )}
             <Input error={errors.email?.message} {...register('email')} className="animate-slide-in-from-bottom" label="Email" type="email" name="email" id="email" />
             <Input error={errors.password?.message} {...register('password')} className="animate-slide-in-from-bottom" label="Senha" type="password" name="password" id="password" isPassword />
-            <Link to="/auth/forgot-password" className="animate-slide-in-from-bottom text-sm text-primary cursor-pointer hover:text-primary/80 transition-colors">
+            <Link to="/auth/forgot-password" className="w-fit animate-slide-in-from-bottom text-sm text-primary cursor-pointer hover:text-primary/80 transition-colors">
               Esqueceu sua senha?
             </Link>
             <Button className="animate-slide-in-from-bottom justify-center">Entrar</Button>
