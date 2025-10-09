@@ -68,6 +68,10 @@ export const users = pgTable('users', {
   verifyTokenExpiry: timestamp('verify_token_expiry', { mode: 'string' }),
   forgotPasswordToken: varchar('forgot_password_token', { length: 255 }),
   forgotPasswordTokenExpiry: timestamp('forgot_password_token_expiry', { mode: 'string' }),
+  verifyLoginToken: varchar('verify_login_token', { length: 255 }),
+  lastVerifiedLoginAt: timestamp('last_verified_login_at', { mode: 'string' }),
+  firstLoginVerify: boolean('first_login_verify').notNull().default(false),
+  ip: varchar('ip', { length: 255 }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })

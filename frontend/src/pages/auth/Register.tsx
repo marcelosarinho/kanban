@@ -13,7 +13,7 @@ import { createUser } from "@api/index";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router";
 import { useState } from "react";
-import { EnvelopeIcon } from "@phosphor-icons/react";
+import { EnvelopeIcon, SignInIcon } from "@phosphor-icons/react";
 
 type Inputs = z.infer<typeof userRegisterSchema>;
 
@@ -74,7 +74,13 @@ export default function Register() {
           </LoginCardHeader>
           <LoginCardBody className="text-center">
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md">Um email foi enviado para você com as instruções necessárias para completar a verificação da sua conta.</p>
-            <Link to="/auth/login" className="inline-block bg-primary text-white px-3 py-2 rounded-md text-sm font-medium mt-6 hover:-translate-y-1 transition">Fazer login</Link>
+            <Link
+              to="/auth/login"
+              className="inline-flex items-center gap-1 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium mt-6 hover:-translate-y-1 transition"
+            >
+              <SignInIcon weight="bold" className="text-lg"/>
+              Fazer login
+            </Link>
           </LoginCardBody>
         </LoginCard>
       )}

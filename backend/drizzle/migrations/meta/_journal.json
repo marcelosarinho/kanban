@@ -71,6 +71,13 @@
       "when": 1758138535613,
       "tag": "0009_changed-forgot-password-token-name",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1760038637219,
+      "tag": "0010_add-verify-login-columns",
+      "breakpoints": true
     }
   ]
 }
