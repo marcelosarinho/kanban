@@ -21,8 +21,8 @@ export const userRegisterSchema = userSchema.extend({
 export const userForgotPasswordSchema = userSchema.pick({ email: true });
 
 export const userResetPasswordSchema = userSchema.pick({ password: true }).extend({
-  token: z.string(),
-  email: z.string(),
+  token: z.string().optional(),
+  email: z.string().optional(),
   password_confirmation: z.string()
   .trim()
   .min(4, 'Senha deve ter entre 4 a 60 caracteres!')

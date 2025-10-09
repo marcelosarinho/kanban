@@ -7,7 +7,7 @@ import dayjs from "../lib/dayjs";
 
 export async function resetPassword(app: FastifyInstance) {
   app.post('/reset-password', async (request: any, reply: any) => {
-    const { token, email, password, confirmPassword } = request.body;
+    const { token, email, password } = request.body;
 
     if (!token || !email) {
       return reply.status(400).send({ message: 'Token ou email não informados! Informe um token e email.' });
@@ -17,10 +17,6 @@ export async function resetPassword(app: FastifyInstance) {
 
     if (!user) {
       return reply.status(404).send({ message: 'Usuário não encontrado!' });
-    }
-
-    if (password !== confirmPassword) {
-      return reply.status(400).send({ message: 'As senhas não coincidem!' });
     }
 
     if (!user.forgotPasswordToken || !user.forgotPasswordTokenExpiry) {

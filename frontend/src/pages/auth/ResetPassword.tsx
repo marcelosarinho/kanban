@@ -1,4 +1,4 @@
-import { resetPassword, verifyResetPassword } from "@api/user";
+import { resetPassword, verifyResetPassword } from "@api/index";
 import Button from "@components/Button";
 import Input from "@components/Input";
 import Loading from "@components/Loading";
@@ -11,7 +11,7 @@ import { ArrowLeftIcon, XCircleIcon } from "@phosphor-icons/react";
 import { userResetPasswordSchema } from "@schemas/user";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitErrorHandler } from "react-hook-form";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import type z from "zod";
 
@@ -33,13 +33,20 @@ export default function ResetPassword() {
   });
 
   const resetPasswordMutation = useMutation({
-    mutationFn: resetPassword,
+    mutationFn: (data: Inputs) => resetPassword(token, email, data.password),
     onSuccess: () => {
-
+      setTimeout(() => {
+        navigate('/auth/login');
+      }, 3000);
     }
   });
 
+  const onError: SubmitErrorHandler<Inputs> = (errors) =>
+    console.log(errors)
+
   function onSubmit(data: Inputs) {
+    console.log(data);
+
     resetPasswordMutation.mutate(data);
   }
 
@@ -51,12 +58,17 @@ export default function ResetPassword() {
             <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Redefinir senha</h1>
           </LoginCardHeader>
           <LoginCardBody>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <fieldset className="flex flex-col gap-4">
-                <UserFormMessage variant="success" message="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis rerum quisquam quam incidunt repellat. Quis soluta, quas commodi accusamus excepturi aspernatur, quod recusandae perferendis error nesciunt voluptatibus omnis dolorem nostrum eius, odio porro suscipit hic animi repellat aliquid eaque? Quo expedita eligendi rerum sed consequuntur aliquid, odit repellat recusandae tenetur?" />
-                <Input className="animate-slide-in-from-bottom" label="Nova senha" type="password" name="password" id="password" isPassword />
-                <Input className="animate-slide-in-from-bottom" label="Confirmar nova senha" type="password" name="confirm-password" id="confirm-password" isPassword />
-                <Button className="animate-slide-in-from-bottom justify-center">Enviar</Button>
+            <form onSubmit={handleSubmit(onSubmit, onError)}>
+              <fieldset disabled={resetPasswordMutation.isPending} className="flex flex-col gap-4">
+                {resetPasswordMutation.isSuccess && (
+                  <UserFormMessage variant="success" message="Senha redefinida com sucesso! Redirecionando para a tela de login..." />
+                )}
+                {resetPasswordMutation.isError && (
+                  <UserFormMessage variant="error" message={resetPasswordMutation.error?.message} />
+                )}
+                <Input error={errors.password?.message} {...register('password')} className="animate-slide-in-from-bottom" label="Nova senha" type="password" name="password" id="password" isPassword />
+                <Input error={errors.password_confirmation?.message} {...register('password_confirmation')} className="animate-slide-in-from-bottom" label="Confirmar nova senha" type="password" name="password_confirmation" id="password_confirmation" isPassword />
+                <Button className="animate-slide-in-from-bottom justify-center" loading={resetPasswordMutation.isPending}>Enviar</Button>
               </fieldset>
             </form>
           </LoginCardBody>
