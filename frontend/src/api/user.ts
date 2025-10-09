@@ -25,6 +25,7 @@ export async function authenticate(user: Pick<User, 'email' | 'password'>) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'X-Forwarded-For': '203.0.113.42'
     },
     body: JSON.stringify(user)
   });
