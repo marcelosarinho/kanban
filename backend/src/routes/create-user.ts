@@ -10,46 +10,42 @@ import path from "path";
 
 export async function createUser(app: FastifyInstance) {
   app.post('/users', async (request: any, reply: any) => {
-    try {
-      const { name, email, password } = request.body;
-      let verifyToken = '';
-      let verifyTokenExpiry = '';
+    const { name, email, password } = request.body;
 
-      const user = await db.query.users.findFirst({ where: eq(users.email, email) });
+    if (!name || !email || !password) {
+      return reply.status(400).send({ message: 'Nome, email e senha são obrigatórios!' });
+    }
 
-      if (user && user.verified) {
-        return reply.status(409).send({ message: 'Usuário já cadastrado!' });
-      }
+    const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
-      if (user && !user.verified) {
-        if (user.verifyTokenExpiry && dayjs().isAfter(dayjs.utc(user.verifyTokenExpiry))) {
-          verifyToken = randomBytes(64).toString('hex');
-          verifyTokenExpiry = dayjs.utc().add(1, 'day').format();
-          const hashVerifyToken = await argon2.hash(verifyToken);
+    if (user && user.verified) {
+      return reply.status(409).send({ message: 'Usuário já cadastrado!' });
+    }
 
-          await db.update(users).set({ verifyToken: hashVerifyToken, verifyTokenExpiry }).where(eq(users.email, user.email));
-        }
-      }
+    const verifyToken = randomBytes(64).toString('hex');
+    const verifyTokenExpiry = dayjs.utc().add(1, 'day').format();
+    const hashVerifyToken = await argon2.hash(verifyToken);
 
-      if (!user) {
-        const hashedPassword = await argon2.hash(password);
-        verifyToken = randomBytes(64).toString('hex');
-        verifyTokenExpiry = dayjs.utc().add(1, 'day').format();
-        const hashVerifyToken = await argon2.hash(verifyToken);
+    if (!user) {
+      const hashedPassword = await argon2.hash(password);
 
-        await db.insert(users).values({ name, email, password: hashedPassword, verifyToken: hashVerifyToken, verifyTokenExpiry });
-      }
+      await db.insert(users).values({ name, email, password: hashedPassword, verifyToken: hashVerifyToken, verifyTokenExpiry });
+    }
 
-      const mail = await getMailClient();
+    if (user && !user.verified) {
+      await db.update(users).set({ verifyToken: hashVerifyToken, verifyTokenExpiry }).where(eq(users.email, user.email));
+    }
 
-      await mail.sendMail({
-        from: {
-          name: 'Kanban',
-          address: process.env.GMAIL_USER!
-        },
-        to: email,
-        subject: 'Verificação de email',
-        html: `
+    const mail = await getMailClient();
+
+    await mail.sendMail({
+      from: {
+        name: 'Kanban',
+        address: process.env.GMAIL_USER!
+      },
+      to: email,
+      subject: 'Verificação de email',
+      html: `
         <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="background-color:#f7f7f7; padding:40px 0;">
           <tr>
             <td align="center">
@@ -76,8 +72,8 @@ export async function createUser(app: FastifyInstance) {
                 </tr>
                 <tr>
                   <td align="center" style="padding:30px 0;">
-                    <a href="${process.env.WEB_BASE_URL}/auth/verify-email?token=${verifyToken}" 
-                        style="background-color:#e3279a; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:5px; font-size:15px; font-weight:bold; display:inline-block;">
+                    <a href="${process.env.WEB_BASE_URL}/auth/verify-email?token=${verifyToken}&email=${email}" 
+                      style="background-color:#e3279a; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:5px; font-size:15px; font-weight:bold; display:inline-block;">
                       Verificar Email
                     </a>
                   </td>
@@ -86,18 +82,15 @@ export async function createUser(app: FastifyInstance) {
             </td>
           </tr>
         </table>`,
-        attachments: [
-          {
-            filename: "mail.png",
-            path: path.join(__dirname, '..', '..', 'public', 'mail.png'),
-            cid: "mail@example.com"
-          }
-        ]
-      });
+      attachments: [
+        {
+          filename: "mail.png",
+          path: path.join(__dirname, '..', '..', 'public', 'mail.png'),
+          cid: "mail@example.com"
+        }
+      ]
+    });
 
-      return reply.status(201).send({ message: 'Usuário cadastrado com sucesso!' });
-    } catch (error) {
-      console.log(error);
-    }
+    return reply.status(201).send({ message: 'Usuário cadastrado com sucesso!' });
   })
 }

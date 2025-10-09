@@ -4,6 +4,7 @@ import ForgotPassword from "@pages/auth/ForgotPassword";
 import ResetPassword from "@pages/auth/ResetPassword";
 import AuthLayout from "@components/auth/AuthLayout";
 import VerifyDevice from "@pages/auth/VerifyDevice";
+import VerifyEmail from "@pages/auth/VerifyEmail";
 
 const authRoutes = {
   path: '/auth',
@@ -12,6 +13,7 @@ const authRoutes = {
     { path: 'login', Component: Login },
     { path: 'verify-device', Component: VerifyDevice },
     { path: 'sign-up', Component: Register },
+    { path: 'verify-email', Component: VerifyEmail },
     { path: 'forgot-password', Component: ForgotPassword },
     { path: 'reset-password', Component: ResetPassword },
   ]
