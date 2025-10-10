@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { boolean, pgEnum, real, timestamp } from "drizzle-orm/pg-core";
+import { boolean, jsonb, pgEnum, real, timestamp } from "drizzle-orm/pg-core";
 import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
 export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high']);
@@ -69,9 +69,9 @@ export const users = pgTable('users', {
   forgotPasswordToken: varchar('forgot_password_token', { length: 255 }),
   forgotPasswordTokenExpiry: timestamp('forgot_password_token_expiry', { mode: 'string' }),
   verifyLoginToken: varchar('verify_login_token', { length: 255 }),
-  lastVerifiedLoginAt: timestamp('last_verified_login_at', { mode: 'string' }),
+  lastVerifiedLogin: timestamp('last_verified_login', { mode: 'string' }),
   firstLoginVerify: boolean('first_login_verify').notNull().default(false),
-  ip: varchar('ip', { length: 255 }),
+  loginInfo: jsonb('login_info'),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 })

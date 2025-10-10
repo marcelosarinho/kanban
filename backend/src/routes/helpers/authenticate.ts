@@ -12,7 +12,7 @@ type DeviceInfo = {
   userAgent: string;
 }
 
-export function checkLoginVerification(user: Pick<User, "verified" | "ip" | "lastVerifiedLoginAt">, deviceInfo: DeviceInfo) {
+export function checkLoginVerification(user: Pick<User, "verified" | "loginInfo" | "lastVerifiedLogin">, deviceInfo: DeviceInfo) {
   if (!user.verified) {
     return { status: "unverified", reason: "first_login" } as Response;
   }
@@ -21,7 +21,7 @@ export function checkLoginVerification(user: Pick<User, "verified" | "ip" | "las
   //   return { status: "unverified", reason: "ip_changed" } as Response;
   // }
 
-  const diffInDays = dayjs.utc().diff(dayjs.utc(user.lastVerifiedLoginAt), 'days');
+  const diffInDays = dayjs.utc().diff(dayjs.utc(user.lastVerifiedLogin), 'days');
 
   if (diffInDays >= DAYS_TO_STALE_LOGIN) {
     return { status: "unverified", reason: "stale_login" } as Response;

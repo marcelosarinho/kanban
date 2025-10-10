@@ -9,9 +9,9 @@ export type User = {
   forgotPasswordToken: string | null;
   forgotPasswordTokenExpiry: string | null;
   verifyLoginToken: string | null;
-  lastVerifiedLoginAt: string | null;
+  lastVerifiedLogin: string | null;
   firstLoginVerify: boolean;
-  ip: string | null;
+  loginInfo: string | null;
   createdAt: string;
   updatedAt: string;
 };

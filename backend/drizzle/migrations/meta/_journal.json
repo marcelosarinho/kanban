@@ -78,6 +78,13 @@
       "when": 1760038637219,
       "tag": "0010_add-verify-login-columns",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1760124781551,
+      "tag": "0011_change_ip_and_last_verified_login_fields_in_users_table",
+      "breakpoints": true
     }
   ]
 }
