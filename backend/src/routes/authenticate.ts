@@ -19,6 +19,10 @@ export async function authenticate(app: FastifyInstance) {
       return reply.status(404).send({ message: 'Usuário não encontrado!' });
     }
 
+    if (!user.verified) {
+      return reply.status(401).send({ message: 'Usuário não verificado!' });
+    }
+
     const isPasswordValid = await argon2.verify(user.password, password);
 
     if (!isPasswordValid) {
