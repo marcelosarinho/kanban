@@ -12,7 +12,7 @@ export const projects = pgTable('projects', {
   userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
-})
+});
 
 export const projectsRelations = relations(projects, ({ many }) => ({
   tasks: many(tasks),
@@ -32,7 +32,7 @@ export const tasks = pgTable('tasks', {
   projectId: integer('project_id').notNull().references(() => projects.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
-})
+});
 
 export const tasksRelations = relations(tasks, ({ one, many }) => ({
   projects: one(projects, {
@@ -49,7 +49,7 @@ export const subtasks = pgTable('subtasks', {
   taskId: integer('task_id').notNull().references(() => tasks.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
-})
+});
 
 export const subtasksRelations = relations(subtasks, ({ one }) => ({
   tasks: one(tasks, {
@@ -71,14 +71,14 @@ export const users = pgTable('users', {
   verifyLoginToken: varchar('verify_login_token', { length: 255 }),
   lastVerifiedLogin: timestamp('last_verified_login', { mode: 'string' }),
   firstLoginVerify: boolean('first_login_verify').notNull().default(false),
-  loginInfo: jsonb('login_info'),
+  deviceInfo: jsonb('device_info'),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
-})
+});
 
 export const usersRelations = relations(users, ({ many }) => ({
   projects: many(projects),
-}))
+}));
 
 export const schema = {
   projects,
