@@ -3,6 +3,7 @@ import { db } from "..";
 import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
 import argon2 from 'argon2';
+import { checkLoginVerification } from "./helpers/authenticate";
 
 export async function authenticate(app: FastifyInstance) {
   app.post('/authenticate', async (request: any, reply: any) => {
@@ -18,6 +19,8 @@ export async function authenticate(app: FastifyInstance) {
     if (!user) {
       return reply.status(404).send({ message: 'Usuário não encontrado!' });
     }
+
+    const { status, reason } = checkLoginVerification(user, ip)
 
     if (!user.verified) {
       return reply.status(401).send({ message: 'Usuário não verificado!' });
