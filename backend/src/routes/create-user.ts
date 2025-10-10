@@ -5,8 +5,6 @@ import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
 import dayjs from "../lib/dayjs";
-import { getMailClient } from "../lib/mail";
-import path from "path";
 import { sendVerificationEmail } from "../utils/email";
 
 export async function createUser(app: FastifyInstance) {
