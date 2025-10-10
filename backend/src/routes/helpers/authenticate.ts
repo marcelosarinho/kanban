@@ -1,25 +1,25 @@
 import { DAYS_TO_STALE_LOGIN } from "../../lib/constants";
 import dayjs from "../../lib/dayjs";
 import { User } from "../../types/user";
+import { DeviceInfo, Response } from "../../types/authenticate";
+import { UAParser } from "ua-parser-js";
 
-type Response = {
-  status: "verified" | "unverified";
-  reason: "first_login" | "ip_changed" | "stale_login" | null;
-};
+function getDeviceSignature(userAgent: Pick<DeviceInfo, "userAgent">) {
+  const parser = new UAParser(userAgent);
+  const { browser, os, device } = parser.getResult();
 
-type DeviceInfo = {
-  ip: string;
-  userAgent: string;
+  console.log(browser)
+  console.log(os)
+  console.log(device)
 }
 
-export function checkLoginVerification(user: Pick<User, "verified" | "loginInfo" | "lastVerifiedLogin">, deviceInfo: DeviceInfo) {
-  if (!user.verified) {
+export function checkLoginVerification(user: Pick<User, "firstLoginVerify" | "deviceInfo" | "lastVerifiedLogin">, deviceInfo: DeviceInfo) {
+  getDeviceSignature(deviceInfo);
+  return;
+
+  if (!user.firstLoginVerify) {
     return { status: "unverified", reason: "first_login" } as Response;
   }
-
-  // if (user.ip !== requestIp) {
-  //   return { status: "unverified", reason: "ip_changed" } as Response;
-  // }
 
   const diffInDays = dayjs.utc().diff(dayjs.utc(user.lastVerifiedLogin), 'days');
 

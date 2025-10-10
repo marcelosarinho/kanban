@@ -1,3 +1,5 @@
+import { DeviceInfo } from "./authenticate";
+
 export type User = {
   id: number;
   name: string;
@@ -11,7 +13,7 @@ export type User = {
   verifyLoginToken: string | null;
   lastVerifiedLogin: string | null;
   firstLoginVerify: boolean;
-  loginInfo: string | null;
+  deviceInfo: DeviceInfo | null;
   createdAt: string;
   updatedAt: string;
 };

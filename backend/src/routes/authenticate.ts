@@ -20,7 +20,8 @@ export async function authenticate(app: FastifyInstance) {
       return reply.status(404).send({ message: 'Usuário não encontrado!' });
     }
 
-    const { status, reason } = checkLoginVerification(user, ip)
+    // const { status, reason } = checkLoginVerification(user, ip)
+    checkLoginVerification(user, ip);
 
     if (!user.verified) {
       return reply.status(401).send({ message: 'Usuário não verificado!' });

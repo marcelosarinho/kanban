@@ -1,14 +1,15 @@
 import { relations } from "drizzle-orm";
 import { boolean, jsonb, pgEnum, real, timestamp } from "drizzle-orm/pg-core";
 import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import { DeviceInfo } from "../types/authenticate";
 
 export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high']);
 export const statusEnum = pgEnum('status', ['todo', 'in_progress', 'testing', 'implemented']);
 
 export const projects = pgTable('projects', {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 255 }).notNull().unique(),
-  description: varchar({ length: 255 }).notNull(),
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar('name', { length: 255 }).notNull().unique(),
+  description: varchar('description', { length: 255 }).notNull(),
   userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
@@ -19,15 +20,15 @@ export const projectsRelations = relations(projects, ({ many }) => ({
 }));
 
 export const tasks = pgTable('tasks', {
-  id: integer().primaryKey().generatedByDefaultAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  description: varchar({ length: 255 }),
+  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
+  name: varchar('name', { length: 255 }).notNull(),
+  description: varchar('description', { length: 255 }),
   priority: priorityEnum().notNull().default('low'),
-  category: varchar({ length: 255 }),
-  progress: real().notNull().default(0),
-  commentary: varchar({ length: 255 }),
-  color: varchar({ length: 20 }),
-  done: boolean().notNull().default(false),
+  category: varchar('category', { length: 255 }),
+  progress: real('progress').notNull().default(0),
+  commentary: varchar('commentary', { length: 255 }),
+  color: varchar('color', { length: 20 }),
+  done: boolean('done').notNull().default(false),
   status: statusEnum().notNull(),
   projectId: integer('project_id').notNull().references(() => projects.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
@@ -43,9 +44,9 @@ export const tasksRelations = relations(tasks, ({ one, many }) => ({
 }));
 
 export const subtasks = pgTable('subtasks', {
-  id: integer().primaryKey().generatedByDefaultAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  done: boolean().notNull().default(false),
+  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
+  name: varchar('name', { length: 255 }).notNull(),
+  done: boolean('done').notNull().default(false),
   taskId: integer('task_id').notNull().references(() => tasks.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
@@ -59,11 +60,11 @@ export const subtasksRelations = relations(subtasks, ({ one }) => ({
 }));
 
 export const users = pgTable('users', {
-  id: integer().primaryKey().generatedByDefaultAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
-  password: varchar({ length: 255 }).notNull(),
-  verified: boolean().notNull().default(false),
+  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
+  name: varchar('name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  password: varchar('password', { length: 255 }).notNull(),
+  verified: boolean('verified').notNull().default(false),
   verifyToken: varchar('verify_token', { length: 255 }),
   verifyTokenExpiry: timestamp('verify_token_expiry', { mode: 'string' }),
   forgotPasswordToken: varchar('forgot_password_token', { length: 255 }),
@@ -71,7 +72,7 @@ export const users = pgTable('users', {
   verifyLoginToken: varchar('verify_login_token', { length: 255 }),
   lastVerifiedLogin: timestamp('last_verified_login', { mode: 'string' }),
   firstLoginVerify: boolean('first_login_verify').notNull().default(false),
-  deviceInfo: jsonb('device_info'),
+  deviceInfo: jsonb('device_info').$type<DeviceInfo | null>(),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 });
