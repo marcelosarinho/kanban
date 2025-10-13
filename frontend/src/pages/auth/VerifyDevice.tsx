@@ -1,6 +1,6 @@
 import LoginCard from "@components/auth/LoginCard";
 import LoginCardHeader from "@components/auth/LoginCardHeader";
-import { EnvelopeIcon } from "@phosphor-icons/react";
+import { DevicesIcon } from "@phosphor-icons/react";
 import LoginCardBody from "@components/auth/LoginCardBody";
 import Input from "@components/Input";
 import Button from "@components/Button";
@@ -48,7 +48,7 @@ export default function VerifyDevice() {
   return (
     <LoginCard>
       <LoginCardHeader>
-        <EnvelopeIcon className="mx-auto mb-3 animate-slide-in-from-bottom dark:text-gray-300" size={64} />
+        <DevicesIcon className="mx-auto mb-3 animate-slide-in-from-bottom dark:text-gray-300" size={64} />
         <h1 className="text-center dark:text-gray-300 text-2xl font-medium animate-slide-in-from-bottom">
           Verificação de dispositivo
         </h1>
