@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
-import { users } from "../db/schema";
+import { users } from "@db/schema";
 import { and, eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
-import dayjs from "../lib/dayjs";
+import dayjs from "@lib/dayjs";
 import argon2 from 'argon2';
-import { sendForgotPasswordEmail } from "../utils/email";
+import { sendForgotPasswordEmail } from "@utils/email";
 
 export async function forgotPassword(app: FastifyInstance) {
   app.post('/forgot-password', async (request: any, reply: any) => {

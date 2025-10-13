@@ -1,4 +1,4 @@
-import { getMailClient } from "../lib/mail";
+import { getMailClient } from "@lib/mail";
 import path from "path";
 
 type VerificationEmail = {

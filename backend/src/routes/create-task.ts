@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
-import { tasks } from "../db/schema";
+import { tasks } from "@db/schema";
 
 export async function createTask(app: FastifyInstance) {
   app.post('/projects/:id/tasks', async (request: any, reply: any) => {

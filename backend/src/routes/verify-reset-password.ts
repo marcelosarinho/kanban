@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
-import dayjs from "../lib/dayjs";
+import dayjs from "@lib/dayjs";
 import { db } from "..";
-import { users } from "../db/schema";
+import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import argon2 from 'argon2';
 

@@ -3,7 +3,7 @@ import "fastify";
 declare module "fastify" {
   interface FastifyRequest {
     clientInfo: {
-      ip?: string | string[];
+      ip?: string;
       userAgent?: string;
     };
   };

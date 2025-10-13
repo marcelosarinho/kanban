@@ -1,11 +1,11 @@
 import { FastifyInstance } from "fastify";
 import argon2 from 'argon2';
 import { db } from "..";
-import { users } from "../db/schema";
+import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
-import dayjs from "../lib/dayjs";
-import { sendVerificationEmail } from "../utils/email";
+import dayjs from "@lib/dayjs";
+import { sendVerificationEmail } from "@utils/email";
 
 export async function createUser(app: FastifyInstance) {
   app.post('/users', async (request: any, reply: any) => {

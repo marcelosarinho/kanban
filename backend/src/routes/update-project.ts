@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { projects } from "../db/schema";
+import { projects } from "@db/schema";
 import { db } from "..";
 import { eq, sql } from "drizzle-orm";
 

@@ -1,4 +1,4 @@
-import { DeviceInfo } from "./authenticate";
+import { DeviceInfo } from "./login";
 
 export type User = {
   id: number;

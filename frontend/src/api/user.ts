@@ -20,8 +20,8 @@ export async function createUser(user: Pick<User, 'name' | 'email' | 'password'>
   return data;
 }
 
-export async function authenticate(user: Pick<User, 'email' | 'password'>) {
-  const response = await fetch('http://localhost:8080/authenticate', {
+export async function login(user: Pick<User, 'email' | 'password'>) {
+  const response = await fetch('http://localhost:8080/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

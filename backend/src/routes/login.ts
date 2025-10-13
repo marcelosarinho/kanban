@@ -1,17 +1,17 @@
-import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
+import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "..";
-import { users } from "../db/schema";
+import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import argon2 from 'argon2';
-import { checkLoginVerification } from "./helpers/authenticate";
+import { checkLoginVerification } from "./helpers/login";
 
-interface AuthenticateBody {
+interface LoginBody {
   email: string;
   password: string;
 }
 
-export async function authenticate(app: FastifyInstance) {
-  app.post<{ Body: AuthenticateBody }>('/authenticate', async (request, reply: FastifyReply) => {
+export async function login(app: FastifyInstance) {
+  app.post<{ Body: LoginBody }>('/login', async (request, reply: FastifyReply) => {
     const { email, password } = request.body;
     const ip = request.clientInfo.ip;
     const userAgent = request.clientInfo.userAgent;
@@ -27,7 +27,7 @@ export async function authenticate(app: FastifyInstance) {
     }
 
     // const { status, reason } = checkLoginVerification(user, ip)
-    checkLoginVerification(user, ip);
+    checkLoginVerification(user, { ip, userAgent });
 
     if (!user.verified) {
       return reply.invalidCredentials();

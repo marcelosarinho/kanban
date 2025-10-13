@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
-import { subtasks } from "../db/schema";
+import { subtasks } from "@db/schema";
 import { eq } from "drizzle-orm";
 
 export async function deleteSubtask(app: FastifyInstance) {

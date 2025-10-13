@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
-import { tasks } from "../db/schema";
+import { tasks } from "@db/schema";
 import { eq, sql } from "drizzle-orm";
 
 export async function updateTask(app: FastifyInstance) {

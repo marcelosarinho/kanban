@@ -11,7 +11,7 @@ import LoginCard from "@components/auth/LoginCard";
 import LoginCardFooter from "@components/auth/LoginCardFooter";
 import { Link, useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
-import { authenticate } from "@api/user";
+import { login } from "@api/user";
 
 type Inputs = z.infer<typeof userLoginSchema>;
 
@@ -27,7 +27,7 @@ export default function Login() {
   })
 
   const loginMutation = useMutation({
-    mutationFn: authenticate,
+    mutationFn: login,
     onSuccess: (_, variables) => {
       navigate('/auth/verify-device', { state: variables.email });
     }

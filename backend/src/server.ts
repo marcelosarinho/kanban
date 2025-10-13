@@ -12,7 +12,7 @@ import { deleteSubtask } from "./routes/delete-subtask";
 import { getTasks } from "./routes/get-tasks";
 import { createUser } from "./routes/create-user";
 import { forgotPassword } from "./routes/forgot-password";
-import { authenticate } from "./routes/authenticate";
+import { login } from "./routes/login";
 import { verifyResetPassword } from "./routes/verify-reset-password";
 import { resetPassword } from "./routes/reset-password";
 
@@ -24,8 +24,12 @@ server.register(cors, {
 });
 
 server.decorateRequest('clientInfo', {
-  ip: undefined,
-  userAgent: undefined,
+  getter() {
+    return {
+      ip: this.ip,
+      userAgent: this.headers['user-agent'],
+    }
+  },
 });
 
 server.decorateReply('invalidCredentials', function (this: FastifyReply, message = "Email ou senha incorretos!") {
@@ -54,7 +58,7 @@ server.decorateReply('created', function (this: FastifyReply, message: string) {
 
 server.addHook('onRequest', (req: FastifyRequest, _: any, done: any) => {
   req.clientInfo = {
-    ip: req.headers['x-forwarded-for'] || req.ip,
+    ip: req.ip,
     userAgent: req.headers['user-agent'],
   }
 
@@ -82,6 +86,6 @@ server.register(createSubtask);
 server.register(deleteSubtask);
 server.register(createUser);
 server.register(forgotPassword);
-server.register(authenticate);
+server.register(login);
 server.register(verifyResetPassword);
 server.register(resetPassword);

@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 import { boolean, jsonb, pgEnum, real, timestamp } from "drizzle-orm/pg-core";
 import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
-import { DeviceInfo } from "../types/authenticate";
+import { DeviceInfo } from "@custom-types/login";
 
 export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high']);
 export const statusEnum = pgEnum('status', ['todo', 'in_progress', 'testing', 'implemented']);

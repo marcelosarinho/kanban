@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
 import { desc, ilike, or } from "drizzle-orm";
-import { projects } from "../db/schema";
+import { projects } from "@db/schema";
 
 export async function getProjects(app: FastifyInstance) {
   app.get('/projects', async (request: any, reply: any) => {

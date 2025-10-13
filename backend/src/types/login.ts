@@ -4,7 +4,7 @@ export type Response = {
 };
 
 export type DeviceInfo = {
-  ip: string;
-  userAgent: string;
-  signature: string;
-}
+  ip?: string;
+  userAgent?: string;
+  signature?: string;
+};

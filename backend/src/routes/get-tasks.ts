@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
 import { eq } from "drizzle-orm";
-import { tasks } from "../db/schema";
-import { Task, TaskStatusOption } from "../types/task";
+import { tasks } from "@db/schema";
+import { Task, TaskStatusOption } from "@custom-types/task";
 
 export async function getTasks(app: FastifyInstance) {
   app.get('/projects/:id/tasks', async (request: any, reply: any) => {

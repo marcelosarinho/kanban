@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
-import { projects } from "../db/schema";
+import { projects } from "@db/schema";
 import { eq } from "drizzle-orm";
 
 export async function deleteProject(app: FastifyInstance) {

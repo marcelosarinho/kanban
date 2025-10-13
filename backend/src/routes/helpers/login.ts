@@ -1,7 +1,7 @@
-import { DAYS_TO_STALE_LOGIN } from "../../lib/constants";
-import dayjs from "../../lib/dayjs";
-import { User } from "../../types/user";
-import { DeviceInfo, Response } from "../../types/authenticate";
+import { DAYS_TO_STALE_LOGIN } from "@lib/constants";
+import dayjs from "@lib/dayjs";
+import { User } from "@custom-types/user";
+import { DeviceInfo, Response } from "@custom-types/login";
 import { UAParser } from "ua-parser-js";
 
 function getDeviceSignature(userAgent: Pick<DeviceInfo, "userAgent">) {

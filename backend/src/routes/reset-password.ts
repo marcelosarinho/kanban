@@ -1,9 +1,9 @@
 import { FastifyInstance } from "fastify";
 import { db } from "..";
 import { eq } from "drizzle-orm";
-import { users } from "../db/schema";
+import { users } from "@db/schema";
 import argon2 from 'argon2';
-import dayjs from "../lib/dayjs";
+import dayjs from "@lib/dayjs";
 
 export async function resetPassword(app: FastifyInstance) {
   app.post('/reset-password', async (request: any, reply: any) => {
