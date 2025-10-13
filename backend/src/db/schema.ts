@@ -70,6 +70,7 @@ export const users = pgTable('users', {
   forgotPasswordToken: varchar('forgot_password_token', { length: 255 }),
   forgotPasswordTokenExpiry: timestamp('forgot_password_token_expiry', { mode: 'string' }),
   verifyLoginToken: varchar('verify_login_token', { length: 255 }),
+  verifyLoginTokenExpiry: timestamp('verify_login_token_expiry', { mode: 'string' }),
   lastVerifiedLogin: timestamp('last_verified_login', { mode: 'string' }),
   firstLoginVerify: boolean('first_login_verify').notNull().default(false),
   deviceInfo: jsonb('device_info').$type<DeviceInfo | null>(),

@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "verify_login_token_expiry" timestamp;

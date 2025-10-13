@@ -99,6 +99,13 @@
       "when": 1760126144757,
       "tag": "0013_remove-ip-column-users-table",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1760386925663,
+      "tag": "0014_add_verify_login_token_expiry_to_users_table",
+      "breakpoints": true
     }
   ]
 }
