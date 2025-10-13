@@ -6,6 +6,7 @@ import argon2 from 'argon2';
 import { checkLoginVerification } from "./helpers/login";
 import { randomInt } from "crypto";
 import { sendLoginVerificationEmail } from "@utils/email";
+import dayjs from "dayjs";
 
 interface LoginBody {
   email: string;
@@ -42,6 +43,12 @@ export async function login(app: FastifyInstance) {
 
     if (deviceStatus === "unverified") {
       const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
+      const hashedCode = await argon2.hash(code);
+
+      await db.update(users).set({
+        verifyLoginToken: hashedCode,
+        verifyLoginTokenExpiry: dayjs.utc().add(10, 'minute').format(),
+      })
 
       await sendLoginVerificationEmail({ name: user.name, email }, code);
 
