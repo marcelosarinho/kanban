@@ -32,26 +32,51 @@ server.decorateRequest('clientInfo', {
   },
 });
 
-server.decorateReply('invalidCredentials', function (this: FastifyReply, message = "Email ou senha incorretos!") {
-  return this.status(401).send({
-    message,
-  });
-});
-
-server.decorateReply('missingCredentials', function (this: FastifyReply, message = "Email e senha são obrigatórios!") {
+server.decorateReply('badRequest', function (this: FastifyReply, message: string) {
   return this.status(400).send({
     message,
   });
 });
 
-server.decorateReply('ok', function (this: FastifyReply, message: string) {
+server.decorateReply('unauthorized', function (this: FastifyReply, message: string) {
+  return this.status(401).send({
+    message,
+  });
+});
+
+server.decorateReply('notFound', function (this: FastifyReply, message: string ) {
+  return this.status(404).send({
+    message,
+  });
+});
+
+server.decorateReply('unprocessableEntity', function (this: FastifyReply, message: string) {
+  return this.status(422).send({
+    message,
+  });
+});
+
+server.decorateReply('error', function (this: FastifyReply, message: string) {
+  return this.status(500).send({
+    message,
+  });
+});
+
+server.decorateReply('ok', function (this: FastifyReply, message: string, data?: unknown) {
   return this.status(200).send({
     message,
+    data,
   });
 });
 
 server.decorateReply('created', function (this: FastifyReply, message: string) {
   return this.status(201).send({
+    message,
+  });
+});
+
+server.decorateReply('modified', function (this: FastifyReply, message: string) {
+  return this.status(204).send({
     message,
   });
 });

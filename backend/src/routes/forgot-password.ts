@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { db } from "..";
 import { users } from "@db/schema";
 import { and, eq } from "drizzle-orm";
@@ -7,14 +7,18 @@ import dayjs from "@lib/dayjs";
 import argon2 from 'argon2';
 import { sendForgotPasswordEmail } from "@utils/email";
 
+interface ForgotPasswordBody {
+  email: string
+}
+
 export async function forgotPassword(app: FastifyInstance) {
-  app.post('/forgot-password', async (request: any, reply: any) => {
+  app.post<{ Body: ForgotPasswordBody }>('/forgot-password', async (request, reply: FastifyReply) => {
     const { email } = request.body;
 
     const user = await db.query.users.findFirst({ where: and(eq(users.email, email), eq(users.verified, true)) });
 
     if (!user) {
-      return reply.status(404).send({ message: 'Não foi possível encontrar um usuário com esse email!' });
+      return reply.notFound('Não foi possível encontrar um usuário com esse email!');
     }
 
     const forgotPasswordToken = randomBytes(64).toString('hex');
@@ -28,6 +32,6 @@ export async function forgotPassword(app: FastifyInstance) {
 
     await sendForgotPasswordEmail({ name: user.name, email, token: forgotPasswordToken });
 
-    return reply.status(200).send({ message: 'Email enviado com sucesso!' });
+    return reply.ok('Email enviado com sucesso!');
   });
 };

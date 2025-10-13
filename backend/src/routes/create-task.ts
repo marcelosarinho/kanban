@@ -1,9 +1,18 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "..";
 import { tasks } from "@db/schema";
+import { TaskStatusOption } from "@custom-types/task";
+
+interface CreateTaskParams {
+  id: number;
+}
+
+interface CreateTaskBody {
+  status: TaskStatusOption;
+}
 
 export async function createTask(app: FastifyInstance) {
-  app.post('/projects/:id/tasks', async (request: any, reply: any) => {
+  app.post<{ Params: CreateTaskParams, Body: CreateTaskBody }>('/projects/:id/tasks', async (request, reply: FastifyReply) => {
     try {
       const { id } = request.params;
       const { status } = request.body;
@@ -18,9 +27,11 @@ export async function createTask(app: FastifyInstance) {
         done: false,
       });
 
-      return reply.status(201).send({ message: 'Tarefa criada com sucesso!' });
+      return reply.created('Tarefa criada com sucesso!');
     } catch (error) {
       console.log(error);
+
+      return reply.error('Ocorreu um erro ao criar tarefa! Por favor, tente novamente.');
     }
   })
 }

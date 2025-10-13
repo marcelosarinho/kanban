@@ -9,9 +9,13 @@ declare module "fastify" {
   };
 
   interface FastifyReply {
-    missingCredentials(message?: string): this;
-    invalidCredentials(message?: string): this;
-    ok(message: string): this;
+    badRequest(message: string): this;
+    unauthorized(message: string): this;
+    notFound(message: string): this;
+    unprocessableEntity(message: string): this;
+    error(message: string): this;
+    ok(message: string, data?: unknown): this;
     created(message: string): this;
-  }
+    modified(message: string): this;
+  };
 }

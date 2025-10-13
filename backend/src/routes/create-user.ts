@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply } from "fastify";
 import argon2 from 'argon2';
 import { db } from "..";
 import { users } from "@db/schema";
@@ -7,19 +7,25 @@ import { randomBytes } from "crypto";
 import dayjs from "@lib/dayjs";
 import { sendVerificationEmail } from "@utils/email";
 
+interface CreateUserBody {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export async function createUser(app: FastifyInstance) {
-  app.post('/users', async (request: any, reply: any) => {
+  app.post<{ Body: CreateUserBody }>('/users', async (request, reply: FastifyReply) => {
     const { name, email, password } = request.body;
 
     if (!name || !email || !password) {
-      return reply.status(400).send({ message: 'Nome, email e senha são obrigatórios!' });
+      return reply.badRequest('Nome, email e senha são obrigatórios!');
     }
 
     try {
       const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
       if (user && user.verified) {
-        return reply.status(409).send({ message: 'Usuário já cadastrado!' });
+        return reply.unprocessableEntity('Erro ao cadastrar usuário!');
       }
 
       const verifyToken = randomBytes(64).toString('hex');
@@ -38,11 +44,11 @@ export async function createUser(app: FastifyInstance) {
 
       await sendVerificationEmail({ name, email, verifyToken });
 
-      return reply.status(201).send({ message: 'Usuário cadastrado com sucesso!' });
+      return reply.created('Usuário cadastrado com sucesso!');
     } catch (error) {
       console.log(error);
 
-      return reply.status(500).send({ message: 'Ocorreu um erro ao cadastrar o usuário! Por favor, tente novamente.' });
+      return reply.error('Ocorreu um erro ao cadastrar usuário! Por favor, tente novamente.');
     }
   })
 }

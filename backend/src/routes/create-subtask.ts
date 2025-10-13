@@ -1,9 +1,17 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "..";
 import { subtasks } from "@db/schema";
 
+interface CreateSubtaskBody {
+  name: string;
+}
+
+interface CreateSubtaskParams {
+  taskId: number;
+}
+
 export async function createSubtask(app: FastifyInstance) {
-  app.post('/projects/:id/tasks/:taskId/subtasks', async (request: any, reply: any) => {
+  app.post<{ Params: CreateSubtaskParams, Body: CreateSubtaskBody }>('/projects/:id/tasks/:taskId/subtasks', async (request, reply: FastifyReply) => {
     try {
       const { taskId } = request.params;
       const { name } = request.body;
@@ -14,9 +22,11 @@ export async function createSubtask(app: FastifyInstance) {
         taskId,
       })
 
-      return reply.status(201).send({ message: 'Subtarefa criada com sucesso!' });
+      return reply.created('Subtarefa criada com sucesso!');
     } catch (error) {
       console.log(error);
+
+      return reply.error('Ocorreu um erro ao criar subtarefa! Por favor, tente novamente.');
     }
   })
 }

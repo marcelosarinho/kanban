@@ -3,13 +3,18 @@ import { db } from "..";
 import { eq } from "drizzle-orm";
 import { tasks } from "@db/schema";
 import { Task, TaskStatusOption } from "@custom-types/task";
+import { FastifyReply } from "fastify";
+
+interface GetTasksParams {
+  id: string;
+}
 
 export async function getTasks(app: FastifyInstance) {
-  app.get('/projects/:id/tasks', async (request: any, reply: any) => {
+  app.get<{ Params: GetTasksParams }>('/projects/:id/tasks', async (request, reply: FastifyReply) => {
     try {
       const { id } = request.params;
 
-      const results = await db.select().from(tasks).where(eq(tasks.projectId, id));
+      const results = await db.select().from(tasks).where(eq(tasks.projectId, Number(id)));
 
       const statuses: Record<TaskStatusOption, Task[]> = {
         todo: [],
@@ -27,9 +32,11 @@ export async function getTasks(app: FastifyInstance) {
         return acc;
       }, statuses);
 
-      return reply.status(200).send(groupedTasks);
+      return reply.ok('Tarefas listadas com sucesso!', groupedTasks);
     } catch (error) {
       console.log(error);
+
+      return reply.error('Ocorreu um erro ao listar tarefas! Por favor, tente novamente.');
     }
   })
 }

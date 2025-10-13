@@ -17,26 +17,26 @@ export async function login(app: FastifyInstance) {
     const userAgent = request.clientInfo.userAgent;
 
     if (!email || !password) {
-      return reply.missingCredentials();
+      return reply.badRequest('Email e senha são obrigatórios!');
     }
 
     const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
     if (!user) {
-      return reply.invalidCredentials();
+      return reply.unauthorized('Email ou senha inválidos!');
     }
 
     // const { status, reason } = checkLoginVerification(user, ip)
     checkLoginVerification(user, { ip, userAgent });
 
     if (!user.verified) {
-      return reply.invalidCredentials();
+      return reply.unauthorized('Email ou senha inválidos!');
     }
 
     const isPasswordValid = await argon2.verify(user.password, password);
 
     if (!isPasswordValid) {
-      return reply.invalidCredentials();
+      return reply.unauthorized('Email ou senha inválidos!');
     }
 
     return reply.ok('Login realizado com sucesso!');
