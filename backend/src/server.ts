@@ -1,4 +1,4 @@
-import fastify from "fastify";
+import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cors from "@fastify/cors";
 import { getProjects } from "./routes/get-projects";
 import { createProject } from "./routes/create-project";
@@ -22,6 +22,44 @@ server.register(cors, {
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 });
+
+server.decorateRequest('clientInfo', {
+  ip: undefined,
+  userAgent: undefined,
+});
+
+server.decorateReply('invalidCredentials', function (this: FastifyReply, message = "Email ou senha incorretos!") {
+  return this.status(401).send({
+    message,
+  });
+});
+
+server.decorateReply('missingCredentials', function (this: FastifyReply, message = "Email e senha são obrigatórios!") {
+  return this.status(400).send({
+    message,
+  });
+});
+
+server.decorateReply('ok', function (this: FastifyReply, message: string) {
+  return this.status(200).send({
+    message,
+  });
+});
+
+server.decorateReply('created', function (this: FastifyReply, message: string) {
+  return this.status(201).send({
+    message,
+  });
+});
+
+server.addHook('onRequest', (req: FastifyRequest, _: any, done: any) => {
+  req.clientInfo = {
+    ip: req.headers['x-forwarded-for'] || req.ip,
+    userAgent: req.headers['user-agent'],
+  }
+
+  done();
+})
 
 server.listen({ port: 8080 }, (err, address) => {
   if (err) {
