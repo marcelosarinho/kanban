@@ -12,13 +12,13 @@ export default function VerifyDevice() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const email = state;
-
-  const [code, setCode] = useState('');
-
   if (!state) {
     return <Navigate to="/auth/login" replace />;
   }
+
+  const { email, reason } = state;
+
+  const [code, setCode] = useState('');
 
   return (
     <LoginCard>

@@ -4,6 +4,8 @@ import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import argon2 from 'argon2';
 import { checkLoginVerification } from "./helpers/login";
+import { randomInt } from "crypto";
+import { sendLoginVerificationEmail } from "@utils/email";
 
 interface LoginBody {
   email: string;
@@ -26,9 +28,6 @@ export async function login(app: FastifyInstance) {
       return reply.unauthorized('Email ou senha inválidos!');
     }
 
-    // const { status, reason } = checkLoginVerification(user, ip)
-    checkLoginVerification(user, { ip, userAgent });
-
     if (!user.verified) {
       return reply.unauthorized('Email ou senha inválidos!');
     }
@@ -39,6 +38,16 @@ export async function login(app: FastifyInstance) {
       return reply.unauthorized('Email ou senha inválidos!');
     }
 
-    return reply.ok('Login realizado com sucesso!');
+    const { deviceStatus, reason } = checkLoginVerification(user, { ip, userAgent });
+
+    if (deviceStatus === "unverified") {
+      const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
+
+      await sendLoginVerificationEmail({ name: user.name, email }, code);
+
+      return reply.ok('Dispositivo não verificado!', { deviceStatus, reason });
+    }
+
+    return reply.ok('Login realizado com sucesso!', { deviceStatus, reason });
   })
 }

@@ -32,6 +32,25 @@ server.decorateRequest('clientInfo', {
   },
 });
 
+server.decorateReply('ok', function (this: FastifyReply, message: string, data?: unknown) {
+  return this.status(200).send({
+    message,
+    data,
+  });
+});
+
+server.decorateReply('created', function (this: FastifyReply, message: string) {
+  return this.status(201).send({
+    message,
+  });
+});
+
+server.decorateReply('modified', function (this: FastifyReply, message: string) {
+  return this.status(204).send({
+    message,
+  });
+});
+
 server.decorateReply('badRequest', function (this: FastifyReply, message: string) {
   return this.status(400).send({
     message,
@@ -61,34 +80,6 @@ server.decorateReply('error', function (this: FastifyReply, message: string) {
     message,
   });
 });
-
-server.decorateReply('ok', function (this: FastifyReply, message: string, data?: unknown) {
-  return this.status(200).send({
-    message,
-    data,
-  });
-});
-
-server.decorateReply('created', function (this: FastifyReply, message: string) {
-  return this.status(201).send({
-    message,
-  });
-});
-
-server.decorateReply('modified', function (this: FastifyReply, message: string) {
-  return this.status(204).send({
-    message,
-  });
-});
-
-server.addHook('onRequest', (req: FastifyRequest, _: any, done: any) => {
-  req.clientInfo = {
-    ip: req.ip,
-    userAgent: req.headers['user-agent'],
-  }
-
-  done();
-})
 
 server.listen({ port: 8080 }, (err, address) => {
   if (err) {

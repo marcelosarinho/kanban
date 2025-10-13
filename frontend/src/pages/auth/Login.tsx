@@ -28,8 +28,14 @@ export default function Login() {
 
   const loginMutation = useMutation({
     mutationFn: login,
-    onSuccess: (_, variables) => {
-      navigate('/auth/verify-device', { state: variables.email });
+    onSuccess: (data, variables) => {
+      const { deviceStatus } = data.data;
+
+      if (deviceStatus === "unverified") {
+        return navigate('/auth/verify-device', { state: { email: variables.email, reason: data.data.reason } });
+      }
+
+      return navigate('/kanban');
     }
   })
 
@@ -44,7 +50,7 @@ export default function Login() {
       </LoginCardHeader>
       <LoginCardBody>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <fieldset className="flex flex-col gap-4">
+          <fieldset disabled={loginMutation.isPending} className="flex flex-col gap-4">
             {loginMutation.isError && (
               <UserFormMessage variant="error" message={loginMutation.error?.message} />
             )}
@@ -53,7 +59,7 @@ export default function Login() {
             <Link to="/auth/forgot-password" className="w-fit animate-slide-in-from-bottom text-sm text-primary cursor-pointer hover:text-primary/80 transition-colors">
               Esqueceu sua senha?
             </Link>
-            <Button className="animate-slide-in-from-bottom justify-center">Entrar</Button>
+            <Button className="animate-slide-in-from-bottom justify-center" loading={loginMutation.isPending}>Entrar</Button>
           </fieldset>
         </form>
       </LoginCardBody>

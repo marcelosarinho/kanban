@@ -125,3 +125,64 @@ export async function sendForgotPasswordEmail({ name, email, token }: Verificati
     ],
   });
 };
+
+export async function sendLoginVerificationEmail({ name, email }: Pick<VerificationEmail, 'name' | 'email'>, code: string) {
+  const mail = await getMailClient();
+
+  await mail.sendMail({
+    from: {
+      name: 'Kanban',
+      address: process.env.GMAIL_USER!
+    },
+    to: email,
+    subject: 'Verificação de dispositivo',
+    html: `
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="background-color:#f7f7f7; padding:40px 0;">
+      <tr>
+        <td align="center">
+          <table width="600" border="0" cellspacing="0" cellpadding="0" style="background:#ffffff; border-radius:8px; padding:20px; font-family: Arial, Helvetica, sans-serif; color:#333333;">
+            <tr>
+              <td align="center" style="padding:20px;">
+                <img src="cid:verify@example.com" alt="Verificação" width="140" height="140" style="display:block; margin:0 auto;"/>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:10px 20px;">
+                <h1 style="font-size:22px; color:#222; margin:0;">Verifique seu código</h1>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:10px 30px; font-size:15px; line-height:22px; text-align:center;">
+                <p style="margin:0;">Olá, <strong>${name}</strong>! Use o código abaixo para confirmar sua identidade no Kanban.</p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:30px 0;">
+                <div style="background-color:#f2f2f2; color:#222; display:inline-block; padding:14px 30px; border-radius:5px; font-size:20px; font-weight:bold; letter-spacing:3px;">
+                  ${code}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:10px 30px; font-size:14px; line-height:20px; text-align:center; color:#555;">
+                <p style="margin:0;">Este código expira em <strong>10 minutos</strong>. Não compartilhe com ninguém por motivos de segurança.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:20px 30px; font-size:12px; line-height:18px; text-align:center; color:#999;">
+                <p style="margin:0;">Se você não solicitou esta verificação, ignore este e-mail.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>`,
+    attachments: [
+      {
+        filename: "verify_code.png",
+        path: path.join(__dirname, '..', '..', 'public', 'verify_device.png'),
+        cid: "verify@example.com"
+      }
+    ],
+  });
+}

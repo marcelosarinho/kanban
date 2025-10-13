@@ -1,12 +1,17 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply } from "fastify";
 import dayjs from "@lib/dayjs";
 import { db } from "..";
 import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import argon2 from 'argon2';
 
+interface VerifyResetPasswordQuery {
+  token: string;
+  email: string;
+}
+
 export async function verifyResetPassword(app: FastifyInstance) {
-  app.get('/verify-reset-password', async (request: any, reply: any) => {
+  app.get<{ Querystring: VerifyResetPasswordQuery }>('/verify-reset-password', async (request, reply: FastifyReply) => {
     const { token, email } = request.query;
 
     if (!token || !email) {
