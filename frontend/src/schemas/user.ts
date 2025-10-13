@@ -31,3 +31,7 @@ export const userResetPasswordSchema = userSchema.pick({ password: true }).exten
   message: 'As senhas não coincidem!',
   path: ['password_confirmation'],
 });
+
+export const userVerifyDevice = z.object({
+  code: z.string().trim().min(1, 'Código obrigatório!')
+})
