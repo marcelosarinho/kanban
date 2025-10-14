@@ -7,6 +7,7 @@ import { checkLoginVerification } from "./helpers/login";
 import { randomInt } from "crypto";
 import { sendLoginVerificationEmail } from "@utils/email";
 import dayjs from "dayjs";
+import jwt from "jsonwebtoken";
 
 interface LoginBody {
   email: string;
@@ -41,6 +42,26 @@ export async function login(app: FastifyInstance) {
 
     const { deviceStatus, reason } = checkLoginVerification(user, { ip, userAgent });
 
+    const jwtToken = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        verified: deviceStatus === "verified",
+      },
+      process.env.JWT_SECRET!,
+      { expiresIn: '1d' }
+    );
+
+    reply.setCookie('auth', jwtToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 60 * 60 * 24,
+    })
+
+    console.log(request.cookies.auth);
+
     if (deviceStatus === "unverified") {
       const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
       const hashedCode = await argon2.hash(code);
@@ -52,9 +73,9 @@ export async function login(app: FastifyInstance) {
 
       await sendLoginVerificationEmail({ name: user.name, email }, code);
 
-      return reply.ok('Dispositivo não verificado!', { deviceStatus, reason });
+      return reply.ok('Dispositivo não verificado!', { verified: false, email: user.email });
     }
 
-    return reply.ok('Login realizado com sucesso!', { deviceStatus, reason });
+    return reply.ok('Login realizado com sucesso!', { verified: true });
   })
 }

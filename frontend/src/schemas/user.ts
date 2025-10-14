@@ -33,5 +33,6 @@ export const userResetPasswordSchema = userSchema.pick({ password: true }).exten
 });
 
 export const userVerifyDevice = z.object({
-  code: z.string().trim().min(1, 'Código obrigatório!')
+  code: z.string().trim().min(1, 'Código obrigatório!'),
+  email: z.email('Email inválido!'),
 })

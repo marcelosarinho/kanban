@@ -9,8 +9,13 @@ interface VerifyDeviceBody {
 }
 
 export default async function verifyDevice(app: FastifyInstance) {
-  app.post<{ Body: VerifyDeviceBody }>('/verify-device', async (request, reply: FastifyReply) => {
+  app.post<{ Body: VerifyDeviceBody }>('/verify-device', { preHandler: app.auth }, async (request, reply: FastifyReply) => {
     const { email, code } = request.body;
+    const token = request.user;
+
+    console.log(token);
+    console.log(request.cookies);
+    return;
 
     if (!email || !code) {
       return reply.badRequest('Email e código são obrigatórios!');

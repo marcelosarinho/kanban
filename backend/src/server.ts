@@ -16,6 +16,8 @@ import { login } from "./routes/login";
 import { verifyResetPassword } from "./routes/verify-reset-password";
 import { resetPassword } from "./routes/reset-password";
 import cookie from "@fastify/cookie";
+import auth from "@middlewares/auth";
+import verifyDevice from "@routes/verify-device";
 const server = fastify();
 
 server.register(cors, {
@@ -27,6 +29,8 @@ server.register(cookie, {
   secret: process.env.COOKIE_SECRET,
   hook: false,
 })
+
+server.register(auth);
 
 server.decorateRequest('clientInfo', {
   getter() {
@@ -110,3 +114,4 @@ server.register(forgotPassword);
 server.register(login);
 server.register(verifyResetPassword);
 server.register(resetPassword);
+server.register(verifyDevice);

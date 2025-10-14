@@ -28,11 +28,11 @@ export default function Login() {
 
   const loginMutation = useMutation({
     mutationFn: login,
-    onSuccess: (data, variables) => {
-      const { deviceStatus } = data.data;
+    onSuccess: (data) => {
+      const { verified, email } = data.data;
 
-      if (deviceStatus === "unverified") {
-        return navigate('/auth/verify-device', { state: { email: variables.email, reason: data.data.reason } });
+      if (!verified) {
+        return navigate('/auth/verify-device', { state: { email } });
       }
 
       return navigate('/kanban');

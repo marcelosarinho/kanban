@@ -18,6 +18,10 @@ export function removeCookie(name: string) {
 }
 
 export function censorEmail(email: string) {
+  if (!email) {
+    return '';
+  }
+
   const [local, domain] = email.split('@');
   const firstLetter = local[0];
   const censored = '*'.repeat(local.length - 1);

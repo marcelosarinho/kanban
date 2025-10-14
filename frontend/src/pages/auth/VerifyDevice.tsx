@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import type z from "zod";
 import { userVerifyDevice } from "@schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { verifyDevice } from "@api/user";
 
 type Inputs = z.infer<typeof userVerifyDevice>;
 
@@ -18,16 +20,27 @@ export default function VerifyDevice() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+  const email = state?.email;
+
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors }
   } = useForm<Inputs>({
     resolver: zodResolver(userVerifyDevice),
   });
 
+  const verifyDeviceMutation = useMutation({
+    mutationFn: verifyDevice,
+    onSuccess: () => {
+      console.log('foi');
+    }
+  })
+
   const code = watch('code');
+  setValue('email', email);
 
   useEffect(() => {
     if (code && code.length === 6) {
@@ -35,14 +48,12 @@ export default function VerifyDevice() {
     }
   }, [code, handleSubmit]);
 
-  if (!state) {
-    return <Navigate to="/auth/login" replace />;
+  function onSubmit(data: Inputs) {
+    verifyDeviceMutation.mutate(data);
   }
 
-  const { email, reason } = state;
-
-  function onSubmit(data: Inputs) {
-    console.log(data);
+  if (!email) {
+    return <Navigate to="/auth/login" />;
   }
 
   return (

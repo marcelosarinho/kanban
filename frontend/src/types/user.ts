@@ -8,4 +8,15 @@ export type User = {
   verifyTokenExpires: string;
   createdAt: string;
   updatedAt: string;
+};
+
+export type ResetPassword = {
+  token: string | null;
+  email: string | null;
+  password: string;
+}
+
+export type VerifyDevice = {
+  code: string;
+  email: string;
 }
