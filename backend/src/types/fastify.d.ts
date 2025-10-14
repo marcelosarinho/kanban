@@ -12,7 +12,7 @@ declare module "fastify" {
     badRequest(message: string): this;
     unauthorized(message: string): this;
     notFound(message: string): this;
-    unprocessableEntity(message: string): this;
+    conflict(message: string): this;
     error(message: string): this;
     ok(message: string, data?: unknown): this;
     created(message: string): this;

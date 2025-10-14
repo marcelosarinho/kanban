@@ -18,7 +18,7 @@ export async function forgotPassword(app: FastifyInstance) {
     const user = await db.query.users.findFirst({ where: and(eq(users.email, email), eq(users.verified, true)) });
 
     if (!user) {
-      return reply.notFound('Não foi possível encontrar um usuário com esse email!');
+      return reply.badRequest('Erro ao recuperar usuário!');
     }
 
     const forgotPasswordToken = randomBytes(64).toString('hex');

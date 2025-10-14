@@ -97,3 +97,7 @@ export async function resetPassword(token: string | null = null, email: string |
 
   return data;
 }
+
+export async function verifyDevice(code: string, email: string) {
+  
+}

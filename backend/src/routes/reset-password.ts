@@ -22,7 +22,7 @@ export async function resetPassword(app: FastifyInstance) {
     const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
     if (!user) {
-      return reply.notFound('Usuário não encontrado!');
+      return reply.badRequest('Erro ao recuperar usuário!');
     }
 
     if (!user.forgotPasswordToken || !user.forgotPasswordTokenExpiry) {

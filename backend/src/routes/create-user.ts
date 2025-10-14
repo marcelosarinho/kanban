@@ -25,7 +25,7 @@ export async function createUser(app: FastifyInstance) {
       const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
       if (user && user.verified) {
-        return reply.unprocessableEntity('Erro ao cadastrar usuário!');
+        return reply.conflict('Usuário já cadastrado!');
       }
 
       const verifyToken = randomBytes(64).toString('hex');

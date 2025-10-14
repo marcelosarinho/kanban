@@ -69,8 +69,8 @@ server.decorateReply('notFound', function (this: FastifyReply, message: string )
   });
 });
 
-server.decorateReply('unprocessableEntity', function (this: FastifyReply, message: string) {
-  return this.status(422).send({
+server.decorateReply('conflict', function (this: FastifyReply, message: string) {
+  return this.status(409).send({
     message,
   });
 });
