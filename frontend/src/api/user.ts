@@ -99,5 +99,21 @@ export async function resetPassword(token: string | null = null, email: string |
 }
 
 export async function verifyDevice(code: string, email: string) {
-  
+  const response = await fetch(`http://localhost:8080/verify-device`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ code, email })
+  })
+
+  if (!response.ok) {
+    const error = await response.json();
+
+    throw new Error(error.message);
+  }
+
+  const data = await response.json();
+
+  return data;
 }

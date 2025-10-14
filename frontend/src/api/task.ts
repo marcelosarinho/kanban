@@ -41,14 +41,14 @@ export async function createTask(status: TaskStatusOption, { id }: Pick<Project,
   }
 }
 
-export async function updateTask(task: Task, projectId?: Pick<Project, 'id'>) {
-  if (!projectId) {
+export async function updateTask(task: Task, project?: Pick<Project, 'id'>) {
+  if (!project?.id) {
     console.log('Projeto não encontrado!');
     return;
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/projects/${projectId}/tasks/${task.id}`, {
+    const response = await fetch(`http://localhost:8080/projects/${project.id}/tasks/${task.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
