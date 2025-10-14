@@ -18,8 +18,8 @@ export default async function verifyDevice(app: FastifyInstance) {
 
     const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
-    // if (!user) {
-    //   return reply.
-    // }
+    if (!user) {
+      return reply.setC
+    }
   });
 }

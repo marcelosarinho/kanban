@@ -15,13 +15,18 @@ import { forgotPassword } from "./routes/forgot-password";
 import { login } from "./routes/login";
 import { verifyResetPassword } from "./routes/verify-reset-password";
 import { resetPassword } from "./routes/reset-password";
-
+import cookie from "@fastify/cookie";
 const server = fastify();
 
 server.register(cors, {
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 });
+
+server.register(cookie, {
+  secret: process.env.COOKIE_SECRET,
+  hook: false,
+})
 
 server.decorateRequest('clientInfo', {
   getter() {
