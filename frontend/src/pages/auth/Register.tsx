@@ -48,7 +48,7 @@ export default function Register() {
         </LoginCardHeader>
         <LoginCardBody>
           <form onSubmit={handleSubmit(onSubmit)}>
-          <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4">
+          <fieldset disabled={registerMutation.isPending} className="flex flex-col gap-4 disabled:opacity-50">
             {registerMutation.isError && (
               <UserFormMessage variant="error" message={registerMutation.error?.message} />
             )}

@@ -50,7 +50,7 @@ export default function Login() {
       </LoginCardHeader>
       <LoginCardBody>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <fieldset disabled={loginMutation.isPending} className="flex flex-col gap-4">
+          <fieldset disabled={loginMutation.isPending} className="flex flex-col gap-4 disabled:opacity-50">
             {loginMutation.isError && (
               <UserFormMessage variant="error" message={loginMutation.error?.message} />
             )}

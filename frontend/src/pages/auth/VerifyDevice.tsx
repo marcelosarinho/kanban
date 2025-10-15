@@ -6,13 +6,14 @@ import Input from "@components/Input";
 import Button from "@components/Button";
 import { censorEmail } from "@utils/functions";
 import { useEffect } from "react";
-import { useLocation } from "react-router";
+import { redirect, useLocation } from "react-router";
 import { useForm } from "react-hook-form";
 import type z from "zod";
 import { userVerifyDevice } from "@schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { verifyDevice } from "@api/user";
+import UserFormMessage from "@components/auth/UserFormMessage";
 
 type Inputs = z.infer<typeof userVerifyDevice>;
 
@@ -34,7 +35,7 @@ export default function VerifyDevice() {
   const verifyDeviceMutation = useMutation({
     mutationFn: verifyDevice,
     onSuccess: () => {
-      console.log('foi');
+      redirect('/kanban');
     }
   })
 
@@ -64,9 +65,12 @@ export default function VerifyDevice() {
           Você está fazendo login em um novo dispositivo. Para sua segurança, verifique o login confirmando o código enviado para o email {censorEmail(email)}.
         </p>
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
-          <fieldset>
-            <Input error={errors.code?.message} {...register('code')} className="animate-slide-in-from-bottom mb-4" id="code" label="Código de verificação" placeholder="XXXXXX" maxLength={6} />
-            <Button className="animate-slide-in-from-bottom justify-center w-full">Verificar</Button>
+          <fieldset disabled={verifyDeviceMutation.isPending} className="flex flex-col gap-4 disabled:opacity-50">
+            {verifyDeviceMutation.isError && (
+              <UserFormMessage variant="error" message={verifyDeviceMutation.error?.message} />
+            )}
+            <Input error={errors.code?.message} {...register('code')} className="animate-slide-in-from-bottom" id="code" label="Código de verificação" placeholder="XXXXXX" maxLength={6} />
+            <Button loading={verifyDeviceMutation.isPending} className="animate-slide-in-from-bottom justify-center w-full">Verificar</Button>
           </fieldset>
         </form>
       </LoginCardBody>

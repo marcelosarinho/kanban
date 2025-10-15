@@ -1,21 +1,20 @@
 import auth from "@api/middlewares/auth";
+import { Navigate } from "react-router";
 import { useEffect, useState } from "react";
 
 export default function PrivateRoute({ children }: { children: React.ReactNode }) {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    authUser();
+    auth().then(() => setAuthenticated(true)).catch(() => setAuthenticated(false));
   }, []);
 
-  async function authUser() {
-    try {
-      const response = await auth();
+  if (authenticated === null) {
+    return <div>Carregando...</div>
+  }
 
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+  if (!authenticated) {
+    return <Navigate to="/auth/login" replace />
   }
 
   return (

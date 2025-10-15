@@ -59,8 +59,6 @@ export async function login(app: FastifyInstance) {
       maxAge: 60 * 60 * 24,
     })
 
-    console.log('cookies no login', request.cookies.auth);
-
     if (deviceStatus === "unverified") {
       const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
       const hashedCode = await argon2.hash(code);

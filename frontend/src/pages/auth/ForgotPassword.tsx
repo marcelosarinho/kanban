@@ -36,8 +36,6 @@ export default function ForgotPassword() {
   });
 
   function onSubmitForgotPassword(data: InputsForgotPassword) {
-    console.log(data);
-
     forgotPasswordMutation.mutate(data);
   }
 
@@ -51,7 +49,7 @@ export default function ForgotPassword() {
           <LoginCardBody>
             <form onSubmit={handleSubmit(onSubmitForgotPassword)}>
             <p className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-md mb-4">Um email será enviado com as instruções necessárias para redefinir sua senha.</p>
-            <fieldset disabled={forgotPasswordMutation.isPending} className="flex flex-col gap-4">
+            <fieldset disabled={forgotPasswordMutation.isPending} className="flex flex-col gap-4 disabled:opacity-50">
               {forgotPasswordMutation.isError && (
                 <UserFormMessage variant="error" message={forgotPasswordMutation.error?.message} />
               )}

@@ -56,7 +56,7 @@ export default function ResetPassword() {
           </LoginCardHeader>
           <LoginCardBody>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <fieldset disabled={resetPasswordMutation.isPending} className="flex flex-col gap-4">
+              <fieldset disabled={resetPasswordMutation.isPending} className="flex flex-col gap-4 disabled:opacity-50">
                 {resetPasswordMutation.isSuccess && (
                   <UserFormMessage variant="success" message="Senha redefinida com sucesso! Redirecionando para a tela de login..." />
                 )}
