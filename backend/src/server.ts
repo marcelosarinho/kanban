@@ -1,33 +1,33 @@
 import fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cors from "@fastify/cors";
-import { getProjects } from "./routes/get-projects";
-import { createProject } from "./routes/create-project";
-import { updateProject } from "./routes/update-project";
-import { createTask } from "./routes/create-task";
-import { updateTask } from "./routes/update-task";
-import { deleteTask } from "./routes/delete-task";
-import { deleteProject } from "./routes/delete-project";
-import { createSubtask } from "./routes/create-subtask";
-import { deleteSubtask } from "./routes/delete-subtask";
-import { getTasks } from "./routes/get-tasks";
-import { createUser } from "./routes/create-user";
-import { forgotPassword } from "./routes/forgot-password";
-import { login } from "./routes/login";
-import { verifyResetPassword } from "./routes/verify-reset-password";
-import { resetPassword } from "./routes/reset-password";
+import { getProjects } from "@routes/get-projects";
+import { createProject } from "@routes/create-project";
+import { updateProject } from "@routes/update-project";
+import { createTask } from "@routes/create-task";
+import { updateTask } from "@routes/update-task";
+import { deleteTask } from "@routes/delete-task";
+import { deleteProject } from "@routes/delete-project";
+import { createSubtask } from "@routes/create-subtask";
+import { deleteSubtask } from "@routes/delete-subtask";
+import { getTasks } from "@routes/get-tasks";
+import { createUser } from "@routes/create-user";
+import { forgotPassword } from "@routes/forgot-password";
+import { login } from "@routes/login";
+import { verifyResetPassword } from "@routes/verify-reset-password";
+import { resetPassword } from "@routes/reset-password";
 import cookie from "@fastify/cookie";
 import auth from "@middlewares/auth";
 import verifyDevice from "@routes/verify-device";
 const server = fastify();
 
 server.register(cors, {
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  origin: process.env.WEB_BASE_URL,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 });
 
 server.register(cookie, {
   secret: process.env.COOKIE_SECRET,
-  hook: false,
 })
 
 server.register(auth);

@@ -1,3 +1,4 @@
+import fp from "fastify-plugin";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import jwt from 'jsonwebtoken';
 
@@ -7,9 +8,9 @@ interface AuthPayload {
   verified: boolean;
 }
 
-export default function auth(app: FastifyInstance) {
+function auth(app: FastifyInstance) {
   app.decorate('auth', async (request: FastifyRequest, reply: FastifyReply) => {
-    const token = request.cookies.auth || request.headers.authorization?.split(" ")[1];;
+    const token = request.cookies.auth || request.headers.authorization?.split(" ")[1];
 
     if (!token) {
       return reply.unauthorized('Token ausente!');
@@ -28,3 +29,5 @@ export default function auth(app: FastifyInstance) {
     }
   })
 }
+
+export default fp(auth);

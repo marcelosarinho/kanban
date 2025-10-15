@@ -4,7 +4,7 @@ import { User } from "@custom-types/user";
 import { DeviceInfo, Response } from "@custom-types/login";
 import { UAParser } from "ua-parser-js";
 
-function getDeviceSignature(userAgent?: string) {
+export function getDeviceSignature(userAgent?: string) {
   if (!userAgent) return;
 
   const parser = new UAParser(userAgent);

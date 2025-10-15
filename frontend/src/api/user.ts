@@ -6,7 +6,7 @@ export async function createUser(user: Pick<User, 'name' | 'email' | 'password'>
 }
 
 export async function login(user: Pick<User, 'email' | 'password'>) {
-  return api.post<{ data: { verified: boolean, email: string } }>(`http://localhost:8080/login`, user);
+  return api.post<{ data: { verified: boolean, email: string } }>(`http://localhost:8080/login`, user, { credentials: 'include' });
 }
 
 export async function forgotPassword(email: Pick<User, 'email'>) {
@@ -22,5 +22,5 @@ export async function resetPassword(resetPassword: ResetPassword) {
 }
 
 export async function verifyDevice(verifyDevice: VerifyDevice) {
-  return api.post(`http://localhost:8080/verify-device`, verifyDevice);
+  return api.post(`http://localhost:8080/verify-device`, verifyDevice, { credentials: 'include' });
 }
