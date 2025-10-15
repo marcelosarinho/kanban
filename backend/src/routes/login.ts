@@ -17,8 +17,7 @@ interface LoginBody {
 export async function login(app: FastifyInstance) {
   app.post<{ Body: LoginBody }>('/login', async (request, reply: FastifyReply) => {
     const { email, password } = request.body;
-    const ip = request.clientInfo.ip;
-    const userAgent = request.clientInfo.userAgent;
+    const { ip, userAgent } = request.clientInfo;
 
     if (!email || !password) {
       return reply.badRequest('Email e senha são obrigatórios!');

@@ -14,8 +14,7 @@ export default async function verifyDevice(app: FastifyInstance) {
   app.post<{ Body: VerifyDeviceBody }>('/verify-device', { preHandler: app.auth }, async (request, reply: FastifyReply) => {
     const { code } = request.body;
     const token = request.user;
-    const ip = request.clientInfo.ip;
-    const userAgent = request.clientInfo.userAgent;
+    const { ip, userAgent } = request.clientInfo;
 
     if (!token) {
       return reply.unauthorized('Token ausente!');
@@ -25,42 +24,47 @@ export default async function verifyDevice(app: FastifyInstance) {
       return reply.badRequest('Código é obrigatório!');
     }
 
-    const user = await db.query.users.findFirst({ where: eq(users.email, token.email) });
+    try {
+      const user = await db.query.users.findFirst({ where: eq(users.email, token.email) });
 
-    if (!user) {
-      return reply.badRequest('Erro ao verificar dispositivo!');
-    }
-
-    if (!user.verifyLoginToken || !user.verifyLoginTokenExpiry) {
-      return reply.badRequest('Erro ao verificar dispositivo!');
-    }
-
-    const isCodeValid = await argon2.verify(user.verifyLoginToken, code);
-
-    if (!isCodeValid) {
-      return reply.unauthorized('Código inválido!');
-    }
-
-    if (dayjs().isAfter(dayjs.utc(user.verifyLoginTokenExpiry))) {
-      return reply.unauthorized('Código expirado! Forneça um código válido.')
-    }
-
-    const today = dayjs.utc().format();
-
-    const deviceSignature = getDeviceSignature(userAgent);
-
-    await db.update(users).set({
-      verifyLoginToken: null,
-      verifyLoginTokenExpiry: null,
-      firstLoginVerify: true,
-      lastVerifiedLogin: today,
-      deviceInfo: {
-        ip,
-        userAgent,
-        signature: deviceSignature,
+      if (!user) {
+        return reply.badRequest('Erro ao verificar dispositivo!');
       }
-    }).where(eq(users.id, user.id));
 
-    reply.ok('Dispositivo verificado com sucesso!');
+      if (!user.verifyLoginToken || !user.verifyLoginTokenExpiry) {
+        return reply.badRequest('Erro ao verificar dispositivo!');
+      }
+
+      const isCodeValid = await argon2.verify(user.verifyLoginToken, code);
+
+      if (!isCodeValid) {
+        return reply.unauthorized('Código inválido!');
+      }
+
+      if (dayjs().isAfter(dayjs.utc(user.verifyLoginTokenExpiry))) {
+        return reply.unauthorized('Código expirado! Forneça um código válido.')
+      }
+
+      const today = dayjs.utc().format();
+
+      const deviceSignature = getDeviceSignature(userAgent);
+
+      await db.update(users).set({
+        verifyLoginToken: null,
+        verifyLoginTokenExpiry: null,
+        firstLoginVerify: true,
+        lastVerifiedLogin: today,
+        deviceInfo: {
+          ip,
+          userAgent,
+          signature: deviceSignature,
+        }
+      }).where(eq(users.id, user.id));
+
+      reply.ok('Dispositivo verificado com sucesso!');
+    } catch (error) {
+      console.log(error);
+      return reply.error('Erro ao verificar dispositivo!');
+    }
   });
 }
