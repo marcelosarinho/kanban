@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply } from "fastify";
-import { db } from "..";
+import { db } from "index";
 import { subtasks } from "@db/schema";
 
 interface CreateSubtaskBody {

@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply } from "fastify";
 import argon2 from 'argon2';
-import { db } from "..";
+import { db } from "index";
 import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
@@ -42,7 +42,7 @@ export async function createUser(app: FastifyInstance) {
         await db.update(users).set({ verifyToken: hashVerifyToken, verifyTokenExpiry }).where(eq(users.email, user.email));
       }
 
-      await sendVerificationEmail({ name, email, verifyToken });
+      await sendVerificationEmail({ name, email, token: verifyToken });
 
       return reply.created('Usuário cadastrado com sucesso!');
     } catch (error) {

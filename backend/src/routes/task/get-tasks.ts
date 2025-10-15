@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { db } from "..";
+import { db } from "index";
 import { eq } from "drizzle-orm";
 import { tasks } from "@db/schema";
 import { Task, TaskStatusOption } from "@custom-types/task";

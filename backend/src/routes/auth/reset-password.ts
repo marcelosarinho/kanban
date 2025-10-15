@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply } from "fastify";
-import { db } from "..";
+import { db } from "index";
 import { eq } from "drizzle-orm";
 import { users } from "@db/schema";
 import argon2 from 'argon2';

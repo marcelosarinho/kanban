@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { db } from "..";
+import { db } from "index";
 import { users } from "@db/schema";
 import { and, eq } from "drizzle-orm";
 import { randomBytes } from "crypto";

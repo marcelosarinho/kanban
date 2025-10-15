@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply } from "fastify";
-import { db } from "..";
 import { desc, ilike, or } from "drizzle-orm";
 import { projects } from "@db/schema";
+import { db } from "index";
 
 interface GetProjectsQuerystring {
   search?: string

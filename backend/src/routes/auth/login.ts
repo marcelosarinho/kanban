@@ -1,9 +1,9 @@
 import { FastifyInstance, FastifyReply } from "fastify";
-import { db } from "..";
+import { db } from "index";
 import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import argon2 from 'argon2';
-import { checkLoginVerification } from "./helpers/login";
+import { checkLoginVerification } from "../helpers/login";
 import { randomInt } from "crypto";
 import { sendLoginVerificationEmail } from "@utils/email";
 import dayjs from "dayjs";

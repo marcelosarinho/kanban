@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply } from "fastify";
-import { db } from "..";
+import { db } from "index";
 import { tasks } from "@db/schema";
 import { TaskStatusOption } from "@custom-types/task";
 

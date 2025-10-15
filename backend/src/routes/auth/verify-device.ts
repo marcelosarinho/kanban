@@ -4,7 +4,7 @@ import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import argon2 from 'argon2';
 import dayjs from "@lib/dayjs";
-import { getDeviceSignature } from "./helpers/login";
+import { getDeviceSignature } from "../helpers/login";
 
 interface VerifyDeviceBody {
   code: string;

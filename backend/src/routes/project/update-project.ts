@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply } from "fastify";
 import { projects } from "@db/schema";
-import { db } from "..";
+import { db } from "index";
 import { eq, sql } from "drizzle-orm";
 
 interface UpdateProjectParams {
