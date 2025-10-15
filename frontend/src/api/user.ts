@@ -9,6 +9,10 @@ export async function login(user: Pick<User, 'email' | 'password'>) {
   return api.post<{ data: { verified: boolean, email: string } }>(`/login`, user, { credentials: 'include' });
 }
 
+export async function logout() {
+  return api.post('/logout', {}, { credentials: 'include' });
+}
+
 export async function forgotPassword(email: Pick<User, 'email'>) {
   return api.post('/forgot-password', email);
 }

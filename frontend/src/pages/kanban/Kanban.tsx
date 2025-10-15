@@ -24,7 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
 import type { Project as ProjectType } from '@custom-types/project';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
-import { createProject, deleteProject, getProjects, updateProject, createTask, getTasks } from '@api/index';
+import { createProject, deleteProject, getProjects, updateProject, createTask, getTasks, logout } from '@api/index';
 import Loading from '@components/Loading';
 import TaskStatusSkeleton from '@components/skeleton/TaskStatusSkeleton';
 import type { Task as TaskType, TaskStatusOption } from '@custom-types/task';
@@ -36,6 +36,7 @@ import { useTheme } from '@contexts/ThemeContext';
 import ThemeIcon from '@components/theme/ThemeIcon';
 import Navbar from '@components/navbar/Navbar';
 import type { CategoryOption } from '@custom-types/constants';
+import { redirect } from 'react-router';
 
 type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
@@ -144,7 +145,7 @@ function Kanban() {
       )
     }
 
-    return projects?.map((p: ProjectType) => (
+    return projects?.data.map((p: ProjectType) => (
       <Project
         key={p.id}
         project={p}
@@ -278,6 +279,16 @@ function Kanban() {
     },
   });
 
+  const logoutMutation = useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      redirect('/login');
+    },
+    onError: () => {
+      toast.error('Erro ao realizar logout!');
+    }
+  })
+
   const {
     isError: isErrorTasks,
     data: tasks,
@@ -309,10 +320,10 @@ function Kanban() {
   }, [isErrorProjects, isErrorTasks]);
 
   useEffect(() => {
-    if (projects && initialLoading) {
+    if (projects?.data && initialLoading) {
       setInitialLoading(false);
     }
-  }, [projects, initialLoading]);
+  }, [projects?.data, initialLoading]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -456,11 +467,11 @@ function Kanban() {
 
             {dropdown.user && (
               <Dropdown className="right-0 top-10">
-                <DropdownOption onClick={() => changeTheme('dark')}>
+                <DropdownOption onClick={() => console.log('perfil')}>
                   <UserGearIcon className="text-xl" />
                   Perfil
                 </DropdownOption>
-                <DropdownOption onClick={() => changeTheme('dark')} className="text-danger">
+                <DropdownOption onClick={() => logoutMutation.mutate()} className="text-danger">
                   <SignOutIcon className="text-xl" />
                   Sair
                 </DropdownOption>

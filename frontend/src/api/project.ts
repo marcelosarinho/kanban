@@ -1,64 +1,18 @@
 import type { Project } from "@custom-types/project";
+import { api } from "./index";
 
-export async function getProjects(search?: string) {
-  try {
-    const response = await fetch('http://localhost:8080/projects' + (search ? `?search=${search}` : ''));
-    return await response.json();
-  } catch (error) {
-    console.error('Erro ao buscar projetos!', error);
-  }
+export async function getProjects(search: string = '') {
+  return api.get<{ data: Project[] }>(`/projects?search=${search}`);
 }
 
 export async function createProject(project: Pick<Project, 'name' | 'description'>) {
-  try {
-    const response = await fetch('http://localhost:8080/projects', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(project)
-    })
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error('Erro ao criar projeto!', error);
-  }
+  return api.post<{ data: Project }>(`/projects`, project);
 }
 
 export async function deleteProject({ id }: Pick<Project, 'id'>) {
-  try {
-    if (!id) {
-      console.error('Projeto não encontrado!');
-      return;
-    }
-
-    await fetch(`http://localhost:8080/projects/${id}`, {
-      method: 'DELETE',
-    })
-
-    return true;
-  } catch (error) {
-    console.error('Erro ao deletar projeto!', error);
-    return false;
-  }
+  return api.delete<{ data: Project }>(`/projects/${id}`);
 }
 
 export async function updateProject(project: Omit<Project, 'createdAt' | 'updatedAt'>) {
-  try {
-    const response = await fetch(`http://localhost:8080/projects/${project.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(project)
-    })
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error('Erro ao atualizar projeto!', error);
-  }
+  return api.put<{ data: Project }>(`/projects/${project.id}`, project);
 }
