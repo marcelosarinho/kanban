@@ -18,6 +18,7 @@ import { resetPassword } from "@routes/auth/reset-password";
 import cookie from "@fastify/cookie";
 import auth from "@middlewares/auth";
 import verifyDevice from "@routes/auth/verify-device";
+import { me } from "@routes/auth/me";
 const server = fastify();
 
 server.register(cors, {
@@ -115,3 +116,4 @@ server.register(login);
 server.register(verifyResetPassword);
 server.register(resetPassword);
 server.register(verifyDevice);
+server.register(me);

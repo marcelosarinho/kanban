@@ -25,6 +25,10 @@ function auth(app: FastifyInstance) {
 
       request.user = decoded as AuthPayload;
     } catch (error) {
+      if (error instanceof jwt.TokenExpiredError) {
+        return reply.unauthorized('Token expirado!');
+      }
+
       return reply.unauthorized('Token inválido!');
     }
   })

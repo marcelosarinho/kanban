@@ -6,7 +6,7 @@ import Input from "@components/Input";
 import Button from "@components/Button";
 import { censorEmail } from "@utils/functions";
 import { useEffect } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import { useForm } from "react-hook-form";
 import type z from "zod";
 import { userVerifyDevice } from "@schemas/user";
@@ -17,7 +17,6 @@ import { verifyDevice } from "@api/user";
 type Inputs = z.infer<typeof userVerifyDevice>;
 
 export default function VerifyDevice() {
-  const navigate = useNavigate();
   const { state } = useLocation();
 
   const email = state?.email;
@@ -50,10 +49,6 @@ export default function VerifyDevice() {
 
   function onSubmit(data: Inputs) {
     verifyDeviceMutation.mutate(data);
-  }
-
-  if (!email) {
-    return <Navigate to="/auth/login" />;
   }
 
   return (

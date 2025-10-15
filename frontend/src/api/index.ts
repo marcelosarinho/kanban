@@ -5,7 +5,7 @@ export * from '@api/user';
 async function request<T>(
   url: string,
   { method = 'GET', headers, body, ...rest }: RequestInit = {}): Promise<T> {
-    const response = await fetch(url, {
+    const response = await fetch(`http://localhost:8080${url}`, {
       method,
       headers: {
         'Content-Type': 'application/json',
