@@ -44,6 +44,7 @@ export async function login(app: FastifyInstance) {
     const jwtToken = jwt.sign(
       {
         id: user.id,
+        name: user.name,
         email: user.email,
         verified: deviceStatus === "verified",
       },
