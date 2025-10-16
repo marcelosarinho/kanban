@@ -1,6 +1,10 @@
 import type { ResetPassword, User } from "@custom-types/user";
 import { api } from "./index";
 
+export async function getUser() {
+  return api.get('/me', { credentials: 'include' });
+}
+
 export async function createUser(user: Pick<User, 'name' | 'email' | 'password'>) {
   return api.post('/users', user);
 }

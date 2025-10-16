@@ -1,3 +1,4 @@
+import { getUser } from "@api/user";
 import Button from "@components/Button";
 import Dropdown from "@components/dropdown/Dropdown";
 import DropdownOption from "@components/dropdown/DropdownOption";
@@ -10,6 +11,7 @@ import ProfileCardHeader from "@components/profile/ProfileCardHeader";
 import ThemeIcon from "@components/theme/ThemeIcon";
 import { useTheme } from "@contexts/ThemeContext";
 import { CheckIcon, KanbanIcon, TrashIcon, UserIcon, WarningIcon } from "@phosphor-icons/react";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 export default function Profile() {
@@ -17,6 +19,15 @@ export default function Profile() {
 
   const [dropdown, setDropdown] = useState({
     theme: false,
+  });
+
+  const {
+    isPending,
+    isError,
+    data,
+  } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => getUser(),
   })
 
   return (
@@ -65,7 +76,7 @@ export default function Profile() {
             <ProfileCardBody>
               <form>
                 <fieldset className="flex flex-col gap-3">
-                  <Input label="Nome" name="name" id="name" type="text" />
+                  <Input value={data?.name} label="Nome" name="name" id="name" type="text" />
                   <Input label="Email" name="email" id="email" type="email" />
                   <Button className="justify-center md:w-fit">
                     <CheckIcon weight="bold" className="text-lg" />
