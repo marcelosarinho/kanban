@@ -15,8 +15,3 @@ export type ResetPassword = {
   email: string | null;
   password: string;
 }
-
-export type VerifyDevice = {
-  code: string;
-  email: string;
-}

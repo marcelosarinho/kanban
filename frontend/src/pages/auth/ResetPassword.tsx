@@ -42,8 +42,6 @@ export default function ResetPassword() {
   });
 
   function onSubmit(data: Inputs) {
-    console.log(data);
-
     resetPasswordMutation.mutate(data);
   }
 

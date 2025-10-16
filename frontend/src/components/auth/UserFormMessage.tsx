@@ -1,9 +1,11 @@
+import type { ComponentProps } from "react";
+
 type Variant = 'error' | 'warning' | 'success';
 
 type UserFormMessageProps = {
   variant: Variant;
   message?: string;
-}
+} & ComponentProps<'div'>
 
 const userFormVariant: Record<Variant, string> = {
   error: 'bg-danger/20 border-danger text-red-800 dark:text-red-400',
@@ -12,10 +14,10 @@ const userFormVariant: Record<Variant, string> = {
 }
 
 export default function UserFormMessage(props: UserFormMessageProps) {
-  const { variant, message } = props;
+  const { variant, message, className } = props;
 
   return (
-    <div className={`p-2 border text-sm rounded animate-in ${userFormVariant[variant]}`}>
+    <div className={`p-2 border text-sm rounded animate-in ${userFormVariant[variant]} ${className}`}>
       {message}
     </div>
   )

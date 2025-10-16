@@ -20,6 +20,7 @@ import auth from "@middlewares/auth";
 import verifyDevice from "@routes/auth/verify-device";
 import { me } from "@routes/auth/me";
 import { logout } from "@routes/auth/logout";
+import { verifyEmail } from "@routes/auth/verify-email";
 const server = fastify();
 
 server.register(cors, {
@@ -113,9 +114,10 @@ server.register(createSubtask);
 server.register(deleteSubtask);
 server.register(createUser);
 server.register(forgotPassword);
+server.register(resetPassword);
 server.register(login);
 server.register(logout);
 server.register(verifyResetPassword);
-server.register(resetPassword);
 server.register(verifyDevice);
+server.register(verifyEmail);
 server.register(me);

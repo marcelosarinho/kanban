@@ -1,4 +1,4 @@
-import type { ResetPassword, User, VerifyDevice } from "@custom-types/user";
+import type { ResetPassword, User } from "@custom-types/user";
 import { api } from "./index";
 
 export async function createUser(user: Pick<User, 'name' | 'email' | 'password'>) {
@@ -25,6 +25,10 @@ export async function resetPassword(resetPassword: ResetPassword) {
   return api.post('/reset-password', resetPassword);
 }
 
-export async function verifyDevice(verifyDevice: VerifyDevice) {
-  return api.post('/verify-device', verifyDevice, { credentials: 'include' });
+export async function verifyDevice(code: string) {
+  return api.post('/verify-device', { code }, { credentials: 'include' });
+}
+
+export async function verifyEmail({ email, token }: { email: string, token: string }) {
+  return api.post('/verify-email', { email, token });
 }

@@ -27,7 +27,6 @@ export default function VerifyDevice() {
     register,
     handleSubmit,
     watch,
-    setValue,
     formState: { errors }
   } = useForm<Inputs>({
     resolver: zodResolver(userVerifyDevice),
@@ -41,7 +40,6 @@ export default function VerifyDevice() {
   })
 
   const code = watch('code');
-  setValue('email', email);
 
   useEffect(() => {
     if (code && code.length === 6) {
@@ -50,7 +48,7 @@ export default function VerifyDevice() {
   }, [code, handleSubmit]);
 
   function onSubmit(data: Inputs) {
-    verifyDeviceMutation.mutate(data);
+    verifyDeviceMutation.mutate(data.code);
   }
 
   return (
