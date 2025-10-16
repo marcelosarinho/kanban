@@ -36,12 +36,14 @@ import { useTheme } from '@contexts/ThemeContext';
 import ThemeIcon from '@components/theme/ThemeIcon';
 import Navbar from '@components/navbar/Navbar';
 import type { CategoryOption } from '@custom-types/constants';
-import { redirect } from 'react-router';
+import { useNavigate } from 'react-router';
 
 type Inputs = z.infer<typeof projectSchema>;
 const queryClient = new QueryClient();
 
 function Kanban() {
+  const navigate = useNavigate();
+
   const [dropdown, setDropdown] = useState({
     theme: false,
     user: false,
@@ -282,7 +284,7 @@ function Kanban() {
   const logoutMutation = useMutation({
     mutationFn: logout,
     onSuccess: () => {
-      redirect('/login');
+      navigate('/auth/login');
     },
     onError: () => {
       toast.error('Erro ao realizar logout!');

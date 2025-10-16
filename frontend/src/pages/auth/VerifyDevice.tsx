@@ -6,7 +6,7 @@ import Input from "@components/Input";
 import Button from "@components/Button";
 import { censorEmail } from "@utils/functions";
 import { useEffect } from "react";
-import { redirect, useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import type z from "zod";
 import { userVerifyDevice } from "@schemas/user";
@@ -18,6 +18,7 @@ import UserFormMessage from "@components/auth/UserFormMessage";
 type Inputs = z.infer<typeof userVerifyDevice>;
 
 export default function VerifyDevice() {
+  const navigate = useNavigate();
   const { state } = useLocation();
 
   const email = state?.email;
@@ -35,7 +36,7 @@ export default function VerifyDevice() {
   const verifyDeviceMutation = useMutation({
     mutationFn: verifyDevice,
     onSuccess: () => {
-      redirect('/kanban');
+      navigate('/kanban');
     }
   })
 
