@@ -439,7 +439,7 @@ function Kanban() {
           </div>
         </aside>
         <section className="ml-52 overflow-hidden">
-          <Navbar>
+          <Navbar className="left-52">
             <NavbarButton onClick={() => setDropdown({ ...dropdown, theme: !dropdown.theme })}>
               <ThemeIcon theme={theme} size="lg" />
             </NavbarButton>
@@ -468,7 +468,7 @@ function Kanban() {
 
             {dropdown.user && (
               <Dropdown className="right-0 top-10">
-                <DropdownOption onClick={() => console.log('perfil')}>
+                <DropdownOption onClick={() => navigate('/profile')}>
                   <UserGearIcon className="text-xl" />
                   Perfil
                 </DropdownOption>

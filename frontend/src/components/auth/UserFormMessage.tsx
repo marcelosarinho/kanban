@@ -17,7 +17,7 @@ export default function UserFormMessage(props: UserFormMessageProps) {
   const { variant, message, className } = props;
 
   return (
-    <div className={`p-2 border text-sm rounded animate-in ${userFormVariant[variant]} ${className}`}>
+    <div className={`p-2 border text-sm rounded animate-in ${userFormVariant[variant]} ${className ?? ''}`}>
       {message}
     </div>
   )

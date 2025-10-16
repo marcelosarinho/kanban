@@ -6,7 +6,7 @@ export default function LoginCardBody(props: ComponentProps<'div'>) {
   return (
     <div
       {...rest}
-      className={`p-6 ${className}`}
+      className={`p-6 ${className ?? ''}`}
     >
       {children}
     </div>
