@@ -67,7 +67,7 @@ export default function Profile() {
                 <fieldset className="flex flex-col gap-3">
                   <Input label="Nome" name="name" id="name" type="text" />
                   <Input label="Email" name="email" id="email" type="email" />
-                  <Button className="w-fit">
+                  <Button className="justify-center md:w-fit">
                     <CheckIcon weight="bold" className="text-lg" />
                     Salvar alterações
                   </Button>
@@ -89,7 +89,7 @@ export default function Profile() {
                 <Input label="Senha atual" name="password" id="password" type="password" isPassword />
                 <Input label="Nova senha" name="newPassword" id="newPassword" type="password" isPassword />
                 <Input label="Confirmar nova senha" name="confirmNewPassword" id="confirmNewPassword" type="password" isPassword />
-                <Button className="w-fit">
+                <Button className="justify-center md:w-fit">
                   <CheckIcon weight="bold" className="text-lg" />
                   Salvar alterações
                 </Button>
@@ -110,13 +110,13 @@ export default function Profile() {
             </ProfileCardHeader>
 
             <ProfileCardBody>
-              <div className="flex justify-between items-center gap-3">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-3">
                 <div>
                   <h1 className="text-md font-medium dark:text-gray-300 mb-1">Apagar conta</h1>
                   <h6 className="text-sm text-gray-500 dark:text-gray-400">Assim que apagar sua conta, não poderá ser recuperada. Tenha certeza!</h6>
                 </div>
 
-                <Button variant="danger">
+                <Button variant="danger" className="justify-center w-full md:w-fit">
                   <TrashIcon weight="bold" className="text-white text-lg" />
                   Apagar conta
                 </Button>
