@@ -16,6 +16,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Link } from "react-router";
 import ProfileInfoSkeleton from "@components/skeleton/ProfileInfoSkeleton";
+import ProfilePasswordSkeleton from "@components/skeleton/ProfilePasswordSkeleton";
+import ProfileDeleteSkeleton from "@components/skeleton/ProfileDeleteSkeleton";
 
 export default function Profile() {
   const { theme, changeTheme } = useTheme();
@@ -69,7 +71,7 @@ export default function Profile() {
         )}
       </Navbar>
       <div className="flex flex-col items-center pt-20 pb-8 h-full gap-6">
-        <section className="flex gap-5 items-center">
+        <section className="flex gap-5 items-center w-full xl:max-w-xl lg:max-w-lg md:max-w-md sm:max-w-sm max-w-sm">
           <div className="bg-white dark:bg-slate-700 rounded-full p-3">
             <UserIcon className="dark:text-gray-300" size={40} />
           </div>
@@ -122,7 +124,17 @@ export default function Profile() {
           </ProfileCard>
         </section>
 
-        <ProfileInfoSkeleton/>
+        <section className="w-full xl:max-w-xl lg:max-w-lg md:max-w-md sm:max-w-sm max-w-sm">
+          <ProfileInfoSkeleton/>
+        </section>
+
+        <section className="w-full xl:max-w-xl lg:max-w-lg md:max-w-md sm:max-w-sm max-w-sm">
+          <ProfilePasswordSkeleton />
+        </section>
+
+        <section className="w-full xl:max-w-xl lg:max-w-lg md:max-w-md sm:max-w-sm max-w-sm">
+          <ProfileDeleteSkeleton />
+        </section>
 
         <section className="w-full xl:max-w-xl lg:max-w-lg md:max-w-md sm:max-w-sm max-w-sm">
           <ProfileCard className="border-danger!">
@@ -141,7 +153,7 @@ export default function Profile() {
                   <h6 className="text-sm text-gray-500 dark:text-gray-400">Assim que apagar sua conta, não poderá ser recuperada. Tenha certeza!</h6>
                 </div>
 
-                <Button variant="danger" className="whitespace-nowrap w-full md:w-fit">
+                <Button variant="danger" className="whitespace-nowrap justify-center w-full md:w-fit">
                   <TrashIcon weight="bold" className="text-white text-lg" />
                   Apagar conta
                 </Button>
