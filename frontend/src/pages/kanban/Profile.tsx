@@ -25,7 +25,12 @@ import ModalTitle from "@components/modal/ModalTitle";
 import ModalClose from "@components/modal/ModalClose";
 import ModalBody from "@components/modal/ModalBody";
 import { closeModal, openModal } from "@utils/modal";
-import Textarea from "@components/Textarea";
+import type z from "zod";
+import { profileInfoSchema, profilePasswordSchema } from "@schemas/user";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+type ProfileInputs = z.infer<typeof profileInfoSchema>;
+type PasswordInputs = z.infer<typeof profilePasswordSchema>;
 
 export default function Profile() {
   const { theme, changeTheme } = useTheme();
@@ -43,17 +48,25 @@ export default function Profile() {
     queryFn: () => getUser(),
   });
 
-
-
   const {
-    register,
-    handleSubmit,
-    reset
-  } = useForm({
+    register: updateProfile,
+    handleSubmit: updateProfileSubmit,
+    reset,
+    formState: { errors: updateProfileErrors },
+  } = useForm<ProfileInputs>({
+    resolver: zodResolver(profileInfoSchema),
     defaultValues: {
       name: '',
       email: '',
     },
+  });
+
+  const {
+    register: updatePassword,
+    handleSubmit: updatePasswordSubmit,
+    formState: { errors: updatePasswordErrors },
+  } = useForm<PasswordInputs>({
+    resolver: zodResolver(profilePasswordSchema),
   });
 
   useEffect(() => {
@@ -65,8 +78,14 @@ export default function Profile() {
     }
   }, [data, reset])
 
-  function onSubmit() {
-    console.log('submit');
+  function onSubmit(type: 'profile' | 'password', data: ProfileInputs | PasswordInputs) {
+    if (type === 'profile') {
+      console.log('Perfil', data);
+    }
+
+    if (type === 'password') {
+      console.log('Senha', data);
+    }
   }
 
   return (
@@ -167,10 +186,10 @@ export default function Profile() {
                 <h6 className="text-sm text-gray-500 dark:text-gray-400">Atualize suas informações pessoais e endereço de email.</h6>
               </ProfileCardHeader>
               <ProfileCardBody>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={updateProfileSubmit((data) => onSubmit('profile', data))}>
                   <fieldset className="flex flex-col gap-3">
-                    <Input disabled={isError} {...register('name')} label="Nome" name="name" id="name" type="text" />
-                    <Input disabled={isError} {...register('email')} label="Email" name="email" id="email" type="email" />
+                    <Input disabled={isError} error={updateProfileErrors.name?.message} {...updateProfile('name')} label="Nome" name="name" id="name" type="text" />
+                    <Input disabled={isError} error={updateProfileErrors.email?.message} {...updateProfile('email')} label="Email" name="email" id="email" type="email" />
                     <Button disabled={isError} className="justify-center md:w-fit">
                       <CheckIcon weight="bold" className="text-lg" />
                       Salvar alterações
@@ -188,11 +207,11 @@ export default function Profile() {
                 <h6 className="text-sm text-gray-500 dark:text-gray-400">Atualize sua senha para manter sua conta segura.</h6>
               </ProfileCardHeader>
               <ProfileCardBody>
-              <form>
+              <form onSubmit={updatePasswordSubmit((data) => onSubmit('password', data))}>
                 <fieldset className="flex flex-col gap-3">
-                  <Input disabled={isError} label="Senha atual" name="password" id="password" type="password" placeholder="Digite sua senha atual" isPassword />
-                  <Input disabled={isError} label="Nova senha" name="newPassword" id="newPassword" type="password" placeholder="Digite sua nova senha" isPassword />
-                  <Input disabled={isError} label="Confirmar nova senha" name="confirmNewPassword" id="confirmNewPassword" type="password" placeholder="Confirme sua nova senha" isPassword />
+                  <Input disabled={isError} error={updatePasswordErrors.password?.message} {...updatePassword('password')} label="Senha atual" name="password" id="password" type="password" placeholder="Digite sua senha atual" isPassword />
+                  <Input disabled={isError} error={updatePasswordErrors.new_password?.message} {...updatePassword('new_password')} label="Nova senha" name="new_password" id="new_password" type="password" placeholder="Digite sua nova senha" isPassword />
+                  <Input disabled={isError} error={updatePasswordErrors.new_password_confirmation?.message} {...updatePassword('new_password_confirmation')} label="Confirmar nova senha" name="new_password_confirmation" id="new_password_confirmation" type="password" placeholder="Confirme sua nova senha" isPassword />
                   <Button disabled={isError} className="justify-center md:w-fit">
                     <CheckIcon weight="bold" className="text-lg" />
                     Salvar alterações

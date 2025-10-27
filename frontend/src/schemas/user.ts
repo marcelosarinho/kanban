@@ -34,4 +34,16 @@ export const userResetPasswordSchema = userSchema.pick({ password: true }).exten
 
 export const userVerifyDevice = z.object({
   code: z.string().trim().min(1, 'Código obrigatório!'),
-})
+});
+
+export const profileInfoSchema = userSchema.omit({ password: true });
+export const profilePasswordSchema = userSchema.pick({ password: true }).extend({
+  new_password: z.string().trim().min(4, 'Senha deve ter entre 4 a 60 caracteres!').max(60, 'Senha deve ter entre 4 a 60 caracteres!'),
+  new_password_confirmation: z.string()
+  .trim()
+  .min(4, 'Senha deve ter entre 4 a 60 caracteres!')
+  .max(60, 'Senha deve ter entre 4 a 60 caracteres!'),
+}).refine((data) => data.new_password === data.new_password_confirmation, {
+  message: 'As senhas não coincidem!',
+  path: ['new_password_confirmation'],
+});
