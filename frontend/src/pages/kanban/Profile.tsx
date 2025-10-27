@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Link } from "react-router";
+import ProfileInfoSkeleton from "@components/skeleton/ProfileInfoSkeleton";
 
 export default function Profile() {
   const { theme, changeTheme } = useTheme();
@@ -69,7 +70,7 @@ export default function Profile() {
       </Navbar>
       <div className="flex flex-col items-center pt-20 pb-8 h-full gap-6">
         <section className="flex gap-5 items-center">
-          <div className="dark:bg-slate-700 rounded-full p-3">
+          <div className="bg-white dark:bg-slate-700 rounded-full p-3">
             <UserIcon className="dark:text-gray-300" size={40} />
           </div>
           <div>
@@ -120,6 +121,8 @@ export default function Profile() {
             </ProfileCardBody>
           </ProfileCard>
         </section>
+
+        <ProfileInfoSkeleton/>
 
         <section className="w-full xl:max-w-xl lg:max-w-lg md:max-w-md sm:max-w-sm max-w-sm">
           <ProfileCard className="border-danger!">
