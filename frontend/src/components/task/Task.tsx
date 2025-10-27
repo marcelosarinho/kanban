@@ -48,7 +48,7 @@ export default function Task(props: TaskProps) {
   }, [taskName, taskDescription]);
 
   return (
-    <div className={`relative p-4 border border-l-4 ${task.done ? 'opacity-50' : ''} ${TASK_COLORS[task.color || 'none'].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
+    <div className={`relative p-4 border border-l-4 ${task.done ? 'opacity-40' : ''} ${TASK_COLORS[task.color || 'none'].border} rounded-md bg-white dark:bg-slate-800 dark:text-gray-300`}>
       {task.done && (
         <CheckCircleIcon size={24} weight="fill" className="absolute right-0 top-0 z-[1] text-success" />
       )}

@@ -202,7 +202,7 @@ export default function Home() {
           <div>
             <h6 className="font-medium mb-2 dark:text-gray-200">Implementado</h6>
 
-            <div className="text-left border border-l-2 border-blue-500 rounded-md bg-white p-3 dark:border-blue-700 dark:bg-slate-800">
+            <div className="text-left border border-l-2 border-blue-500 rounded-md bg-white p-3 dark:border-blue-700 dark:bg-slate-800 opacity-40">
               <TaskCategoryBadge className="w-fit" category="frontend"/>
               <h6 className="mt-3 font-medium dark:text-gray-200 line-through">Criar landing page</h6>
               <div className="mt-3 flex flex-col gap-1">
