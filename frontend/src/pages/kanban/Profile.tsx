@@ -28,7 +28,7 @@ export default function Profile() {
   } = useQuery({
     queryKey: ['user'],
     queryFn: () => getUser(),
-  })
+  });
 
   return (
     <>
@@ -127,7 +127,7 @@ export default function Profile() {
                   <h6 className="text-sm text-gray-500 dark:text-gray-400">Assim que apagar sua conta, não poderá ser recuperada. Tenha certeza!</h6>
                 </div>
 
-                <Button variant="danger" className="justify-center w-full md:w-fit">
+                <Button variant="danger" className="whitespace-nowrap w-full md:w-fit">
                   <TrashIcon weight="bold" className="text-white text-lg" />
                   Apagar conta
                 </Button>
