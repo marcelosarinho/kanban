@@ -39,7 +39,7 @@ export async function login(app: FastifyInstance) {
       return reply.unauthorized('Email ou senha inválidos!');
     }
 
-    const { deviceStatus, reason } = checkLoginVerification(user, { ip, userAgent });
+    const { deviceStatus } = checkLoginVerification(user, { ip, userAgent });
 
     const jwtToken = jwt.sign(
       {

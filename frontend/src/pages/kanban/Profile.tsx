@@ -12,7 +12,9 @@ import ThemeIcon from "@components/theme/ThemeIcon";
 import { useTheme } from "@contexts/ThemeContext";
 import { CheckIcon, KanbanIcon, TrashIcon, UserIcon, WarningIcon } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { Link } from "react-router";
 
 export default function Profile() {
   const { theme, changeTheme } = useTheme();
@@ -30,6 +32,13 @@ export default function Profile() {
     queryFn: () => getUser(),
   });
 
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      name: data?.data.name,
+      email: data?.data.email,
+    },
+  });
+
   return (
     <>
       <Navbar className="left-0">
@@ -37,7 +46,9 @@ export default function Profile() {
           <ThemeIcon theme={theme} size="lg" />
         </NavbarButton>
         <NavbarButton>
-          <KanbanIcon className="text-2xl dark:text-gray-300" />
+          <Link to="/kanban">
+            <KanbanIcon className="text-2xl dark:text-gray-300" />
+          </Link>
         </NavbarButton>
         {dropdown.theme && (
           <Dropdown className="right-12 top-10">
@@ -74,10 +85,10 @@ export default function Profile() {
               <h6 className="text-sm text-gray-500 dark:text-gray-400">Atualize suas informações pessoais e endereço de email.</h6>
             </ProfileCardHeader>
             <ProfileCardBody>
-              <form>
+              <form onSubmit={handleSubmit()}>
                 <fieldset className="flex flex-col gap-3">
-                  <Input value={data?.name} label="Nome" name="name" id="name" type="text" />
-                  <Input label="Email" name="email" id="email" type="email" />
+                  <Input {...register('name')} label="Nome" name="name" id="name" type="text" />
+                  <Input {...register('email')} label="Email" name="email" id="email" type="email" />
                   <Button className="justify-center md:w-fit">
                     <CheckIcon weight="bold" className="text-lg" />
                     Salvar alterações

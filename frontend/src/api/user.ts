@@ -1,7 +1,7 @@
-import type { ResetPassword, User } from "@custom-types/user";
+import type { ResetPassword, User, UserSession } from "@custom-types/user";
 import { api } from "./index";
 
-export async function getUser() {
+export async function getUser(): Promise<{ message: string, data: UserSession}> {
   return api.get('/me', { credentials: 'include' });
 }
 
