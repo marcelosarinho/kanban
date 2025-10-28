@@ -37,7 +37,7 @@ export function updateProfile(app: FastifyInstance) {
         await sendUpdateProfileEmail(name, email, user.email);
       }
 
-      await db.update(users).set({ name, email }).where(eq(users.id, Number(id)));
+      await db.update(users).set({ name }).where(eq(users.id, Number(id)));
 
       return reply.ok('Perfil atualizado com sucesso!');
     } catch (error) {

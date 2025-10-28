@@ -187,8 +187,9 @@ export async function sendLoginVerificationEmail({ name, email }: Pick<Verificat
   });
 }
 
-export async function sendUpdateProfileEmail(name: string, newEmail: string, oldEmail: string) {
+export async function sendUpdateProfileEmail(name: string, newEmail: string, oldEmail: string, confirmLink: string) {
   const mail = await getMailClient();
+  const expiryHours = 1;
 
   // Envio para o email antigo
   await mail.sendMail({
@@ -303,7 +304,7 @@ export async function sendUpdateProfileEmail(name: string, newEmail: string, old
 
             <tr>
               <td style="padding:10px 30px; font-size:14px; line-height:20px; text-align:center; color:#555;">
-                <p style="margin:0;">Este link expira em <strong>${expiryMinutes} minutos</strong>. Após esse período, será necessário solicitar novamente.</p>
+                <p style="margin:0;">Este link expira em <strong>${expiryHours} hora</strong>. Após esse período, será necessário solicitar novamente.</p>
               </td>
             </tr>
 
