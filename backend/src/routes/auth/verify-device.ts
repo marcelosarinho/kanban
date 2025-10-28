@@ -25,7 +25,7 @@ export default async function verifyDevice(app: FastifyInstance) {
     }
 
     try {
-      const user = await db.query.users.findFirst({ where: eq(users.email, token.email) });
+      const user = await db.query.users.findFirst({ where: eq(users.id, Number(token.id)) });
 
       if (!user) {
         return reply.badRequest('Erro ao verificar dispositivo!');

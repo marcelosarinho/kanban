@@ -11,7 +11,7 @@ import ProfileCardHeader from "@components/profile/ProfileCardHeader";
 import ThemeIcon from "@components/theme/ThemeIcon";
 import { useTheme } from "@contexts/ThemeContext";
 import { CheckIcon, KanbanIcon, TrashIcon, UserIcon, WarningIcon, XIcon } from "@phosphor-icons/react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
@@ -28,6 +28,8 @@ import { closeModal, openModal } from "@utils/modal";
 import type z from "zod";
 import { profileInfoSchema, profilePasswordSchema } from "@schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { updateProfile as updateProfileFn, updatePassword as updatePasswordFn } from "@api/user";
+import toast, { Toaster } from "react-hot-toast";
 
 type ProfileInputs = z.infer<typeof profileInfoSchema>;
 type PasswordInputs = z.infer<typeof profilePasswordSchema>;
@@ -46,6 +48,26 @@ export default function Profile() {
   } = useQuery({
     queryKey: ['user'],
     queryFn: () => getUser(),
+  });
+
+  const updateProfileMutation = useMutation({
+    mutationFn: updateProfileFn,
+    onSuccess: () => {
+      toast.success('Perfil atualizado com sucesso!');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    }
+  });
+
+  const updatePasswordMutation = useMutation({
+    mutationFn: updatePasswordFn,
+    onSuccess: () => {
+      toast.success('Senha atualizada com sucesso!');
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    }
   });
 
   const {
@@ -80,16 +102,43 @@ export default function Profile() {
 
   function onSubmit(type: 'profile' | 'password', data: ProfileInputs | PasswordInputs) {
     if (type === 'profile') {
-      console.log('Perfil', data);
+      updateProfileMutation.mutate({
+        name: (data as ProfileInputs).name,
+        email: (data as ProfileInputs).email,
+      });
     }
 
     if (type === 'password') {
-      console.log('Senha', data);
+      updatePasswordMutation.mutate({
+        oldPassword: (data as PasswordInputs).password,
+        newPassword: (data as PasswordInputs).new_password,
+        confirmPassword: (data as PasswordInputs).new_password_confirmation,
+      });
     }
   }
 
   return (
       <>
+      <Toaster
+          position='bottom-right'
+          toastOptions={{
+            success: {
+              iconTheme: {
+                primary: 'var(--color-success)',
+                secondary: 'black',
+              }
+            },
+            error: {
+              iconTheme: {
+                primary: 'var(--color-danger)',
+                secondary: 'white',
+              }
+            },
+            className: 'react-hot-toast',
+            duration: 3000,
+          }}
+        />
+
       <Modal id="delete-account-modal">
         <ModalHeader>
           <ModalTitle>Apagar conta</ModalTitle>
@@ -188,9 +237,9 @@ export default function Profile() {
               <ProfileCardBody>
                 <form onSubmit={updateProfileSubmit((data) => onSubmit('profile', data))}>
                   <fieldset className="flex flex-col gap-3">
-                    <Input disabled={isError} error={updateProfileErrors.name?.message} {...updateProfile('name')} label="Nome" name="name" id="name" type="text" />
-                    <Input disabled={isError} error={updateProfileErrors.email?.message} {...updateProfile('email')} label="Email" name="email" id="email" type="email" />
-                    <Button disabled={isError} className="justify-center md:w-fit">
+                    <Input disabled={isError || updateProfileMutation.isPending} error={updateProfileErrors.name?.message} {...updateProfile('name')} label="Nome" name="name" id="name" type="text" />
+                    <Input disabled={isError || updateProfileMutation.isPending} error={updateProfileErrors.email?.message} {...updateProfile('email')} label="Email" name="email" id="email" type="email" />
+                    <Button disabled={isError} loading={updateProfileMutation.isPending} className="justify-center md:w-fit">
                       <CheckIcon weight="bold" className="text-lg" />
                       Salvar alterações
                     </Button>
@@ -209,10 +258,10 @@ export default function Profile() {
               <ProfileCardBody>
               <form onSubmit={updatePasswordSubmit((data) => onSubmit('password', data))}>
                 <fieldset className="flex flex-col gap-3">
-                  <Input disabled={isError} error={updatePasswordErrors.password?.message} {...updatePassword('password')} label="Senha atual" name="password" id="password" type="password" placeholder="Digite sua senha atual" isPassword />
-                  <Input disabled={isError} error={updatePasswordErrors.new_password?.message} {...updatePassword('new_password')} label="Nova senha" name="new_password" id="new_password" type="password" placeholder="Digite sua nova senha" isPassword />
-                  <Input disabled={isError} error={updatePasswordErrors.new_password_confirmation?.message} {...updatePassword('new_password_confirmation')} label="Confirmar nova senha" name="new_password_confirmation" id="new_password_confirmation" type="password" placeholder="Confirme sua nova senha" isPassword />
-                  <Button disabled={isError} className="justify-center md:w-fit">
+                  <Input disabled={isError || updatePasswordMutation.isPending} error={updatePasswordErrors.password?.message} {...updatePassword('password')} label="Senha atual" name="password" id="password" type="password" placeholder="Digite sua senha atual" isPassword />
+                  <Input disabled={isError || updatePasswordMutation.isPending} error={updatePasswordErrors.new_password?.message} {...updatePassword('new_password')} label="Nova senha" name="new_password" id="new_password" type="password" placeholder="Digite sua nova senha" isPassword />
+                  <Input disabled={isError || updatePasswordMutation.isPending} error={updatePasswordErrors.new_password_confirmation?.message} {...updatePassword('new_password_confirmation')} label="Confirmar nova senha" name="new_password_confirmation" id="new_password_confirmation" type="password" placeholder="Confirme sua nova senha" isPassword />
+                  <Button disabled={isError} loading={updatePasswordMutation.isPending} className="justify-center md:w-fit">
                     <CheckIcon weight="bold" className="text-lg" />
                     Salvar alterações
                   </Button>

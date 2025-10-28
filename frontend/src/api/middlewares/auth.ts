@@ -1,5 +1,5 @@
 import { api } from "..";
 
 export default async function auth() {
-  return api.get('/me', { credentials: 'include' });
+  return api.get('/authenticate', { credentials: 'include' });
 }

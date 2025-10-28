@@ -36,3 +36,11 @@ export async function verifyDevice(code: string) {
 export async function verifyEmail({ email, token }: { email: string, token: string }) {
   return api.post('/verify-email', { email, token });
 }
+
+export async function updateProfile(profile: Pick<User, 'name' | 'email'>) {
+  return api.patch('/update-profile', profile, { credentials: 'include' });
+}
+
+export async function updatePassword({ oldPassword, newPassword, confirmPassword }: { oldPassword: string, newPassword: string, confirmPassword: string }) {
+  return api.patch('/update-password', { oldPassword, newPassword, confirmPassword }, { credentials: 'include' });
+}
