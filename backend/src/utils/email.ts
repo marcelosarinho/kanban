@@ -186,3 +186,135 @@ export async function sendLoginVerificationEmail({ name, email }: Pick<Verificat
     ],
   });
 }
+
+export async function sendUpdateProfileEmail(name: string, newEmail: string, oldEmail: string) {
+  const mail = await getMailClient();
+
+  // Envio para o email antigo
+  await mail.sendMail({
+    from: {
+      name: 'Kanban',
+      address: process.env.GMAIL_USER!
+    },
+    to: oldEmail,
+    subject: 'Solicitação de alteração de e-mail',
+    html: `
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="background-color:#f7f7f7; padding:40px 0;">
+      <tr>
+        <td align="center">
+          <table width="600" border="0" cellspacing="0" cellpadding="0" style="background:#ffffff; border-radius:8px; padding:20px; font-family: Arial, Helvetica, sans-serif; color:#333333;">
+            <tr>
+              <td align="center" style="padding:20px;">
+                <img src="cid:alert@example.com" alt="Aviso de alteração" width="140" height="140" style="display:block; margin:0 auto;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" style="padding:10px 20px;">
+                <h1 style="font-size:22px; color:#222; margin:0;">Solicitação de alteração de e-mail</h1>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:12px 30px; font-size:15px; line-height:22px; text-align:center;">
+                <p style="margin:0;">Olá, <strong>${name}</strong>! Detectamos uma solicitação para alterar o e-mail da sua conta Kanban.</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:18px 40px; font-size:14px; line-height:20px; text-align:center; color:#555;">
+                <p style="margin:0;">
+                  <strong>E-mail atual:</strong> ${oldEmail}<br/>
+                  <strong>Novo e-mail solicitado:</strong> ${newEmail}
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:26px 30px; font-size:14px; line-height:20px; text-align:center; color:#555;">
+                <p style="margin:0;">Se você **não solicitou essa alteração**, recomendamos alterar sua senha imediatamente para manter sua conta segura.</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:20px 30px; font-size:12px; line-height:18px; text-align:center; color:#999;">
+                <p style="margin:0;">Este é apenas um aviso — nenhuma ação é necessária caso a solicitação tenha sido feita por você.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>`,
+    attachments: [
+      {
+        filename: "alert.png",
+        path: path.join(__dirname, '..', '..', 'public', 'alert.png'),
+        cid: "alert@example.com"
+      }
+    ],
+  });
+
+  // Envio para o email novo
+  await mail.sendMail({
+    from: {
+      name: 'Kanban',
+      address: process.env.GMAIL_USER!,
+    },
+    to: newEmail,
+    subject: 'Sua conta foi atualizada',
+    html: `
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="background-color:#f7f7f7; padding:40px 0;">
+      <tr>
+        <td align="center">
+          <table width="600" border="0" cellspacing="0" cellpadding="0" style="background:#ffffff; border-radius:8px; padding:20px; font-family: Arial, Helvetica, sans-serif; color:#333333;">
+            <tr>
+              <td align="center" style="padding:20px;">
+                <img src="cid:verify@example.com" alt="Confirmação de e-mail" width="140" height="140" style="display:block; margin:0 auto;"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" style="padding:10px 20px;">
+                <h1 style="font-size:22px; color:#222; margin:0;">Confirme seu novo e-mail</h1>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 30px; font-size:15px; line-height:22px; text-align:center;">
+                <p style="margin:0;">Olá, <strong>${name}</strong>! Você solicitou a alteração do e-mail da sua conta Kanban.</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:12px 40px; font-size:14px; line-height:20px; text-align:center; color:#555;">
+                <p style="margin:0;">
+                  Para concluir a alteração e ativar seu novo endereço de e-mail (<strong>${newEmail}</strong>), clique no botão abaixo:
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" style="padding:30px 0;">
+                <a href="${confirmLink}" style="display:inline-block; text-decoration:none; background:#2563eb; color:#ffffff; padding:12px 28px; border-radius:6px; font-weight:600; font-size:16px;">
+                  Confirmar novo e-mail
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:10px 30px; font-size:14px; line-height:20px; text-align:center; color:#555;">
+                <p style="margin:0;">Este link expira em <strong>${expiryMinutes} minutos</strong>. Após esse período, será necessário solicitar novamente.</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:20px 30px; font-size:12px; line-height:18px; text-align:center; color:#999;">
+                <p style="margin:0;">Se você não solicitou essa alteração, ignore este e-mail.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>`
+  })
+}

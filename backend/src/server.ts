@@ -31,7 +31,7 @@ server.register(cors, {
 
 server.register(cookie, {
   secret: process.env.COOKIE_SECRET,
-})
+});
 
 server.register(auth);
 

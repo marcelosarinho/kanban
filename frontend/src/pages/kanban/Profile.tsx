@@ -74,9 +74,9 @@ export default function Profile() {
       reset({
         name: data.data.name,
         email: data.data.email,
-      })
+      });
     }
-  }, [data, reset])
+  }, [data, reset]);
 
   function onSubmit(type: 'profile' | 'password', data: ProfileInputs | PasswordInputs) {
     if (type === 'profile') {
