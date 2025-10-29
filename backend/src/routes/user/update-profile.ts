@@ -1,7 +1,7 @@
 import { users } from "@db/schema";
 import { sendUpdateProfileEmail } from "@utils/email";
 import { randomBytes } from "crypto";
-import { eq } from "drizzle-orm";
+import { eq, or } from "drizzle-orm";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import argon2 from 'argon2';
@@ -24,29 +24,56 @@ export function updateProfile(app: FastifyInstance) {
     }
 
     try {
-      const user = await db.query.users.findFirst({ where: eq(users.id, Number(id)) });
+      const result = await db.transaction(async (tx) => {
+        const user = await tx.query.users.findFirst({ where: eq(users.id, Number(id)) });
 
-      if (!user) {
-        return reply.badRequest('Erro ao encontrar usuário!');
-      }
-
-      if (email !== user.email) {
-        const userByEmail = await db.query.users.findFirst({ where: eq(users.email, email) });
-
-        if (userByEmail) {
-          return reply.badRequest('Erro ao atualizar email!');
+        if (!user) {
+          return reply.badRequest('Erro ao encontrar usuário!');
         }
 
-        const pendingEmailToken = randomBytes(64).toString('hex');
-        const pendingEmailTokenExpiry = dayjs.utc().add(1, 'hour').format();
-        const hashPendingEmailToken = await argon2.hash(pendingEmailToken);
+        let pendingEmailInfo: {
+          name: string;
+          email: string;
+          oldEmail: string;
+          token: string;
+        } | null = null;
 
-        await sendUpdateProfileEmail(name, email, user.email, pendingEmailToken);
+        if (email !== user.email) {
+          const userByEmail = await tx.query.users.findFirst({ where: or(eq(users.email, email), eq(users.pendingEmail, email)) });
+  
+          if (userByEmail) {
+            return reply.badRequest('Erro ao atualizar email!');
+          }
+  
+          const pendingEmailToken = randomBytes(64).toString('hex');
+          const pendingEmailTokenExpiry = dayjs.utc().add(1, 'hour').format();
+          const hashPendingEmailToken = await argon2.hash(pendingEmailToken);
+  
+          await sendUpdateProfileEmail(name, email, user.email, pendingEmailToken);
+  
+          await tx.update(users).set({
+            pendingEmail: email,
+            pendingEmailToken: hashPendingEmailToken,
+            pendingEmailTokenExpiry
+          }).where(eq(users.id, Number(id)));
 
-        await db.update(users).set({ pendingEmail: email, pendingEmailToken: hashPendingEmailToken, pendingEmailTokenExpiry }).where(eq(users.id, Number(id)));
+          pendingEmailInfo = {
+            name,
+            email,
+            oldEmail: user.email,
+            token: pendingEmailToken,
+          }
+        }
+  
+        await tx.update(users).set({ name }).where(eq(users.id, Number(id)));
+
+        return pendingEmailInfo;
+      });
+
+      if (result) {
+        const { name, email, oldEmail, token } = result;
+        await sendUpdateProfileEmail(name, email, oldEmail, token);
       }
-
-      await db.update(users).set({ name }).where(eq(users.id, Number(id)));
 
       return reply.ok('Perfil atualizado com sucesso!');
     } catch (error) {
