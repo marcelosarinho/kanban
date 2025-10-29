@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, ReactElement, SetStateAction } from "react";
 import Searchbar from "@components/Searchbar";
 import { TASK_STATUSES } from "@libs/constants";
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import { PlusIcon } from "@phosphor-icons/react";
 import type { TaskStatusOption } from "@custom-types/task";
 
@@ -23,9 +23,12 @@ export default function TaskStatus(props: TaskStatusProps) {
           {TASK_STATUSES[status]}
         </header>
 
-        <Button variant="success" onClick={createTask}>
-          <PlusIcon weight="bold" className="text-xs" />
-        </Button>
+        <Button
+          variant="success"
+          onClick={createTask}
+          icon={PlusIcon}
+          iconClassName="text-xs"
+        />
       </div>
 
       <Searchbar

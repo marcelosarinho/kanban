@@ -1,4 +1,4 @@
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import Input from "@components/Input";
 import { userLoginSchema } from "@schemas/user";
 import type z from "zod";

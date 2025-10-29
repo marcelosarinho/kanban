@@ -1,4 +1,4 @@
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import { EnvelopeIcon, SealCheckIcon } from "@phosphor-icons/react";
 import LoginCard from "@components/auth/LoginCard";
 import LoginCardBody from "@components/auth/LoginCardBody";
@@ -43,8 +43,9 @@ export default function VerifyEmail() {
           loading={verifyEmailMutation.isPending}
           className="animate-slide-in-from-bottom justify-center mx-auto mt-4"
           onClick={() => verifyEmailMutation.mutate({ email, token })}
+          icon={SealCheckIcon}
+          iconClassName="text-lg"
         >
-          <SealCheckIcon weight="bold" className="text-lg"/>
           Verificar email
         </Button>
       </LoginCardBody>

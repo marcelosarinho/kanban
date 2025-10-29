@@ -1,5 +1,5 @@
 import { useDeferredValue, useEffect, useState, type ChangeEvent } from 'react';
-import Button from '@components/Button';
+import Button from '@components/button/Button';
 import Modal from '@components/modal/Modal';
 import ModalHeader from '@components/modal/ModalHeader';
 import ModalTitle from '@components/modal/ModalTitle';
@@ -367,16 +367,18 @@ function Kanban() {
                 loading={createProjectMutation.isPending || updateProjectMutation.isPending}
                 className="flex items-center"
                 form="create-project-form"
+                icon={CheckIcon}
+                iconClassName="text-lg"
               >
-                <CheckIcon weight="bold" className="text-lg" />
                 {project ? 'Salvar' : 'Criar'}
               </Button>
 
               <Button
                 onClick={() => closeModal('create-project-modal')}
                 variant="outline-primary"
+                icon={XIcon}
+                iconClassName="text-lg"
               >
-                <XIcon className="text-lg" />
                 Cancelar
               </Button>
             </ModalFooter>
@@ -421,8 +423,7 @@ function Kanban() {
         <aside className="fixed w-52 bg-white h-full border-r border-gray-300 dark:bg-slate-900 dark:border-slate-700">
           <div className="flex flex-col items-center px-2">
             <h3 className="text-xl font-semibold text-center mb-4 mt-2 dark:text-gray-300">Projetos</h3>
-            <Button type="button" onClick={() => openModal('create-project-modal')}>
-              <PlusIcon weight="bold" className="text-lg" />
+            <Button type="button" onClick={() => openModal('create-project-modal')} icon={PlusIcon} iconClassName="text-lg">
               Novo projeto
             </Button>
 

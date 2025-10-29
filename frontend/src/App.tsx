@@ -1,5 +1,5 @@
 import React, { useDeferredValue, useEffect, useState, type ChangeEvent } from 'react';
-import Button from '@components/Button';
+import Button from '@components/button/Button';
 import Modal from '@components/modal/Modal';
 import ModalHeader from '@components/modal/ModalHeader';
 import ModalTitle from '@components/modal/ModalTitle';

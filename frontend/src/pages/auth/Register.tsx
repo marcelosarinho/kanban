@@ -2,7 +2,7 @@ import LoginCard from "@components/auth/LoginCard";
 import LoginCardHeader from "@components/auth/LoginCardHeader";
 import LoginCardBody from "@components/auth/LoginCardBody";
 import LoginCardFooter from "@components/auth/LoginCardFooter";
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import Input from "@components/Input";
 import UserFormMessage from "@components/auth/UserFormMessage";
 import { useForm } from "react-hook-form";

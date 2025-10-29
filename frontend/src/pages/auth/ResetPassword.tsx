@@ -1,5 +1,5 @@
 import { resetPassword, verifyResetPassword } from "@api/index";
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import Input from "@components/Input";
 import Loading from "@components/Loading";
 import LoginCard from "@components/auth/LoginCard";

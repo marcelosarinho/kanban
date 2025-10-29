@@ -1,5 +1,5 @@
 import { CaretDownIcon, CaretRightIcon, CheckIcon, PlusIcon, XIcon } from "@phosphor-icons/react";
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import { useState } from "react";
 
 type SubtasksProps = {
@@ -37,9 +37,12 @@ export default function Subtasks(props: SubtasksProps) {
                   {title}
                 </label>
               </div>
-              <Button className="rounded!" variant="transparent">
-                <XIcon className="dark:text-slate-500" />
-              </Button>
+              <Button
+                icon={XIcon}
+                iconClassName="dark:text-slate-500"
+                variant="transparent"
+                className="rounded!"
+              />
             </li>
             {!newTask && (
               <li onClick={() => setNewTask(true)} className="flex items-center gap-1.5 text-xs cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 p-1 rounded transition-colors w-fit">

@@ -1,5 +1,5 @@
 import { getUser } from "@api/user";
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import Dropdown from "@components/dropdown/Dropdown";
 import DropdownOption from "@components/dropdown/DropdownOption";
 import Input from "@components/Input";
@@ -248,7 +248,8 @@ export default function Profile() {
                     <Button
                       disabledOnError={isError}
                       loading={updateProfileMutation.isPending}
-                      icon={<CheckIcon weight="bold" className="text-lg" />}
+                      icon={CheckIcon}
+                      iconClassName="text-lg"
                       className="justify-center md:w-fit"
                     >
                       Salvar alterações
@@ -271,8 +272,13 @@ export default function Profile() {
                   <Input disabled={isError || updatePasswordMutation.isPending} error={updatePasswordErrors.password?.message} {...updatePassword('password')} label="Senha atual" name="password" id="password" type="password" placeholder="Digite sua senha atual" isPassword />
                   <Input disabled={isError || updatePasswordMutation.isPending} error={updatePasswordErrors.new_password?.message} {...updatePassword('new_password')} label="Nova senha" name="new_password" id="new_password" type="password" placeholder="Digite sua nova senha" isPassword />
                   <Input disabled={isError || updatePasswordMutation.isPending} error={updatePasswordErrors.new_password_confirmation?.message} {...updatePassword('new_password_confirmation')} label="Confirmar nova senha" name="new_password_confirmation" id="new_password_confirmation" type="password" placeholder="Confirme sua nova senha" isPassword />
-                  <Button disabled={isError} loading={updatePasswordMutation.isPending} className="justify-center md:w-fit">
-                    <CheckIcon weight="bold" className="text-lg" />
+                  <Button
+                    disabledOnError={isError}
+                    loading={updatePasswordMutation.isPending}
+                    icon={CheckIcon}
+                    iconClassName="text-lg"
+                    className="justify-center md:w-fit"
+                  >
                     Salvar alterações
                   </Button>
                 </fieldset>
@@ -298,8 +304,15 @@ export default function Profile() {
                     <h6 className="text-sm text-gray-500 dark:text-gray-400">Assim que apagar sua conta, não poderá ser recuperada. Tenha certeza!</h6>
                   </div>
 
-                  <Button disabled={isError} onClick={() => openModal('delete-account-modal')} variant="danger" className="whitespace-nowrap justify-center w-full md:w-fit">
-                    <TrashIcon weight="bold" className="text-white text-lg" />
+                  <Button
+                    disabledOnError={isError}
+                    loading={true}
+                    onClick={() => openModal('delete-account-modal')}
+                    variant="danger"
+                    icon={TrashIcon}
+                    iconClassName="text-lg"
+                    className="whitespace-nowrap justify-center w-full md:w-fit"
+                  >
                     Apagar conta
                   </Button>
                 </div>

@@ -3,7 +3,7 @@ import TaskPriorityBadge from "@components/badge/TaskPriorityBadge"
 import ProgressBar from "@components/ProgressBar"
 import { useEffect, useState } from "react"
 import { ChatIcon, CheckCircleIcon, CheckIcon, SquaresFourIcon, TrashIcon } from "@phosphor-icons/react";
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import Textarea from "@components/Textarea";
 import { TASK_COLORS, TASK_PRIORITIES } from "@libs/constants";
 import CustomTooltip from "@components/CustomTooltip";
@@ -126,8 +126,8 @@ export default function Task(props: TaskProps) {
           id={`comments_${task.id}`}
           variant="transparent"
           onClick={() => setToggleElement({...toggleElement, comment: !toggleElement.comment})}
+          icon={ChatIcon}
         >
-          <ChatIcon weight="bold" />
           <CustomTooltip anchorSelect={`#comments_${task.id}`} content="Comentários" />
         </Button>
       </div>
@@ -139,13 +139,21 @@ export default function Task(props: TaskProps) {
       )}
 
       <footer className="flex justify-between items-center">
-        <Button onClick={onClick} className="text-xs!" variant="info">
-          <SquaresFourIcon weight="bold" />
+        <Button
+          onClick={onClick}
+          className="text-xs!"
+          variant="info"
+          icon={SquaresFourIcon}
+        >
           Categorias
         </Button>
 
-        <Button id={`delete_${task.id}`} variant="transparent">
-          <TrashIcon className="text-danger" weight="bold" />
+        <Button
+          id={`delete_${task.id}`}
+          variant="transparent"
+          icon={TrashIcon}
+          iconClassName="text-danger"
+        >
           <CustomTooltip anchorSelect={`#delete_${task.id}`} content="Deletar" />
         </Button>
       </footer>

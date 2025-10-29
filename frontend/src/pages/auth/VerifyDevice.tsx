@@ -3,7 +3,7 @@ import LoginCardHeader from "@components/auth/LoginCardHeader";
 import { DevicesIcon } from "@phosphor-icons/react";
 import LoginCardBody from "@components/auth/LoginCardBody";
 import Input from "@components/Input";
-import Button from "@components/Button";
+import Button from "@components/button/Button";
 import { censorEmail } from "@utils/functions";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
