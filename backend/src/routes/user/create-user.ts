@@ -3,9 +3,8 @@ import argon2 from 'argon2';
 import { db } from "index";
 import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
-import { randomBytes } from "crypto";
-import dayjs from "@lib/dayjs";
 import { sendVerificationEmail } from "@utils/email";
+import { generateToken } from "@routes/helpers/token";
 
 interface CreateUserBody {
   name: string;
@@ -28,21 +27,19 @@ export async function createUser(app: FastifyInstance) {
         return reply.conflict('Usuário já cadastrado!');
       }
 
-      const verifyToken = randomBytes(64).toString('hex');
-      const verifyTokenExpiry = dayjs.utc().add(1, 'day').format();
-      const hashVerifyToken = await argon2.hash(verifyToken);
+      const { token, hashToken, expiry } = await generateToken(1, 'days');
 
       if (!user) {
         const hashedPassword = await argon2.hash(password);
 
-        await db.insert(users).values({ name, email, password: hashedPassword, verifyToken: hashVerifyToken, verifyTokenExpiry });
+        await db.insert(users).values({ name, email, password: hashedPassword, verifyToken: hashToken, verifyTokenExpiry: expiry });
       }
 
       if (user && !user.verified) {
-        await db.update(users).set({ verifyToken: hashVerifyToken, verifyTokenExpiry }).where(eq(users.email, user.email));
+        await db.update(users).set({ verifyToken: hashToken, verifyTokenExpiry: expiry }).where(eq(users.email, user.email));
       }
 
-      await sendVerificationEmail({ name, email, token: verifyToken });
+      await sendVerificationEmail({ name, email, token });
 
       return reply.created('Usuário cadastrado com sucesso!');
     } catch (error) {
