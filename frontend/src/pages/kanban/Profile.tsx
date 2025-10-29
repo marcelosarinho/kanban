@@ -245,8 +245,12 @@ export default function Profile() {
                   <fieldset className="flex flex-col gap-3">
                     <Input disabled={isError || updateProfileMutation.isPending} error={updateProfileErrors.name?.message} {...updateProfile('name')} label="Nome" name="name" id="name" type="text" />
                     <Input disabled={isError || updateProfileMutation.isPending} error={updateProfileErrors.email?.message} {...updateProfile('email')} label="Email" name="email" id="email" type="email" />
-                    <Button disabled={isError} loading={updateProfileMutation.isPending} className="justify-center md:w-fit">
-                      <CheckIcon weight="bold" className="text-lg" />
+                    <Button
+                      disabledOnError={isError}
+                      loading={updateProfileMutation.isPending}
+                      icon={<CheckIcon weight="bold" className="text-lg" />}
+                      className="justify-center md:w-fit"
+                    >
                       Salvar alterações
                     </Button>
                   </fieldset>
