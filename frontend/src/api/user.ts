@@ -37,7 +37,7 @@ export async function verifyEmail({ email, token }: { email: string, token: stri
   return api.post('/verify-email', { email, token });
 }
 
-export async function updateProfile(profile: Pick<User, 'name' | 'email'>) {
+export async function updateProfile(profile: Pick<User, 'name' | 'email'>): Promise<{ message: string, data?: { pendingEmail?: string } }> {
   return api.patch('/update-profile', profile, { credentials: 'include' });
 }
 

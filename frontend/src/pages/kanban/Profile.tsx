@@ -52,8 +52,14 @@ export default function Profile() {
 
   const updateProfileMutation = useMutation({
     mutationFn: updateProfileFn,
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.success('Perfil atualizado com sucesso!');
+
+      if (data.data?.pendingEmail) {
+        toast.success(`Email de confirmação enviado para: ${data.data.pendingEmail}`, {
+          duration: 10000,
+        });
+      }
     },
     onError: (error) => {
       toast.error(error.message);

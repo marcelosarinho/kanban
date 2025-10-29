@@ -1,6 +1,6 @@
 import { users } from "@db/schema";
 import { sendUpdateProfileEmail } from "@utils/email";
-import { eq, or } from "drizzle-orm";
+import { and, eq, ne, or } from "drizzle-orm";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import { generateToken } from "@routes/helpers/token";
@@ -37,15 +37,18 @@ export function updateProfile(app: FastifyInstance) {
         } | null = null;
 
         if (email !== user.email) {
-          const userByEmail = await tx.query.users.findFirst({ where: or(eq(users.email, email), eq(users.pendingEmail, email)) });
+          const userByEmail = await tx.query.users.findFirst({
+            where: and(
+              or(eq(users.email, email), eq(users.pendingEmail, email)),
+              ne(users.id, Number(id))
+            ),
+          });
   
           if (userByEmail) {
             return reply.badRequest('Erro ao atualizar email!');
           }
 
           const { token, hashToken, expiry } = await generateToken(1, 'hours');
-  
-          await sendUpdateProfileEmail(name, email, user.email, token);
   
           await tx.update(users).set({
             pendingEmail: email,
@@ -71,7 +74,7 @@ export function updateProfile(app: FastifyInstance) {
         await sendUpdateProfileEmail(name, email, oldEmail, token);
       }
 
-      return reply.ok('Perfil atualizado com sucesso!');
+      return reply.ok('Perfil atualizado com sucesso!', { pendingEmail: result?.email });
     } catch (error) {
       return reply.error('Erro ao atualizar perfil!');
     }

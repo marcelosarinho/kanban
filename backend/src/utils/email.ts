@@ -270,7 +270,7 @@ export async function sendUpdateProfileEmail(name: string, newEmail: string, old
           <table width="600" border="0" cellspacing="0" cellpadding="0" style="background:#ffffff; border-radius:8px; padding:20px; font-family: Arial, Helvetica, sans-serif; color:#333333;">
             <tr>
               <td align="center" style="padding:20px;">
-                <img src="cid:verify@example.com" alt="Confirmação de e-mail" width="140" height="140" style="display:block; margin:0 auto;"/>
+                <img src="cid:new_email@example.com" alt="Confirmação de e-mail" width="140" height="140" style="display:block; margin:0 auto;"/>
               </td>
             </tr>
 
@@ -296,7 +296,7 @@ export async function sendUpdateProfileEmail(name: string, newEmail: string, old
 
             <tr>
               <td align="center" style="padding:30px 0;">
-                <a href="${process.env.WEB_BASE_URL}/update-email?token=${newEmailToken}" style="display:inline-block; text-decoration:none; background:#2563eb; color:#ffffff; padding:12px 28px; border-radius:6px; font-weight:600; font-size:16px;">
+                <a href="${process.env.WEB_BASE_URL}/update-email?token=${newEmailToken}" style="display:inline-block; text-decoration:none; background:#e3279a; color:#ffffff; padding:12px 28px; border-radius:6px; font-weight:600; font-size:16px;">
                   Confirmar novo e-mail
                 </a>
               </td>
@@ -316,6 +316,13 @@ export async function sendUpdateProfileEmail(name: string, newEmail: string, old
           </table>
         </td>
       </tr>
-    </table>`
+    </table>`,
+    attachments: [
+      {
+        filename: "new_email.png",
+        path: path.join(__dirname, '..', '..', 'public', 'new_email.png'),
+        cid: "new_email@example.com"
+      }
+    ]
   })
 }
