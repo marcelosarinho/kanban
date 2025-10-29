@@ -1,8 +1,11 @@
 import { users } from "@db/schema";
 import { sendUpdateProfileEmail } from "@utils/email";
+import { randomBytes } from "crypto";
 import { eq } from "drizzle-orm";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
+import argon2 from 'argon2';
+import dayjs from "@lib/dayjs";
 
 export function updateProfile(app: FastifyInstance) {
   app.patch<{ Body: { name: string; email: string } }>(
@@ -34,7 +37,13 @@ export function updateProfile(app: FastifyInstance) {
           return reply.badRequest('Erro ao atualizar email!');
         }
 
-        await sendUpdateProfileEmail(name, email, user.email);
+        const pendingEmailToken = randomBytes(64).toString('hex');
+        const pendingEmailTokenExpiry = dayjs.utc().add(1, 'hour').format();
+        const hashPendingEmailToken = await argon2.hash(pendingEmailToken);
+
+        await sendUpdateProfileEmail(name, email, user.email, pendingEmailToken);
+
+        await db.update(users).set({ pendingEmail: email, pendingEmailToken: hashPendingEmailToken, pendingEmailTokenExpiry }).where(eq(users.id, Number(id)));
       }
 
       await db.update(users).set({ name }).where(eq(users.id, Number(id)));
