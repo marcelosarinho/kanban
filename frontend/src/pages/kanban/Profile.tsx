@@ -1,4 +1,4 @@
-import { getUser } from "@api/user";
+import { deleteUser, getUser } from "@api/user";
 import Button from "@components/button/Button";
 import Dropdown from "@components/dropdown/Dropdown";
 import DropdownOption from "@components/dropdown/DropdownOption";
@@ -14,7 +14,7 @@ import { CheckIcon, KanbanIcon, TrashIcon, UserIcon, WarningIcon, XIcon } from "
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import ProfileInfoSkeleton from "@components/skeleton/ProfileInfoSkeleton";
 import ProfilePasswordSkeleton from "@components/skeleton/ProfilePasswordSkeleton";
 import ProfileDeleteSkeleton from "@components/skeleton/ProfileDeleteSkeleton";
@@ -35,6 +35,8 @@ type ProfileInputs = z.infer<typeof profileInfoSchema>;
 type PasswordInputs = z.infer<typeof profilePasswordSchema>;
 
 export default function Profile() {
+  const navigate = useNavigate();
+
   const { theme, changeTheme } = useTheme();
 
   const [dropdown, setDropdown] = useState({
@@ -75,6 +77,16 @@ export default function Profile() {
       toast.error(error.message);
     }
   });
+
+  const deleteUserMutation = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      navigate('/goodbye');
+    },
+    onError: () => {
+      toast.error('Erro ao deletar usuário!');
+    }
+  })
 
   const {
     register: updateProfile,
@@ -154,12 +166,10 @@ export default function Profile() {
           <p>Essa é uma ação irreversível, ao apagar sua conta, todos os seus projetos e dados serão perdidos. Tem certeza que deseja continuar?</p>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={() => console.log('deletar')} variant="primary">
-            <CheckIcon weight="bold" className="text-white text-lg" />
+          <Button onClick={() => deleteUserMutation.mutate()} loading={deleteUserMutation.isPending} variant="primary" icon={CheckIcon} iconClassName="text-lg">
             Apagar
           </Button>
-          <Button onClick={() => closeModal('delete-account-modal')} variant="outline-primary">
-            <XIcon weight="bold" className="text-lg" />
+          <Button onClick={() => closeModal('delete-account-modal')} variant="outline-primary" icon={XIcon} iconClassName="text-lg">
             Cancelar
           </Button>
         </ModalFooter>
@@ -301,12 +311,12 @@ export default function Profile() {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-3 mt-8">
                   <div>
                     <h1 className="text-md font-medium dark:text-gray-300 mb-1">Apagar conta</h1>
-                    <h6 className="text-sm text-gray-500 dark:text-gray-400">Assim que apagar sua conta, não poderá ser recuperada. Tenha certeza!</h6>
+                    <h6 className="text-sm text-gray-500 dark:text-gray-400">Assim que apagar sua conta, ela não poderá ser recuperada. Tenha certeza!</h6>
                   </div>
 
                   <Button
                     disabledOnError={isError}
-                    loading={true}
+                    loading={deleteUserMutation.isPending}
                     onClick={() => openModal('delete-account-modal')}
                     variant="danger"
                     icon={TrashIcon}

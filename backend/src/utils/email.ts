@@ -296,7 +296,7 @@ export async function sendUpdateProfileEmail(name: string, newEmail: string, old
 
             <tr>
               <td align="center" style="padding:30px 0;">
-                <a href="${process.env.WEB_BASE_URL}/update-email?token=${newEmailToken}" style="display:inline-block; text-decoration:none; background:#e3279a; color:#ffffff; padding:12px 28px; border-radius:6px; font-weight:600; font-size:16px;">
+                <a href="${process.env.WEB_BASE_URL}/new-email?email=${newEmail}&token=${newEmailToken}" style="display:inline-block; text-decoration:none; background:#e3279a; color:#ffffff; padding:12px 28px; border-radius:6px; font-weight:600; font-size:16px;">
                   Confirmar novo e-mail
                 </a>
               </td>

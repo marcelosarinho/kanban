@@ -44,3 +44,11 @@ export async function updateProfile(profile: Pick<User, 'name' | 'email'>): Prom
 export async function updatePassword({ oldPassword, newPassword, confirmPassword }: { oldPassword: string, newPassword: string, confirmPassword: string }) {
   return api.patch('/update-password', { oldPassword, newPassword, confirmPassword }, { credentials: 'include' });
 }
+
+export async function deleteUser() {
+  return api.delete('/delete-user', { credentials: 'include' });
+}
+
+export async function verifyNewEmail({ email, token }: { email: string, token: string }) {
+  return api.post('/verify-new-email', { email, token });
+}
