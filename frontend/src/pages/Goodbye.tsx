@@ -6,12 +6,22 @@ import ModalFooter from "@components/modal/ModalFooter";
 import ModalHeader from "@components/modal/ModalHeader";
 import ModalTitle from "@components/modal/ModalTitle";
 import Textarea from "@components/Textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCenteredTextIcon, CheckCircleIcon, EnvelopeIcon, HouseIcon, ShieldIcon, CheckIcon, XIcon, SmileyIcon, SmileyMehIcon, SmileySadIcon } from "@phosphor-icons/react";
+import { feedbackSchema } from "@schemas/feedback";
 import { closeModal, openModal } from "@utils/modal";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import type z from "zod";
+
+type Inputs = z.infer<typeof feedbackSchema>;
 
 export default function Goodbye() {
   const navigate = useNavigate();
+
+  const { register, handleSubmit } = useForm<Inputs>({
+    resolver: zodResolver(feedbackSchema),
+  })
 
   return (
     <>
