@@ -3,6 +3,7 @@ import authRoutes from "@routes/auth";
 import appRoutes from "@routes/app";
 import Error from "@pages/error/Error";
 import Home from "@pages/Home";
+import Goodbye from "@pages/Goodbye";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/goodbye',
+        element: <Goodbye />
       },
       authRoutes,
       ...appRoutes,

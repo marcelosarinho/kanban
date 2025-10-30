@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <main>
-      <nav className="fixed top-2 w-full bg-transparent">
+      <nav className="fixed top-2 w-full bg-transparent z-50">
         <div className="px-6">
           <div className="bg-white dark:bg-slate-950 flex items-center justify-center sm:justify-between border border-gray-200 p-3 rounded-lg dark:border-slate-800 shadow-sm">
             <KanbanIcon className="hidden sm:inline-block text-3xl dark:text-gray-200" />

@@ -81,7 +81,12 @@ export default function Profile() {
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
-      navigate('/goodbye');
+      toast.success('Conta deletada com sucesso!');
+      toast.success('Redirecionando para a página de despedida...');
+
+      setTimeout(() => {
+        navigate('/goodbye');
+      }, 3000);
     },
     onError: () => {
       toast.error('Erro ao deletar usuário!');

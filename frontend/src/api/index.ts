@@ -8,7 +8,7 @@ async function request<T>(
     const response = await fetch(`http://localhost:8080${url}`, {
       method,
       headers: {
-        'Content-Type': 'application/json',
+        ...(method !== 'DELETE' ? { 'Content-Type': 'application/json' } : {}),
         ...headers,
       },
       body,
