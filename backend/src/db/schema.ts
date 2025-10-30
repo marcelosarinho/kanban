@@ -5,6 +5,7 @@ import { DeviceInfo } from "@custom-types/login";
 
 export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high']);
 export const statusEnum = pgEnum('status', ['todo', 'in_progress', 'testing', 'implemented']);
+export const experienceEnum = pgEnum('experience', ['positive', 'neutral', 'negative']);
 
 export const projects = pgTable('projects', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
@@ -85,6 +86,15 @@ export const usersRelations = relations(users, ({ many }) => ({
   projects: many(projects),
 }));
 
+export const feedbacks = pgTable('feedbacks', {
+  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
+  experience: experienceEnum().notNull(),
+  rating: integer('rating'),
+  feedback: varchar('feedback', { length: 255 }),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
+})
+
 export const schema = {
   projects,
   tasks,
@@ -94,4 +104,5 @@ export const schema = {
   subtasksRelations,
   users,
   usersRelations,
+  feedbacks,
 };

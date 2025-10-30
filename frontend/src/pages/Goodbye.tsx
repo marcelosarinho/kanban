@@ -39,7 +39,7 @@ export default function Goodbye() {
               </div>
 
               <div>
-                <p>Qual nota você daria para o Kanban?</p>
+                <p>Qual nota você daria para o Kanban? <span className="text-xs text-gray-500">(opcional)</span></p>
                 <div className="flex mt-2 gap-3">
                   {Array.from({ length: 5 }, (_, index) => index + 1).map((index) => (
                     <div key={index} className="dark:bg-slate-600 bg-slate-200 text-lg size-9 rounded-full flex items-center justify-center hover:bg-primary/50 hover:cursor-pointer transition-colors">
@@ -49,7 +49,8 @@ export default function Goodbye() {
                 </div>
               </div>
 
-              <Textarea id="feedback" label="Feedback" placeholder="Gostaria de sugerir alguma funcionalidade ou correção?" rows={5} />
+              <label htmlFor="feedback" className="w-fit">Feedback <span className="text-xs text-gray-500">(opcional)</span></label>
+              <Textarea id="feedback" placeholder="Gostaria de sugerir alguma funcionalidade ou correção?" rows={5} />
             </fieldset>
           </form>
         </ModalBody>

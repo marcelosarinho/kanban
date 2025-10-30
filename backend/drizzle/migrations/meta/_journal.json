@@ -113,6 +113,13 @@
       "when": 1761676499157,
       "tag": "0015_add-pending-email-and-token-to-users",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1761858520476,
+      "tag": "0016_feedbacks-table",
+      "breakpoints": true
     }
   ]
 }
