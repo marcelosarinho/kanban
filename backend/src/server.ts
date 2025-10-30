@@ -24,6 +24,7 @@ import { verifyEmail } from "@routes/auth/verify-email";
 import { updateProfile } from "@routes/user/update-profile";
 import { updatePassword } from "@routes/user/update-password";
 import { me } from "@routes/user/me";
+import { verifyNewEmail } from "@routes/user/verify-new-email";
 const server = fastify();
 
 server.register(cors, {
@@ -127,3 +128,4 @@ server.register(authenticate);
 server.register(updateProfile);
 server.register(updatePassword);
 server.register(me);
+server.register(verifyNewEmail);

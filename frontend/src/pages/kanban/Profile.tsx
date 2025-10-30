@@ -138,24 +138,24 @@ export default function Profile() {
   return (
       <>
       <Toaster
-          position='bottom-right'
-          toastOptions={{
-            success: {
-              iconTheme: {
-                primary: 'var(--color-success)',
-                secondary: 'black',
-              }
-            },
-            error: {
-              iconTheme: {
-                primary: 'var(--color-danger)',
-                secondary: 'white',
-              }
-            },
-            className: 'react-hot-toast',
-            duration: 3000,
-          }}
-        />
+        position='bottom-right'
+        toastOptions={{
+          success: {
+            iconTheme: {
+              primary: 'var(--color-success)',
+              secondary: 'black',
+            }
+          },
+          error: {
+            iconTheme: {
+              primary: 'var(--color-danger)',
+              secondary: 'white',
+            }
+          },
+          className: 'react-hot-toast',
+          duration: 3000,
+        }}
+      />
 
       <Modal id="delete-account-modal">
         <ModalHeader>

@@ -283,6 +283,8 @@ export async function sendUpdateProfileEmail(name: string, newEmail: string, old
             <tr>
               <td style="padding:10px 30px; font-size:15px; line-height:22px; text-align:center;">
                 <p style="margin:0;">Olá, <strong>${name}</strong>! Você solicitou a alteração do e-mail da sua conta Kanban.</p>
+                <br />
+                <p style="margin:0;"><strong>IMPORTANTE: </strong>É necessário abrir esse link no <strong>MESMO NAVEGADOR</strong> no qual você está logado no Kanban! Caso contrário, a alteração <strong>NÃO SERÁ CONCLUÍDA!</strong></p>
               </td>
             </tr>
 

@@ -50,5 +50,5 @@ export async function deleteUser() {
 }
 
 export async function verifyNewEmail({ email, token }: { email: string, token: string }) {
-  return api.post('/verify-new-email', { email, token });
+  return api.post('/verify-new-email', { email, token }, { credentials: "include" });
 }
