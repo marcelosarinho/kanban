@@ -6,6 +6,7 @@ import ModalFooter from "@components/modal/ModalFooter";
 import ModalHeader from "@components/modal/ModalHeader";
 import ModalTitle from "@components/modal/ModalTitle";
 import Textarea from "@components/Textarea";
+import type { Experience } from "@custom-types/feedback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCenteredTextIcon, CheckCircleIcon, EnvelopeIcon, HouseIcon, ShieldIcon, CheckIcon, XIcon, SmileyIcon, SmileyMehIcon, SmileySadIcon } from "@phosphor-icons/react";
 import { feedbackSchema } from "@schemas/feedback";
@@ -19,9 +20,21 @@ type Inputs = z.infer<typeof feedbackSchema>;
 export default function Goodbye() {
   const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm<Inputs>({
+  const { register, handleSubmit, setValue } = useForm<Inputs>({
     resolver: zodResolver(feedbackSchema),
   })
+
+  const handleExperience = (experience: Experience) => {
+    setValue('experience', experience);
+  }
+
+  const handleRating = (rating: number) => {
+    setValue('rating', rating);
+  }
+
+  function onSubmit(data: Inputs) {
+    console.log(data);
+  }
 
   return (
     <>
@@ -31,18 +44,27 @@ export default function Goodbye() {
           <ModalClose onClick={() => closeModal('goodbye')} />
         </ModalHeader>
         <ModalBody>
-          <form className="mt-3">
+          <form onSubmit={handleSubmit(onSubmit)} className="mt-3">
             <fieldset className="flex flex-col gap-4">
               <div>
                 <p>Qual foi sua experiência ao utilizar o Kanban?</p>
                 <div className="flex mt-2 gap-3">
-                  <div className="dark:bg-slate-600 bg-slate-200 group hover:bg-success/50 hover:cursor-pointer transition-colors p-1 rounded-full">
+                  <div
+                    onClick={() => handleExperience('positive')}
+                    className="dark:bg-slate-600 bg-slate-200 group hover:bg-success/50 hover:cursor-pointer transition-colors p-1 rounded-full"
+                  >
                     <SmileyIcon className="text-3xl" />
                   </div>
-                  <div className="dark:bg-slate-600 bg-slate-200 group hover:bg-warning/50 hover:cursor-pointer transition-colors p-1 rounded-full">
+                  <div
+                    onClick={() => handleExperience('neutral')}
+                    className="dark:bg-slate-600 bg-slate-200 group hover:bg-warning/50 hover:cursor-pointer transition-colors p-1 rounded-full"
+                  >
                     <SmileyMehIcon className="text-3xl" />
                   </div>
-                  <div className="dark:bg-slate-600 bg-slate-200 group hover:bg-danger/50 hover:cursor-pointer transition-colors p-1 rounded-full">
+                  <div
+                    onClick={() => handleExperience('negative')}
+                    className="dark:bg-slate-600 bg-slate-200 group hover:bg-danger/50 hover:cursor-pointer transition-colors p-1 rounded-full"
+                  >
                     <SmileySadIcon className="text-3xl" />
                   </div>
                 </div>
@@ -52,7 +74,11 @@ export default function Goodbye() {
                 <p>Qual nota você daria para o Kanban? <span className="text-xs text-gray-500">(opcional)</span></p>
                 <div className="flex mt-2 gap-3">
                   {Array.from({ length: 5 }, (_, index) => index + 1).map((index) => (
-                    <div key={index} className="dark:bg-slate-600 bg-slate-200 text-lg size-9 rounded-full flex items-center justify-center hover:bg-primary/50 hover:cursor-pointer transition-colors">
+                    <div
+                      onClick={() => handleRating(index)}
+                      key={index}
+                      className="dark:bg-slate-600 bg-slate-200 text-lg size-9 rounded-full flex items-center justify-center hover:bg-primary/50 hover:cursor-pointer transition-colors"
+                    >
                       {index}
                     </div>
                   ))}
@@ -60,12 +86,12 @@ export default function Goodbye() {
               </div>
 
               <label htmlFor="feedback" className="w-fit">Feedback <span className="text-xs text-gray-500">(opcional)</span></label>
-              <Textarea id="feedback" placeholder="Gostaria de sugerir alguma funcionalidade ou correção?" rows={5} />
+              <Textarea {...register('feedback')} id="feedback" placeholder="Gostaria de sugerir alguma funcionalidade ou correção?" rows={5} />
             </fieldset>
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={() => closeModal('goodbye')} variant="primary" icon={CheckIcon} iconClassName="text-lg">
+          <Button type="submit" variant="primary" icon={CheckIcon} iconClassName="text-lg">
             Enviar
           </Button>
           <Button onClick={() => closeModal('goodbye')} variant="outline-primary" icon={XIcon} iconClassName="text-lg">
