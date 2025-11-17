@@ -1,12 +1,16 @@
 import fp from "fastify-plugin";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import jwt from 'jsonwebtoken';
+import { db } from "index";
+import { eq } from "drizzle-orm";
+import { users } from "@db/schema";
 
 interface AuthPayload {
   id: string;
   name: string;
   email: string;
   verified: boolean;
+  token_version: number;
 }
 
 function auth(app: FastifyInstance) {
@@ -21,6 +25,16 @@ function auth(app: FastifyInstance) {
       const decoded = jwt.verify(token, process.env.JWT_SECRET!);
 
       if (typeof decoded === 'string')  {
+        return reply.unauthorized('Token inválido!');
+      }
+
+      const user = await db.query.users.findFirst({ where: eq(users.id, decoded.id) });
+
+      if (!user) {
+        return reply.unauthorized('Usuário não encontrado!');
+      }
+
+      if (user.tokenVersion !== decoded.token_version) {
         return reply.unauthorized('Token inválido!');
       }
 

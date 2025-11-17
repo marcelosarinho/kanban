@@ -46,6 +46,7 @@ export async function login(app: FastifyInstance) {
         id: user.id,
         name: user.name,
         email: user.email,
+        token_version: user.tokenVersion,
         verified: deviceStatus === "verified",
       },
       process.env.JWT_SECRET!,

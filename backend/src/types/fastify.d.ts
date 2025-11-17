@@ -12,7 +12,10 @@ declare module "fastify" {
     };
     user?: {
       id: string;
+      name: string;
+      email: string;
       verified: boolean;
+      token_version: number;
     }
   };
 
