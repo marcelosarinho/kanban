@@ -1,3 +1,4 @@
+import { createFeedback } from "@api/feedback";
 import Button from "@components/button/Button";
 import Modal from "@components/modal/Modal";
 import ModalBody from "@components/modal/ModalBody";
@@ -10,8 +11,10 @@ import type { Experience } from "@custom-types/feedback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCenteredTextIcon, CheckCircleIcon, EnvelopeIcon, HouseIcon, ShieldIcon, CheckIcon, XIcon, SmileyIcon, SmileyMehIcon, SmileySadIcon } from "@phosphor-icons/react";
 import { feedbackSchema } from "@schemas/feedback";
+import { useMutation } from "@tanstack/react-query";
 import { closeModal, openModal } from "@utils/modal";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import type z from "zod";
 
@@ -20,9 +23,30 @@ type Inputs = z.infer<typeof feedbackSchema>;
 export default function Goodbye() {
   const navigate = useNavigate();
 
-  const { register, handleSubmit, setValue } = useForm<Inputs>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    watch
+  } = useForm<Inputs>({
     resolver: zodResolver(feedbackSchema),
-  })
+  });
+
+  const [experience, rating] = watch(['experience', 'rating']);
+
+  const feedbackMutation = useMutation({
+    mutationFn: createFeedback,
+    onSuccess: () => {
+      closeModal('goodbye-modal');
+
+      toast.success('Obrigado pelo seu feedback! Redirecionando para a página inicial...');
+
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+    },
+  });
 
   const handleExperience = (experience: Experience) => {
     setValue('experience', experience);
@@ -33,41 +57,62 @@ export default function Goodbye() {
   }
 
   function onSubmit(data: Inputs) {
-    console.log(data);
+    feedbackMutation.mutate(data);
   }
 
   return (
     <>
-      <Modal id="goodbye">
+      <Toaster
+        position='bottom-right'
+        toastOptions={{
+          success: {
+            iconTheme: {
+              primary: 'var(--color-success)',
+              secondary: 'black',
+            }
+          },
+          error: {
+            iconTheme: {
+              primary: 'var(--color-danger)',
+              secondary: 'white',
+            }
+          },
+          className: 'react-hot-toast',
+          duration: 3000,
+        }}
+      />
+
+      <Modal id="goodbye-modal">
         <ModalHeader>
           <ModalTitle>Feedback</ModalTitle>
-          <ModalClose onClick={() => closeModal('goodbye')} />
+          <ModalClose onClick={() => closeModal('goodbye-modal')} />
         </ModalHeader>
         <ModalBody>
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-3">
+          <form id="goodbye" onSubmit={handleSubmit(onSubmit)} className="mt-3">
             <fieldset className="flex flex-col gap-4">
               <div>
                 <p>Qual foi sua experiência ao utilizar o Kanban?</p>
                 <div className="flex mt-2 gap-3">
                   <div
                     onClick={() => handleExperience('positive')}
-                    className="dark:bg-slate-600 bg-slate-200 group hover:bg-success/50 hover:cursor-pointer transition-colors p-1 rounded-full"
+                    className={`group hover:cursor-pointer transition-colors p-1 rounded-full ${experience === 'positive' ? 'bg-success text-green-900' : 'dark:bg-slate-600 bg-slate-200 hover:bg-success/50'}`}
                   >
                     <SmileyIcon className="text-3xl" />
                   </div>
                   <div
                     onClick={() => handleExperience('neutral')}
-                    className="dark:bg-slate-600 bg-slate-200 group hover:bg-warning/50 hover:cursor-pointer transition-colors p-1 rounded-full"
+                    className={`group hover:cursor-pointer transition-colors p-1 rounded-full ${experience === 'neutral' ? 'bg-warning text-yellow-900' : 'dark:bg-slate-600 bg-slate-200 hover:bg-warning/50'}`}
                   >
                     <SmileyMehIcon className="text-3xl" />
                   </div>
                   <div
                     onClick={() => handleExperience('negative')}
-                    className="dark:bg-slate-600 bg-slate-200 group hover:bg-danger/50 hover:cursor-pointer transition-colors p-1 rounded-full"
+                    className={`group hover:cursor-pointer transition-colors p-1 rounded-full ${experience === 'negative' ? 'bg-danger text-red-900' : 'dark:bg-slate-600 bg-slate-200 hover:bg-danger/50'}`}
                   >
                     <SmileySadIcon className="text-3xl" />
                   </div>
                 </div>
+                <p className="mt-2 text-sm text-danger">{errors.experience?.message}</p>
               </div>
 
               <div>
@@ -77,7 +122,7 @@ export default function Goodbye() {
                     <div
                       onClick={() => handleRating(index)}
                       key={index}
-                      className="dark:bg-slate-600 bg-slate-200 text-lg size-9 rounded-full flex items-center justify-center hover:bg-primary/50 hover:cursor-pointer transition-colors"
+                      className={`text-lg size-9 rounded-full flex items-center justify-center hover:cursor-pointer transition-colors ${rating === index ? 'bg-primary text-white' : 'dark:bg-slate-600 bg-slate-200 hover:bg-primary/50'}`}
                     >
                       {index}
                     </div>
@@ -91,10 +136,10 @@ export default function Goodbye() {
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button type="submit" variant="primary" icon={CheckIcon} iconClassName="text-lg">
+          <Button form="goodbye" type="submit" variant="primary" icon={CheckIcon} iconClassName="text-lg">
             Enviar
           </Button>
-          <Button onClick={() => closeModal('goodbye')} variant="outline-primary" icon={XIcon} iconClassName="text-lg">
+          <Button onClick={() => closeModal('goodbye-modal')} variant="outline-primary" icon={XIcon} iconClassName="text-lg">
             Cancelar
           </Button>
         </ModalFooter>
@@ -146,7 +191,7 @@ export default function Goodbye() {
 
             <Button
               variant="outline-primary"
-              onClick={() => openModal('goodbye')}
+              onClick={() => openModal('goodbye-modal')}
               icon={ChatCenteredTextIcon}
               iconClassName="text-xl"
             >

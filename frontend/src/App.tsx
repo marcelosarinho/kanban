@@ -352,6 +352,7 @@ function App() {
             duration: 3000,
           }}
         />
+
         <Modal id="create-project-modal">
           <ModalHeader>
             <ModalTitle>{project ? 'Editar' : 'Adicionar'} projeto</ModalTitle>

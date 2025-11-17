@@ -1,6 +1,7 @@
 export * from '@api/project';
 export * from '@api/task';
 export * from '@api/user';
+export * from '@api/feedback';
 
 async function request<T>(
   url: string,

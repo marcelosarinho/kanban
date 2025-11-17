@@ -19,8 +19,10 @@ export async function createFeedback(app: FastifyInstance) {
       return reply.badRequest('Feedback deve ter no máximo 255 caracteres!');
     }
 
+    const formattedFeedback = feedback?.trim() === '' ? null : feedback?.trim();
+
     try {
-      await db.insert(feedbacks).values({ experience, rating, feedback });
+      await db.insert(feedbacks).values({ experience, rating, feedback: formattedFeedback });
 
       return reply.ok('Feedback enviado com sucesso!');
     } catch (error) {
