@@ -120,6 +120,13 @@
       "when": 1761858520476,
       "tag": "0016_feedbacks-table",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1763401821921,
+      "tag": "0017_add-token-version-to-users-table",
+      "breakpoints": true
     }
   ]
 }

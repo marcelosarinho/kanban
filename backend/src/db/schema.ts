@@ -78,6 +78,7 @@ export const users = pgTable('users', {
   lastVerifiedLogin: timestamp('last_verified_login', { mode: 'string' }),
   firstLoginVerify: boolean('first_login_verify').notNull().default(false),
   deviceInfo: jsonb('device_info').$type<DeviceInfo | null>(),
+  tokenVersion: integer('token_version').notNull().default(0),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 });

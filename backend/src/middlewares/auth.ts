@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 
 interface AuthPayload {
   id: string;
+  name: string;
+  email: string;
   verified: boolean;
 }
 
