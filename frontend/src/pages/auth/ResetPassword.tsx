@@ -33,7 +33,7 @@ export default function ResetPassword() {
   });
 
   const resetPasswordMutation = useMutation({
-    mutationFn: (data: Inputs) => resetPassword(token, email, data.password),
+    mutationFn: (data: Inputs) => resetPassword({ token, email, password: data.password }),
     onSuccess: () => {
       setTimeout(() => {
         navigate('/auth/login');
@@ -102,13 +102,13 @@ export default function ResetPassword() {
     async function isValidResetPassword() {
       setStatus({ loading: true, valid: false, message: '' });
 
-      const result = await verifyResetPassword(token, email);
+      const result = await verifyResetPassword({ token, email });
 
       setStatus({ loading: false, valid: result.valid, message: result.message });
     }
 
     isValidResetPassword();
-  }, []);
+  }, [email, navigate, token]);
 
   return (
     status?.loading ? (
