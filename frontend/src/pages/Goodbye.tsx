@@ -117,7 +117,7 @@ export default function Goodbye() {
 
               <div>
                 <p>Qual nota você daria para o Kanban? <span className="text-xs text-gray-500">(opcional)</span></p>
-                <div className="flex mt-2 gap-3">
+                <div className="flex flex-wrap mt-2 gap-3">
                   {Array.from({ length: 5 }, (_, index) => index + 1).map((index) => (
                     <div
                       onClick={() => handleRating(index)}
@@ -136,10 +136,10 @@ export default function Goodbye() {
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button form="goodbye" type="submit" variant="primary" icon={CheckIcon} iconClassName="text-lg">
+          <Button className="w-full justify-center sm:w-auto" form="goodbye" type="submit" variant="primary" icon={CheckIcon} iconClassName="text-lg">
             Enviar
           </Button>
-          <Button onClick={() => closeModal('goodbye-modal')} variant="outline-primary" icon={XIcon} iconClassName="text-lg">
+          <Button className="w-full justify-center sm:w-auto" onClick={() => closeModal('goodbye-modal')} variant="outline-primary" icon={XIcon} iconClassName="text-lg">
             Cancelar
           </Button>
         </ModalFooter>
