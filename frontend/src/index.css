@@ -20,6 +20,7 @@
   --animate-in: in 0.5s linear;
   --animate-dropdown: in 0.15s linear;
   --animate-slide-in-from-bottom: slide-in-from-bottom 0.2s linear;
+  --animate-slide-in-from-right: slide-in-from-right 0.3s ease-in-out;
 
   @keyframes in {
     0% {
@@ -36,6 +37,15 @@
     }
     100% {
       transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-from-right {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
     }
   }
 }

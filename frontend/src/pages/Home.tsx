@@ -1,26 +1,44 @@
 import TaskCategoryBadge from "@components/badge/TaskCategoryBadge";
 import TaskPriorityBadge from "@components/badge/TaskPriorityBadge";
-import { ArrowRightIcon, CodeIcon, FolderIcon, GithubLogoIcon, KanbanIcon, LightningIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon, CodeIcon, FolderIcon, GithubLogoIcon, KanbanIcon, LightningIcon, LinkedinLogoIcon, ListIcon, XIcon } from "@phosphor-icons/react";
 import { useRef } from "react";
 import { Link } from "react-router";
 
 export default function Home() {
-  const darkMode = useRef(window.matchMedia("(prefers-color-scheme: dark)"));
+  const sidebar = useRef<HTMLDivElement>(null);
 
-  document.documentElement.classList.toggle('dark', darkMode.current.matches);
+  function openSidebar() {
+    if (!sidebar.current) {
+      return;
+    }
 
-  darkMode.current.addEventListener('change', () => {
-    document.documentElement.classList.toggle('dark', darkMode.current.matches);
-  });
+    sidebar.current.classList.add("fixed", "animate-slide-in-from-right");
+    sidebar.current.classList.remove("hidden");
+  }
+
+  function closeSidebar() {
+    if (!sidebar.current) {
+      return;
+    }
+
+    sidebar.current.classList.remove("fixed", "animate-slide-in-from-right");
+    sidebar.current.classList.add("hidden");
+  }
+
+  function redirectTo(id: string) {
+    closeSidebar();
+
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }
 
   return (
     <main>
       <nav className="fixed top-2 w-full bg-transparent z-50">
         <div className="px-6">
-          <div className="bg-white dark:bg-slate-950 flex items-center justify-center sm:justify-between border border-gray-200 p-3 rounded-lg dark:border-slate-800 shadow-sm">
-            <KanbanIcon className="hidden sm:inline-block text-3xl dark:text-gray-200" />
+          <div className="bg-white dark:bg-slate-950 flex items-center justify-between border border-gray-200 p-3 rounded-lg dark:border-slate-800 shadow-sm">
+            <KanbanIcon className="inline-block text-3xl dark:text-gray-200" />
 
-            <div className="flex items-center gap-3 dark:text-gray-200">
+            <div className="md:flex items-center gap-3 dark:text-gray-200 hidden">
               <a href="#features" className="hidden sm:inline-block hover:bg-neutral-200 dark:hover:bg-slate-700 px-2 py-1 rounded dark:hover:text-white transition-colors">
                 Funcionalidades
               </a>
@@ -31,19 +49,41 @@ export default function Home() {
 
               <Link
                 to="/auth/login"
-                className="inline-block hover:bg-neutral-200 dark:hover:bg-slate-700 px-2 py-1 rounded dark:hover:text-white transition-colors">
+                className="inline-block rounded border border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-2 py-1 dark:hover:border-slate-500 transition-colors dark:hover:text-white">
                   Fazer login
               </Link>
 
               <Link
                 to="/auth/sign-up"
-                className="inline-block rounded border border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-2 py-1 dark:hover:border-slate-500 transition-colors dark:hover:text-white">
-                  Cadastre-se
+                className="inline-block rounded border border-primary bg-primary hover:border-primary/25 px-2 py-1 transition-colors"
+              >
+                Cadastre-se
               </Link>
+            </div>
+
+            <div className="md:hidden">
+              <button
+                onClick={openSidebar}
+                className="dark:text-white border p-1 rounded border-neutral-300 hover:border-neutral-400 dark:border-slate-600"
+              >
+                <ListIcon weight="bold" className="text-lg"/>
+              </button>
             </div>
           </div>
         </div>
       </nav>
+
+      <div ref={sidebar} className="hidden w-full h-full bg-white dark:bg-slate-900 z-[60] p-3">
+        <XIcon weight="bold" className="dark:text-gray-200 text-xl" onClick={closeSidebar}/>
+
+        <div className="my-4 flex flex-col gap-3 dark:text-gray-200 text-center">
+          <Link to="/auth/login" className="block rounded border border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-2 py-1 dark:hover:border-slate-500 transition-colors dark:hover:text-white dark:bg-slate-950">Fazer login</Link>
+          <Link to="/auth/sign-up" className="block rounded border border-primary bg-primary hover:border-primary/25 px-2 py-1 transition-colors">Cadastre-se</Link>
+        </div>
+
+        <a onClick={() => redirectTo("features")} className="p-2 block dark:text-gray-200">Funcionalidades</a>
+        <a onClick={() => redirectTo("how-it-works")} className="p-2 block dark:text-gray-200">Como funciona?</a>
+      </div>
 
       <section className="py-36 mx-6 text-center">
         <h1 className="text-5xl font-bold mb-6 dark:text-gray-200">Organize seus projetos. <span className="text-primary">Visualize progreso.</span></h1>
@@ -51,14 +91,16 @@ export default function Home() {
         <div className="flex justify-center gap-3">
           <Link
             to="/auth/sign-up"
-            className="text-xl inline-flex items-center gap-2 rounded border bg-white border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-3 py-2 dark:hover:border-slate-500 transition-colors dark:bg-slate-900 dark:text-gray-200">
+            className="text-xl inline-flex items-center gap-2 rounded dark:border-slate-600 px-3 py-2 dark:hover:border-slate-500 transition-colors bg-primary/15 hover:bg-primary/25 text-primary dark:bg-primary/30 dark:hover:bg-primary/40"
+            >
             Comece agora
             <ArrowRightIcon weight="bold"/>
           </Link>
 
           <Link
             to="/auth/login"
-            className="text-xl inline-flex items-center gap-2 rounded dark:border-slate-600 px-3 py-2 dark:hover:border-slate-500 transition-colors bg-primary/15 hover:bg-primary/25 text-primary dark:bg-primary/30 dark:hover:bg-primary/40">
+            className="text-xl inline-flex items-center gap-2 rounded border bg-white border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-3 py-2 dark:hover:border-slate-500 transition-colors dark:bg-slate-900 dark:text-gray-200"
+            >
             Faça login
           </Link>
         </div>
