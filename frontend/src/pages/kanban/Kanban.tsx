@@ -358,14 +358,14 @@ function Kanban() {
           <fieldset disabled={createProjectMutation.isPending || updateProjectMutation.isPending} className="disabled:opacity-50">
             <ModalBody>
               <form onSubmit={handleSubmit(onSubmit)} id="create-project-form" className='flex flex-col gap-3'>
-                <Input error={errors.name?.message} {...register('name')} autoComplete='off' id="project-name" label="Nome do projeto"/>
-                <Textarea error={errors.description?.message} {...register('description')} id="project-description" label="Descrição do projeto"/>
+                <Input error={errors.name?.message} {...register('name')} autoComplete='off' id="project-name" label="Nome do projeto" placeholder='Projeto 1'/>
+                <Textarea rows={4} error={errors.description?.message} {...register('description')} id="project-description" label="Descrição do projeto" placeholder='Projeto de exemplo'/>
               </form>
             </ModalBody>
             <ModalFooter>
               <Button
                 loading={createProjectMutation.isPending || updateProjectMutation.isPending}
-                className="flex items-center"
+                className="w-full justify-center sm:w-auto"
                 form="create-project-form"
                 icon={CheckIcon}
                 iconClassName="text-lg"
@@ -375,6 +375,7 @@ function Kanban() {
 
               <Button
                 onClick={() => closeModal('create-project-modal')}
+                className="w-full justify-center sm:w-auto"
                 variant="outline-primary"
                 icon={XIcon}
                 iconClassName="text-lg"
