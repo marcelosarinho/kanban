@@ -10,7 +10,7 @@ import Input from '@components/Input';
 import Textarea from '@components/Textarea';
 import Project from '@components/project/Project';
 import CategoryBadge from '@components/badge/CategoryBadge';
-import { ArrowsOutIcon, CheckIcon, PlusIcon, SignOutIcon, UserGearIcon, UserIcon, XIcon } from '@phosphor-icons/react';
+import { ArrowsOutIcon, CheckIcon, PlusIcon, SignOutIcon, TrashIcon, UserGearIcon, UserIcon, XIcon } from '@phosphor-icons/react';
 import Searchbar from '@components/Searchbar';
 import { CATEGORIES, TASK_STATUSES } from '@libs/constants';
 import TaskStatus from '@components/task/TaskStatus';
@@ -219,6 +219,8 @@ function Kanban() {
   }
 
   function searchTasks(status: TaskStatusOption) {
+    console.log('teste');
+    return [];
     return tasks?.[status].filter((t: TaskType) => t.name.toLowerCase().includes(deferredTasksQuery[status].toLowerCase())) ?? [];
   }
 
@@ -388,14 +390,29 @@ function Kanban() {
 
         <Modal id="delete-project-modal">
           <ModalHeader>
-            <ModalTitle>Deletar projeto?</ModalTitle>
+            <ModalTitle>Remover projeto?</ModalTitle>
           </ModalHeader>
           <ModalBody>
-            <p>Tem certeza de que deseja deletar o projeto {project?.name}?</p>
+            <p>Tem certeza de que deseja remover o projeto {project?.name}?</p>
           </ModalBody>
           <ModalFooter>
-            <Button loading={deleteProjectMutation.isPending} onClick={() => deleteProjectMutation.mutate(project?.id)} variant="primary">Deletar</Button>
-            <Button onClick={() => closeModal('delete-project-modal')} variant="outline-primary">Cancelar</Button>
+            <Button
+              loading={deleteProjectMutation.isPending}
+              className="w-full justify-center sm:w-auto"
+              icon={TrashIcon}
+              onClick={() => deleteProjectMutation.mutate(project?.id)}
+              variant="primary"
+            >
+              Remover
+            </Button>
+            <Button
+              onClick={() => closeModal('delete-project-modal')}
+              className="w-full justify-center sm:w-auto"
+              variant="outline-primary"
+              icon={XIcon}
+            >
+              Cancelar
+            </Button>
           </ModalFooter>
         </Modal>
 
