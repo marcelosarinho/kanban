@@ -5,6 +5,7 @@
 @import "./styles/scrollbar.css";
 @import "./styles/progressbar.css";
 @import "./styles/react-hot-toast.css";
+@import "./styles/home.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
