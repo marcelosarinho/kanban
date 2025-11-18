@@ -276,10 +276,10 @@ function Kanban() {
     onSuccess: () => {
       refetchProjects();
       closeModal('delete-project-modal');
-      toast.success('Projeto deletado com sucesso!');
+      toast.success('Projeto removido com sucesso!');
     },
     onError: () => {
-      toast.error('Erro ao deletar projeto!');
+      toast.error('Erro ao remover projeto!');
     },
   });
 
@@ -400,6 +400,7 @@ function Kanban() {
               loading={deleteProjectMutation.isPending}
               className="w-full justify-center sm:w-auto"
               icon={TrashIcon}
+              iconClassName="text-lg"
               onClick={() => deleteProjectMutation.mutate(project?.id)}
               variant="primary"
             >
@@ -410,6 +411,7 @@ function Kanban() {
               className="w-full justify-center sm:w-auto"
               variant="outline-primary"
               icon={XIcon}
+              iconClassName="text-lg"
             >
               Cancelar
             </Button>

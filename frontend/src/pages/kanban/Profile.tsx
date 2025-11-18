@@ -171,10 +171,23 @@ export default function Profile() {
           <p>Essa é uma ação irreversível, ao apagar sua conta, todos os seus projetos e dados serão perdidos. Tem certeza que deseja continuar?</p>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={() => deleteUserMutation.mutate()} loading={deleteUserMutation.isPending} variant="primary" icon={CheckIcon} iconClassName="text-lg">
+          <Button
+            onClick={() => deleteUserMutation.mutate()}
+            className="w-full justify-center sm:w-auto"
+            loading={deleteUserMutation.isPending}
+            variant="primary"
+            icon={TrashIcon}
+            iconClassName="text-lg"
+          >
             Apagar
           </Button>
-          <Button onClick={() => closeModal('delete-account-modal')} variant="outline-primary" icon={XIcon} iconClassName="text-lg">
+          <Button
+            onClick={() => closeModal('delete-account-modal')}
+            className="w-full justify-center sm:w-auto"
+            variant="outline-primary"
+            icon={XIcon}
+            iconClassName="text-lg"
+          >
             Cancelar
           </Button>
         </ModalFooter>
