@@ -4,6 +4,12 @@ import { MoonIcon, MoonStarsIcon, SunIcon } from "@phosphor-icons/react"
 
 export const MAX_CATEGORIES_LENGTH = 2;
 
+export const THEME_NAMES: Record<ThemeOption, string> = {
+  light: 'Claro',
+  dark: 'Escuro',
+  system: 'Sistema',
+}
+
 export const THEME_ICONS: Record<ThemeOption, React.ElementType> = {
   light: SunIcon,
   dark: MoonIcon,

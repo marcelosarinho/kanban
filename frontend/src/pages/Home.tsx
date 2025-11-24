@@ -1,10 +1,19 @@
 import TaskCategoryBadge from "@components/badge/TaskCategoryBadge";
 import TaskPriorityBadge from "@components/badge/TaskPriorityBadge";
+import ThemeButton from "@components/theme/ThemeButton";
+import ThemeIcon from "@components/theme/ThemeIcon";
+import { useTheme } from "@contexts/ThemeContext";
+import type { ThemeOption } from "@custom-types/constants";
+import { THEME_NAMES } from "@libs/constants";
 import { ArrowRightIcon, CodeIcon, FolderIcon, GithubLogoIcon, KanbanIcon, LightningIcon, LinkedinLogoIcon, ListIcon, XIcon } from "@phosphor-icons/react";
 import { useRef } from "react";
 import { Link } from "react-router";
 
+
+
 export default function Home() {
+  const { theme, changeTheme } = useTheme();
+
   const sidebar = useRef<HTMLDivElement>(null);
 
   function openSidebar() {
@@ -59,6 +68,10 @@ export default function Home() {
               >
                 Cadastre-se
               </Link>
+
+              <div className="h-7 w-px bg-gray-200 dark:bg-slate-800"></div>
+
+              <ThemeButton dropdownClassName="right-10 top-10" />
             </div>
 
             <div className="md:hidden">
@@ -73,16 +86,38 @@ export default function Home() {
         </div>
       </nav>
 
-      <div ref={sidebar} className="hidden w-full h-full bg-white dark:bg-slate-900 z-[60] p-3">
+      <div ref={sidebar} className="hidden w-full h-full bg-neutral-50 dark:bg-slate-900 z-[60] p-3">
         <XIcon weight="bold" className="dark:text-gray-200 text-xl" onClick={closeSidebar}/>
 
         <div className="my-4 flex flex-col gap-3 dark:text-gray-200 text-center">
-          <Link to="/auth/login" className="block rounded border border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-2 py-1 dark:hover:border-slate-500 transition-colors dark:hover:text-white dark:bg-slate-950">Fazer login</Link>
-          <Link to="/auth/sign-up" className="block rounded border border-primary bg-primary hover:border-primary/25 px-2 py-1 transition-colors">Cadastre-se</Link>
+          <Link to="/auth/login" className="block bg-white rounded border border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-2 py-1 dark:hover:border-slate-500 transition-colors dark:hover:text-white dark:bg-slate-950">Fazer login</Link>
+          <Link to="/auth/sign-up" className="block bg-primary rounded border text-white border-primary hover:border-primary/25 px-2 py-1 transition-colors">Cadastre-se</Link>
         </div>
 
         <a onClick={() => redirectTo("features")} className="p-2 block dark:text-gray-200">Funcionalidades</a>
         <a onClick={() => redirectTo("how-it-works")} className="p-2 block dark:text-gray-200">Como funciona?</a>
+
+        <hr className="my-4 dark:border-slate-700 border-neutral-300" />
+
+        <div className="flex items-center justify-between">
+          <span className="dark:text-gray-200">Tema</span>
+
+          <div className="relative flex items-center justify-between gap-2 border border-neutral-300 rounded px-2 py-1 dark:border-slate-600 dark:bg-slate-900 dark:text-gray-200 bg-white">
+            <ThemeIcon theme={theme} />
+
+            <span>{THEME_NAMES[theme]}</span>
+
+            <select
+              onChange={(e) => changeTheme(e.target.value as ThemeOption)}
+              className="absolute size-full appearance-none border border-red-500 inset-0 opacity-0"
+              value={theme}
+            >
+              <option value="dark">Escuro</option>
+              <option value="light">Claro</option>
+              <option value="system">Sistema</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <section className="py-36 mx-6 text-center">
