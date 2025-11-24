@@ -127,6 +127,13 @@
       "when": 1763401821921,
       "tag": "0017_add-token-version-to-users-table",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1764004869347,
+      "tag": "0018_create-error-logs-table",
+      "breakpoints": true
     }
   ]
 }
