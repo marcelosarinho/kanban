@@ -7,6 +7,7 @@ import ModalFooter from "@components/modal/ModalFooter";
 import ModalHeader from "@components/modal/ModalHeader";
 import ModalTitle from "@components/modal/ModalTitle";
 import Textarea from "@components/Textarea";
+import ThemeButton from "@components/theme/ThemeButton";
 import type { Experience } from "@custom-types/feedback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCenteredTextIcon, CheckCircleIcon, EnvelopeIcon, HouseIcon, ShieldIcon, CheckIcon, XIcon, SmileyIcon, SmileyMehIcon, SmileySadIcon } from "@phosphor-icons/react";
@@ -146,6 +147,11 @@ export default function Goodbye() {
       </Modal>
 
       <main className="h-full sm:h-screen flex flex-col items-center justify-center">
+        <ThemeButton
+          className="fixed top-4 right-4"
+          dropdownClassName="right-0"
+        />
+
         <header className="mb-6 flex flex-col justify-center items-center w-full xl:max-w-xl lg:max-w-lg md:max-w-md sm:max-w-sm max-w-sm mt-3 md:mt-0">
           <div className="mt-auto bg-success/20 rounded-full p-2.5 w-fit">
             <CheckCircleIcon className="text-4xl text-success" />

@@ -58,13 +58,14 @@ export default function Home() {
 
               <Link
                 to="/auth/login"
-                className="inline-block rounded border border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-2 py-1 dark:hover:border-slate-500 transition-colors dark:hover:text-white">
-                  Fazer login
+                className="inline-block rounded border border-neutral-300 hover:border-neutral-400 dark:border-slate-600 px-2 py-1 dark:hover:border-slate-500 transition-colors dark:hover:text-white"
+              >
+                Fazer login
               </Link>
 
               <Link
                 to="/auth/sign-up"
-                className="inline-block rounded border border-primary bg-primary hover:border-primary/25 px-2 py-1 transition-colors"
+                className="inline-block rounded text-white border border-primary bg-primary hover:border-primary/25 px-2 py-1 transition-colors"
               >
                 Cadastre-se
               </Link>
