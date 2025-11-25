@@ -134,6 +134,13 @@
       "when": 1764004869347,
       "tag": "0018_create-error-logs-table",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1764090469423,
+      "tag": "0019_add-nullable-to-stacktrace-in-error-logs-table",
+      "breakpoints": true
     }
   ]
 }

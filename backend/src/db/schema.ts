@@ -1,64 +1,10 @@
 import { relations } from "drizzle-orm";
-import { boolean, jsonb, pgEnum, real, text, timestamp } from "drizzle-orm/pg-core";
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, varchar, jsonb, pgEnum, real, text, timestamp } from "drizzle-orm/pg-core";
 import { DeviceInfo } from "@custom-types/login";
 
 export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high']);
 export const statusEnum = pgEnum('status', ['todo', 'in_progress', 'testing', 'implemented']);
 export const experienceEnum = pgEnum('experience', ['positive', 'neutral', 'negative']);
-
-export const projects = pgTable('projects', {
-  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar('name', { length: 255 }).notNull().unique(),
-  description: varchar('description', { length: 255 }).notNull(),
-  userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
-});
-
-export const projectsRelations = relations(projects, ({ many }) => ({
-  tasks: many(tasks),
-}));
-
-export const tasks = pgTable('tasks', {
-  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
-  name: varchar('name', { length: 255 }).notNull(),
-  description: varchar('description', { length: 255 }),
-  priority: priorityEnum().notNull().default('low'),
-  category: varchar('category', { length: 255 }),
-  progress: real('progress').notNull().default(0),
-  commentary: varchar('commentary', { length: 255 }),
-  color: varchar('color', { length: 20 }),
-  done: boolean('done').notNull().default(false),
-  status: statusEnum().notNull(),
-  projectId: integer('project_id').notNull().references(() => projects.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
-});
-
-export const tasksRelations = relations(tasks, ({ one, many }) => ({
-  projects: one(projects, {
-    fields: [tasks.projectId],
-    references: [projects.id],
-  }),
-  subtasks: many(subtasks),
-}));
-
-export const subtasks = pgTable('subtasks', {
-  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
-  name: varchar('name', { length: 255 }).notNull(),
-  done: boolean('done').notNull().default(false),
-  taskId: integer('task_id').notNull().references(() => tasks.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
-});
-
-export const subtasksRelations = relations(subtasks, ({ one }) => ({
-  tasks: one(tasks, {
-    fields: [subtasks.taskId],
-    references: [tasks.id],
-  }),
-}));
 
 export const users = pgTable('users', {
   id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
@@ -83,10 +29,52 @@ export const users = pgTable('users', {
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 });
 
-export const usersRelations = relations(users, ({ many }) => ({
-  projects: many(projects),
-  errorLogs: many(errorLogs),
-}));
+export const errorLogs = pgTable('error_logs', {
+  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
+  timestamp: timestamp('timestamp', { mode: 'string' }).defaultNow().notNull(),
+  message: text('message').notNull(),
+  stacktrace: text('stacktrace'),
+  route: varchar('route', { length: 255 }).notNull(),
+  method: varchar('method', { length: 10 }).notNull(),
+  context: jsonb('context').notNull(),
+  userId: integer('user_id').references(() => users.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
+});
+
+export const projects = pgTable('projects', {
+  id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar('name', { length: 255 }).notNull().unique(),
+  description: varchar('description', { length: 255 }).notNull(),
+  userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
+});
+
+export const tasks = pgTable('tasks', {
+  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
+  name: varchar('name', { length: 255 }).notNull(),
+  description: varchar('description', { length: 255 }),
+  priority: priorityEnum().notNull().default('low'),
+  category: varchar('category', { length: 255 }),
+  progress: real('progress').notNull().default(0),
+  commentary: varchar('commentary', { length: 255 }),
+  color: varchar('color', { length: 20 }),
+  done: boolean('done').notNull().default(false),
+  status: statusEnum().notNull(),
+  projectId: integer('project_id').notNull().references(() => projects.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
+});
+
+export const subtasks = pgTable('subtasks', {
+  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
+  name: varchar('name', { length: 255 }).notNull(),
+  done: boolean('done').notNull().default(false),
+  taskId: integer('task_id').notNull().references(() => tasks.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
+});
 
 export const feedbacks = pgTable('feedbacks', {
   id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
@@ -97,24 +85,35 @@ export const feedbacks = pgTable('feedbacks', {
   updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
 });
 
-export const errorLogs = pgTable('error_logs', {
-  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
-  timestamp: timestamp('timestamp', { mode: 'string' }).defaultNow().notNull(),
-  message: text('message').notNull(),
-  stacktrace: text('stacktrace').notNull(),
-  route: varchar('route', { length: 255 }).notNull(),
-  method: varchar('method', { length: 10 }).notNull(),
-  context: jsonb('context').notNull(),
-  userId: integer('user_id').references(() => users.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
-});
+export const projectsRelations = relations(projects, ({ many }) => ({
+  tasks: many(tasks),
+}));
+
+export const tasksRelations = relations(tasks, ({ one, many }) => ({
+  projects: one(projects, {
+    fields: [tasks.projectId],
+    references: [projects.id],
+  }),
+  subtasks: many(subtasks),
+}));
+
+export const subtasksRelations = relations(subtasks, ({ one }) => ({
+  tasks: one(tasks, {
+    fields: [subtasks.taskId],
+    references: [tasks.id],
+  }),
+}));
 
 export const errorLogsRelations = relations(errorLogs, ({ one }) => ({
   user: one(users, {
     fields: [errorLogs.userId],
     references: [users.id],
   }),
+}));
+
+export const usersRelations = relations(users, ({ many }) => ({
+  projects: many(projects),
+  errorLogs: many(errorLogs),
 }));
 
 export const schema = {
