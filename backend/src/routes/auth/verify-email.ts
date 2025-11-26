@@ -4,6 +4,7 @@ import { db } from "index";
 import { users } from "@db/schema";
 import argon2 from "argon2";
 import dayjs from "@lib/dayjs";
+import { createErrorLog } from "@routes/helpers/log";
 
 interface VerifyEmailBody {
   email: string;
@@ -52,6 +53,8 @@ export async function verifyEmail(app: FastifyInstance) {
 
       return reply.ok('Email verificado com sucesso!');
     } catch (error) {
+      createErrorLog(error as Error, request, reply);
+
       return reply.error('Erro ao verificar email!');
     }
   })

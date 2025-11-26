@@ -4,6 +4,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { db } from "index";
 import argon2 from "argon2";
 import dayjs from "@lib/dayjs";
+import { createErrorLog } from "@routes/helpers/log";
 
 export async function verifyNewEmail(app: FastifyInstance) {
   app.post<{ Body: { email: string, token: string } }>('/verify-new-email', { preHandler: app.auth }, async (request, reply: FastifyReply) => {
@@ -52,6 +53,8 @@ export async function verifyNewEmail(app: FastifyInstance) {
 
       return reply.ok('Novo email verificado com sucesso!');
     } catch (error) {
+      createErrorLog(error as Error, request, reply);
+
       return reply.error('Erro ao verificar novo email!');
     }
   });

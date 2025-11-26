@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import argon2 from 'argon2';
+import { createErrorLog } from "@routes/helpers/log";
 
 export function updatePassword(app: FastifyInstance) {
   app.patch<{ Body: { oldPassword: string; newPassword: string, confirmPassword: string } }>(
@@ -43,6 +44,8 @@ export function updatePassword(app: FastifyInstance) {
 
         return reply.ok('Senha atualizada com sucesso!');
       } catch (error) {
+        createErrorLog(error as Error, request, reply);
+
         return reply.error('Erro ao atualizar senha!');
       }
     }

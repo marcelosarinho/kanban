@@ -10,13 +10,11 @@ interface GetProjectsQuerystring {
 
 export async function getProjects(app: FastifyInstance) {
   app.get<{ Querystring: GetProjectsQuerystring }>("/projects", async (request, reply: FastifyReply) => {
+    const { search } = request.query;
+
+    const where = search ? or(ilike(projects.name, `%${search}%`), ilike(projects.description, `%${search}%`)) : undefined;
+
     try {
-      throw new Error('Teste');
-
-      const { search } = request.query;
-
-      const where = search ? or(ilike(projects.name, `%${search}%`), ilike(projects.description, `%${search}%`)) : undefined;
-
       const results = await db.query.projects.findMany({
         where,
         orderBy: [desc(projects.createdAt)],

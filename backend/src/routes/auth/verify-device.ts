@@ -5,6 +5,7 @@ import { db } from "index";
 import argon2 from 'argon2';
 import dayjs from "@lib/dayjs";
 import { getDeviceSignature } from "../helpers/login";
+import { createErrorLog } from "@routes/helpers/log";
 
 interface VerifyDeviceBody {
   code: string;
@@ -63,7 +64,8 @@ export default async function verifyDevice(app: FastifyInstance) {
 
       reply.ok('Dispositivo verificado com sucesso!');
     } catch (error) {
-      console.log(error);
+      createErrorLog(error as Error, request, reply);
+
       return reply.error('Erro ao verificar dispositivo!');
     }
   });

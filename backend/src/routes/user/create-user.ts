@@ -5,6 +5,7 @@ import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import { sendVerificationEmail } from "@utils/email";
 import { generateToken } from "@routes/helpers/token";
+import { createErrorLog } from "@routes/helpers/log";
 
 interface CreateUserBody {
   name: string;
@@ -43,7 +44,7 @@ export async function createUser(app: FastifyInstance) {
 
       return reply.created('Usuário cadastrado com sucesso!');
     } catch (error) {
-      console.log(error);
+      createErrorLog(error as Error, request, reply);
 
       return reply.error('Ocorreu um erro ao cadastrar usuário! Por favor, tente novamente.');
     }

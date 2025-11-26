@@ -4,6 +4,7 @@ import { and, eq, ne, or } from "drizzle-orm";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import { generateToken } from "@routes/helpers/token";
+import { createErrorLog } from "@routes/helpers/log";
 
 export function updateProfile(app: FastifyInstance) {
   app.patch<{ Body: { name: string; email: string } }>(
@@ -76,6 +77,8 @@ export function updateProfile(app: FastifyInstance) {
 
       return reply.ok('Perfil atualizado com sucesso!', { pendingEmail: result?.email });
     } catch (error) {
+      createErrorLog(error as Error, request, reply);
+
       return reply.error('Erro ao atualizar perfil!');
     }
   })
