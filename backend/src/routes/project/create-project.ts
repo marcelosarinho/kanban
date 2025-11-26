@@ -1,6 +1,7 @@
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
-import { projects } from "@db/schema";
+import { actionLogs, projects } from "@db/schema";
+import { createActionLog } from "@routes/helpers/log";
 
 interface CreateProjectBody {
   name: string;
@@ -20,7 +21,8 @@ export async function createProject(app: FastifyInstance) {
       return reply.badRequest('Nome e descrição do projeto são obrigatórios!');
     }
 
-    await db.insert(projects).values({ name, description, userId: Number(userId) });
+    const project = await db.insert(projects).values({ name, description, userId: Number(userId) });
+    await createActionLog('create', request, reply, `Usuário ${userId} criou o projeto ${}`);
 
     return reply.created('Projeto criado com sucesso!');
   })
