@@ -27,6 +27,8 @@ import { me } from "@routes/user/me";
 import { verifyNewEmail } from "@routes/user/verify-new-email";
 import { deleteUser } from "@routes/user/delete-user";
 import { createFeedback } from "@routes/feedback/create-feedback";
+import { setupErrorHandler } from "handlers/errorHandler";
+
 const server = fastify();
 
 server.register(cors, {
@@ -107,6 +109,8 @@ server.listen({ port: 8080 }, (err, address) => {
 
   console.log(`Server running at ${address}`)
 });
+
+setupErrorHandler(server);
 
 server.register(getProjects);
 server.register(createProject);

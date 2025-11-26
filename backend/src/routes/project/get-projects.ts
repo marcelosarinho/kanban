@@ -2,7 +2,6 @@ import { FastifyInstance, FastifyReply } from "fastify";
 import { desc, ilike, or } from "drizzle-orm";
 import { projects } from "@db/schema";
 import { db } from "index";
-import { createErrorLog } from "@routes/helpers/log";
 
 interface GetProjectsQuerystring {
   search?: string
@@ -14,17 +13,11 @@ export async function getProjects(app: FastifyInstance) {
 
     const where = search ? or(ilike(projects.name, `%${search}%`), ilike(projects.description, `%${search}%`)) : undefined;
 
-    try {
-      const results = await db.query.projects.findMany({
-        where,
-        orderBy: [desc(projects.createdAt)],
-      });
+    const results = await db.query.projects.findMany({
+      where,
+      orderBy: [desc(projects.createdAt)],
+    });
 
-      return reply.ok('Projetos listados com sucesso!', results);
-    } catch (error) {
-      createErrorLog(error as Error, request, reply);
-
-      return reply.error('Ocorreu um erro ao listar projetos! Por favor, tente novamente.');
-    }
+    return reply.ok('Projetos listados com sucesso!', results);
   })
 }
