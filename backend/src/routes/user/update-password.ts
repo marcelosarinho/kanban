@@ -3,7 +3,6 @@ import { eq } from "drizzle-orm";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import argon2 from 'argon2';
-import { createErrorLog } from "@routes/helpers/log";
 
 export function updatePassword(app: FastifyInstance) {
   app.patch<{ Body: { oldPassword: string; newPassword: string, confirmPassword: string } }>(
@@ -25,29 +24,23 @@ export function updatePassword(app: FastifyInstance) {
         return reply.badRequest('As senhas não coincidem!');
       }
 
-      try {
-        const user = await db.query.users.findFirst({ where: eq(users.id, Number(id)) });
+      const user = await db.query.users.findFirst({ where: eq(users.id, Number(id)) });
 
-        if (!user) {
-          return reply.badRequest('Erro ao encontrar usuário!');
-        }
-
-        const isPasswordValid = await argon2.verify(user.password, oldPassword);
-
-        if (!isPasswordValid) {
-          return reply.badRequest('Senha antiga inválida!');
-        }
-
-        const hashedPassword = await argon2.hash(newPassword);
-
-        await db.update(users).set({ password: hashedPassword }).where(eq(users.id, Number(id)));
-
-        return reply.ok('Senha atualizada com sucesso!');
-      } catch (error) {
-        createErrorLog(error as Error, request, reply);
-
-        return reply.error('Erro ao atualizar senha!');
+      if (!user) {
+        return reply.badRequest('Erro ao encontrar usuário!');
       }
+
+      const isPasswordValid = await argon2.verify(user.password, oldPassword);
+
+      if (!isPasswordValid) {
+        return reply.badRequest('Senha antiga inválida!');
+      }
+
+      const hashedPassword = await argon2.hash(newPassword);
+
+      await db.update(users).set({ password: hashedPassword }).where(eq(users.id, Number(id)));
+
+      return reply.ok('Senha atualizada com sucesso!');
     }
   );
 }

@@ -5,7 +5,6 @@ import { users } from "@db/schema";
 import { eq } from "drizzle-orm";
 import { sendVerificationEmail } from "@utils/email";
 import { generateToken } from "@routes/helpers/token";
-import { createErrorLog } from "@routes/helpers/log";
 
 interface CreateUserBody {
   name: string;
@@ -21,32 +20,26 @@ export async function createUser(app: FastifyInstance) {
       return reply.badRequest('Nome, email e senha são obrigatórios!');
     }
 
-    try {
-      const user = await db.query.users.findFirst({ where: eq(users.email, email) });
+    const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
-      if (user && user.verified) {
-        return reply.conflict('Usuário já cadastrado!');
-      }
-
-      const { token, hashToken, expiry } = await generateToken(1, 'days');
-
-      if (!user) {
-        const hashedPassword = await argon2.hash(password);
-
-        await db.insert(users).values({ name, email, password: hashedPassword, verifyToken: hashToken, verifyTokenExpiry: expiry });
-      }
-
-      if (user && !user.verified) {
-        await db.update(users).set({ verifyToken: hashToken, verifyTokenExpiry: expiry }).where(eq(users.email, user.email));
-      }
-
-      await sendVerificationEmail({ name, email, token });
-
-      return reply.created('Usuário cadastrado com sucesso!');
-    } catch (error) {
-      createErrorLog(error as Error, request, reply);
-
-      return reply.error('Ocorreu um erro ao cadastrar usuário! Por favor, tente novamente.');
+    if (user && user.verified) {
+      return reply.conflict('Usuário já cadastrado!');
     }
+
+    const { token, hashToken, expiry } = await generateToken(1, 'days');
+
+    if (!user) {
+      const hashedPassword = await argon2.hash(password);
+
+      await db.insert(users).values({ name, email, password: hashedPassword, verifyToken: hashToken, verifyTokenExpiry: expiry });
+    }
+
+    if (user && !user.verified) {
+      await db.update(users).set({ verifyToken: hashToken, verifyTokenExpiry: expiry }).where(eq(users.email, user.email));
+    }
+
+    await sendVerificationEmail({ name, email, token });
+
+    return reply.created('Usuário cadastrado com sucesso!');
   })
 }

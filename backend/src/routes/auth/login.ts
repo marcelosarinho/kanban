@@ -8,7 +8,6 @@ import { randomInt } from "crypto";
 import { sendLoginVerificationEmail } from "@utils/email";
 import dayjs from "dayjs";
 import jwt from "jsonwebtoken";
-import { createErrorLog } from "@routes/helpers/log";
 
 interface LoginBody {
   email: string;
@@ -24,64 +23,58 @@ export async function login(app: FastifyInstance) {
       return reply.badRequest('Email e senha são obrigatórios!');
     }
 
-    try {
-      const user = await db.query.users.findFirst({ where: eq(users.email, email) });
+    const user = await db.query.users.findFirst({ where: eq(users.email, email) });
 
-      if (!user) {
-        return reply.unauthorized('Email ou senha inválidos!');
-      }
-
-      if (!user.verified) {
-        return reply.unauthorized('Email ou senha inválidos!');
-      }
-
-      const isPasswordValid = await argon2.verify(user.password, password);
-
-      if (!isPasswordValid) {
-        return reply.unauthorized('Email ou senha inválidos!');
-      }
-
-      const { deviceStatus } = checkLoginVerification(user, { ip, userAgent });
-
-      const jwtToken = jwt.sign(
-        {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          token_version: user.tokenVersion,
-          verified: deviceStatus === "verified",
-        },
-        process.env.JWT_SECRET!,
-        { expiresIn: '1d' }
-      );
-
-      reply.setCookie('auth', jwtToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        path: '/',
-        maxAge: 60 * 60 * 24,
-      });
-
-      if (deviceStatus === "unverified") {
-        const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
-        const hashedCode = await argon2.hash(code);
-
-        await db.update(users).set({
-          verifyLoginToken: hashedCode,
-          verifyLoginTokenExpiry: dayjs.utc().add(10, 'minute').format(),
-        })
-
-        await sendLoginVerificationEmail({ name: user.name, email }, code);
-
-        return reply.ok('Dispositivo não verificado!', { verified: false, email: user.email });
-      }
-
-      return reply.ok('Login realizado com sucesso!', { verified: true });
-    } catch (error) {
-      createErrorLog(error as Error, request, reply);
-
-      return reply.error('Ocorreu um erro ao realizar login! Por favor, tente novamente.');
+    if (!user) {
+      return reply.unauthorized('Email ou senha inválidos!');
     }
+
+    if (!user.verified) {
+      return reply.unauthorized('Email ou senha inválidos!');
+    }
+
+    const isPasswordValid = await argon2.verify(user.password, password);
+
+    if (!isPasswordValid) {
+      return reply.unauthorized('Email ou senha inválidos!');
+    }
+
+    const { deviceStatus } = checkLoginVerification(user, { ip, userAgent });
+
+    const jwtToken = jwt.sign(
+      {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        token_version: user.tokenVersion,
+        verified: deviceStatus === "verified",
+      },
+      process.env.JWT_SECRET!,
+      { expiresIn: '1d' }
+    );
+
+    reply.setCookie('auth', jwtToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 60 * 60 * 24,
+    });
+
+    if (deviceStatus === "unverified") {
+      const code = randomInt(0, 1_000_000).toString().padStart(6, '0');
+      const hashedCode = await argon2.hash(code);
+
+      await db.update(users).set({
+        verifyLoginToken: hashedCode,
+        verifyLoginTokenExpiry: dayjs.utc().add(10, 'minute').format(),
+      })
+
+      await sendLoginVerificationEmail({ name: user.name, email }, code);
+
+      return reply.ok('Dispositivo não verificado!', { verified: false, email: user.email });
+    }
+
+    return reply.ok('Login realizado com sucesso!', { verified: true });
   })
 }

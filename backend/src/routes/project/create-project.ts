@@ -1,7 +1,6 @@
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import { projects } from "@db/schema";
-import { createErrorLog } from "@routes/helpers/log";
 
 interface CreateProjectBody {
   name: string;
@@ -21,14 +20,8 @@ export async function createProject(app: FastifyInstance) {
       return reply.badRequest('Nome e descrição do projeto são obrigatórios!');
     }
 
-    try {
-      await db.insert(projects).values({ name, description, userId: Number(userId) });
+    await db.insert(projects).values({ name, description, userId: Number(userId) });
 
-      return reply.created('Projeto criado com sucesso!');
-    } catch (error) {
-      createErrorLog(error as Error, request, reply);
-
-      return reply.error('Ocorreu um erro ao criar projeto! Por favor, tente novamente.');
-    }
+    return reply.created('Projeto criado com sucesso!');
   })
 }

@@ -1,8 +1,7 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { Experience, Feedback } from "@custom-types/feedback";
+import { FastifyInstance, FastifyReply } from "fastify";
+import { Feedback } from "@custom-types/feedback";
 import { db } from "index";
 import { feedbacks } from "@db/schema";
-import { createErrorLog } from "@routes/helpers/log";
 
 export async function createFeedback(app: FastifyInstance) {
   app.post<{ Body: Pick<Feedback, 'experience' | 'rating' | 'feedback'> }>('/feedback', async (request, reply: FastifyReply) => {
@@ -22,14 +21,8 @@ export async function createFeedback(app: FastifyInstance) {
 
     const formattedFeedback = feedback?.trim() === '' ? null : feedback?.trim();
 
-    try {
-      await db.insert(feedbacks).values({ experience, rating, feedback: formattedFeedback });
+    await db.insert(feedbacks).values({ experience, rating, feedback: formattedFeedback });
 
-      return reply.ok('Feedback enviado com sucesso!');
-    } catch (error) {
-      createErrorLog(error as Error, request, reply);
-
-      return reply.error('Ocorreu um erro ao enviar feedback! Por favor, tente novamente.');
-    }
+    return reply.ok('Feedback enviado com sucesso!');
   });
 }

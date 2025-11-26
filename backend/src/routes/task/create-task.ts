@@ -2,7 +2,6 @@ import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import { tasks } from "@db/schema";
 import { TaskStatusOption } from "@custom-types/task";
-import { createErrorLog } from "@routes/helpers/log";
 
 interface CreateTaskParams {
   id: number;
@@ -25,8 +24,7 @@ export async function createTask(app: FastifyInstance) {
       return reply.badRequest('Status da tarefa não informado!');
     }
 
-    try {
-      await db.insert(tasks).values({
+    await db.insert(tasks).values({
         projectId: id,
         status,
         name: 'Nova tarefa',
@@ -37,10 +35,5 @@ export async function createTask(app: FastifyInstance) {
       });
 
       return reply.created('Tarefa criada com sucesso!');
-    } catch (error) {
-      createErrorLog(error as Error, request, reply);
-
-      return reply.error('Ocorreu um erro ao criar tarefa! Por favor, tente novamente.');
-    }
   })
 }

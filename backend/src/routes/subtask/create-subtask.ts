@@ -1,7 +1,6 @@
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import { subtasks } from "@db/schema";
-import { createErrorLog } from "@routes/helpers/log";
 
 interface CreateSubtaskBody {
   name: string;
@@ -24,18 +23,12 @@ export async function createSubtask(app: FastifyInstance) {
       return reply.badRequest('Nome da subtarefa não informado!');
     }
 
-    try {
-      await db.insert(subtasks).values({
-        name,
-        done: false,
-        taskId,
-      })
+    await db.insert(subtasks).values({
+      name,
+      done: false,
+      taskId,
+    })
 
-      return reply.created('Subtarefa criada com sucesso!');
-    } catch (error) {
-      createErrorLog(error as Error, request, reply);
-
-      return reply.error('Ocorreu um erro ao criar subtarefa! Por favor, tente novamente.');
-    }
+    return reply.created('Subtarefa criada com sucesso!');
   })
 }

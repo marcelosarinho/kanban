@@ -4,7 +4,6 @@ import { tasks } from "@db/schema";
 import { eq, sql } from "drizzle-orm";
 import { FastifyReply } from "fastify";
 import { TaskPriorityOption, TaskStatusOption } from "@custom-types/task";
-import { createErrorLog } from "@routes/helpers/log";
 
 interface UpdateTaskBody {
   name: string;
@@ -30,17 +29,11 @@ export async function updateTask(app: FastifyInstance) {
       return reply.badRequest('ID da tarefa não informado!');
     }
 
-    try {
-      await db.update(tasks).set({
-        ...data,
-        updatedAt: sql`NOW()`
-      }).where(eq(tasks.id, taskId));
+    await db.update(tasks).set({
+      ...data,
+      updatedAt: sql`NOW()`
+    }).where(eq(tasks.id, taskId));
 
-      return reply.modified('Tarefa atualizada com sucesso!');
-    } catch (error) {
-      createErrorLog(error as Error, request, reply);
-
-      return reply.error('Ocorreu um erro ao atualizar tarefa! Por favor, tente novamente.');
-    }
+    return reply.modified('Tarefa atualizada com sucesso!');
   })
 }
