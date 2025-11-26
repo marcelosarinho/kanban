@@ -31,15 +31,22 @@ export const users = pgTable('users', {
 
 export const errorLogs = pgTable('error_logs', {
   id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
-  timestamp: timestamp('timestamp', { mode: 'string' }).defaultNow().notNull(),
   message: text('message').notNull(),
   stacktrace: text('stacktrace'),
   route: varchar('route', { length: 255 }).notNull(),
   method: varchar('method', { length: 10 }).notNull(),
-  context: jsonb('context').notNull(),
+  context: jsonb('context').default({}),
   userId: integer('user_id').references(() => users.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { mode: 'string' }).defaultNow().notNull(),
+});
+
+export const actionLogs = pgTable('action_logs', {
+  id: integer('id').primaryKey().generatedByDefaultAsIdentity(),
+  action: varchar('action', { length: 255 }).notNull(),
+  description: text('description'),
+  userId: integer('user_id').references(() => users.id, { onDelete: 'cascade' }),
+  context: jsonb('context').default({}),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow().notNull(),
 });
 
 export const projects = pgTable('projects', {
@@ -111,9 +118,17 @@ export const errorLogsRelations = relations(errorLogs, ({ one }) => ({
   }),
 }));
 
+export const actionLogsRelations = relations(actionLogs, ({ one }) => ({
+  user: one(users, {
+    fields: [actionLogs.userId],
+    references: [users.id],
+  }),
+}));
+
 export const usersRelations = relations(users, ({ many }) => ({
   projects: many(projects),
   errorLogs: many(errorLogs),
+  actionLogs: many(actionLogs),
 }));
 
 export const schema = {
@@ -128,4 +143,6 @@ export const schema = {
   feedbacks,
   errorLogs,
   errorLogsRelations,
+  actionLogs,
+  actionLogsRelations,
 };
