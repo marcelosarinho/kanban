@@ -1,9 +1,9 @@
 import { actionLogs, errorLogs } from "@db/schema";
-import { FastifyReply, FastifyRequest } from "fastify";
+import { FastifyError, FastifyRequest } from "fastify";
 import { db } from "index";
 import { Action } from "@lib/constants";
 
-export async function createErrorLog(error: Error, request: FastifyRequest, reply: FastifyReply) {
+export async function createErrorLog(error: FastifyError, request: FastifyRequest) {
   const { user } = request;
 
   await db.insert(errorLogs).values({
@@ -16,10 +16,10 @@ export async function createErrorLog(error: Error, request: FastifyRequest, repl
   });
 }
 
-export async function createActionLog(action: Action, request: FastifyRequest, reply: FastifyReply, description?: string) {
+export async function createActionLog(action: Action, request: FastifyRequest, tx: typeof db, description?: string) {
   const { user } = request;
 
-  await db.insert(actionLogs).values({
+  await tx.insert(actionLogs).values({
     action,
     userId: user?.id ? Number(user.id) : undefined,
     description,
