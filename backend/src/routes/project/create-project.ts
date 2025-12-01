@@ -11,7 +11,7 @@ interface CreateProjectBody {
 }
 
 export async function createProject(app: FastifyInstance) {
-  app.post<{ Body: CreateProjectBody }>('/projects', async (request, reply: FastifyReply) => {
+  app.post<{ Body: CreateProjectBody }>('/projects', { preHandler: app.auth }, async (request, reply: FastifyReply) => {
     const { name, description } = request.body;
 
     if (!request.user?.id) {
@@ -31,7 +31,7 @@ export async function createProject(app: FastifyInstance) {
     await db.transaction(async (tx) => {
       const newProject = await tx.insert(projects).values({ name, description, userId: Number(request.user?.id) }).returning();
 
-      // await createActionLog('create', request, tx, `Usuário de ID ${request.user?.id} criou o projeto de ID ${newProject[0].id}`);
+      await createActionLog('create', request, tx, `Usuário de ID ${request.user?.id} criou o projeto de ID ${newProject[0].id}`);
     })
 
     return reply.created('Projeto criado com sucesso!');

@@ -3,6 +3,8 @@ import { FastifyError, FastifyRequest } from "fastify";
 import { db } from "index";
 import { Action } from "@lib/constants";
 
+type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0];
+
 export async function createErrorLog(error: FastifyError, request: FastifyRequest) {
   const { user } = request;
 
@@ -16,7 +18,7 @@ export async function createErrorLog(error: FastifyError, request: FastifyReques
   });
 }
 
-export async function createActionLog(action: Action, request: FastifyRequest, tx: typeof db, description?: string) {
+export async function createActionLog(action: Action, request: FastifyRequest, tx: Tx, description?: string) {
   const { user } = request;
 
   await tx.insert(actionLogs).values({

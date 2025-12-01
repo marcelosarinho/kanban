@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { users } from "@db/schema";
 
 export async function logout(app: FastifyInstance) {
-  app.post('/logout', { preHandler: [app.auth] }, async (request: FastifyRequest, reply: FastifyReply) => {
+  app.post('/logout', { preHandler: app.auth }, async (request: FastifyRequest, reply: FastifyReply) => {
     const token = request.user;
 
     if (!token) {

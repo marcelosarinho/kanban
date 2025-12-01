@@ -5,7 +5,7 @@ export * from '@api/feedback';
 
 async function request<T>(
   url: string,
-  { method = 'GET', headers, body, ...rest }: RequestInit = {}): Promise<T> {
+  { method = 'GET', headers, body, ...rest }: RequestInit = {}): Promise<T | void> {
     const response = await fetch(`http://localhost:8080${url}`, {
       method,
       headers: {
@@ -20,6 +20,10 @@ async function request<T>(
       const error = await response.json();
 
       throw new Error(error.message);
+    }
+
+    if (response.status === 204) {
+      return;
     }
 
     return await response.json() as T;

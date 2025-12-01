@@ -8,7 +8,7 @@ interface GetProjectsQuerystring {
 }
 
 export async function getProjects(app: FastifyInstance) {
-  app.get<{ Querystring: GetProjectsQuerystring }>("/projects", async (request, reply: FastifyReply) => {
+  app.get<{ Querystring: GetProjectsQuerystring }>("/projects", { preHandler: app.auth }, async (request, reply: FastifyReply) => {
     const { search } = request.query;
 
     const where = search ? or(ilike(projects.name, `%${search}%`), ilike(projects.description, `%${search}%`)) : undefined;

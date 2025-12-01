@@ -266,7 +266,8 @@ function Kanban() {
       closeModal('create-project-modal');
       toast.success('Projeto atualizado com sucesso!');
     },
-    onError: () => {
+    onError: (e) => {
+      console.log(e);
       toast.error('Erro ao atualizar projeto!');
     },
   });
