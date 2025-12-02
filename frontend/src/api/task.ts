@@ -1,65 +1,19 @@
 import type { Project } from "@custom-types/project";
 import type { Task, TaskStatusOption } from "@custom-types/task";
+import { api } from ".";
 
 export async function getTasks({ id }: Pick<Project, 'id'>) {
-  if (!id) {
-    console.error('Projeto não encontrado!');
-    return;
-  }
-
-  try {
-    const response = await fetch(`http://localhost:8080/projects/${id}/tasks`);
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
+  return api.get<{ data: Task[] }>(`/projects/${id}/tasks`, { credentials: 'include' });
 }
 
 export async function createTask(status: TaskStatusOption, { id }: Pick<Project, 'id'>) {
-  if (!id) {
-    console.error('Projeto não encontrado!');
-    return;
-  }
-
-  try {
-    const response = await fetch(`http://localhost:8080/projects/${id}/tasks`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ status }),
-    });
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error('Erro ao criar tarefa!', error);
-  }
+  return api.post<{ data: Task }>(`/projects/${id}/tasks`, { status }, { credentials: 'include' });
 }
 
-export async function updateTask(task: Task, project?: Pick<Project, 'id'>) {
-  if (!project?.id) {
-    console.log('Projeto não encontrado!');
-    return;
-  }
+export async function updateTask(task: Task) {
+  return api.patch<{ data: Task }>(`/tasks/${task.id}`, task, { credentials: 'include' });
+}
 
-  try {
-    const response = await fetch(`http://localhost:8080/projects/${project.id}/tasks/${task.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(task),
-    });
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
+export async function deleteTask({ id }: Pick<Task, 'id'>) {
+  return api.delete<{ data: Task }>(`/tasks/${id}`, { credentials: 'include' });
 }

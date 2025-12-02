@@ -221,7 +221,7 @@ function Kanban() {
   function searchTasks(status: TaskStatusOption) {
     console.log('teste');
     return [];
-    return tasks?.[status].filter((t: TaskType) => t.name.toLowerCase().includes(deferredTasksQuery[status].toLowerCase())) ?? [];
+    // return tasks?.data?.[status].filter((t: TaskType) => t.name.toLowerCase().includes(deferredTasksQuery[status].toLowerCase())) ?? [];
   }
 
   async function onSubmit(data: Inputs) {

@@ -4,12 +4,10 @@ import { and, eq, ne, or } from "drizzle-orm";
 import { FastifyInstance, FastifyReply } from "fastify";
 import { db } from "index";
 import { generateToken } from "@routes/helpers/token";
+import { createActionLog } from "@routes/helpers/log";
 
 export function updateProfile(app: FastifyInstance) {
-  app.patch<{ Body: { name: string; email: string } }>(
-    '/update-profile',
-    { preHandler: app.auth },
-    async (request, reply: FastifyReply) => {
+  app.patch<{ Body: { name: string; email: string } }>('/update-profile', { preHandler: app.auth }, async (request, reply: FastifyReply) => {
     const { name, email } = request.body;
     const { id } = request.user!;
 
@@ -28,12 +26,7 @@ export function updateProfile(app: FastifyInstance) {
         return reply.badRequest('Erro ao encontrar usuário!');
       }
 
-      let pendingEmailInfo: {
-        name: string;
-        email: string;
-        oldEmail: string;
-        token: string;
-      } | null = null;
+      let pendingEmailInfo: { name: string; email: string; oldEmail: string; token: string } | null = null;
 
       if (email !== user.email) {
         const userByEmail = await tx.query.users.findFirst({
@@ -64,6 +57,8 @@ export function updateProfile(app: FastifyInstance) {
       }
 
       await tx.update(users).set({ name }).where(eq(users.id, Number(id)));
+
+      await createActionLog('update', request, tx, `Usuário de ID ${id} atualizou seu perfil`);
 
       return pendingEmailInfo;
     });
