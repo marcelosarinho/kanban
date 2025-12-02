@@ -28,6 +28,7 @@ import { verifyNewEmail } from "@routes/user/verify-new-email";
 import { deleteUser } from "@routes/user/delete-user";
 import { createFeedback } from "@routes/feedback/create-feedback";
 import { setupErrorHandler } from "handlers/errorHandler";
+import { updateSubtask } from "@routes/subtask/update-subtask";
 
 const server = fastify();
 
@@ -122,6 +123,7 @@ server.register(updateTask);
 server.register(deleteTask);
 server.register(createSubtask);
 server.register(deleteSubtask);
+server.register(updateSubtask);
 server.register(createUser);
 server.register(deleteUser);
 server.register(forgotPassword);
