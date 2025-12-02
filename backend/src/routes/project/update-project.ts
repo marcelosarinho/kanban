@@ -33,15 +33,21 @@ export async function updateProject(app: FastifyInstance) {
       if (!name || !description) {
         return reply.badRequest('Nome e descrição do projeto são obrigatórios!');
       }
+
+      const project = await db.query.projects.findFirst({ where: eq(projects.id, Number(id)) });
+
+      if (!project) {
+        return reply.notFound('Projeto não encontrado!');
+      }
   
-      const project = await db.query.projects.findFirst({ where: and(eq(projects.name, name), ne(projects.id, Number(id))) });
+      const existingProject = await db.query.projects.findFirst({ where: and(eq(projects.name, name), ne(projects.id, Number(id))) });
   
-      if (project) {
+      if (existingProject) {
         return reply.conflict('Projeto já cadastrado!');
       }
   
       await db.transaction(async (tx) => {
-        await tx.update(projects).set({ name, description, updatedAt: sql`NOW()` }).where(eq(projects.id, id));
+        await tx.update(projects).set({ name, description, updatedAt: sql`NOW()` }).where(eq(projects.id, Number(id)));
   
         await createActionLog('update', request, tx, `Usuário de ID ${request.user?.id} atualizou o projeto de ID ${id}`);
       });

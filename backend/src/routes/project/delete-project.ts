@@ -20,8 +20,14 @@ export async function deleteProject(app: FastifyInstance) {
       return reply.badRequest('ID do projeto não informado!');
     }
 
+    const project = await db.query.projects.findFirst({ where: eq(projects.id, Number(id)) });
+
+    if (!project) {
+      return reply.notFound('Projeto não encontrado!');
+    }
+
     await db.transaction(async (tx) => {
-      await tx.delete(projects).where(eq(projects.id, id));
+      await tx.delete(projects).where(eq(projects.id, Number(id)));
 
       await createActionLog('delete', request, tx, `Usuário de ID ${request.user?.id} deletou o projeto de ID ${id}`);
     });
