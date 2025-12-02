@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 type GoodbyeContextType = {
-  goodbye: boolean;
-  setGoodbye: (goodbye: boolean) => void;
+  goodbyeToken: string | null;
+  setGoodbyeToken: (goodbyeToken: string | null) => void;
 }
 
 export const GoodbyeContext = createContext<GoodbyeContextType | null>(null);
