@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 type GoodbyeContextType = {
   goodbyeToken: string | null;
@@ -7,7 +7,9 @@ type GoodbyeContextType = {
 
 export const GoodbyeContext = createContext<GoodbyeContextType | null>(null);
 
-export function useGoodbye(ctx: GoodbyeContextType) {
+export function useGoodbye() {
+  const ctx = useContext(GoodbyeContext);
+
   if (!ctx) {
     throw new Error('useGoodbye deve ser usado dentro de um GoodbyeProvider');
   }

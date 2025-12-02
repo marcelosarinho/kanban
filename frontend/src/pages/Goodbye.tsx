@@ -8,21 +8,38 @@ import ModalHeader from "@components/modal/ModalHeader";
 import ModalTitle from "@components/modal/ModalTitle";
 import Textarea from "@components/Textarea";
 import ThemeButton from "@components/theme/ThemeButton";
+import { useGoodbye } from "@contexts/GoodbyeContext";
 import type { Experience } from "@custom-types/feedback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatCenteredTextIcon, CheckCircleIcon, EnvelopeIcon, HouseIcon, ShieldIcon, CheckIcon, XIcon, SmileyIcon, SmileyMehIcon, SmileySadIcon } from "@phosphor-icons/react";
 import { feedbackSchema } from "@schemas/feedback";
 import { useMutation } from "@tanstack/react-query";
 import { closeModal, openModal } from "@utils/modal";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import type z from "zod";
 
 type Inputs = z.infer<typeof feedbackSchema>;
 
 export default function Goodbye() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
+
+  const { goodbyeToken, setGoodbyeToken } = useGoodbye();
+
+  useEffect(() => {
+    if (token) {
+      setGoodbyeToken(token);
+    }
+  }, [token, setGoodbyeToken]);
+
+  if (!token || token !== goodbyeToken) {
+    navigate('/');
+  }
 
   const {
     register,
