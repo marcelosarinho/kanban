@@ -10,6 +10,13 @@ export type User = {
   updatedAt: string;
 };
 
+export type AuthUser = {
+  id: string;
+  name: string;
+  email: string;
+  verified: boolean;
+}
+
 export type ResetPassword = {
   token: string | null;
   email: string | null;
@@ -23,4 +30,4 @@ export type UserSession = {
   verified: boolean;
   exp: number;
   iat: number;
-}
+};
