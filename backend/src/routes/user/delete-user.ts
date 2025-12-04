@@ -6,10 +6,6 @@ import { db } from "index";
 
 export async function deleteUser(app: FastifyInstance) {
   app.delete('/delete-user', { preHandler: app.auth }, async (request: FastifyRequest, reply: FastifyReply) => {
-    const token = crypto.randomUUID();
-
-    return reply.ok('Usuário excluído com sucesso!', { token });
-
     const { id } = request.user!;
 
     if (!id) {
@@ -28,6 +24,8 @@ export async function deleteUser(app: FastifyInstance) {
       await createActionLog('delete', request, tx, `Usuário de ID ${id} excluiu a conta`);
     });
 
-    return reply.ok('Usuário excluído com sucesso!');
+    const token = crypto.randomUUID();
+
+    return reply.ok('Usuário excluído com sucesso!', { token });
   })
 }

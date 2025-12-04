@@ -1,3 +1,5 @@
+import auth from "@api/middlewares/auth";
+import PrivateRoute from "@pages/auth/PrivateRoute";
 import Kanban from "@pages/kanban/Kanban";
 import Profile from "@pages/kanban/Profile";
 import VerifyNewEmail from "@pages/kanban/VerifyNewEmail";
@@ -5,15 +7,30 @@ import VerifyNewEmail from "@pages/kanban/VerifyNewEmail";
 const appRoutes = [
   {
     path: '/kanban',
-    Component: Kanban,
+    middleware: [auth],
+    Component: () => (
+      <PrivateRoute>
+        <Kanban />
+      </PrivateRoute>
+    ),
   },
   {
     path: '/profile',
-    Component: Profile,
+    middleware: [auth],
+    Component: () => (
+      <PrivateRoute>
+        <Profile />
+      </PrivateRoute>
+    ),
   },
   {
     path: '/new-email',
-    Component: VerifyNewEmail,
+    middleware: [auth],
+    Component: () => (
+      <PrivateRoute>
+        <VerifyNewEmail />
+      </PrivateRoute>
+    ),
   }
 ]
 
