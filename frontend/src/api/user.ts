@@ -1,7 +1,7 @@
 import type { ResetPassword, User, UserSession } from "@custom-types/user";
 import { api } from "./index";
 
-export async function getUser(): Promise<{ message: string, data: UserSession}> {
+export async function getUser(): Promise<{ message: string, data: UserSession} | void> {
   return api.get('/me', { credentials: 'include' });
 }
 
@@ -21,7 +21,7 @@ export async function forgotPassword(email: Pick<User, 'email'>) {
   return api.post('/forgot-password', email);
 }
 
-export async function verifyResetPassword(resetPassword: Pick<ResetPassword, 'token' | 'email'>): Promise<{ valid: boolean, message: string }> {
+export async function verifyResetPassword(resetPassword: Pick<ResetPassword, 'token' | 'email'>): Promise<{ valid: boolean, message: string } | void> {
   return api.get(`/verify-reset-password?token=${resetPassword.token}&email=${resetPassword.email}`);
 }
 
@@ -37,7 +37,7 @@ export async function verifyEmail({ email, token }: { email: string, token: stri
   return api.post('/verify-email', { email, token });
 }
 
-export async function updateProfile(profile: Pick<User, 'name' | 'email'>): Promise<{ message: string, data?: { pendingEmail?: string } }> {
+export async function updateProfile(profile: Pick<User, 'name' | 'email'>): Promise<{ message: string, data?: { pendingEmail?: string } } | void> {
   return api.patch('/update-profile', profile, { credentials: 'include' });
 }
 
@@ -45,7 +45,7 @@ export async function updatePassword({ oldPassword, newPassword, confirmPassword
   return api.patch('/update-password', { oldPassword, newPassword, confirmPassword }, { credentials: 'include' });
 }
 
-export async function deleteUser() {
+export async function deleteUser(): Promise<{ message: string, data: { token: string } } | void> {
   return api.delete('/delete-user', { credentials: 'include' });
 }
 

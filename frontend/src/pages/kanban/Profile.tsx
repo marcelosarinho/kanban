@@ -30,6 +30,7 @@ import { profileInfoSchema, profilePasswordSchema } from "@schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateProfile as updateProfileFn, updatePassword as updatePasswordFn } from "@api/user";
 import toast, { Toaster } from "react-hot-toast";
+import { useGoodbye } from "@contexts/GoodbyeContext";
 
 type ProfileInputs = z.infer<typeof profileInfoSchema>;
 type PasswordInputs = z.infer<typeof profilePasswordSchema>;
@@ -38,6 +39,7 @@ export default function Profile() {
   const navigate = useNavigate();
 
   const { theme, changeTheme } = useTheme();
+  const { setGoodbyeToken } = useGoodbye();
 
   const [dropdown, setDropdown] = useState({
     theme: false,
@@ -57,7 +59,7 @@ export default function Profile() {
     onSuccess: (data) => {
       toast.success('Perfil atualizado com sucesso!');
 
-      if (data.data?.pendingEmail) {
+      if (data?.data?.pendingEmail) {
         toast.success(`Email de confirmação enviado para: ${data.data.pendingEmail}`, {
           duration: 10000,
         });
@@ -80,9 +82,13 @@ export default function Profile() {
 
   const deleteUserMutation = useMutation({
     mutationFn: deleteUser,
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast.success('Conta deletada com sucesso!');
       toast.success('Redirecionando para a página de despedida...');
+
+      if (data?.data?.token) {
+        setGoodbyeToken(data.data.token);
+      }
 
       setTimeout(() => {
         navigate('/goodbye');

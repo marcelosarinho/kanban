@@ -18,26 +18,23 @@ import { closeModal, openModal } from "@utils/modal";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import type z from "zod";
 
 type Inputs = z.infer<typeof feedbackSchema>;
 
 export default function Goodbye() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const token = params.get('token');
 
-  const { goodbyeToken, setGoodbyeToken } = useGoodbye();
+  const { goodbyeToken } = useGoodbye();
 
   useEffect(() => {
-    if (token) {
-      setGoodbyeToken(token);
+    if (!goodbyeToken) {
+      navigate('/');
     }
-  }, [token, setGoodbyeToken]);
+  }, [goodbyeToken, navigate]);
 
-  if (!token || token !== goodbyeToken) {
+  if (!goodbyeToken) {
     navigate('/');
   }
 
