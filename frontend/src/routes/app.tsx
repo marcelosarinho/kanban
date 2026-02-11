@@ -8,37 +8,35 @@ import { userContext } from "./contexts/userContext";
 const appRoutes = [
   {
     path: '/kanban',
-    middleware: [authMiddleware],
-    loader: async () => null,
+    loader: authMiddleware,
     Component: Kanban,
   },
   {
     path: '/profile',
-    middleware: [authMiddleware],
-    loader: async () => null,
+    loader: authMiddleware,
     Component: Profile,
   },
   {
     path: '/new-email',
-    middleware: [authMiddleware],
-    loader: async () => null,
+    loader: authMiddleware,
     Component: VerifyNewEmail,
   }
 ];
 
 // @ts-expect-error -- React Router ainda não exporta tipos oficiais para middleware context e temos que usar any, infelizmente.
 async function authMiddleware({ context }) {
-  console.log('oi');
+  try {
+    const response = await auth<{ message: string, data: unknown }>();
 
-  const user = await auth();
+    if (!response) {
+      return redirect('/auth/login');
+    }
 
-  console.log(user);
-
-  if (!user) {
+    context.set(userContext, response.data);
+    return null;
+  } catch {
     return redirect('/auth/login');
   }
-
-  context.set(userContext, user);
 }
 
 export default appRoutes;
