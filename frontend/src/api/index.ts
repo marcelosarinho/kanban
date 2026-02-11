@@ -5,10 +5,9 @@ export * from '@api/feedback';
 
 async function request<T>(
   url: string,
-  { method = 'GET', headers, body, credentials = 'include', ...rest }: RequestInit = {}): Promise<T | void> {
+  { method = 'GET', headers, body, ...rest }: RequestInit = {}): Promise<T | void> {
     const response = await fetch(`http://localhost:8080${url}`, {
       method,
-      credentials,
       headers: {
         ...(method !== 'DELETE' ? { 'Content-Type': 'application/json' } : {}),
         ...headers,
