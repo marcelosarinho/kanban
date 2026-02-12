@@ -38,6 +38,6 @@ export async function verifyResetPassword(app: FastifyInstance) {
       return reply.unauthorized('Token expirado! Forneça um token válido.');
     }
 
-    return reply.ok('Token válido!', true);
+    return reply.ok('Token válido!', { valid: true });
   });
 }

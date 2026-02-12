@@ -1,7 +1,6 @@
-import { resetPassword, verifyResetPassword } from "@api/index";
+import { resetPassword } from "@api/index";
 import Button from "@components/button/Button";
 import Input from "@components/Input";
-import Loading from "@components/Loading";
 import LoginCard from "@components/auth/LoginCard";
 import LoginCardBody from "@components/auth/LoginCardBody";
 import LoginCardHeader from "@components/auth/LoginCardHeader";
@@ -10,19 +9,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeftIcon, XCircleIcon } from "@phosphor-icons/react";
 import { userResetPasswordSchema } from "@schemas/user";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, useSearchParams } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import type z from "zod";
 
 type Inputs = z.infer<typeof userResetPasswordSchema>;
 
 export default function ResetPassword() {
-  const [searchParams] = useSearchParams();
-  const [status, setStatus] = useState<{ loading: boolean, valid: boolean, message: string } | null>(null);
-
+  const { token, email, valid, message } = useLoaderData();
   const navigate = useNavigate();
-  const { token, email } = Object.fromEntries(searchParams.entries());
 
   const {
     register,
@@ -46,7 +41,7 @@ export default function ResetPassword() {
   }
 
   function renderResetPassword() {
-    if (status?.valid) {
+    if (valid) {
       return (
         <LoginCard>
           <LoginCardHeader>
@@ -78,7 +73,7 @@ export default function ResetPassword() {
           <h1 className="animate-slide-in-from-bottom text-center dark:text-gray-300 text-2xl font-medium">Erro ao redefinir senha!</h1>
         </LoginCardHeader>
         <LoginCardBody className="text-center">
-          <p className="animate-slide-in-from-bottom dark:text-gray-300 text-md">{status?.message || 'Token inválido!'}</p>
+          <p className="animate-slide-in-from-bottom dark:text-gray-300 text-md">{message || 'Token inválido!'}</p>
           <p className="animate-slide-in-from-bottom dark:text-gray-300 text-md">Por favor, tente novamente.</p>
 
           <Link
@@ -93,28 +88,5 @@ export default function ResetPassword() {
     )
   }
 
-  useEffect(() => {
-    if (!token || !email) {
-      navigate('/auth/login');
-      return;
-    }
-
-    async function isValidResetPassword() {
-      setStatus({ loading: true, valid: false, message: '' });
-
-      const result = await verifyResetPassword({ token, email });
-
-      setStatus({ loading: false, valid: result.valid, message: result.message });
-    }
-
-    isValidResetPassword();
-  }, [email, navigate, token]);
-
-  return (
-    status?.loading ? (
-      <Loading loading={status.loading} className="text-primary text-5xl" />
-    ) : (
-      renderResetPassword()
-    )
-  )
+  return renderResetPassword();
 }

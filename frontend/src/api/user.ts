@@ -21,7 +21,7 @@ export async function forgotPassword(email: Pick<User, 'email'>) {
   return api.post('/forgot-password', email);
 }
 
-export async function verifyResetPassword(resetPassword: Pick<ResetPassword, 'token' | 'email'>): Promise<{ valid: boolean, message: string } | void> {
+export async function verifyResetPassword(resetPassword: Pick<ResetPassword, 'token' | 'email'>): Promise<{ data: { valid: boolean }, message: string } | void> {
   return api.get(`/verify-reset-password?token=${resetPassword.token}&email=${resetPassword.email}`);
 }
 
